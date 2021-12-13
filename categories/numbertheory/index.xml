@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>NumberTheory on CryptoPatrick | Seamless Global Nature</title>
-    <link>localhost/categories/numbertheory/</link>
+    <link>https://cryptopatrick.github.io/categories/numbertheory/</link>
     <description>Recent content in NumberTheory on CryptoPatrick | Seamless Global Nature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 12 Dec 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="localhost/categories/numbertheory/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://cryptopatrick.github.io/categories/numbertheory/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Cipher: Polybius&#39; checkerboard</title>
-      <link>localhost/posts/20211212_01/</link>
+      <link>https://cryptopatrick.github.io/posts/20211212_01/</link>
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>localhost/posts/20211212_01/</guid>
+      <guid>https://cryptopatrick.github.io/posts/20211212_01/</guid>
       <description>The Greek historian Polybius
    The Polybius Checkerboard, named after Greek historian Polybius, is an example of a substitution cipher from around 205-123 B.C. .
 Polybius was the first to propose a method of substituting different two-digit numbers for a letter in an alphabet. Hence, the Polybius&amp;rsquo; Checkerboard is an early example of a substitution cipher.
@@ -25,10 +25,10 @@ Polybius&amp;rsquo; Checkerboard A Polybius&amp;rsquo; checkerboard looks almost
     
     <item>
       <title>Cipher: Spartan Scytale</title>
-      <link>localhost/posts/20211211_01/</link>
+      <link>https://cryptopatrick.github.io/posts/20211211_01/</link>
       <pubDate>Sat, 11 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>localhost/posts/20211211_01/</guid>
+      <guid>https://cryptopatrick.github.io/posts/20211211_01/</guid>
       <description>Credit: FotoRieth
   The Spartan Scytale was communication device used by the military of Sparta.
 The Scytale is an example of a transposition cipher and it dates from around 500 B.C. .
@@ -40,10 +40,10 @@ The sender writes the message line by line, and parallel to the rod&#39;s axis.<
     
     <item>
       <title>Cipher: Atbash</title>
-      <link>localhost/posts/20211210_01/</link>
+      <link>https://cryptopatrick.github.io/posts/20211210_01/</link>
       <pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>localhost/posts/20211210_01/</guid>
+      <guid>https://cryptopatrick.github.io/posts/20211210_01/</guid>
       <description>Credit: FotoRieth
    &amp;ldquo;And after them the king of Sheshach shall drink.&amp;rdquo;
  It might not be obvious, but Sheshach in that phrase is actually one of the earliest examples of secret code, in this case for the name: Babylon.
