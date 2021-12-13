@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Arduino, Shift Registers, LEDs, Bit Shifting on Tiemen</title>
+    <link>https://tiemenwaterreus.com/tags/arduino-shift-registers-leds-bit-shifting/</link>
+    <description>Recent content in Arduino, Shift Registers, LEDs, Bit Shifting on Tiemen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Mar 2015 22:30:03 +0200</lastBuildDate><atom:link href="https://tiemenwaterreus.com/tags/arduino-shift-registers-leds-bit-shifting/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Driving 16 LEDs using only three pins of an Arduino</title>
+      <link>https://tiemenwaterreus.com/posts/driving-16-leds-using-three-pins-of-aruino/</link>
+      <pubDate>Sat, 14 Mar 2015 22:30:03 +0200</pubDate>
+      
+      <guid>https://tiemenwaterreus.com/posts/driving-16-leds-using-three-pins-of-aruino/</guid>
+      <description>It has been quite a while since I last played with the Arduino so I figured it was about time to do so. In this article I’ll show you how you can drive 16 LEDs with two 8-bit shift-registers using only three pins of the Arduino. So lets get started!
+Parts list For this build we’re using the following parts:
+ Arduino UNO (any Arduino will do actually) Breadboard (with at least 32 rows to fit the components) 16 x LEDs 16 x resistors (220 Ohm) 2 x 74HC595 shift-registers Enough jumper wires to tie it all together  Schematic The wiring for this build is actually pretty simple.</description>
+    </item>
+    
+  </channel>
+</rss>

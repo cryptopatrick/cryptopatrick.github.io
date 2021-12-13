@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BitString, Elixir, Binary, Base2 on Tiemen</title>
+    <link>https://tiemenwaterreus.com/tags/bitstring-elixir-binary-base2/</link>
+    <description>Recent content in BitString, Elixir, Binary, Base2 on Tiemen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 Jul 2020 00:30:03 +0200</lastBuildDate><atom:link href="https://tiemenwaterreus.com/tags/bitstring-elixir-binary-base2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>From BitString to Base2 with Elixir</title>
+      <link>https://tiemenwaterreus.com/posts/from-bitstring-to-base2-elixir/</link>
+      <pubDate>Fri, 03 Jul 2020 00:30:03 +0200</pubDate>
+      
+      <guid>https://tiemenwaterreus.com/posts/from-bitstring-to-base2-elixir/</guid>
+      <description>If you ever worked with the BitString type in Elixir you&amp;rsquo;re probably familiar with the &amp;lt;&amp;lt;104, 101, 108, 108, 111&amp;gt;&amp;gt;-like notation. This is basically a compact notation of printing each byte as their decimal notation. Converting them to a string of ones and zeroes is as easy as combining a BitString generator with some functions from the Enum module, and voila:
+1defmodule Bits do 2 def as_string(binary) do 3 for(&amp;lt;&amp;lt;x::size(1) &amp;lt;- binary&amp;gt;&amp;gt;, do: &amp;#34;#{x}&amp;#34;) 4 |&amp;gt; Enum.</description>
+    </item>
+    
+  </channel>
+</rss>

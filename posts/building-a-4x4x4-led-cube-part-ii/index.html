@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Building a 4x4x4 LED Cube. Part II; The software ~ Tiemen</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
+rel="stylesheet" href="/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
+
+
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-25416548-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-25416548-1");
+</script>
+<meta property="og:title" content="Building a 4x4x4 LED Cube. Part II; The software ~ Tiemen" />
+    <meta name="twitter:title" content="Building a 4x4x4 LED Cube. Part II; The software ~ Tiemen" />
+    <meta itemprop="name" content="Building a 4x4x4 LED Cube. Part II; The software ~ Tiemen" />
+    <meta name="application-name" content="Building a 4x4x4 LED Cube. Part II; The software ~ Tiemen" />
+    <meta property="og:site_name" content="" />
+
+    <meta name="keywords" content="" />
+
+    <meta name="description" content="Writing the software for our 4x4x4 cube!" />
+    <meta itemprop="description" content="Writing the software for our 4x4x4 cube!" />
+    <meta property="og:description" content="Writing the software for our 4x4x4 cube!" />
+    <meta name="twitter:description" content="Writing the software for our 4x4x4 cube!" />
+
+    <link rel="canonical" href="https://tiemenwaterreus.com/posts/building-a-4x4x4-led-cube-part-ii/" itemprop="url" />
+    <meta name="url" content="https://tiemenwaterreus.com/posts/building-a-4x4x4-led-cube-part-ii/" />
+    <meta name="twitter:url" content="https://tiemenwaterreus.com/posts/building-a-4x4x4-led-cube-part-ii/" />
+    <meta property="og:url" content="https://tiemenwaterreus.com/posts/building-a-4x4x4-led-cube-part-ii/" />
+  </head>
+  <body>
+    <section class="single-post">
+      <section class="post-pre-header">
+        <a href="/posts" class="bring-me-back">&larr; all posts</a>
+
+        <div class="meta">
+          Posted on Feb 1, 2016
+        </div>
+      </section>
+
+      <h1>Building a 4x4x4 LED Cube. Part II; The software</h1>
+      <p>It’s been awhile since I wrote about the LED cube I’ve been building and I figured it was about time I did the long planned followup where we take a closer look at the software that drives the cube.</p>
+<p>If you’ve followed along with my earlier writings you’ll know that we’ve been building up to this point by first <a href="/posts/driving-16-leds-using-three-pins-of-aruino/">driving 16 LEDs using only three pins of an Arduino</a> and then learned how to apply fading effects to the LEDs by taking a <a href="/posts/4-bit-angle-modulating/">deep dive in Bit Angle Modulation (BAM)</a>. In my previous post we’ve talked about <a href="posts/building-a-4x4x4-led-cube-part-i/">the hardware of the cube</a> and in this post we’ll combine the pieces and learn how we can drive the individual LEDs in the cube.</p>
+<h2 id="were-just-getting-started-and-were-already-almost-done">We’re just getting started and we’re already almost done</h2>
+<p>Ok, in the previous examples we’ve kept is relatively simple. Driving 16 LEDs using 595-shift registers.. Done. Applying fading effects using Bit Angle Modulation.. Done. But now we’re dealing with 64 individual LEDs. thats hard! Or is it?</p>
+<p>Not really; if you think about it a 64 LED cube are just four layers of 16 LEDs, and we’ve already nailed that part. Lets have a look at a couple of changes we have to make to our existing codebase.</p>
+<h2 id="selecting-a-layer">Selecting a layer</h2>
+<p>The main difference between the cube setup and simply driving 16 LEDs is that we have to deal with multiple layers stacked on top of each other, so we need to find a way to select a specific layer to control.</p>
+<p>Looking at my previous article about the hardware of this build you’ll see that we’ve added one extra shift register so we now have three instead of the two we used to drive the 16 LED example. This shift register is hooked up to four transistors which will complete the circuit once pulled high.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ino" data-lang="ino"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#999;font-style:italic">// turn on correct LED using 595&#39;s
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span><span style="color:#999;font-style:italic"></span><span style="color:#6ab825;font-weight:bold">void</span> <span style="color:#447fcf">turnOnLed</span>(<span style="color:#6ab825;font-weight:bold">int</span> ledNr, <span style="color:#6ab825;font-weight:bold">int</span> layer) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>  <span style="color:#447fcf">digitalWrite</span>(latchPin, <span style="color:#6ab825;font-weight:bold">LOW</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>  <span style="color:#447fcf;text-decoration:underline">SPI</span>.<span style="color:#447fcf">transfer</span>(<span style="color:#3677a9">1</span>&lt;&lt;layer);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>  <span style="color:#6ab825;font-weight:bold">if</span> (ledNr &gt;= <span style="color:#3677a9">8</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>    <span style="color:#447fcf;text-decoration:underline">SPI</span>.<span style="color:#447fcf">transfer</span>(<span style="color:#3677a9">1</span>&lt;&lt;ledNr-<span style="color:#3677a9">8</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>    <span style="color:#447fcf;text-decoration:underline">SPI</span>.<span style="color:#447fcf">transfer</span>(<span style="color:#3677a9">0</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>  <span style="color:#6ab825;font-weight:bold">else</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>    <span style="color:#447fcf;text-decoration:underline">SPI</span>.<span style="color:#447fcf">transfer</span>(<span style="color:#3677a9">0</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>    <span style="color:#447fcf;text-decoration:underline">SPI</span>.<span style="color:#447fcf">transfer</span>(<span style="color:#3677a9">1</span>&lt;&lt;ledNr);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>  <span style="color:#447fcf">digitalWrite</span>(latchPin, <span style="color:#6ab825;font-weight:bold">HIGH</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span>}
+</code></pre></div><p>As you can see in the example included above we’ve extended our <code>turnOnLed()</code> function we’ve created in the BAM example to also take an integer called layer. We’re shifting <code>1 &lt;&lt; layer</code> out first, which makes sure that a value between 1000 and 0001 (binary) will be pushed in first.</p>
+<p>Followed by the actual LED information that will be pushed to the second and first shift register, this part is actually not changed when comparing to the BAM example.</p>
+<p><em>Note that we’re shifting MSBFIRST (Most Significant Bit First) here, so the layer information we’ve shifted out first will be pushed through to the last shift register when we’re shifting out the actual LED information.</em></p>
+<h2 id="keeping-track-of-our-four-layers">Keeping track of our four layers</h2>
+<p>Ok, so we can select a layer to control now. The next challenge is keeping track of the value of each LED. We’ve already dealt with BAM for 16 LEDs so we can basically just copy and paste the brightnessMask array from the BAM example three more times.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ino" data-lang="ino"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">bool</span> brightnessMask_layer1[NUMBER_OF_CONNECTED_LEDS*<span style="color:#3677a9">4</span>];
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span><span style="color:#6ab825;font-weight:bold">bool</span> brightnessMask_layer2[NUMBER_OF_CONNECTED_LEDS*<span style="color:#3677a9">4</span>];
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span><span style="color:#6ab825;font-weight:bold">bool</span> brightnessMask_layer3[NUMBER_OF_CONNECTED_LEDS*<span style="color:#3677a9">4</span>];
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span><span style="color:#6ab825;font-weight:bold">bool</span> brightnessMask_layer4[NUMBER_OF_CONNECTED_LEDS*<span style="color:#3677a9">4</span>];
+</code></pre></div><p><em>Note that this is the solution I came up with since the language didn’t (and doesn’t?) allow me to define a multi-dimentional array here.</em></p>
+<h2 id="writing-values-for-each-layer">Writing values for each layer</h2>
+<p>So we have our layer select part done, we’re keeping track of the value of each LED in each of our four layers. So what’s next? We need a way to write the correct value to the correct position of the <code>brightnessMask</code> array before we can shift it all out. Therefore I’ve changed up the <code>led()</code> function a bit.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ino" data-lang="ino"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">void</span> <span style="color:#447fcf">led</span>(<span style="color:#6ab825;font-weight:bold">int</span> x, <span style="color:#6ab825;font-weight:bold">int</span> y, <span style="color:#6ab825;font-weight:bold">int</span> z, <span style="color:#6ab825;font-weight:bold">int</span> brightness){
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>   <span style="color:#999;font-style:italic">// ensure 4-bit limited brightness
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span style="color:#999;font-style:italic"></span>  brightness = <span style="color:#447fcf">constrain</span>(brightness, <span style="color:#3677a9">0</span>, <span style="color:#3677a9">15</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>  <span style="color:#6ab825;font-weight:bold">int</span> ledNr = y*<span style="color:#3677a9">4</span>+x;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>  <span style="color:#999;font-style:italic">// turn 4-bit brightness into brightness mask
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span style="color:#999;font-style:italic"></span>  <span style="color:#6ab825;font-weight:bold">for</span> (<span style="color:#6ab825;font-weight:bold">int</span> i = <span style="color:#3677a9">3</span>; i &gt;= <span style="color:#3677a9">0</span>; i--) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>    <span style="color:#6ab825;font-weight:bold">if</span> (brightness - (<span style="color:#3677a9">1</span> &lt;&lt; i) &gt;= <span style="color:#3677a9">0</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>      brightness -= (<span style="color:#3677a9">1</span> &lt;&lt; i);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>      setBrightnessForLayerAddressValue(z, (ledNr*<span style="color:#3677a9">4</span>)+i, <span style="color:#24909d">true</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>    }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>    <span style="color:#6ab825;font-weight:bold">else</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>      setBrightnessForLayerAddressValue(z, (ledNr*<span style="color:#3677a9">4</span>)+i, <span style="color:#24909d">false</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>    }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span><span style="color:#6ab825;font-weight:bold">void</span> <span style="color:#447fcf">setBrightnessForLayerAddressValue</span>(<span style="color:#6ab825;font-weight:bold">int</span> layer, <span style="color:#6ab825;font-weight:bold">int</span> address, <span style="color:#6ab825;font-weight:bold">bool</span> value){
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span>  <span style="color:#6ab825;font-weight:bold">if</span>(layer == <span style="color:#3677a9">0</span>){
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span>    brightnessMask_layer1[address] = value;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span>  <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span>(layer == <span style="color:#3677a9">1</span>){
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span>    brightnessMask_layer2[address] = value;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27</span>  <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span>(layer == <span style="color:#3677a9">2</span>){
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28</span>    brightnessMask_layer3[address] = value;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30</span>  <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span>(layer == <span style="color:#3677a9">3</span>){
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31</span>    brightnessMask_layer4[address] = value;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33</span>}
+</code></pre></div><p>As you can see in the code snippet included above the led() function now accepts an x, y and z value along with its brightness value. Where the x and the y values obviously map to their corresponding LED on a given layer which is determined by the z parameter.</p>
+<p>We’re determining the overall LED address (<em>integer</em>) by multiplying the y value by four and adding the x axis on top of that. Calculating the 4-bits based on the 0–15 brightness value is still the same as in the BAM example, but we’re delegating the outcome together with the layer information to <code>setBrightnessForLayerAddressValue</code> function which selects the correct brightnessMask array to write to.</p>
+<h2 id="shifting-it-all-out">Shifting it all out</h2>
+<p>Okay, so now we’re able to select a layer, keep track of brightness information of each layer and writing brightness information to the brightnessMask. These were in fact the biggest changes, pushing this information to the cube is basically more of the same we already had.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ino" data-lang="ino"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">void</span> <span style="color:#447fcf">refresh</span>(){
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span> <span style="color:#999;font-style:italic">// Loop over each LED
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span><span style="color:#999;font-style:italic"></span> <span style="color:#6ab825;font-weight:bold">for</span> (<span style="color:#6ab825;font-weight:bold">int</span> cycle = <span style="color:#3677a9">0</span>; cycle &lt; <span style="color:#3677a9">16</span>; cycle++) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>   <span style="color:#6ab825;font-weight:bold">for</span> (<span style="color:#6ab825;font-weight:bold">int</span> currentLed = <span style="color:#3677a9">0</span>; currentLed &lt; NUMBER_OF_CONNECTED_LEDS; currentLed++) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>     <span style="color:#6ab825;font-weight:bold">int</span> maskPosition = currentLed * <span style="color:#3677a9">4</span>;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>     <span style="color:#6ab825;font-weight:bold">if</span> (cycle == <span style="color:#3677a9">1</span> &amp;&amp; brightnessMask_layer1[maskPosition]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>       turnOnLed(currentLed, <span style="color:#3677a9">0</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> ((cycle == <span style="color:#3677a9">2</span> || cycle == <span style="color:#3677a9">3</span>) &amp;&amp; brightnessMask_layer1[maskPosition+<span style="color:#3677a9">1</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>       turnOnLed(currentLed, <span style="color:#3677a9">0</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> (cycle &gt;= <span style="color:#3677a9">4</span> &amp;&amp; cycle &lt;= <span style="color:#3677a9">7</span> &amp;&amp; brightnessMask_layer1[maskPosition+<span style="color:#3677a9">2</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>       turnOnLed(currentLed, <span style="color:#3677a9">0</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> (cycle &gt;= <span style="color:#3677a9">8</span> &amp;&amp; cycle &lt;= <span style="color:#3677a9">15</span> &amp;&amp; brightnessMask_layer1[maskPosition+<span style="color:#3677a9">3</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span>       turnOnLed(currentLed, <span style="color:#3677a9">0</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span>   }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span>   <span style="color:#6ab825;font-weight:bold">for</span> (<span style="color:#6ab825;font-weight:bold">int</span> currentLed = <span style="color:#3677a9">0</span>; currentLed &lt; NUMBER_OF_CONNECTED_LEDS; currentLed++) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span>     <span style="color:#6ab825;font-weight:bold">int</span> maskPosition = currentLed * <span style="color:#3677a9">4</span>;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span>     <span style="color:#6ab825;font-weight:bold">if</span> (cycle == <span style="color:#3677a9">1</span> &amp;&amp; brightnessMask_layer2[maskPosition]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span>       turnOnLed(currentLed, <span style="color:#3677a9">1</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> ((cycle == <span style="color:#3677a9">2</span> || cycle == <span style="color:#3677a9">3</span>) &amp;&amp; brightnessMask_layer2[maskPosition+<span style="color:#3677a9">1</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28</span>       turnOnLed(currentLed, <span style="color:#3677a9">1</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> (cycle &gt;= <span style="color:#3677a9">4</span> &amp;&amp; cycle &lt;= <span style="color:#3677a9">7</span> &amp;&amp; brightnessMask_layer2[maskPosition+<span style="color:#3677a9">2</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31</span>       turnOnLed(currentLed, <span style="color:#3677a9">1</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> (cycle &gt;= <span style="color:#3677a9">8</span> &amp;&amp; cycle &lt;= <span style="color:#3677a9">15</span> &amp;&amp; brightnessMask_layer2[maskPosition+<span style="color:#3677a9">3</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">34</span>       turnOnLed(currentLed, <span style="color:#3677a9">1</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">35</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">36</span>   }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">37</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">38</span>   <span style="color:#6ab825;font-weight:bold">for</span> (<span style="color:#6ab825;font-weight:bold">int</span> currentLed = <span style="color:#3677a9">0</span>; currentLed &lt; NUMBER_OF_CONNECTED_LEDS; currentLed++) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">39</span>     <span style="color:#6ab825;font-weight:bold">int</span> maskPosition = currentLed * <span style="color:#3677a9">4</span>;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">40</span>     <span style="color:#6ab825;font-weight:bold">if</span> (cycle == <span style="color:#3677a9">1</span> &amp;&amp; brightnessMask_layer3[maskPosition]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">41</span>       turnOnLed(currentLed, <span style="color:#3677a9">2</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">42</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">43</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> ((cycle == <span style="color:#3677a9">2</span> || cycle == <span style="color:#3677a9">3</span>) &amp;&amp; brightnessMask_layer3[maskPosition+<span style="color:#3677a9">1</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">44</span>       turnOnLed(currentLed, <span style="color:#3677a9">2</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">45</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">46</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> (cycle &gt;= <span style="color:#3677a9">4</span> &amp;&amp; cycle &lt;= <span style="color:#3677a9">7</span> &amp;&amp; brightnessMask_layer3[maskPosition+<span style="color:#3677a9">2</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">47</span>       turnOnLed(currentLed, <span style="color:#3677a9">2</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">48</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">49</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> (cycle &gt;= <span style="color:#3677a9">8</span> &amp;&amp; cycle &lt;= <span style="color:#3677a9">15</span> &amp;&amp; brightnessMask_layer3[maskPosition+<span style="color:#3677a9">3</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">50</span>       turnOnLed(currentLed, <span style="color:#3677a9">2</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">51</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">52</span>   }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">53</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">54</span>   <span style="color:#6ab825;font-weight:bold">for</span> (<span style="color:#6ab825;font-weight:bold">int</span> currentLed = <span style="color:#3677a9">0</span>; currentLed &lt; NUMBER_OF_CONNECTED_LEDS; currentLed++) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">55</span>     <span style="color:#6ab825;font-weight:bold">int</span> maskPosition = currentLed * <span style="color:#3677a9">4</span>;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">56</span>     <span style="color:#6ab825;font-weight:bold">if</span> (cycle == <span style="color:#3677a9">1</span> &amp;&amp; brightnessMask_layer4[maskPosition]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">57</span>       turnOnLed(currentLed, <span style="color:#3677a9">3</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">58</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">59</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> ((cycle == <span style="color:#3677a9">2</span> || cycle == <span style="color:#3677a9">3</span>) &amp;&amp; brightnessMask_layer4[maskPosition+<span style="color:#3677a9">1</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">60</span>       turnOnLed(currentLed, <span style="color:#3677a9">3</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">61</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">62</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> (cycle &gt;= <span style="color:#3677a9">4</span> &amp;&amp; cycle &lt;= <span style="color:#3677a9">7</span> &amp;&amp; brightnessMask_layer4[maskPosition+<span style="color:#3677a9">2</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">63</span>       turnOnLed(currentLed, <span style="color:#3677a9">3</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">64</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">65</span>     <span style="color:#6ab825;font-weight:bold">else</span> <span style="color:#6ab825;font-weight:bold">if</span> (cycle &gt;= <span style="color:#3677a9">8</span> &amp;&amp; cycle &lt;= <span style="color:#3677a9">15</span> &amp;&amp; brightnessMask_layer4[maskPosition+<span style="color:#3677a9">3</span>]) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">66</span>       turnOnLed(currentLed, <span style="color:#3677a9">3</span>);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">67</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">68</span>   }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">69</span>   clearLeds();
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">70</span> }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">71</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">72</span>}
+</code></pre></div><p>While this looks like a lot of code, it comes all down to this: Loop 16 times for one cycle, loop over the leds in and determine wether the LED should be turned on or off for the current cycle. Each cycle will call the <code>turnOnLed()</code> function we’ve already described above. <strong>Repeat</strong> this step for all four layers and we’re done!</p>
+<h2 id="its-a-wrap">It’s a wrap</h2>
+<p>These where in fact the biggest changes. For the full source code have a look at <a href="https://gist.github.com/Tmw/3a3f3d016a6592a989d8">the gist</a>. In a future article we’ll be looking at how we can take these building blocks and create a neat little animation with it. Of course we’ll also be looking at how we can refactor our code since it gained quite some complexity to the point where it isn’t exactly DRY anymore ;)</p>
+
+    </section>
+  </body>
+</html>

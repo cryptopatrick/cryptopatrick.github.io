@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>From BitString to Base2 with Elixir ~ Tiemen</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
+rel="stylesheet" href="/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
+
+
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-25416548-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-25416548-1");
+</script>
+<meta property="og:title" content="From BitString to Base2 with Elixir ~ Tiemen" />
+    <meta name="twitter:title" content="From BitString to Base2 with Elixir ~ Tiemen" />
+    <meta itemprop="name" content="From BitString to Base2 with Elixir ~ Tiemen" />
+    <meta name="application-name" content="From BitString to Base2 with Elixir ~ Tiemen" />
+    <meta property="og:site_name" content="" />
+
+    <meta name="keywords" content="" />
+
+    <meta name="description" content="Printing the binary representation of a BitString using Elixir." />
+    <meta itemprop="description" content="Printing the binary representation of a BitString using Elixir." />
+    <meta property="og:description" content="Printing the binary representation of a BitString using Elixir." />
+    <meta name="twitter:description" content="Printing the binary representation of a BitString using Elixir." />
+
+    <link rel="canonical" href="https://tiemenwaterreus.com/posts/from-bitstring-to-base2-elixir/" itemprop="url" />
+    <meta name="url" content="https://tiemenwaterreus.com/posts/from-bitstring-to-base2-elixir/" />
+    <meta name="twitter:url" content="https://tiemenwaterreus.com/posts/from-bitstring-to-base2-elixir/" />
+    <meta property="og:url" content="https://tiemenwaterreus.com/posts/from-bitstring-to-base2-elixir/" />
+  </head>
+  <body>
+    <section class="single-post">
+      <section class="post-pre-header">
+        <a href="/posts" class="bring-me-back">&larr; all posts</a>
+
+        <div class="meta">
+          Posted on Jul 3, 2020
+        </div>
+      </section>
+
+      <h1>From BitString to Base2 with Elixir</h1>
+      <p>If you ever worked with the BitString type in Elixir you&rsquo;re probably familiar with the <code>&lt;&lt;104, 101, 108, 108, 111&gt;&gt;</code>-like notation. This is basically a compact notation of printing each byte as their decimal notation. Converting them to a string of ones and zeroes is as easy as combining a BitString generator with some functions from the Enum module, and voila:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">Bits</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  <span style="color:#6ab825;font-weight:bold">def</span> as_string(binary) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>    <span style="color:#6ab825;font-weight:bold">for</span>(&lt;&lt;x::size(<span style="color:#3677a9">1</span>) &lt;- binary&gt;&gt;, <span style="color:#ed9d13">do</span>: <span style="color:#ed9d13">&#34;</span><span style="color:#ed9d13">#{</span>x<span style="color:#ed9d13">}</span><span style="color:#ed9d13">&#34;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.chunk_every(<span style="color:#3677a9">8</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.join(<span style="color:#ed9d13">&#34; &#34;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>Calling the function defined above like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#447fcf;text-decoration:underline">Bits</span>.as_string(<span style="color:#ed9d13">&#34;Hello, world!&#34;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span><span style="color:#ed9d13">&#34;01001000 01100101 01101100 01101100 01101111 00101100 00100000 01110111 01101111 01110010 01101100 01100100 00100001&#34;</span>
+</code></pre></div><p>Where every 8 bits are separated with a space for readability, we can clearly see the patterns of the ASCII table, where:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>H = 0100 1000
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>e = 0110 0101
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>l = 0110 1100
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>etc.
+</code></pre></div><p>🙌</p>
+
+    </section>
+  </body>
+</html>

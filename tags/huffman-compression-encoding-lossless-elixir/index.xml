@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Huffman, compression, encoding, lossless, elixir on Tiemen</title>
+    <link>https://tiemenwaterreus.com/tags/huffman-compression-encoding-lossless-elixir/</link>
+    <description>Recent content in Huffman, compression, encoding, lossless, elixir on Tiemen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Sep 2020 14:00:10 +0200</lastBuildDate><atom:link href="https://tiemenwaterreus.com/tags/huffman-compression-encoding-lossless-elixir/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Huffman coding from scratch with Elixir</title>
+      <link>https://tiemenwaterreus.com/posts/compession-and-huffman-coding-with-elixir/</link>
+      <pubDate>Thu, 03 Sep 2020 14:00:10 +0200</pubDate>
+      
+      <guid>https://tiemenwaterreus.com/posts/compession-and-huffman-coding-with-elixir/</guid>
+      <description>Huffman coding is a pretty straight-forward lossless compression algorithm first described in 1992 by David Huffman. It utilizes a binary tree as its base and it&amp;rsquo;s quite an easy to grasp algorithm. In this post we walk through implementing a Huffman coder and decoder from scratch using Elixir ⚗️
+How does Huffman work? In this example we assume the data we are compressing is a piece of text, as text lends itself very well for compression due to repetition of characters.</description>
+    </item>
+    
+  </channel>
+</rss>

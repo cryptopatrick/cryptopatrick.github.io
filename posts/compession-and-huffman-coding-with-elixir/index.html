@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Huffman coding from scratch with Elixir ~ Tiemen</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
+rel="stylesheet" href="/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
+
+
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-25416548-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-25416548-1");
+</script>
+<meta property="og:title" content="Huffman coding from scratch with Elixir ~ Tiemen" />
+    <meta name="twitter:title" content="Huffman coding from scratch with Elixir ~ Tiemen" />
+    <meta itemprop="name" content="Huffman coding from scratch with Elixir ~ Tiemen" />
+    <meta name="application-name" content="Huffman coding from scratch with Elixir ~ Tiemen" />
+    <meta property="og:site_name" content="" />
+
+    <meta name="keywords" content="" />
+
+    <meta name="description" content="Implement a basic Huffman compression algorithm using Elixir." />
+    <meta itemprop="description" content="Implement a basic Huffman compression algorithm using Elixir." />
+    <meta property="og:description" content="Implement a basic Huffman compression algorithm using Elixir." />
+    <meta name="twitter:description" content="Implement a basic Huffman compression algorithm using Elixir." />
+
+    <link rel="canonical" href="https://tiemenwaterreus.com/posts/compession-and-huffman-coding-with-elixir/" itemprop="url" />
+    <meta name="url" content="https://tiemenwaterreus.com/posts/compession-and-huffman-coding-with-elixir/" />
+    <meta name="twitter:url" content="https://tiemenwaterreus.com/posts/compession-and-huffman-coding-with-elixir/" />
+    <meta property="og:url" content="https://tiemenwaterreus.com/posts/compession-and-huffman-coding-with-elixir/" />
+  </head>
+  <body>
+    <section class="single-post">
+      <section class="post-pre-header">
+        <a href="/posts" class="bring-me-back">&larr; all posts</a>
+
+        <div class="meta">
+          Posted on Sep 3, 2020
+        </div>
+      </section>
+
+      <h1>Huffman coding from scratch with Elixir</h1>
+      <p>Huffman coding is a pretty straight-forward lossless compression algorithm first described in 1992 by David Huffman. It utilizes a binary tree as its base and it&rsquo;s quite an easy to grasp algorithm. In this post we walk through implementing a Huffman coder and decoder from scratch using Elixir ⚗️</p>
+<h2 id="how-does-huffman-work">How does Huffman work?</h2>
+<p>In this example we assume the data we are compressing is a piece of text, as text lends itself very well for compression due to repetition of characters.</p>
+<p>The algorithm in its core works by building a binary tree based on the frequency of the individual characters. Placing characters with a higher frequency closer to the root of the tree than characters with a lower one.</p>
+<p>The Huffman code can be derived by walking the tree until we find the character. Every time we pick the left-child, we write down a <code>0</code> and for every right-child a <code>1</code>. Repeat the process for each character in the text, and voila!</p>
+<p>Decoding the text is as simple as starting at the root of the tree and traverse down the left-child for every <code>0</code> you encounter and pick the right-child for every <code>1</code>. Once you hit a character, write it down and start over with the remainder of the bits.</p>
+<p>For an excellent explanation on the Huffman Coding algorithm, give this <a href="https://www.youtube.com/watch?v=JsTptu56GM8">explainer video by Tom Scott</a> a watch!</p>
+<h2 id="lets-get-to-work-setting-up-the-project">Let&rsquo;s get to work: Setting up the project</h2>
+<p>Ok! Let&rsquo;s begin by generating a new Mix project using <code>mix new huffman</code>. <code>cd huffman</code> into the project root and open up the <code>lib/huffman.ex</code> file. This file contains our <code>Huffman</code> module. Replace the contents of the file with a single function declaration <code>encode/1</code> like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">Huffman</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  <span style="color:#6ab825;font-weight:bold">def</span> encode(text \\ <span style="color:#ed9d13">&#34;cheesecake&#34;</span>) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>This function accepts the text we like to compress and defaults to &ldquo;cheesecake&rdquo; because, why not 🤷</p>
+<h2 id="frequency-analysis">Frequency analysis</h2>
+<p>The first step in Huffman coding is a simple frequency analysis. For each character in the given text, count how many times it is used in the text. This is a rather crucial part of the encoding algorithm as this determines where the characters are placed in the binary tree.</p>
+<p>For example; when encoding the word &ldquo;cheesecake&rdquo; we can already see that certain characters appear more than others. <code>e</code> is used four times whereas the <code>c</code> appears only twice.</p>
+<p>Let&rsquo;s write some code that does the frequency analysis for us. Update our <code>encode/1</code> function to match the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">def</span> encode(text \\ <span style="color:#ed9d13">&#34;cheesecake&#34;</span>) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  frequencies =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>    text
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">String</span>.graphemes()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.reduce(%{}, <span style="color:#6ab825;font-weight:bold">fn</span> char, map -&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span>      <span style="color:#447fcf;text-decoration:underline">Map</span>.update(map, char, <span style="color:#3677a9">1</span>, <span style="color:#6ab825;font-weight:bold">fn</span> val -&gt; val + <span style="color:#3677a9">1</span> <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span>    <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>This code above splits the input string into graphemes (individual characters) and stores the count per character in a map using <a href="https://hexdocs.pm/elixir/Map.html#update/4">Map.update/4</a>.</p>
+<p>Popping into an <code>iex</code> shell and running <code>Huffman.encode</code> now gives us the following output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>%{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  <span style="color:#ed9d13">&#34;a&#34;</span> =&gt; <span style="color:#3677a9">1</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>  <span style="color:#ed9d13">&#34;c&#34;</span> =&gt; <span style="color:#3677a9">2</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>  <span style="color:#ed9d13">&#34;e&#34;</span> =&gt; <span style="color:#3677a9">4</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span>  <span style="color:#ed9d13">&#34;h&#34;</span> =&gt; <span style="color:#3677a9">1</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span>  <span style="color:#ed9d13">&#34;k&#34;</span> =&gt; <span style="color:#3677a9">1</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span>  <span style="color:#ed9d13">&#34;s&#34;</span> =&gt; <span style="color:#3677a9">1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8</span>}
+</code></pre></div><h2 id="sorting-the-characters">Sorting the characters</h2>
+<p>Since order is important when building our tree, we need to sort the list of characters by their frequency. Luckily Elixir&rsquo;s Enum module comes to the rescue. Add the following code to our <code>Huffman.encode/1</code> function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>queue = 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  frequencies
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>  |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.sort_by(<span style="color:#6ab825;font-weight:bold">fn</span> {_char, frequency} -&gt; 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>    frequency 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span>  <span style="color:#6ab825;font-weight:bold">end</span>)
+</code></pre></div><p>By passing the map with frequencies to <a href="https://hexdocs.pm/elixir/Enum.html#sort_by/3"><code>Enum.sort_by/2</code></a>, we sort the map using its values (the frequencies). This outputs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>[
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  {<span style="color:#ed9d13">&#34;a&#34;</span>, <span style="color:#3677a9">1</span>}, 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>  {<span style="color:#ed9d13">&#34;h&#34;</span>, <span style="color:#3677a9">1</span>}, 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>  {<span style="color:#ed9d13">&#34;k&#34;</span>, <span style="color:#3677a9">1</span>}, 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span>  {<span style="color:#ed9d13">&#34;s&#34;</span>, <span style="color:#3677a9">1</span>}, 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span>  {<span style="color:#ed9d13">&#34;c&#34;</span>, <span style="color:#3677a9">2</span>}, 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span>  {<span style="color:#ed9d13">&#34;e&#34;</span>, <span style="color:#3677a9">4</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8</span>]
+</code></pre></div><h2 id="building-the-tree">Building the tree</h2>
+<p>Before we can neatly build a tree, we need to determine which kinds of nodes we have. We have a <code>Leaf</code> node which holds a single character and a <code>Node</code> which contains a left- and a right child. Each child on its own can be another <code>Node</code> or a <code>Leaf</code>.</p>
+<p>Let&rsquo;s define two structs to model these types of nodes at the top or our module:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">Node</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  <span style="color:#6ab825;font-weight:bold">defstruct</span> [<span style="color:#ed9d13">:left</span>, <span style="color:#ed9d13">:right</span>]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span><span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span><span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">Leaf</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span>  <span style="color:#6ab825;font-weight:bold">defstruct</span> [<span style="color:#ed9d13">:value</span>]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p><em>Note:</em> Make sure you define the two structs within our current <code>Huffman</code> module to avoid naming clashes with the built-in <a href="https://hexdocs.pm/elixir/Node.html"><code>Node</code></a>.</p>
+<p>The next step is to iterate over our list of sorted characters and convert them to <code>Leaf</code> nodes. Extend our <code>Huffman.encode/1</code> function like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>  queue =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>    frequencies
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>    |&gt; Enum.sort_by(fn {_node, frequency} -&gt; frequency end)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span><span style="color:#589819">+   |&gt; Enum.map(fn {value, frequency} -&gt; 
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span><span style="color:#589819">+        {
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span><span style="color:#589819">+          %Leaf{value: value}, 
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span><span style="color:#589819">+          frequency
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8</span><span style="color:#589819">+        }
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">9</span><span style="color:#589819">+   end)
+</span></code></pre></div><p>Now that we have an ordered set of <code>Leaf</code> nodes, we can build up the rest of the binary tree. Define a new function to do exactly this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">defp</span> build([{root, _freq}]), <span style="color:#ed9d13">do</span>: root
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span style="color:#6ab825;font-weight:bold">defp</span> build(queue) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>  [{node_a, freq_a} | queue] = queue
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>  [{node_b, freq_b} | queue] = queue
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>  new_node = %<span style="color:#447fcf;text-decoration:underline">Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>    <span style="color:#ed9d13">left</span>: node_a,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>    <span style="color:#ed9d13">right</span>: node_b
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>  total = freq_a + freq_b
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>  queue = [{new_node, total}] ++ queue
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span>  queue
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span>  |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.sort_by(<span style="color:#6ab825;font-weight:bold">fn</span> {_node, frequency} -&gt; frequency <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span>  |&gt; build()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>Since this is a recursive function we need an exit condition, otherwise we are looping forever. In our case we are done building the tree when there is only a single root-node in the queue. The second clause is a bit more beefy, let&rsquo;s break it down:</p>
+<ul>
+<li>
+<p>First thing we do is pop two nodes of the queue by pattern matching the tuple <code>{node, frequency}</code> as the head of the list, and matching the <em>rest</em> of the list again as <code>queue</code>. Doing this twice gives us two nodes and their frequencies we can work with.</p>
+</li>
+<li>
+<p>The next step is combining these two nodes in a parent <code>Node</code> and tallying up the frequencies so we can prepend it to the queue.</p>
+</li>
+<li>
+<p>The next step is sorting the queue again to make sure the items with the lowest frequency are at the head of the queue.</p>
+</li>
+<li>
+<p>The last step is to call <code>build/1</code> again so this process starts all over again.</p>
+</li>
+</ul>
+<p>Calling our <code>build/1</code> function at the end of our <code>Huffman.encode/1</code> function passing the queue of items results in:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span>%<span style="color:#447fcf;text-decoration:underline">Huffman.Node</span>{  
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  <span style="color:#ed9d13">left</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;e&#34;</span>},
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>  <span style="color:#ed9d13">right</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>    <span style="color:#ed9d13">left</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;c&#34;</span>},    
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>    <span style="color:#ed9d13">right</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>      <span style="color:#ed9d13">left</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>        <span style="color:#ed9d13">left</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;k&#34;</span>},
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>        <span style="color:#ed9d13">right</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;s&#34;</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>      },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>      <span style="color:#ed9d13">right</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>        <span style="color:#ed9d13">left</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;a&#34;</span>},
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>        <span style="color:#ed9d13">right</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;h&#34;</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>      }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>    }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span>}
+</code></pre></div><p>The output above shows a tree structure where the character <code>e</code> is placed more towards the root of the tree and the character <code>a</code> is placed more towards the bottom. Each node in our tree is either a <code>Leaf</code> with the actual character or another <code>Node</code>. Drawn out this looks like:</p>
+<figure><img src="/resources/huffman/tree.png"
+         alt="Our Huffman tree" width="500"/><figcaption>
+            <p>Our Huffman tree</p>
+        </figcaption>
+</figure>
+
+<h2 id="encoding-the-text">Encoding the text</h2>
+<p>Now that we have the Huffman tree all setup and ready to go, let&rsquo;s focus on encoding the text using Huffman coding. The process of doing so is quite simple:</p>
+<p>Look up each character of the text in our binary tree and keep track of each step while traversing down the tree. Each time we traverse down the left-child, write down a <code>0</code> and each time we traverse down the right-child write down a <code>1</code>. Once we find the character in the tree, the path we wrote down is our Huffman code.</p>
+<h3 id="an-example">An example</h3>
+<p>So for example, in our tree above, the letter &ldquo;c&rdquo; has the code <code>10</code> since at the first node we  take the right branch and then the left branch and voila. Similarly for the character &ldquo;s&rdquo; the code is <code>1101</code> since for the first two nodes, we take the right branch, then the left and lastly the right one again.</p>
+<figure><img src="/resources/huffman/tree_with_example.png"
+         alt="Encoding process of S an C" width="500"/><figcaption>
+            <p>Encoding process of S an C</p>
+        </figcaption>
+</figure>
+
+<h3 id="code">Code</h3>
+<p>First things first, we should be able to look up a character in the binary tree and keep track of its path while doing so.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">defp</span> find(tree, character, path \\ &lt;&lt;&gt;&gt;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span style="color:#6ab825;font-weight:bold">defp</span> find(%<span style="color:#447fcf;text-decoration:underline">Leaf</span>{<span style="color:#ed9d13">value</span>: value}, character, path) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>  <span style="color:#6ab825;font-weight:bold">case</span> value <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>    ^character -&gt; path
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>    _ -&gt; <span style="color:#40ffff">nil</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span style="color:#6ab825;font-weight:bold">defp</span> find(%<span style="color:#447fcf;text-decoration:underline">Node</span>{<span style="color:#ed9d13">left</span>: left, <span style="color:#ed9d13">right</span>: right}, character, path) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>  find(left, character, &lt;&lt;path::bitstring, <span style="color:#3677a9">0</span>::size(<span style="color:#3677a9">1</span>)&gt;&gt;) ||
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>    find(right, character, &lt;&lt;path::bitstring, <span style="color:#3677a9">1</span>::size(<span style="color:#3677a9">1</span>)&gt;&gt;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>In the code example above we defined a function with two different clauses and a function header. The function header is just so that we can define a default value for the path which we set to an empty binary.</p>
+<p>The first clause executes when passed in a <code>Leaf</code> node. The only thing we need to do is compare its value to the character we are looking for. When they match, return the path, else return <code>nil</code>.</p>
+<p>The second clause matches on <code>Node</code>s and calls <code>find/3</code> with each child of the node, passing in an updated path. So when recursing on the left-child, we update the <code>path</code> with a <code>0</code>. The <code>||</code> (or) operator makes sure that either of the two paths is returned.</p>
+<p>Now that we can look up a single character in our binary tree, let&rsquo;s iterate over all the characters in the text and replace them with their Huffman code. Add the following function to our <code>Huffman</code> module:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">defp</span> convert(text, tree) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  text
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>  |&gt; <span style="color:#447fcf;text-decoration:underline">String</span>.graphemes()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>  |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.reduce(&lt;&lt;&gt;&gt;, <span style="color:#6ab825;font-weight:bold">fn</span> character, binary -&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span>    code = find(tree, character)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span>    &lt;&lt;binary::bitstring, code::bitstring&gt;&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8</span>  <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">9</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>This function simply breaks the text into graphemes and iterates over each grapheme by calling <code>Enum.reduce/3</code>. Starting off with an empty binary, we can simply append to it for each character we find.</p>
+<p>Now wire it all up and call our <code>convert/2</code> function at the bottom of our <code>Huffman.encode/1</code> function passing the original text and the tree.</p>
+<p>The <code>encode/1</code> function now looks like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">def</span> encode(text \\ <span style="color:#ed9d13">&#34;cheesecake&#34;</span>) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  frequencies =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>    text
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">String</span>.graphemes()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.reduce(%{}, <span style="color:#6ab825;font-weight:bold">fn</span> char, map -&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>      <span style="color:#447fcf;text-decoration:underline">Map</span>.update(map, char, <span style="color:#3677a9">1</span>, <span style="color:#6ab825;font-weight:bold">fn</span> val -&gt; val + <span style="color:#3677a9">1</span> <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>    <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>  queue =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>    frequencies
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.sort_by(<span style="color:#6ab825;font-weight:bold">fn</span> {_node, frequency} -&gt; frequency <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.map(<span style="color:#6ab825;font-weight:bold">fn</span> {value, frequency} -&gt; {%<span style="color:#447fcf;text-decoration:underline">Leaf</span>{<span style="color:#ed9d13">value</span>: value}, frequency} <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>  tree = build(queue)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>  {tree, convert(text, tree)}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>As you can see it returns a tuple containing the tree and the encoded text. It returns the tree because we need this in the next step to decode the text to its original form again.</p>
+<p>Calling <code>Huffman.encode</code> now results in the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  %<span style="color:#447fcf;text-decoration:underline">Huffman.Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>   <span style="color:#ed9d13">left</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;e&#34;</span>},
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>   <span style="color:#ed9d13">right</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>     <span style="color:#ed9d13">left</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;c&#34;</span>},
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>     <span style="color:#ed9d13">right</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>       <span style="color:#ed9d13">left</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>         <span style="color:#ed9d13">left</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;k&#34;</span>},
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>         <span style="color:#ed9d13">right</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;s&#34;</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>       },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>       <span style="color:#ed9d13">right</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>         <span style="color:#ed9d13">left</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;a&#34;</span>},
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>         <span style="color:#ed9d13">right</span>: %<span style="color:#447fcf;text-decoration:underline">Huffman.Leaf</span>{<span style="color:#ed9d13">value</span>: <span style="color:#ed9d13">&#34;h&#34;</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>       }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>     }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span>   }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span> }, &lt;&lt;<span style="color:#3677a9">188</span>, <span style="color:#3677a9">213</span>, <span style="color:#3677a9">216</span>&gt;&gt;}
+</code></pre></div><p>Where the second element of the tuple (<code>&lt;&lt;188, 213, 216&gt;&gt;</code>) is our compressed data.</p>
+<h3 id="quick-size-comparison">Quick size comparison</h3>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>iex(<span style="color:#3677a9">1</span>)&gt; &lt;&lt;<span style="color:#3677a9">188</span>, <span style="color:#3677a9">213</span>, <span style="color:#3677a9">216</span>&gt;&gt; |&gt; bit_size()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span><span style="color:#3677a9">24</span> <span style="color:#999;font-style:italic"># variable bit length per char, but max 4 bits in this scenario</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>iex(<span style="color:#3677a9">2</span>)&gt; <span style="color:#ed9d13">&#34;cheesecake&#34;</span> |&gt; bit_size()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span><span style="color:#3677a9">80</span> <span style="color:#999;font-style:italic"># 10 chars * 8 bits per char = 80 bits</span>
+</code></pre></div><p>Using our Huffman module, encoding the string &ldquo;cheesecake&rdquo; results in a binary blob of <em>only</em> 24 bits. Each character in our binary tree is reachable in max. four steps, so each character is encoded in 4 bits or less. Using ASCII encoding each character takes 8 bits.</p>
+<p>However, in order to decompress the text, we need access to the same tree we used to compress the text. Meaning that if we want to send the compressed data over the wire or store it to disk, we need need to account for additional space for the tree too.</p>
+<h2 id="decoding">Decoding</h2>
+<p>Now that we have coded ourselves the ability to encode text using Huffman coding, we also should have a way to decode the data back to its original form.</p>
+<p>Decoding the data is quite straight-forward: all we need is our original Huffman tree and the encoded binary blob from the previous steps.</p>
+<p>We use the binary blob as some sort of turn-by-turn navigation through our binary tree. From the top of the tree, traverse down the left-child when encountering a <code>0</code> in the data and traverse down the right-child when finding a <code>1</code>.</p>
+<p>Repeat this process until we hit a <code>Leaf</code> node. Write down the value of the <code>Leaf</code> and repeat with the remainder of the bits.</p>
+<h3 id="code-1">Code</h3>
+<p>First things first, we need a function that can walk the tree following the instructions in the compressed data, until we hit a <code>Leaf</code> node.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">defp</span> walk(binary, %<span style="color:#447fcf;text-decoration:underline">Leaf</span>{<span style="color:#ed9d13">value</span>: value}), <span style="color:#ed9d13">do</span>: {binary, value}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span><span style="color:#6ab825;font-weight:bold">defp</span> walk(&lt;&lt;<span style="color:#3677a9">0</span>::size(<span style="color:#3677a9">1</span>), rest::bitstring&gt;&gt;, %<span style="color:#447fcf;text-decoration:underline">Node</span>{<span style="color:#ed9d13">left</span>: left}) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>  walk(rest, left)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span><span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span><span style="color:#6ab825;font-weight:bold">defp</span> walk(&lt;&lt;<span style="color:#3677a9">1</span>::size(<span style="color:#3677a9">1</span>), rest::bitstring&gt;&gt;, %<span style="color:#447fcf;text-decoration:underline">Node</span>{<span style="color:#ed9d13">right</span>: right}) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8</span>  walk(rest, right)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">9</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>In the code above we define a <code>walk/2</code> function that takes the encoded binary and the tree and walks the tree. For every <code>Node</code> it encounters it looks at the next <em>bit</em> of the data to determine whether it should traverse down the first-child (found a <code>0</code>) or traverse down the right-child (found a <code>1</code>).</p>
+<p>It keeps doing that until it finds a <code>Leaf</code> node, then it returns the remainder of the data and the character that belongs to that code.</p>
+<p>Now that we have a function that can walk to the first available <code>Leaf</code> node following the instructions of the data, we want to call this function recursively as long as there&rsquo;s more binary data available.</p>
+<p>Let&rsquo;s define another function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">def</span> decode(tree, data, result \\ [])
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span><span style="color:#6ab825;font-weight:bold">def</span> decode(_tree, &lt;&lt;&gt;&gt;, result), 
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>  <span style="color:#ed9d13">do</span>: <span style="color:#447fcf;text-decoration:underline">List</span>.to_string(result)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span><span style="color:#6ab825;font-weight:bold">def</span> decode(tree, data, result) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span>  {rest, value} = walk(data, tree)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8</span>  decode(tree, rest, result ++ [value])
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">9</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>The <code>decode/3</code> function above has two clauses. The last one basically walks the tree until it finds the first <code>Leaf</code> node, stores its character value in a list (<code>result</code>) and recurses with the remainder of the binary data.</p>
+<p>The first clause matches once we have no binary data left to decode. It passes the result to <code>List.to_string/1</code> concatenating the items in the list together forming a string.</p>
+<h2 id="the-end-result">The end result</h2>
+<p>That&rsquo;s all there is to it! We built ourselves a Huffman Coder and Decoder using ~90 lines of Elixir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">Huffman</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  <span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">Node</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>    <span style="color:#6ab825;font-weight:bold">defstruct</span> [<span style="color:#ed9d13">:left</span>, <span style="color:#ed9d13">:right</span>]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>  <span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">Leaf</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>    <span style="color:#6ab825;font-weight:bold">defstruct</span> [<span style="color:#ed9d13">:value</span>]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>  <span style="color:#6ab825;font-weight:bold">def</span> encode(text \\ <span style="color:#ed9d13">&#34;cheesecake&#34;</span>) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>    frequencies =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>      text
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>      |&gt; <span style="color:#447fcf;text-decoration:underline">String</span>.graphemes()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>      |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.reduce(%{}, <span style="color:#6ab825;font-weight:bold">fn</span> char, map -&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>        <span style="color:#447fcf;text-decoration:underline">Map</span>.update(map, char, <span style="color:#3677a9">1</span>, <span style="color:#6ab825;font-weight:bold">fn</span> val -&gt; val + <span style="color:#3677a9">1</span> <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span>      <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span>    queue =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span>      frequencies
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span>      |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.sort_by(<span style="color:#6ab825;font-weight:bold">fn</span> {_node, frequency} -&gt; frequency <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span>      |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.map(<span style="color:#6ab825;font-weight:bold">fn</span> {value, frequency} -&gt; {%<span style="color:#447fcf;text-decoration:underline">Leaf</span>{<span style="color:#ed9d13">value</span>: value}, frequency} <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span>    tree = build(queue)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span>    {tree, convert(text, tree)}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27</span>  <span style="color:#6ab825;font-weight:bold">def</span> decode(tree, data, result \\ [])
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29</span>  <span style="color:#6ab825;font-weight:bold">def</span> decode(_tree, &lt;&lt;&gt;&gt;, result),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30</span>    <span style="color:#ed9d13">do</span>: <span style="color:#447fcf;text-decoration:underline">List</span>.to_string(result)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32</span>  <span style="color:#6ab825;font-weight:bold">def</span> decode(tree, data, result) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33</span>    {rest, value} = walk(data, tree)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">34</span>    decode(tree, rest, result ++ [value])
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">35</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">36</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">37</span>  <span style="color:#6ab825;font-weight:bold">defp</span> walk(binary, %<span style="color:#447fcf;text-decoration:underline">Leaf</span>{<span style="color:#ed9d13">value</span>: value}), <span style="color:#ed9d13">do</span>: {binary, value}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">38</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">39</span>  <span style="color:#6ab825;font-weight:bold">defp</span> walk(&lt;&lt;<span style="color:#3677a9">0</span>::size(<span style="color:#3677a9">1</span>), rest::bitstring&gt;&gt;, %<span style="color:#447fcf;text-decoration:underline">Node</span>{<span style="color:#ed9d13">left</span>: left}) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">40</span>    walk(rest, left)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">41</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">42</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">43</span>  <span style="color:#6ab825;font-weight:bold">defp</span> walk(&lt;&lt;<span style="color:#3677a9">1</span>::size(<span style="color:#3677a9">1</span>), rest::bitstring&gt;&gt;, %<span style="color:#447fcf;text-decoration:underline">Node</span>{<span style="color:#ed9d13">right</span>: right}) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">44</span>    walk(rest, right)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">45</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">46</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">47</span>  <span style="color:#6ab825;font-weight:bold">defp</span> build([{root, _freq}]), <span style="color:#ed9d13">do</span>: root
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">48</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">49</span>  <span style="color:#6ab825;font-weight:bold">defp</span> build(queue) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">50</span>    [{node_a, freq_a} | queue] = queue
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">51</span>    [{node_b, freq_b} | queue] = queue
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">52</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">53</span>    new_node = %<span style="color:#447fcf;text-decoration:underline">Node</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">54</span>      <span style="color:#ed9d13">left</span>: node_a,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">55</span>      <span style="color:#ed9d13">right</span>: node_b
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">56</span>    }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">57</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">58</span>    total = freq_a + freq_b
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">59</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">60</span>    queue = [{new_node, total}] ++ queue
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">61</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">62</span>    queue
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">63</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.sort_by(<span style="color:#6ab825;font-weight:bold">fn</span> {_node, frequency} -&gt; frequency <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">64</span>    |&gt; build()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">65</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">66</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">67</span>  <span style="color:#6ab825;font-weight:bold">defp</span> find(tree, character, path \\ &lt;&lt;&gt;&gt;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">68</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">69</span>  <span style="color:#6ab825;font-weight:bold">defp</span> find(%<span style="color:#447fcf;text-decoration:underline">Leaf</span>{<span style="color:#ed9d13">value</span>: value}, character, path) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">70</span>    <span style="color:#6ab825;font-weight:bold">case</span> value <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">71</span>      ^character -&gt; path
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">72</span>      _ -&gt; <span style="color:#40ffff">nil</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">73</span>    <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">74</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">75</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">76</span>  <span style="color:#6ab825;font-weight:bold">defp</span> find(%<span style="color:#447fcf;text-decoration:underline">Node</span>{<span style="color:#ed9d13">left</span>: left, <span style="color:#ed9d13">right</span>: right}, character, path) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">77</span>    find(left, character, &lt;&lt;path::bitstring, <span style="color:#3677a9">0</span>::size(<span style="color:#3677a9">1</span>)&gt;&gt;) ||
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">78</span>      find(right, character, &lt;&lt;path::bitstring, <span style="color:#3677a9">1</span>::size(<span style="color:#3677a9">1</span>)&gt;&gt;)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">79</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">80</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">81</span>  <span style="color:#6ab825;font-weight:bold">defp</span> convert(text, tree) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">82</span>    text
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">83</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">String</span>.graphemes()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">84</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.reduce(&lt;&lt;&gt;&gt;, <span style="color:#6ab825;font-weight:bold">fn</span> character, binary -&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">85</span>      code = find(tree, character)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">86</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">87</span>      &lt;&lt;binary::bitstring, code::bitstring&gt;&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">88</span>    <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">89</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">90</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><h2 id="next-steps">Next steps</h2>
+<p>There&rsquo;s several improvements we can make to this implementation. For example, when encoding the text and looking up the Huffman code in the tree, we don&rsquo;t have to walk the tree for every character. We can do a full traversal once and keep track of each character and its Huffman code in a map.</p>
+<p>Also building up the queue can be improved. We don&rsquo;t have to keep sorting the queue after every insert, rather have a look at a proper priority queue.</p>
+<p>For an implementation that also serializes the tree to be written to disk or network, head over to <a href="https://github.com/Tmw/huffman">the GitHub repository</a></p>
+<p>Thanks for reading! 🤘</p>
+
+    </section>
+  </body>
+</html>

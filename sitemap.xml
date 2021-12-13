@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>localhost/categories/</loc>
+    <lastmod>2021-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>localhost/posts/20211212_01/</loc>
+    <lastmod>2021-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>localhost/tags/cryptography/</loc>
+    <lastmod>2021-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>localhost/categories/cryptography/</loc>
+    <lastmod>2021-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>localhost/tags/mathematics/</loc>
+    <lastmod>2021-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>localhost/categories/numbertheory/</loc>
+    <lastmod>2021-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>localhost/posts/</loc>
+    <lastmod>2021-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>localhost/tags/</loc>
+    <lastmod>2021-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>localhost/posts/20211211_01/</loc>
+    <lastmod>2021-12-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>localhost/</loc>
+    <lastmod>2021-12-10T08:23:55+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>localhost/posts/20211210_01/</loc>
+    <lastmod>2021-12-10T00:00:00+00:00</lastmod>
+  </url>
+  
+</urlset>

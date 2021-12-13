@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Linear Regression with Elixir, Phoenix and LiveView. Part II ~ Tiemen</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
+rel="stylesheet" href="/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
+
+
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-25416548-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-25416548-1");
+</script>
+<meta property="og:title" content="Linear Regression with Elixir, Phoenix and LiveView. Part II ~ Tiemen" />
+    <meta name="twitter:title" content="Linear Regression with Elixir, Phoenix and LiveView. Part II ~ Tiemen" />
+    <meta itemprop="name" content="Linear Regression with Elixir, Phoenix and LiveView. Part II ~ Tiemen" />
+    <meta name="application-name" content="Linear Regression with Elixir, Phoenix and LiveView. Part II ~ Tiemen" />
+    <meta property="og:site_name" content="" />
+
+    <meta name="keywords" content="[linrear regression, machine learning, elixir, liveview]" />
+
+    <meta name="description" content="Making our linear regression algorithm interactive using Phoenix LiveView" />
+    <meta itemprop="description" content="Making our linear regression algorithm interactive using Phoenix LiveView" />
+    <meta property="og:description" content="Making our linear regression algorithm interactive using Phoenix LiveView" />
+    <meta name="twitter:description" content="Making our linear regression algorithm interactive using Phoenix LiveView" />
+
+    <link rel="canonical" href="https://tiemenwaterreus.com/posts/linear-regression-elixir-phoenix-liveview-ii/" itemprop="url" />
+    <meta name="url" content="https://tiemenwaterreus.com/posts/linear-regression-elixir-phoenix-liveview-ii/" />
+    <meta name="twitter:url" content="https://tiemenwaterreus.com/posts/linear-regression-elixir-phoenix-liveview-ii/" />
+    <meta property="og:url" content="https://tiemenwaterreus.com/posts/linear-regression-elixir-phoenix-liveview-ii/" />
+  </head>
+  <body>
+    <section class="single-post">
+      <section class="post-pre-header">
+        <a href="/posts" class="bring-me-back">&larr; all posts</a>
+
+        <div class="meta">
+          Posted on May 9, 2020
+        </div>
+      </section>
+
+      <h1>Linear Regression with Elixir, Phoenix and LiveView. Part II</h1>
+      <p>In the <a href="/posts/linear-regression-elixir-phoenix-liveview-i/">previous post</a> we walked through setting up a fairly simple linear regression algorithm that uses the slope-intercept form and gradient descent to fit the best line possible over a list of given datapoints. In this part we will make this interactive using Phoenix LiveView and a SVG element in the browser.</p>
+<h2 id="kicking-things-off">Kicking things off</h2>
+<p>In the previous post we&rsquo;ve scaffolded a Phoenix LiveView application using <code>mix phx.new --live --no-ecto</code> but up until now we only focused on the non-phoenix parts. Let&rsquo;s begin by starting our development server and see what we&rsquo;re setup with out-of-the-box:</p>
+<p>Either <code>iex -S mix phx.server</code> or <code>mix phoenix.server</code> will do. I like the former better because it drops us immediately into an IEx session we can use to inspect, validate or just doodle around.</p>
+<p>Visiting <code>http://localhost:4000</code> will greet us with a default Phoenix LiveView page:</p>
+<figure><img src="/resources/linreg-ii/default_page.png"
+         alt="The default Phoenix LiveView page"/><figcaption>
+            <p>The default Phoenix LiveView page</p>
+        </figcaption>
+</figure>
+
+<p>Now open your favorite editor and look under <code>lib/linreg_web/live</code>. This is where the LiveView modules and their templates live. Go ahead and add two files to this folder: <code>regression_live.ex</code> and <code>regression_live.html.leex</code>.</p>
+<h2 id="setting-up-the-liveview-module-and-its-template">Setting up the LiveView module and its template</h2>
+<p>Now that we have a new module for our logic, go ahead and open the <code>regression_live.ex</code> file to start coding our module.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">LinregWeb.RegressionLive</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  <span style="color:#6ab825;font-weight:bold">use</span> <span style="color:#447fcf;text-decoration:underline">LinregWeb</span>, <span style="color:#ed9d13">:live_view</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>  <span style="color:#bbb">@impl</span> <span style="color:#40ffff">true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span>  <span style="color:#6ab825;font-weight:bold">def</span> mount(_params, _sesion, socket) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span>    {<span style="color:#ed9d13">:ok</span>, socket}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>This is the most barebones version of a LiveView module we can write. It defines a new module called <code>RegressionLive</code> which uses the LiveView parts of our application. Its behaviour specifies only one required function <code>mount/3</code> to kick things off. It knows, by convention, to render the <code>regression_live.html.leex</code> template.</p>
+<p>Now, to actually show something in the browser, we&rsquo;ll need to write some HTML. Open the template file <code>regression_live.html.leex</code> and add some basic HTML:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>&lt;<span style="color:#6ab825;font-weight:bold">h1</span>&gt;Hello, LiveView!&lt;/<span style="color:#6ab825;font-weight:bold">h1</span>&gt;
+</code></pre></div><p>And lastly, in order to be able to view it, we need to hook the LiveView module up to our router. Locate the <code>router.ex</code> file living in <code>lib/linreg_web/</code> and find the line where it says:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>live <span style="color:#ed9d13">&#34;/&#34;</span>, <span style="color:#447fcf;text-decoration:underline">PageLive</span>, <span style="color:#ed9d13">:index</span>
+</code></pre></div><p>This line tells Phoenix to mount the LiveView module on the root route (&quot;/&quot;), hook it up to the PageLive module and mark it as the <code>:index</code> action.In other words, if there&rsquo;s a request made to our root route, we&rsquo;ll render the <code>PageLive</code> live module.</p>
+<p>We want to change that to our own module and see our friendly greeting:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>live <span style="color:#ed9d13">&#34;/&#34;</span>, <span style="color:#447fcf;text-decoration:underline">RegressionLive</span>, <span style="color:#ed9d13">:index</span>
+</code></pre></div><p>Now refresh our browser and be greeted with our own module:</p>
+<figure><img src="/resources/linreg-ii/hello_liveview.png"
+         alt="Our own Linreg.RegressionLive module in effect!"/><figcaption>
+            <p>Our own Linreg.RegressionLive module in effect!</p>
+        </figcaption>
+</figure>
+
+<h2 id="collecting-datapoints">Collecting datapoints</h2>
+<p>Now that we have a basic LiveView setup, we can start working on collecting datapoints to let our model learn against. Let&rsquo;s begin by rendering a SVG plane on screen.</p>
+<p>Open our live template (<code>regression_live.html.leex</code>) and write the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>&lt;<span style="color:#6ab825;font-weight:bold">svg</span> <span style="color:#bbb">phx-click</span>=<span style="color:#ed9d13">&#34;add_point&#34;</span> <span style="color:#bbb">width</span>=<span style="color:#ed9d13">&#34;800&#34;</span> <span style="color:#bbb">height</span>=<span style="color:#ed9d13">&#34;800&#34;</span>&gt;&lt;/<span style="color:#6ab825;font-weight:bold">svg</span>&gt;
+</code></pre></div><p>This sets up an empty SVG element with a with and height of 800px. Another important thing that we&rsquo;ve added here is the <code>phx-click</code> attribute. This is the LiveView magic that will make it interactive! This ties an event listener to this element that will react to click events on the SVG element and will send off an event called <code>add_point</code>.</p>
+<p>Let&rsquo;s setup the eventhandler itself. Open up the <code>regression_live.ex</code> module again and write the following function in there:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#bbb">@impl</span> <span style="color:#40ffff">true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span><span style="color:#6ab825;font-weight:bold">def</span> handle_event(<span style="color:#ed9d13">&#34;add_point&#34;</span>, params, socket) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>  <span style="color:#447fcf;text-decoration:underline">IO</span>.inspect(params, <span style="color:#ed9d13">label</span>: <span style="color:#ed9d13">&#34;params&#34;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>  {<span style="color:#ed9d13">:noreply</span>, socket}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>The function definition above has three parameters. The first one is the event name, followed by the parameters of that event and lastly the socket which holds our state and causes the template to re-render if anything changes.</p>
+<p>All this function does is print out the parameters when the <code>&quot;add_point&quot;</code> event comes in. Let&rsquo;s try it out by refreshing the page and clicking anywhere on the SVG element. The terminal running your Phoenix app should now show something along the lines of:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span>params: %{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  <span style="color:#ed9d13">&#34;altKey&#34;</span> =&gt; false,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>  <span style="color:#ed9d13">&#34;ctrlKey&#34;</span> =&gt; false,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>  <span style="color:#ed9d13">&#34;detail&#34;</span> =&gt; 1,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>  <span style="color:#ed9d13">&#34;metaKey&#34;</span> =&gt; false,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>  <span style="color:#ed9d13">&#34;offsetX&#34;</span> =&gt; 549,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>  <span style="color:#ed9d13">&#34;offsetY&#34;</span> =&gt; 227,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>  <span style="color:#ed9d13">&#34;pageX&#34;</span> =&gt; 832,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>  <span style="color:#ed9d13">&#34;pageY&#34;</span> =&gt; 367,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>  <span style="color:#ed9d13">&#34;screenX&#34;</span> =&gt; 832,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>  <span style="color:#ed9d13">&#34;screenY&#34;</span> =&gt; 465,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>  <span style="color:#ed9d13">&#34;shiftKey&#34;</span> =&gt; false,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>  <span style="color:#ed9d13">&#34;x&#34;</span> =&gt; 832,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>  <span style="color:#ed9d13">&#34;y&#34;</span> =&gt; <span style="color:#3677a9">367</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>}
+</code></pre></div><p>It&rsquo;s right there in the <code>offsetX</code> and <code>offsetY</code> where we get our coordinates within the SVG.</p>
+<p>Note: Since Phoenix 1.5.3 and Phoenix LiveView 0.13.0 <code>phx-click</code> no longer sends its metadata along. See the troubleshooting section on Github on <a href="https://github.com/tmw/linreg/#clicks-not-appearing">how to fix this</a>.</p>
+<h2 id="scaling-the-data">Scaling the data</h2>
+<p>The coordinates that will come in will be between 0 and 800. Our linear regression algorithm works better with smaller numbers. To make this work we&rsquo;ll need to scale our coordinates down to between 0 and 1. I&rsquo;ve added a convenience function called <code>map/5</code> that takes the original value alongside its original scale and maps it to the second given scale. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>map(<span style="color:#3677a9">5</span>, <span style="color:#3677a9">0</span>, <span style="color:#3677a9">10</span>, <span style="color:#3677a9">0</span>, <span style="color:#3677a9">1</span>) <span style="color:#999;font-style:italic"># 0.5</span>
+</code></pre></div><p>I&rsquo;ve wrote this function in the module <code>linreg/math.ex</code> so we can use it both in our Live module to scale the coordinates down as well as in our template to scale the coordinates back up to their original.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">Linreg.Math</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  <span style="color:#6ab825;font-weight:bold">def</span> map(value, in_min, in_max, out_min, out_max) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>    out_min + (out_max - out_min) * ((value - in_min) / (in_max - in_min))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>Then I imported the module into our <code>lib/linreg_web.ex</code> module under <code>view_helpers/0</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span>defp view_helpers do
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  quote do
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>    # Use all HTML functionality (forms, tags, etc)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>    use Phoenix.HTML
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>    #... snip
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>    alias LinregWeb.Router.Helpers, as: Routes
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span style="color:#589819">+   import Linreg.Math, only: [map: 5]
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span style="color:#589819"></span>  end
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>end
+</code></pre></div><p>Importing it in our view_helpers will make it available in both our <code>_live</code> modules as well as our <code>.leex</code> templates, which are exactly the places where we&rsquo;ll need them.</p>
+<h2 id="adding-points-to-our-training-data">Adding points to our training data</h2>
+<p>Head back to our <code>regression_live.ex</code> module and find the <code>mount/3</code> function. This function is executed once (upon hitting the route). This is also the place where we can assign an initial state to our socket. Let&rsquo;s use this hook to initialize an empty model and an empty data struct to collect our datapoints in, like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span><span style="color:#6ab825;font-weight:bold">def</span> mount(_params, _sesion, socket) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">2</span>  socket =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">3</span>    socket
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">4</span>    |&gt; assign(<span style="color:#ed9d13">model</span>: <span style="color:#447fcf;text-decoration:underline">Linreg.Model</span>.new())
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">5</span>    |&gt; assign(<span style="color:#ed9d13">data</span>: <span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>.new())
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">7</span>  {<span style="color:#ed9d13">:ok</span>, socket}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">8</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>Now in every handler where we have access to the socket, we also have access to this state in the <code>assigns</code> map. For the next step, we need to go back to our <code>handle_event/3</code> function and add some logic in and around that function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span>  <span style="color:#6ab825;font-weight:bold">def</span> handle_event(<span style="color:#ed9d13">&#34;add_point&#34;</span>, params, socket) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>    {<span style="color:#ed9d13">:noreply</span>, add_point(params, socket)}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>  <span style="color:#6ab825;font-weight:bold">defp</span> add_point(%{<span style="color:#ed9d13">&#34;offsetX&#34;</span> =&gt; x, <span style="color:#ed9d13">&#34;offsetY&#34;</span> =&gt; y}, socket) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>    data =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>      socket.assigns
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>      |&gt; <span style="color:#447fcf;text-decoration:underline">Map</span>.get(<span style="color:#ed9d13">:data</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>      |&gt; <span style="color:#447fcf;text-decoration:underline">Data</span>.add_point(map(x, <span style="color:#3677a9">0</span>, <span style="color:#3677a9">800</span>, <span style="color:#3677a9">0</span>, <span style="color:#3677a9">1</span>), map(y, <span style="color:#3677a9">0</span>, <span style="color:#3677a9">800</span>, <span style="color:#3677a9">1</span>, <span style="color:#3677a9">0</span>))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>    assign(socket, <span style="color:#ed9d13">data</span>: data)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>In the <code>add_point/2</code> function we&rsquo;re grabbing the x and y values and assign them to the data struct stored in our socket.</p>
+<blockquote>
+<p>Also note the call to <code>map/5</code> in there. We&rsquo;re calling it twice since we&rsquo;re scaling both the X and Y axis down. The X axis from 0 - 800 to 0-1 and the Y axis from 0 - 800 to 1 - 0. We flipped the Y axis so that it Y = 0 is on the bottom of the SVG.</p>
+</blockquote>
+<h2 id="drawing-our-input">Drawing our input</h2>
+<p>With our RegressionLive module storing inputs, let&rsquo;s adjust the template so it will render all points it has stored. Open up the <code>regression_live.html.leex</code> template and make some edits:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span>~ &lt;svg phx-click=&#34;add_point&#34; width=&#34;800&#34; height=&#34;800&#34;&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span><span style="color:#589819">+  &lt;%= for {x, y} &lt;- @data.points do %&gt;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span style="color:#589819">+  &lt;circle
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span><span style="color:#589819">+    cx=&#34;&lt;%= map(x, 0, 1, 0, 800) %&gt;&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span><span style="color:#589819">+    cy=&#34;&lt;%= map(y, 0, 1, 800, 0) %&gt;&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span><span style="color:#589819">+    r=&#34;5&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span><span style="color:#589819">+    fill=&#34;#24DA5E&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span style="color:#589819">+  /&gt;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span><span style="color:#589819">+  &lt;% end %&gt;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span style="color:#589819"></span>~ &lt;/svg&gt;
+</code></pre></div><p>It will now iterate over all the points in the <code>data</code> struct and passing them through the <code>map/5</code> function to map the coordinates to 0 - 800 again. It looks like:</p>
+<figure><img src="/resources/linreg-ii/collecting_points.gif"
+         alt="Adding points"/><figcaption>
+            <p>Adding points</p>
+        </figcaption>
+</figure>
+
+<h2 id="drawing-the-predicted-line">Drawing the predicted line</h2>
+<p>Now that we have a canvas that renders our collected points, let&rsquo;s hook it up to our linear regression algorithm and let it draw its predicted line.</p>
+<p>To draw that line, we need to know the Y value for X = 0 to get the starting point, and Y when x = 800 (the width of our canvas), as our end point, to draw a line between those two points. We&rsquo;ll store both those values on the socket too as <code>start_y</code> and <code>end_y</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span>  def mount(_params, _sesion, socket) do
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>    socket =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>      socket
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>      |&gt; assign(model: Linreg.Model.new())
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>      |&gt; assign(data: Linreg.Data.new())
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span><span style="color:#589819">+     |&gt; assign(start_y: 0)
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span><span style="color:#589819">+     |&gt; assign(end_y: 0)
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span style="color:#589819"></span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>    {:ok, socket}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>  end
+</code></pre></div><p>In our template we can use these values to draw the line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span>&lt;svg phx-click=&#34;add_point&#34; width=&#34;800&#34; height=&#34;800&#34;&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  &lt;%= for {x, y} &lt;- @data.points do %&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>  &lt;circle
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>    cx=&#34;&lt;%= map(x, 0, 1, 0, 800) %&gt;&#34;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>    cy=&#34;&lt;%= map(y, 0, 1, 800, 0) %&gt;&#34;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>    r=&#34;5&#34;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>    fill=&#34;#24DA5E&#34;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>  /&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>  &lt;% end %&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span style="color:#589819">+ &lt;line
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span><span style="color:#589819">+   x1=&#34;0&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span><span style="color:#589819">+   y1=&#34;&lt;%= map(@start_y, 0, 1, 800, 0) %&gt;&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span><span style="color:#589819">+   x2=&#34;800&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span><span style="color:#589819">+   y2=&#34;&lt;%= map(@end_y, 0, 1, 800, 0) %&gt;&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span><span style="color:#589819">+   stroke-width=&#34;1&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span><span style="color:#589819">+   stroke=&#34;#2477DA&#34;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span><span style="color:#589819">+ /&gt;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span><span style="color:#589819"></span>&lt;/svg&gt;
+</code></pre></div><p>We&rsquo;ve added a <code>line</code> element which takes two X and Y pairs to indicate the start and end points of the line. As you can see these points are passed through our <code>map/5</code> function as well before using them in the template.</p>
+<h2 id="learning">Learning</h2>
+<p>When adding new points we like our model to run the training adjusting its weights and on its turn adjusting the predicted line. To run the training, add the following two functions to our RegressionLive module:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">defp</span> learn(%{<span style="color:#ed9d13">assigns</span>: %{<span style="color:#ed9d13">data</span>: data, <span style="color:#ed9d13">model</span>: model}} = socket) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  <span style="color:#6ab825;font-weight:bold">if</span> length(data.points) &gt;= <span style="color:#3677a9">2</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>    model = <span style="color:#447fcf;text-decoration:underline">Model</span>.train(model, data, <span style="color:#ed9d13">learning_rate</span>: <span style="color:#3677a9">0.1</span>, <span style="color:#ed9d13">epochs</span>: <span style="color:#3677a9">500</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>    assign(socket, <span style="color:#ed9d13">model</span>: model)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>  <span style="color:#6ab825;font-weight:bold">else</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>    socket
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span style="color:#6ab825;font-weight:bold">defp</span> update_prediction(%{<span style="color:#ed9d13">assigns</span>: %{<span style="color:#ed9d13">model</span>: model}} = socket) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>  socket
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>  |&gt; assign(<span style="color:#ed9d13">start_y</span>: <span style="color:#447fcf;text-decoration:underline">Model</span>.predict(model, <span style="color:#3677a9">0</span>))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>  |&gt; assign(<span style="color:#ed9d13">end_y</span>: <span style="color:#447fcf;text-decoration:underline">Model</span>.predict(model, <span style="color:#3677a9">1</span>))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>The first one: <code>learn/1</code> will take the socket and pattern match the training data and the model from the socket. Then, only if there&rsquo;s two or more points in the training set, it&rsquo;ll call the <code>Model.train/3</code> function. In this case we&rsquo;re calling it with a learning rate of 0.1 and we&rsquo;ll train it for 500 epochs, but feel free to play with these numbers and observe the output change.</p>
+<p>The other function <code>update_predicton/1</code> simply takes the socket to pattern match the model out of there, and assigns the <code>start_y</code> and <code>end_y</code> values in the socket based on the updated model&rsquo;s prediction for X = 0 and X = 1.</p>
+<p>Now to use these functions, let&rsquo;s revisit our <code>add_point/2</code> function one last time:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span>defp add_point(%{&#34;offsetX&#34; =&gt; x, &#34;offsetY&#34; =&gt; y}, socket) do
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  data =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>    socket.assigns
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>    |&gt; Map.get(:data)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>    |&gt; Data.add_point(map(x, 0, 800, 0, 1), map(y, 0, 800, 1, 0))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span><span style="color:#d22323">- assign(socket, data: data)
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span style="color:#d22323"></span><span style="color:#589819">+ socket
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span><span style="color:#589819">+ |&gt; assign(data: data)
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span style="color:#589819">+ |&gt; learn()
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span style="color:#589819">+ |&gt; update_prediction()
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span><span style="color:#589819"></span>end
+</code></pre></div><h2 id="done">Done</h2>
+<p>And we&rsquo;re done! We&rsquo;ve built a linear regression algorithm in Elixir and made it interactive and visual using LiveView!</p>
+<figure><img src="/resources/linreg-ii/finished_product.gif"
+         alt="That&amp;rsquo;s a wrap!"/><figcaption>
+            <p>That&rsquo;s a wrap!</p>
+        </figcaption>
+</figure>
+
+<p>You can find the <a href="https://github.com/tmw/linreg">full code on GitHub</a>. Feel free to play around with it and make it better! Thanks for reading :)</p>
+
+    </section>
+  </body>
+</html>

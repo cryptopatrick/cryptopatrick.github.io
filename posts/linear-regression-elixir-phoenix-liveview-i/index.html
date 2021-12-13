@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Linear Regression with Elixir, Phoenix and LiveView. Part I ~ Tiemen</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
+rel="stylesheet" href="/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
+
+
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-25416548-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-25416548-1");
+</script>
+<meta property="og:title" content="Linear Regression with Elixir, Phoenix and LiveView. Part I ~ Tiemen" />
+    <meta name="twitter:title" content="Linear Regression with Elixir, Phoenix and LiveView. Part I ~ Tiemen" />
+    <meta itemprop="name" content="Linear Regression with Elixir, Phoenix and LiveView. Part I ~ Tiemen" />
+    <meta name="application-name" content="Linear Regression with Elixir, Phoenix and LiveView. Part I ~ Tiemen" />
+    <meta property="og:site_name" content="" />
+
+    <meta name="keywords" content="[linrear regression, machine learning, elixir, liveview]" />
+
+    <meta name="description" content="Writing a basic linear regression algorithm in Elixir and make it interactive using Phoenix Live View" />
+    <meta itemprop="description" content="Writing a basic linear regression algorithm in Elixir and make it interactive using Phoenix Live View" />
+    <meta property="og:description" content="Writing a basic linear regression algorithm in Elixir and make it interactive using Phoenix Live View" />
+    <meta name="twitter:description" content="Writing a basic linear regression algorithm in Elixir and make it interactive using Phoenix Live View" />
+
+    <link rel="canonical" href="https://tiemenwaterreus.com/posts/linear-regression-elixir-phoenix-liveview-i/" itemprop="url" />
+    <meta name="url" content="https://tiemenwaterreus.com/posts/linear-regression-elixir-phoenix-liveview-i/" />
+    <meta name="twitter:url" content="https://tiemenwaterreus.com/posts/linear-regression-elixir-phoenix-liveview-i/" />
+    <meta property="og:url" content="https://tiemenwaterreus.com/posts/linear-regression-elixir-phoenix-liveview-i/" />
+  </head>
+  <body>
+    <section class="single-post">
+      <section class="post-pre-header">
+        <a href="/posts" class="bring-me-back">&larr; all posts</a>
+
+        <div class="meta">
+          Posted on Apr 28, 2020
+        </div>
+      </section>
+
+      <h1>Linear Regression with Elixir, Phoenix and LiveView. Part I</h1>
+      <p>Phoenix LiveView has been around for <a href="https://www.youtube.com/watch?v=8xJzHq8ru0M">a bit</a>, but with the release of Phoenix 1.5 it became even easier to get started with it in a new Phoenix app! Simply pass the <code>--live</code> flag when generating a new project and off you go! 🚀</p>
+<p>In this two part series we&rsquo;re getting our hands dirty with a basic linear regression algorithm that allows the user to click on a plane to add datapoints and the algorithm figure out the best fitting line through these points.</p>
+<figure><img src="/resources/linreg-ii/finished_product.gif"
+         alt="The endresult!"/><figcaption>
+            <p>The endresult!</p>
+        </figcaption>
+</figure>
+
+<h2 id="upgrading-to-phoenix-150">Upgrading to Phoenix 1.5.0</h2>
+<p>To kick things off, we first need to get up-to-date with our Phoenix version, if you have not already done this. You can do so by running: <code>mix archive.install hex phx_new</code></p>
+<p>If you rather get LiveView to work on Phoenix 1.4.x, just follow <a href="https://hexdocs.pm/phoenix_live_view/installation.html">the getting started guide</a>.</p>
+<h2 id="setting-up-the-project">Setting up the project</h2>
+<p>Generating a new project that will help us hit the ground running is as simple as: <code>mix phx.new linreg --live --no-ecto</code>.</p>
+<p>Note the two flags there:</p>
+<ul>
+<li>
+<p><code>--no-ecto</code> skips setting up all Ecto related things since we won&rsquo;t be using them in this project.</p>
+</li>
+<li>
+<p><code>--live</code> ensures everything is wired up to use LiveView!</p>
+</li>
+</ul>
+<p>Lastly; <code>cd</code> into the <code>linreg</code> folder and kick-off the Phoenix server by running <code>mix phx.server</code>. You are now greeted by the getting started page over at <code>http://localhost:4000</code>. 🎉</p>
+<h2 id="basic-model">Basic model</h2>
+<p>Now that we have a new Elixir, Phoenix and LiveView project ready to go, we can get cracking on the real stuff!</p>
+<p>First things first, let&rsquo;s define a simple model to hold our data and make our predictions with. A simple struct to hold our weights will do! Fire up your favorite editor and create a new file under <code>lib/linreg/</code>. Let’s call it <code>model.ex</code> by lack of a better name and drop in the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">Linreg.Model</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  <span style="color:#6ab825;font-weight:bold">defstruct</span> <span style="color:#ed9d13">m</span>: <span style="color:#3677a9">0.0</span>, <span style="color:#ed9d13">b</span>: <span style="color:#3677a9">0.0</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>  <span style="color:#6ab825;font-weight:bold">alias</span> __MODULE__
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>  <span style="color:#6ab825;font-weight:bold">def</span> new <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>    %<span style="color:#447fcf;text-decoration:underline">Model</span>{}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>  <span style="color:#6ab825;font-weight:bold">def</span> predict(%<span style="color:#447fcf;text-decoration:underline">Model</span>{<span style="color:#ed9d13">m</span>: m, <span style="color:#ed9d13">b</span>: b}, x) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>    b + m * x
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>The module starts off pretty basic. It defines a struct to keep track of two values: M and B and define a function to make predictions based off of the model. For convenience I added a factory function that returns a new empty <code>%Model{}</code> struct.</p>
+<h2 id="what-is-training">What is training</h2>
+<p>Without training, our model would always return 0.0. This is because the weights aren&rsquo;t adjusted yet. There&rsquo;s a variety of ways to let the machine learn the correct values for M and B, but basically it all boils down to:</p>
+<ol>
+<li>Let the model make a prediction,</li>
+<li>Calculate how far it is off (often called error, loss or cost),</li>
+<li>Adjust the weights accordingly and repeat. Repeat until the error is acceptably low.</li>
+</ol>
+<h2 id="gather-training-data">Gather training data</h2>
+<p>In order to correctly train our model, we need training data. Training data in our case means a set of X and Y value pairs. The model can learn from these values by making a prediction based on X and see how far it is off by looking at the actual Y value.</p>
+<p>In the <code>lib/linreg</code> folder, go ahead and make a new file called <code>data.ex</code> and write the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">defmodule</span> <span style="color:#447fcf;text-decoration:underline">Linreg.Data</span> <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  <span style="color:#6ab825;font-weight:bold">defstruct</span> <span style="color:#ed9d13">points</span>: []
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>  <span style="color:#6ab825;font-weight:bold">alias</span> __MODULE__
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>  <span style="color:#6ab825;font-weight:bold">def</span> new <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>    %<span style="color:#447fcf;text-decoration:underline">Data</span>{}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>  <span style="color:#6ab825;font-weight:bold">def</span> add_point(%<span style="color:#447fcf;text-decoration:underline">Data</span>{<span style="color:#ed9d13">points</span>: points} = data, x, y) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>    %<span style="color:#447fcf;text-decoration:underline">Data</span>{data | <span style="color:#ed9d13">points</span>: [{x, y}] ++ points}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>In this module we define a struct that holds our training data. A list of X and Y coordinates called <em>points</em> and some utility functions to initialize a new <code>%Data{}</code> struct and to add a point to an existing dataset.</p>
+<h2 id="adjusting-the-weights">Adjusting the weights</h2>
+<p>Now that we can record training data, we can implement a training function that adjusts the weights of our model. Open <code>lib/linreg/model.ex</code> and write the following function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">def</span> train(%<span style="color:#447fcf;text-decoration:underline">Model</span>{<span style="color:#ed9d13">m</span>: m, <span style="color:#ed9d13">b</span>: b} = model, %<span style="color:#447fcf;text-decoration:underline">Data</span>{<span style="color:#ed9d13">points</span>: points}, opts \\ []) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  learning_rate = <span style="color:#447fcf;text-decoration:underline">Keyword</span>.get(opts, <span style="color:#ed9d13">:learning_rate</span>, <span style="color:#3677a9">0.01</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>  m_error =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>    points
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.map(<span style="color:#6ab825;font-weight:bold">fn</span> {x, y} -&gt; x * (predict(model, x) - y) <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.sum()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Kernel</span>./(length(points))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>  b_error =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>    points
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.map(<span style="color:#6ab825;font-weight:bold">fn</span> {x, y} -&gt; predict(model, x) - y <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.sum()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>    |&gt; <span style="color:#447fcf;text-decoration:underline">Kernel</span>./(length(points))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span>  %<span style="color:#447fcf;text-decoration:underline">Model</span>{model | <span style="color:#ed9d13">m</span>: m - m_error * learning_rate, <span style="color:#ed9d13">b</span>: b - b_error * learning_rate}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>The <code>train/3</code> function takes the current model, training data and a list of options. Then for each point in the training set, it will make a prediction of the Y value given its X value and calculate how far it is off.</p>
+<p>It will do this for both the M and the B values. Only difference is that, for M, we’re constraining the result by multiplying it with its input X value. Once we have the errors for each datapoint, we take the average.</p>
+<p>Once we have the average error of the model, we adjust each weight by subtracting the average corresponding error multiplied by the <em>learning rate</em>.</p>
+<blockquote>
+<p>The learning rate is a value, often between 0 and 1, which determines <em>how quick</em> the machine learns. It ensures that the adjustments to the weights are done in very small steps as to not overshoot the optimum value. This process is called gradient descent and is a very common technique within machine learning algorithms.</p>
+</blockquote>
+<h2 id="taking-it-for-a-spin">Taking it for a spin</h2>
+<p>That’s pretty much all there is to it! Now let’s take it for a spin and see how it works. Fire up an IEx shell again and let’s make some predictions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#999;font-style:italic"># Initialize new trainings data and a new model</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>iex&gt; d = <span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>.new
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>%<span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>{<span style="color:#ed9d13">points</span>: []}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>iex&gt; m = <span style="color:#447fcf;text-decoration:underline">Linreg.Model</span>.new
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>%<span style="color:#447fcf;text-decoration:underline">Linreg.Model</span>{<span style="color:#ed9d13">b</span>: <span style="color:#3677a9">0.0</span>, <span style="color:#ed9d13">m</span>: <span style="color:#3677a9">0.0</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span style="color:#999;font-style:italic"># Add some known data to the training set</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>iex&gt; d = <span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>.add_point(d, <span style="color:#3677a9">2</span>, <span style="color:#3677a9">4</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>%<span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>{<span style="color:#ed9d13">points</span>: [{<span style="color:#3677a9">2</span>, <span style="color:#3677a9">4</span>}]}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>iex&gt; d = <span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>.add_point(d, <span style="color:#3677a9">6</span>, <span style="color:#3677a9">12</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>%<span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>{<span style="color:#ed9d13">points</span>: [{<span style="color:#3677a9">6</span>, <span style="color:#3677a9">12</span>}, {<span style="color:#3677a9">2</span>, <span style="color:#3677a9">4</span>}]}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span><span style="color:#999;font-style:italic"># Train the model</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span>iex&gt; m = <span style="color:#447fcf;text-decoration:underline">Model</span>.train(m, d)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span>%<span style="color:#447fcf;text-decoration:underline">Linreg.Model</span>{<span style="color:#ed9d13">b</span>: <span style="color:#3677a9">0.08</span>, <span style="color:#ed9d13">m</span>: <span style="color:#3677a9">0.4</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span><span style="color:#999;font-style:italic"># Predict our first value</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span>iex&gt; <span style="color:#447fcf;text-decoration:underline">Model</span>.predict(m, <span style="color:#3677a9">5</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span><span style="color:#3677a9">2.08</span>
+</code></pre></div><p>In the example above we’ve created a model and fed it some pretty straight forward trainings data where <code>Y = 2 * X</code>. We trained our model and let it make a prediction for 5. We expect it to predict 10, however it predicts 2 and some change.. We are getting closer, but the error is still pretty high.</p>
+<p>What we see here is the learning rate in effect! We take smaller steps so we don’t overshoot our goal, however that also means that simply iterating over the training set once, will not cut it.</p>
+<blockquote>
+<p>In machine learning; iterating over the trainings set once is referred to as one epoch. In most machine learning algorithms, it requires iterating over your data set many times. Each time shaving some points off of the error, each time perfecting the model’s weights a bit more.</p>
+</blockquote>
+<p>Running the training and prediction functions again yield in values a little closer to what we expect.</p>
+<h2 id="multiple-epochs">Multiple epochs</h2>
+<p>In order to make training for multiple epochs a little easier, let’s revisit the <code>train/3</code> function one more time and make it iterate over the entire training set multiple times.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">def</span> train(%<span style="color:#447fcf;text-decoration:underline">Model</span>{} = model, %<span style="color:#447fcf;text-decoration:underline">Data</span>{<span style="color:#ed9d13">points</span>: points}, opts \\ []) <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>  learning_rate = <span style="color:#447fcf;text-decoration:underline">Keyword</span>.get(opts, <span style="color:#ed9d13">:learning_rate</span>, <span style="color:#3677a9">0.01</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>  epochs = <span style="color:#447fcf;text-decoration:underline">Keyword</span>.get(opts, <span style="color:#ed9d13">:epochs</span>, <span style="color:#3677a9">100</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>  <span style="color:#6ab825;font-weight:bold">for</span> _epoch &lt;- <span style="color:#3677a9">1</span>..epochs, <span style="color:#ed9d13">reduce</span>: model <span style="color:#6ab825;font-weight:bold">do</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>    %<span style="color:#447fcf;text-decoration:underline">Model</span>{<span style="color:#ed9d13">m</span>: m, <span style="color:#ed9d13">b</span>: b} = model -&gt;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>      m_error =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>        points
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>        |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.map(<span style="color:#6ab825;font-weight:bold">fn</span> {x, y} -&gt; x * (predict(model, x) - y) <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>        |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.sum()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>        |&gt; <span style="color:#447fcf;text-decoration:underline">Kernel</span>./(length(points))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span>      b_error =
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>        points
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>        |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.map(<span style="color:#6ab825;font-weight:bold">fn</span> {x, y} -&gt; predict(model, x) - y <span style="color:#6ab825;font-weight:bold">end</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span>        |&gt; <span style="color:#447fcf;text-decoration:underline">Enum</span>.sum()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span>        |&gt; <span style="color:#447fcf;text-decoration:underline">Kernel</span>./(length(points))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span>      %<span style="color:#447fcf;text-decoration:underline">Model</span>{model | <span style="color:#ed9d13">m</span>: m - m_error * learning_rate, <span style="color:#ed9d13">b</span>: b - b_error * learning_rate}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span>  <span style="color:#6ab825;font-weight:bold">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span><span style="color:#6ab825;font-weight:bold">end</span>
+</code></pre></div><p>We made a few changes to the train function. First off: We’re defining an epoch value which will determine how many times we run through the entire training set. Secondly; we wrapped the whole function body in an for comprehension so that we can iterate through the entire training set multiple times, each time adjusting the weights a little bit more.</p>
+<blockquote>
+<p>Note that we’re using a <a href="https://hexdocs.pm/elixir/Kernel.SpecialForms.html?#for/1-the-reduce-option">comprehension with the reduce option</a>. This is essentially the same as <a href="https://hexdocs.pm/elixir/Enum.html#reduce/3"><code>Enum.reduce/3</code></a> but is a little easier on the eyes with larger bodies, but that might just be a matter of taste 😗</p>
+</blockquote>
+<h2 id="more-training">More training</h2>
+<p>Now that we’ve advanced our training function, let’s try it out and see if our predictions will get a little closer this time! Fire up the IEx again (<code>iex -S mix</code>) and run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span>iex&gt; d = <span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>.add_point(d, <span style="color:#3677a9">2</span>, <span style="color:#3677a9">4</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>%<span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>{<span style="color:#ed9d13">points</span>: [{<span style="color:#3677a9">2</span>, <span style="color:#3677a9">4</span>}]}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>iex&gt; d = <span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>.add_point(d, <span style="color:#3677a9">8</span>, <span style="color:#3677a9">16</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span>%<span style="color:#447fcf;text-decoration:underline">Linreg.Data</span>{<span style="color:#ed9d13">points</span>: [{<span style="color:#3677a9">8</span>, <span style="color:#3677a9">16</span>}, {<span style="color:#3677a9">2</span>, <span style="color:#3677a9">4</span>}]}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>iex&gt; m = <span style="color:#447fcf;text-decoration:underline">Linreg.Model</span>.train(m, d)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>%<span style="color:#447fcf;text-decoration:underline">Linreg.Model</span>{<span style="color:#ed9d13">b</span>: <span style="color:#3677a9">0.22374565348607184</span>, <span style="color:#ed9d13">m</span>: <span style="color:#3677a9">1.966843594782793</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>iex&gt; <span style="color:#447fcf;text-decoration:underline">Linreg.Model</span>.predict(m, <span style="color:#3677a9">5</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span style="color:#3677a9">10.057963627400037</span>
+</code></pre></div><p>Hooray! We trained our model the formula <code>Y = 2 * X + 0</code>. More or less. As you can see the values for M and B are still a bit off, but given enough training, these values will approach the correct values more and more.</p>
+<p>I’m saying approach here; they will never exactly be 2 and 0. This is mainly due to the learning rate, but floating point arithmetic is also to blame here.</p>
+<h2 id="try-for-yourself">Try for yourself</h2>
+<p>The previous example is using a learning rate of 0.01 and trains for 100 epochs, these values are overridable in the options and will yield different results. Simply by calling our training function with the options list:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">1</span>iex&gt; m = <span style="color:#447fcf;text-decoration:underline">Model</span>.train(m, d, <span style="color:#ed9d13">learning_rate</span>: <span style="color:#3677a9">0.1</span>, <span style="color:#ed9d13">epochs</span>: <span style="color:#3677a9">500</span>)
+</code></pre></div><p>I’ll leave it as an exercise to the reader to play a bit with these values and see what happens.</p>
+<h2 id="closing-words">Closing words</h2>
+<p>That’s it for this post! We built a machine learning model that can perform linear regressions and trained it using gradient descent in Elixir.</p>
+<p>In the <a href="/posts/linear-regression-elixir-phoenix-liveview-ii/">next part</a> we’ll look at how we can make this an interactive example using Phoenix LiveView where clicking on a SVG plane will generate training data and let the model predict the best fitting line through those points.</p>
+
+    </section>
+  </body>
+</html>

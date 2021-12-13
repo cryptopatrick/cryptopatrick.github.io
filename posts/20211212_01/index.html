@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cipher: Polybius&#39; checkerboard ~ CryptoPatrick | Seamless Global Nature</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
+rel="stylesheet" href="localhost/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="localhost/favicon.svg" />
+
+
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-25416548-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-25416548-1");
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="localhost/js/mathjax.js"></script>
+
+<script type="text/javascript" src="localhost/%20js%20/jquery.js"></script>
+<script type="text/javascript" src="localhost/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="localhost/js/index.js"></script>
+<script type="text/javascript" src="localhost/js/mathjax.js"></script>
+<meta property="og:title" content="Cipher: Polybius&#39; checkerboard ~ CryptoPatrick | Seamless Global Nature" />
+    <meta name="twitter:title" content="Cipher: Polybius&#39; checkerboard ~ CryptoPatrick | Seamless Global Nature" />
+    <meta itemprop="name" content="Cipher: Polybius&#39; checkerboard ~ CryptoPatrick | Seamless Global Nature" />
+    <meta name="application-name" content="Cipher: Polybius&#39; checkerboard ~ CryptoPatrick | Seamless Global Nature" />
+    <meta property="og:site_name" content="" />
+
+    <meta name="keywords" content="" />
+
+    <meta name="description" content="This post is part of a small series on the history of cryptology." />
+    <meta itemprop="description" content="This post is part of a small series on the history of cryptology." />
+    <meta property="og:description" content="This post is part of a small series on the history of cryptology." />
+    <meta name="twitter:description" content="This post is part of a small series on the history of cryptology." />
+
+    <link rel="canonical" href="localhost/posts/20211212_01/" itemprop="url" />
+    <meta name="url" content="localhost/posts/20211212_01/" />
+    <meta name="twitter:url" content="localhost/posts/20211212_01/" />
+    <meta property="og:url" content="localhost/posts/20211212_01/" />
+  </head>
+  <body>
+    <section class="single-post">
+      <section class="post-pre-header">
+        <a href="localhost/posts" class="bring-me-back">&larr; all posts</a>
+
+        <div class="meta">
+          Posted on Dec 12, 2021
+        </div>
+      </section>
+
+      <h1>Cipher: Polybius&#39; checkerboard</h1>
+      <h2 id="hahahugoshortcode-s0-hbhb"><figure>
+    <img src="localhost/images/image-for-polybius-683x1024.gif"
+         alt="The Greek historian Polybius"/> <figcaption>
+            <p>The Greek historian Polybius</p>
+        </figcaption>
+</figure>
+</h2>
+<p>The Polybius Checkerboard, named after Greek historian Polybius, is an example of a <strong>substitution cipher</strong> from around 205-123 B.C. .</p>
+<p>Polybius was the first to propose a method of substituting different two-digit numbers for a letter in an alphabet. Hence, the Polybius&rsquo; Checkerboard is an early example of a <strong>substitution cipher</strong>.</p>
+<h2 id="polybius-checkerboard">Polybius&rsquo; Checkerboard</h2>
+<p>A Polybius&rsquo; checkerboard looks almost like a like a <strong>checkerboard</strong>.
+Each square holds a letter and we can locate a letter on the checkerboard by crossreferencing a unique row and column number.</p>
+<p>Thus, each letter is represented by a number pair $(n,m)$, where the first number in the pair represents the <strong>row</strong>, and the second number in the pair represents the <strong>column</strong> on the checkerboard.
+If we does this for the <strong>Roman</strong> alphabet we get something like this:</p>
+<figure>
+    <img src="https://images.fineartamerica.com/images-medium-large-5/polybius-square-science-photo-library.jpg" height="500"/> 
+</figure>
+
+<p>In the checkerboard above, the letter $S$ is located on row 4 and column 3, so its representation is $(4,3)$.</p>
+<blockquote>
+<p>Please not the exception in row-column (2,4) which holds two letters <em>I/J</em>.</p>
+</blockquote>
+<h2 id="the-ciphering-process">The Ciphering Process</h2>
+<p>Using a Polybius&rsquo; Checkerboard, we can encipher a <em>plaintext</em> message by <strong>substituting</strong> each letter in the message with a number pair representing the letter's position on the board.</p>
+<p>For example, <em>enciphering</em> the plaintext message:
+$$&quot;SENDMORETROOPS&quot;$$</p>
+<p>results in the ciphertext:</p>
+<p>$$4315331432344215444234343543$$</p>
+<p>The <em>deciphering</em> process would mean <strong>reverting</strong> the ciphering process, <em>translating</em> each number pair to its location o the checkerboard.</p>
+<blockquote>
+<p>Russian Nihilist political prisoners are believed to have adapted a Polybius Checkerboard system to communicate secretly across prison cell walls.</p>
+</blockquote>
+<hr>
+<h2 id="a-simple-code-example">A Simple Code Example</h2>
+<p>Let's try to write a simple <strong>Polybius&rsquo; Checkerboard</strong> cipher program.</p>
+<blockquote>
+<p>The following program makes a lot of assumptions on the input provided to the ciphering function. The program is only meant to illustrate the fundamental idea of the cipher.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">pub</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">struct</span> <span style="color:#447fcf;text-decoration:underline">Checkerboard</span><span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span><span style="color:#666"></span><span style="color:#666">    </span>rows: [[char;<span style="color:#666"> </span><span style="color:#3677a9">5</span>];<span style="color:#666"> </span><span style="color:#3677a9">5</span>],<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span style="color:#666"></span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span><span style="color:#666"></span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">impl</span><span style="color:#666"> </span>Checkerboard<span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#ed9d13">/// Creates a new Polybius Checkerboard, preloaded with the Roman alphabet.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span><span style="color:#ed9d13"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">pub</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">new</span>()<span style="color:#666"> </span>-&gt; <span style="color:#447fcf;text-decoration:underline">Self</span><span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span style="color:#666"></span><span style="color:#666">        </span>Checkerboard<span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span><span style="color:#666"></span><span style="color:#666">            </span>rows:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span>                [[<span style="color:#ed9d13">&#39;A&#39;</span>,<span style="color:#ed9d13">&#39;B&#39;</span>,<span style="color:#ed9d13">&#39;C&#39;</span>,<span style="color:#ed9d13">&#39;D&#39;</span>,<span style="color:#ed9d13">&#39;E&#39;</span>],<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span style="color:#666"></span><span style="color:#666">                </span>[<span style="color:#ed9d13">&#39;F&#39;</span>,<span style="color:#ed9d13">&#39;G&#39;</span>,<span style="color:#ed9d13">&#39;H&#39;</span>,<span style="color:#ed9d13">&#39;I&#39;</span>,<span style="color:#ed9d13">&#39;K&#39;</span>],<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span><span style="color:#666"></span><span style="color:#666">                </span>[<span style="color:#ed9d13">&#39;L&#39;</span>,<span style="color:#ed9d13">&#39;M&#39;</span>,<span style="color:#ed9d13">&#39;N&#39;</span>,<span style="color:#ed9d13">&#39;O&#39;</span>,<span style="color:#ed9d13">&#39;P&#39;</span>],<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span><span style="color:#666"></span><span style="color:#666">                </span>[<span style="color:#ed9d13">&#39;Q&#39;</span>,<span style="color:#ed9d13">&#39;R&#39;</span>,<span style="color:#ed9d13">&#39;S&#39;</span>,<span style="color:#ed9d13">&#39;T&#39;</span>,<span style="color:#ed9d13">&#39;U&#39;</span>],<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span><span style="color:#666"></span><span style="color:#666">                </span>[<span style="color:#ed9d13">&#39;V&#39;</span>,<span style="color:#ed9d13">&#39;W&#39;</span>,<span style="color:#ed9d13">&#39;X&#39;</span>,<span style="color:#ed9d13">&#39;Y&#39;</span>,<span style="color:#ed9d13">&#39;Z&#39;</span>]]}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span><span style="color:#666"></span><span style="color:#666">    </span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span><span style="color:#666"></span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">pub</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">get</span>(&amp;self,<span style="color:#666"> </span>row: <span style="color:#6ab825;font-weight:bold">usize</span>,<span style="color:#666"> </span>col: <span style="color:#6ab825;font-weight:bold">usize</span>)<span style="color:#666"> </span>-&gt; <span style="color:#24909d">Option</span>&lt;char&gt;<span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span><span style="color:#666"></span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span>val<span style="color:#666"> </span>=<span style="color:#666"> </span>self.rows.get(row)?.get(col)?;<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span><span style="color:#666"></span><span style="color:#666">        </span><span style="color:#24909d">Some</span>(*val)<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span><span style="color:#666"></span><span style="color:#666">    </span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span><span style="color:#666"></span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#ed9d13">/// OBS! We increment the ith and jth value to adjust for
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span><span style="color:#ed9d13"></span><span style="color:#666">    </span><span style="color:#ed9d13">/// the common practice of starting a checkerboard index by
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span><span style="color:#ed9d13"></span><span style="color:#666">    </span><span style="color:#ed9d13">/// the values 1 (instead of 0, which is common in computer
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span><span style="color:#ed9d13"></span><span style="color:#666">    </span><span style="color:#ed9d13">/// science). Thus, the letter &#39;A&#39; has the adjusted index of
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26</span><span style="color:#ed9d13"></span><span style="color:#666">    </span><span style="color:#ed9d13">/// (1,1) instead of (0,0).
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27</span><span style="color:#ed9d13"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">pub</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">get_position</span>(&amp;self,<span style="color:#666"> </span>searchletter:<span style="color:#447fcf;text-decoration:underline">char</span>)<span style="color:#666"> </span>-&gt; <span style="color:#24909d">Option</span>&lt;<span style="color:#24909d">String</span>&gt;<span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28</span><span style="color:#666"></span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>res<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">String</span>::new();<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29</span><span style="color:#666"></span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">for</span><span style="color:#666"> </span>(i,<span style="color:#666"> </span>row)<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">in</span><span style="color:#666"> </span>self.rows.iter().enumerate()<span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30</span><span style="color:#666"></span><span style="color:#666">            </span><span style="color:#6ab825;font-weight:bold">for</span><span style="color:#666"> </span>(j,<span style="color:#666"> </span>letter)<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">in</span><span style="color:#666"> </span>row.iter().enumerate()<span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31</span><span style="color:#666"></span><span style="color:#666">                </span><span style="color:#6ab825;font-weight:bold">if</span><span style="color:#666"> </span>letter<span style="color:#666"> </span>==<span style="color:#666"> </span>&amp;searchletter<span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32</span><span style="color:#666"></span><span style="color:#666">                    </span>res<span style="color:#666"> </span>=<span style="color:#666"> </span>(i+<span style="color:#3677a9">1</span>).to_string();<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33</span><span style="color:#666"></span><span style="color:#666">                    </span>res.push_str(&amp;(j+<span style="color:#3677a9">1</span>).to_string());<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">34</span><span style="color:#666"></span><span style="color:#666">                </span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">35</span><span style="color:#666"></span><span style="color:#666">            </span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">36</span><span style="color:#666"></span><span style="color:#666">        </span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">37</span><span style="color:#666"></span><span style="color:#666">        </span><span style="color:#24909d">Some</span>(res)<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">38</span><span style="color:#666"></span><span style="color:#666">    </span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">39</span><span style="color:#666"></span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">40</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">pub</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">encipher</span>(&amp;self,<span style="color:#666"> </span>plaintext: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span>)<span style="color:#666"> </span>-&gt; <span style="color:#24909d">String</span> {<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">41</span><span style="color:#666"></span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>ciphertext<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">String</span>::new();<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">42</span><span style="color:#666"></span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">for</span><span style="color:#666"> </span>c<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">in</span><span style="color:#666"> </span>plaintext.chars()<span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">43</span><span style="color:#666"></span><span style="color:#666">            </span>ciphertext.push_str(&amp;self.get_position(c).unwrap());<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">44</span><span style="color:#666"></span><span style="color:#666">        </span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">45</span><span style="color:#666"></span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">46</span><span style="color:#666"></span><span style="color:#666">        </span>ciphertext<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">47</span><span style="color:#666"></span><span style="color:#666">    </span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">48</span><span style="color:#666"></span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">49</span><span style="color:#666"></span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">50</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">main</span>()<span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">51</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span>checkerboard<span style="color:#666"> </span>=<span style="color:#666"> </span>Checkerboard::new();<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">52</span><span style="color:#666"></span><span style="color:#666">    </span>println!(<span style="color:#ed9d13">&#34;SENDMORETROOPS = {}&#34;</span>,<span style="color:#666"> </span>checkerboard.encipher(<span style="color:#ed9d13">&#34;SENDMORETROOPS&#34;</span>));<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">53</span><span style="color:#666"></span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">54</span><span style="color:#666"></span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">55</span><span style="color:#666"></span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">56</span><span style="color:#666"></span><span style="color:#cd2828;font-weight:bold">#[</span><span style="color:#cd2828;font-weight:bold">cfg(test)</span><span style="color:#cd2828;font-weight:bold">]</span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">57</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">mod</span> <span style="color:#447fcf;text-decoration:underline">tests</span><span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">58</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">use</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">super</span>::*;<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">59</span><span style="color:#666"></span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">60</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#cd2828;font-weight:bold">#[</span><span style="color:#cd2828;font-weight:bold">test</span><span style="color:#cd2828;font-weight:bold">]</span><span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">61</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">encipher_test</span>()<span style="color:#666"> </span>{<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">62</span><span style="color:#666"></span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span>roman_checkerboard=<span style="color:#666"> </span>Checkerboard::new();<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">63</span><span style="color:#666"></span><span style="color:#666">        </span>assert_eq!(roman_checkerboard.encipher(<span style="color:#ed9d13">&#34;SENDMORETROOPS&#34;</span>),<span style="color:#666"> 
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">64</span><span style="color:#666">            </span><span style="color:#ed9d13">&#34;4315331432344215444234343543&#34;</span>);<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">65</span><span style="color:#666"></span><span style="color:#666">    </span>}<span style="color:#666">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">66</span><span style="color:#666"></span>}<span style="color:#666">
+</span></code></pre></div><blockquote>
+<p>The code can also be found on my <a href="https://github.com/cryptopatrick/Everyday/blob/main/day_2021_12_12A">Github</a></p>
+</blockquote>
+
+    </section>
+  </body>
+</html>

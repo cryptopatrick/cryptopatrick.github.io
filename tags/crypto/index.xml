@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>crypto on Tiemen</title>
+    <link>localhost/tags/crypto/</link>
+    <description>Recent content in crypto on Tiemen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 17 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="localhost/tags/crypto/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reading: Rust Channels</title>
+      <link>localhost/posts/20210617_01/</link>
+      <pubDate>Thu, 17 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>localhost/posts/20210617_01/</guid>
+      <description>Channels  Create a thread 1usestd::thread;2usestd::time::Duration;34fn main(){5thread::spawn(||{6//Do work inside the tread 7for_iin1..5{8println!(&amp;#34;Ping from inside thread&amp;#34;);9// Sleep for 1 millisec 10thread::sleep(Duration::from_millis(1));11}12});1314for_iin1..5{15println!(&amp;#34;Ping from main thread&amp;#34;);16thread::sleep(Duration::from_millis(1));17}18}Waiting for threads to finish There is no guarantee on the order in which threads run.
+Sometimes we need to make sure that some or all threads are finished before moving on. How do we fix this?
+We fix the problem by saving the return value of a thread in a variable.</description>
+    </item>
+    
+  </channel>
+</rss>

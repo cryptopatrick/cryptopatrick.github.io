@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Arduino, Shift Registers, LEDs, Bit Shifting, Cube, 4x4x4 on Tiemen</title>
+    <link>https://tiemenwaterreus.com/tags/arduino-shift-registers-leds-bit-shifting-cube-4x4x4/</link>
+    <description>Recent content in Arduino, Shift Registers, LEDs, Bit Shifting, Cube, 4x4x4 on Tiemen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 01 Feb 2016 21:54:12 +0200</lastBuildDate><atom:link href="https://tiemenwaterreus.com/tags/arduino-shift-registers-leds-bit-shifting-cube-4x4x4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building a 4x4x4 LED Cube. Part II; The software</title>
+      <link>https://tiemenwaterreus.com/posts/building-a-4x4x4-led-cube-part-ii/</link>
+      <pubDate>Mon, 01 Feb 2016 21:54:12 +0200</pubDate>
+      
+      <guid>https://tiemenwaterreus.com/posts/building-a-4x4x4-led-cube-part-ii/</guid>
+      <description>It’s been awhile since I wrote about the LED cube I’ve been building and I figured it was about time I did the long planned followup where we take a closer look at the software that drives the cube.
+If you’ve followed along with my earlier writings you’ll know that we’ve been building up to this point by first driving 16 LEDs using only three pins of an Arduino and then learned how to apply fading effects to the LEDs by taking a deep dive in Bit Angle Modulation (BAM).</description>
+    </item>
+    
+    <item>
+      <title>Building a 4x4x4 LED Cube. Part I; The hardware</title>
+      <link>https://tiemenwaterreus.com/posts/building-a-4x4x4-led-cube-part-i/</link>
+      <pubDate>Sat, 23 May 2015 14:31:06 +0200</pubDate>
+      
+      <guid>https://tiemenwaterreus.com/posts/building-a-4x4x4-led-cube-part-i/</guid>
+      <description>As you might have read in my previous posts I’ve been fiddling around with an Arduino and a couple of LEDs using shift registers. I’ve explained how you can control 16 LEDs using only three pins of an Arduino and in a more recent post I’ve talked about Bit Angle Modulation to apply fading effects to individual LEDs in the 16 LED array. In this post I’ll go more into detail on how you can setup a 4x4x4 LED cube.</description>
+    </item>
+    
+  </channel>
+</rss>

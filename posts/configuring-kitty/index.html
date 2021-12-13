@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configuring Kitty ~ Tiemen</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
+rel="stylesheet" href="/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
+
+
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-25416548-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-25416548-1");
+</script>
+<meta property="og:title" content="Configuring Kitty ~ Tiemen" />
+    <meta name="twitter:title" content="Configuring Kitty ~ Tiemen" />
+    <meta itemprop="name" content="Configuring Kitty ~ Tiemen" />
+    <meta name="application-name" content="Configuring Kitty ~ Tiemen" />
+    <meta property="og:site_name" content="" />
+
+    <meta name="keywords" content="[Kitty, tty, terminal, config, iTerm]" />
+
+    <meta name="description" content="Configuring Kitty with some iTerm2 shortcuts" />
+    <meta itemprop="description" content="Configuring Kitty with some iTerm2 shortcuts" />
+    <meta property="og:description" content="Configuring Kitty with some iTerm2 shortcuts" />
+    <meta name="twitter:description" content="Configuring Kitty with some iTerm2 shortcuts" />
+
+    <link rel="canonical" href="https://tiemenwaterreus.com/posts/configuring-kitty/" itemprop="url" />
+    <meta name="url" content="https://tiemenwaterreus.com/posts/configuring-kitty/" />
+    <meta name="twitter:url" content="https://tiemenwaterreus.com/posts/configuring-kitty/" />
+    <meta property="og:url" content="https://tiemenwaterreus.com/posts/configuring-kitty/" />
+  </head>
+  <body>
+    <section class="single-post">
+      <section class="post-pre-header">
+        <a href="/posts" class="bring-me-back">&larr; all posts</a>
+
+        <div class="meta">
+          Posted on Jun 7, 2020
+        </div>
+      </section>
+
+      <h1>Configuring Kitty</h1>
+      <p>I love the <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a> terminal emulator for its speed! Ever since I started doing more work in the terminal, it became painfully clear to me that the standard terminal.app on Mac and even <a href="https://www.iterm2.com/">iTerm2</a> (although an amazing product!) were not cutting it anymore for me in terms of speed.</p>
+<p>However, since I started using Kitty, I noticed how used I was to some of the shortcuts that &ldquo;just work&rdquo; when using terminal.app and iTerm2. In this short post we&rsquo;ll go over some configuration settings to make Kitty behave more like iTerm2 and have the best of both worlds!</p>
+<h2 id="what-well-be-configuring">What we&rsquo;ll be configuring</h2>
+<ul>
+<li><code>cmd</code> + arrow keys for jumping to beginning or end of the line.</li>
+<li><code>alt</code> + arrow keys for jumping between words.</li>
+<li>Only vertical splits by default</li>
+<li>Switching between Tabs (Kitty calls them Windows)
+by using <code>cmd</code> + 1-9 numeric keys</li>
+<li>Some visual tweaks</li>
+</ul>
+<h2 id="relevant-config">Relevant config</h2>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span># don&#39;t draw extra borders, but fade the inactive text a bit
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span>active_border_color none
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span>inactive_text_alpha 0.6
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span># tabbar should be at the top
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span>tab_bar_edge top
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span>tab_bar_style separator
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span>tab_separator &#34; ┇&#34;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span># open new split (window) with cmd+d retaining the cwd
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span>map cmd+d new_window_with_cwd
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span># open new tab with cmd+t
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span>map cmd+t new_tab_with_cwd
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span># new split with default cwd
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span>map cmd+shift+d new_window
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span># switch between next and previous splits
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span>map cmd+]        next_window
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span>map cmd+[        previous_window
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span># clear the terminal screen
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span>map cmd+k combine : clear_terminal scrollback active : send_text normal,application \x0c
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26</span># jump to beginning and end of word
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27</span>map alt+left send_text all \x1b\x62
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28</span>map alt+right send_text all \x1b\x66
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30</span># jump to beginning and end of line
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31</span>map cmd+left send_text all \x01
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">32</span>map cmd+right send_text all \x05
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">33</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">34</span># Map cmd + &lt;num&gt; to corresponding tabs
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">35</span>map cmd+1 goto_tab 1
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">36</span>map cmd+2 goto_tab 2
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">37</span>map cmd+3 goto_tab 3
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">38</span>map cmd+4 goto_tab 4
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">39</span>map cmd+5 goto_tab 5
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">40</span>map cmd+6 goto_tab 6
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">41</span>map cmd+7 goto_tab 7
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">42</span>map cmd+8 goto_tab 8
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">43</span>map cmd+9 goto_tab 9
+</code></pre></div><p>See the <a href="https://github.com/Tmw/dotfiles/blob/master/.config/kitty/kitty.conf">full config</a> in my Dotfiles and see all available configuration options <a href="https://sw.kovidgoyal.net/kitty/conf.html">here</a>.</p>
+<p>Cheers! 🐈</p>
+
+    </section>
+  </body>
+</html>
