@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cryptography on CryptoPatrick | Seamless Global Nature</title>
-    <link>https://cryptopatrick.github.io/categories/cryptography/</link>
+    <link>localhost/categories/cryptography/</link>
     <description>Recent content in Cryptography on CryptoPatrick | Seamless Global Nature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 14 Dec 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://cryptopatrick.github.io/categories/cryptography/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="localhost/categories/cryptography/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Cipher: Nomenclator</title>
-      <link>https://cryptopatrick.github.io/posts/20211214_01/</link>
+      <link>localhost/posts/20211214_01/</link>
       <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://cryptopatrick.github.io/posts/20211214_01/</guid>
+      <guid>localhost/posts/20211214_01/</guid>
       <description>A Simple Code Example Let&#39;s try to write a simple Nomenclator program.
  The following program makes a lot of assumptions on the input provided to the ciphering function. The program is only meant to illustrate the fundamental idea of the cipher.
  1usestd::collections::HashMap;23struct Nomenclator{4nc: HashMap&amp;lt;&amp;amp;str,&amp;amp;str&amp;gt;,5}678implNomenclator{9pubfn encipher(&amp;amp;self,message: &amp;amp;str)-&amp;gt; String {10letmutres=String::new();1112forletterinmessage.chars(){13res.push_str(self.nc.get(&amp;amp;letter).to_string());14}1516res17}1819fn new()-&amp;gt; Self{20Nomenclator{21nc: HashMap::from([22(&amp;#34;A&amp;#34;,&amp;#34;Alpha&amp;#34;),23(&amp;#34;B&amp;#34;,&amp;#34;Bravo&amp;#34;),24(&amp;#34;C&amp;#34;,&amp;#34;Charlie&amp;#34;),25(&amp;#34;D&amp;#34;,&amp;#34;Delta&amp;#34;),26(&amp;#34;E&amp;#34;,&amp;#34;Echo&amp;#34;),27(&amp;#34;F&amp;#34;,&amp;#34;Foxtrot&amp;#34;),28(&amp;#34;G&amp;#34;,&amp;#34;Golf&amp;#34;),29(&amp;#34;H&amp;#34;,&amp;#34;Hotel&amp;#34;),30(&amp;#34;I&amp;#34;,&amp;#34;India&amp;#34;),31(&amp;#34;J&amp;#34;,&amp;#34;Juliet&amp;#34;),32(&amp;#34;K&amp;#34;,&amp;#34;Kilo&amp;#34;),33(&amp;#34;L&amp;#34;,&amp;#34;Lima&amp;#34;),34(&amp;#34;M&amp;#34;,&amp;#34;Mike&amp;#34;),35(&amp;#34;N&amp;#34;,&amp;#34;November&amp;#34;),36(&amp;#34;O&amp;#34;,&amp;#34;Oscar&amp;#34;),37(&amp;#34;P&amp;#34;,&amp;#34;Papa&amp;#34;),38(&amp;#34;Q&amp;#34;,&amp;#34;Quebec&amp;#34;),39(&amp;#34;R&amp;#34;,&amp;#34;Romeo&amp;#34;),40(&amp;#34;S&amp;#34;,&amp;#34;Sierra&amp;#34;),41(&amp;#34;T&amp;#34;,&amp;#34;Tango&amp;#34;),42(&amp;#34;U&amp;#34;,&amp;#34;Uniform&amp;#34;),43(&amp;#34;V&amp;#34;,&amp;#34;Victor&amp;#34;),44(&amp;#34;W&amp;#34;,&amp;#34;Whiskey&amp;#34;),45(&amp;#34;X&amp;#34;,&amp;#34;X-Ray&amp;#34;),46(&amp;#34;Y&amp;#34;,&amp;#34;Yankee&amp;#34;),47(&amp;#34;Z&amp;#34;,&amp;#34;Zulu&amp;#34;),48])49}50}51}5253fn main(){54letnomenclator=Nomenclator::new();55println!(&amp;#34;{:?}&amp;#34;,nomenclator.nc.get(&amp;#34;Z&amp;#34;).unwrap());56println!(&amp;#34;{:?}&amp;#34;,nomenclator.nc.get(&amp;#34;A&amp;#34;).unwrap());5758lettest=nomenclator.encipher(&amp;#34;ABC&amp;#34;);59println!(&amp;#34;{}&amp;#34;,test);60}6162#[cfg(test)]63mod tests{64usesuper::*;6566#[test]67fn encipher(){68letnomenclator=Nomenclator::new();69assert_eq!(*nomenclator.nc.get(&amp;#34;A&amp;#34;).unwrap(),&amp;#34;Alpha&amp;#34;);70assert_eq!(*nomenclator.nc.get(&amp;#34;Z&amp;#34;).unwrap(),&amp;#34;Zulu&amp;#34;);71}72} The code can also be found on my Github
@@ -25,10 +25,10 @@
     
     <item>
       <title>Cipher: Caesar</title>
-      <link>https://cryptopatrick.github.io/posts/20211213_01/</link>
+      <link>localhost/posts/20211213_01/</link>
       <pubDate>Mon, 13 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://cryptopatrick.github.io/posts/20211213_01/</guid>
+      <guid>localhost/posts/20211213_01/</guid>
       <description>The Greek historian Polybius
    Gaius Julius Caesar needs little introduction. The Roman general and politician became dictator of Rome. He was assasinated in 44 B.C. by fellow senators who feared he was becoming too powerful .
 In his book Gallic Wars, Julis Caesar describes a method of encipherment that has come to be known as The Caesar Cipher.
@@ -37,10 +37,10 @@ The Ciphering Process The Caesar Cipher is an example of a shift cipher.</descri
     
     <item>
       <title>Cipher: Polybius&#39; checkerboard</title>
-      <link>https://cryptopatrick.github.io/posts/20211212_01/</link>
+      <link>localhost/posts/20211212_01/</link>
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://cryptopatrick.github.io/posts/20211212_01/</guid>
+      <guid>localhost/posts/20211212_01/</guid>
       <description>The Greek historian Polybius
    The Polybius Checkerboard, named after Greek historian Polybius, is an example of a substitution cipher from around 205-123 B.C. .
 Polybius was the first to propose a method of substituting different two-digit numbers for a letter in an alphabet. Hence, the Polybius&amp;rsquo; Checkerboard is an early example of a substitution cipher.
@@ -49,10 +49,10 @@ Polybius&amp;rsquo; Checkerboard A Polybius&amp;rsquo; checkerboard looks almost
     
     <item>
       <title>Cipher: Spartan Scytale</title>
-      <link>https://cryptopatrick.github.io/posts/20211211_01/</link>
+      <link>localhost/posts/20211211_01/</link>
       <pubDate>Sat, 11 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://cryptopatrick.github.io/posts/20211211_01/</guid>
+      <guid>localhost/posts/20211211_01/</guid>
       <description>Credit: FotoRieth
   The Spartan Scytale was communication device used by the military of Sparta.
 The Scytale is an example of a transposition cipher and it dates from around 500 B.C. .
@@ -64,10 +64,10 @@ The sender writes the message line by line, and parallel to the rod&#39;s axis.<
     
     <item>
       <title>Cipher: Atbash</title>
-      <link>https://cryptopatrick.github.io/posts/20211210_01/</link>
+      <link>localhost/posts/20211210_01/</link>
       <pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://cryptopatrick.github.io/posts/20211210_01/</guid>
+      <guid>localhost/posts/20211210_01/</guid>
       <description>Credit: FotoRieth
    &amp;ldquo;And after them the king of Sheshach shall drink.&amp;rdquo;
  It might not be obvious, but Sheshach in that phrase is actually one of the earliest examples of secret code, in this case for the name: Babylon.

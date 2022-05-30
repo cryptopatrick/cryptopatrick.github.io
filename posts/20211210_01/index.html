@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
-rel="stylesheet" href="https://cryptopatrick.github.io/css/main.css" />
-<link rel="icon" type="image/png" sizes="16x16" href="https://cryptopatrick.github.io/favicon.svg" />
+rel="stylesheet" href="localhost/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="localhost/favicon.svg" />
 
 
 <script
@@ -32,12 +32,12 @@ rel="stylesheet" href="https://cryptopatrick.github.io/css/main.css" />
     });
 </script>
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/javascript" src="https://cryptopatrick.github.io/js/mathjax.js"></script>
+<script type="text/javascript" src="localhost/js/mathjax.js"></script>
 
-<script type="text/javascript" src="https://cryptopatrick.github.io/%20js%20/jquery.js"></script>
-<script type="text/javascript" src="https://cryptopatrick.github.io/js/jquery.fitvids.js"></script>
-<script type="text/javascript" src="https://cryptopatrick.github.io/js/index.js"></script>
-<script type="text/javascript" src="https://cryptopatrick.github.io/js/mathjax.js"></script>
+<script type="text/javascript" src="localhost/%20js%20/jquery.js"></script>
+<script type="text/javascript" src="localhost/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="localhost/js/index.js"></script>
+<script type="text/javascript" src="localhost/js/mathjax.js"></script>
 <meta property="og:title" content="Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature" />
     <meta name="twitter:title" content="Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature" />
     <meta itemprop="name" content="Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature" />
@@ -51,15 +51,15 @@ rel="stylesheet" href="https://cryptopatrick.github.io/css/main.css" />
     <meta property="og:description" content="This post is part of a small series on the history of cryptology." />
     <meta name="twitter:description" content="This post is part of a small series on the history of cryptology." />
 
-    <link rel="canonical" href="https://cryptopatrick.github.io/posts/20211210_01/" itemprop="url" />
-    <meta name="url" content="https://cryptopatrick.github.io/posts/20211210_01/" />
-    <meta name="twitter:url" content="https://cryptopatrick.github.io/posts/20211210_01/" />
-    <meta property="og:url" content="https://cryptopatrick.github.io/posts/20211210_01/" />
+    <link rel="canonical" href="localhost/posts/20211210_01/" itemprop="url" />
+    <meta name="url" content="localhost/posts/20211210_01/" />
+    <meta name="twitter:url" content="localhost/posts/20211210_01/" />
+    <meta property="og:url" content="localhost/posts/20211210_01/" />
   </head>
   <body>
     <section class="single-post">
       <section class="post-pre-header">
-        <a href="https://cryptopatrick.github.io/posts" class="bring-me-back">&larr; all posts</a>
+        <a href="localhost/posts" class="bring-me-back">&larr; all posts</a>
 
         <div class="meta">
           Posted on Dec 10, 2021
@@ -84,7 +84,7 @@ In this brief post I will go over <strong>Atbash</strong>, an old <em>substituti
 <blockquote>
 <p>The name Atbash could deride from the story of Babel, where God confused the speech of people, as punishment for trying to build a tower all the way to heaven.</p>
 </blockquote>
-<h2 id="the-ciphering-process">The Ciphering Process</h2>
+<h2 id="the-atbash-cipher-in-rust-">The Atbash Cipher in Rust 🦀</h2>
 <p>Ancient Hewbrew scribes are believed to have used the following technique
 to secretly encode some words:</p>
 <ol>
@@ -99,7 +99,7 @@ The second letter <strong>beth</strong> is mapped to the next-to-last letter <st
 <li>Hebrew scribes used this mapping to turn the word <strong>beth-beth-lamed</strong> into the word <strong>shin-shin-kaph</strong>.</li>
 </ol>
 <blockquote>
-<p>The letter sounds and interpolated vowels turns <strong>B-A-B-E-L</strong> into <strong>Sh-E-Sh-A-Ch</strong>.</p>
+<p>Code: simple Rust implementation of the Atbash cipher.</p>
 </blockquote>
 <hr>
 <h2 id="a-simple-code-example">A Simple Code Example</h2>

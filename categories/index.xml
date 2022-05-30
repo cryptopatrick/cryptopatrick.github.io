@@ -2,30 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on CryptoPatrick | Seamless Global Nature</title>
-    <link>https://cryptopatrick.github.io/categories/</link>
+    <link>localhost/categories/</link>
     <description>Recent content in Categories on CryptoPatrick | Seamless Global Nature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://cryptopatrick.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="localhost/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>GUI</title>
+      <link>localhost/categories/gui/</link>
+      <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>localhost/categories/gui/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rust</title>
+      <link>localhost/categories/rust/</link>
+      <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>localhost/categories/rust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Cryptography</title>
-      <link>https://cryptopatrick.github.io/categories/cryptography/</link>
+      <link>localhost/categories/cryptography/</link>
       <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://cryptopatrick.github.io/categories/cryptography/</guid>
+      <guid>localhost/categories/cryptography/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NumberTheory</title>
-      <link>https://cryptopatrick.github.io/categories/numbertheory/</link>
+      <link>localhost/categories/numbertheory/</link>
       <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://cryptopatrick.github.io/categories/numbertheory/</guid>
+      <guid>localhost/categories/numbertheory/</guid>
       <description></description>
     </item>
     
