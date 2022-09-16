@@ -5,25 +5,6 @@
     <link>https://cryptopatrick.github.io/categories/</link>
     <description>Recent content in Categories on CryptoPatrick | Seamless Global Nature</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 14 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://cryptopatrick.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Cryptography</title>
-      <link>https://cryptopatrick.github.io/categories/cryptography/</link>
-      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://cryptopatrick.github.io/categories/cryptography/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NumberTheory</title>
-      <link>https://cryptopatrick.github.io/categories/numbertheory/</link>
-      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://cryptopatrick.github.io/categories/numbertheory/</guid>
-      <description></description>
-    </item>
-    
+    <language>en-us</language><atom:link href="https://cryptopatrick.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
