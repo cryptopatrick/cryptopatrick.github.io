@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
-rel="stylesheet" href="localhost/css/main.css" />
-<link rel="icon" type="image/png" sizes="16x16" href="localhost/favicon.svg" />
+rel="stylesheet" href="https://cryptopatrick.github.io/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://cryptopatrick.github.io/favicon.svg" />
 
 
 <script
@@ -32,12 +32,12 @@ rel="stylesheet" href="localhost/css/main.css" />
     });
 </script>
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/javascript" src="localhost/js/mathjax.js"></script>
+<script type="text/javascript" src="https://cryptopatrick.github.io/js/mathjax.js"></script>
 
-<script type="text/javascript" src="localhost/%20js%20/jquery.js"></script>
-<script type="text/javascript" src="localhost/js/jquery.fitvids.js"></script>
-<script type="text/javascript" src="localhost/js/index.js"></script>
-<script type="text/javascript" src="localhost/js/mathjax.js"></script>
+<script type="text/javascript" src="https://cryptopatrick.github.io/%20js%20/jquery.js"></script>
+<script type="text/javascript" src="https://cryptopatrick.github.io/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="https://cryptopatrick.github.io/js/index.js"></script>
+<script type="text/javascript" src="https://cryptopatrick.github.io/js/mathjax.js"></script>
 <meta property="og:title" content="Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature" />
     <meta name="twitter:title" content="Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature" />
     <meta itemprop="name" content="Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature" />
@@ -51,15 +51,15 @@ rel="stylesheet" href="localhost/css/main.css" />
     <meta property="og:description" content="This post is part of a small series on the history of cryptology." />
     <meta name="twitter:description" content="This post is part of a small series on the history of cryptology." />
 
-    <link rel="canonical" href="localhost/posts/20211210_01/" itemprop="url" />
-    <meta name="url" content="localhost/posts/20211210_01/" />
-    <meta name="twitter:url" content="localhost/posts/20211210_01/" />
-    <meta property="og:url" content="localhost/posts/20211210_01/" />
+    <link rel="canonical" href="https://cryptopatrick.github.io/posts/20211210_01/" itemprop="url" />
+    <meta name="url" content="https://cryptopatrick.github.io/posts/20211210_01/" />
+    <meta name="twitter:url" content="https://cryptopatrick.github.io/posts/20211210_01/" />
+    <meta property="og:url" content="https://cryptopatrick.github.io/posts/20211210_01/" />
   </head>
   <body>
     <section class="single-post">
       <section class="post-pre-header">
-        <a href="localhost/posts" class="bring-me-back">&larr; all posts</a>
+        <a href="https://cryptopatrick.github.io/posts" class="bring-me-back">&larr; all posts</a>
 
         <div class="meta">
           Posted on Dec 10, 2021
@@ -67,9 +67,8 @@ rel="stylesheet" href="localhost/css/main.css" />
       </section>
 
       <h1>Cipher: Atbash</h1>
-      <figure>
-    <img src="https://cdn.pixabay.com/photo/2019/04/09/17/52/joshua-4115147_960_720.jpg"
-         alt="Credit:"/> <figcaption>
+      <figure><img src="https://cdn.pixabay.com/photo/2019/04/09/17/52/joshua-4115147_960_720.jpg"
+         alt="Credit:"/><figcaption>
             <p>Credit:
                     <a href="https://pixabay.com/de/users/fotorieth-837884/">FotoRieth</a></p>
         </figcaption>
@@ -103,36 +102,36 @@ The second letter <strong>beth</strong> is mapped to the next-to-last letter <st
 </blockquote>
 <hr>
 <h2 id="a-simple-code-example">A Simple Code Example</h2>
-<p>Let's try to write a simple <strong>Atbash</strong> cipher program.</p>
+<p>Let&rsquo;s try to write a simple <strong>Atbash</strong> cipher program.</p>
 <blockquote>
 <p>The following program makes a lot of assumptions on the input provided to the ciphering function. The program is only meant to illustrate the fundamental idea of the cipher.</p>
 </blockquote>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">static</span><span style="color:#666"> </span>ALPHABET: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span> =<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>;<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">static</span><span style="color:#666"> </span>TEBAHPLA: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span> =<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ZYXWVUTSRQPONMLKJIHGFEDCBA&#34;</span>;<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span style="color:#666"></span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">atbash</span>(sequence: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span>)<span style="color:#666"> </span>-&gt; <span style="color:#24909d">String</span> {<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>res: <span style="color:#24909d">Vec</span>&lt;char&gt;<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">Vec</span>::new();<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span>chars: <span style="color:#24909d">Vec</span>&lt;char&gt;<span style="color:#666"> </span>=<span style="color:#666"> </span>sequence.chars().collect();<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">for</span><span style="color:#666"> </span>c<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">in</span><span style="color:#666"> </span>chars<span style="color:#666"> </span>{<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span style="color:#666"></span><span style="color:#666">        </span>res.push(TEBAHPLA.chars().nth(ALPHABET.find(c).unwrap()).unwrap());<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span><span style="color:#666"></span><span style="color:#666">    </span>}<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span style="color:#666"></span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span style="color:#666"></span><span style="color:#666">    </span>res.iter().collect::&lt;<span style="color:#24909d">String</span>&gt;()<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span><span style="color:#666"></span>}<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span><span style="color:#666"></span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">main</span>()<span style="color:#666"> </span>{<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span><span style="color:#666"></span><span style="color:#666">    </span>println!(<span style="color:#ed9d13">&#34;{}&#34;</span>,<span style="color:#666"> </span>atbash(<span style="color:#ed9d13">&#34;ABC&#34;</span>));<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span><span style="color:#666"></span>}<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span><span style="color:#666"></span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span><span style="color:#666"></span><span style="color:#cd2828;font-weight:bold">#[</span><span style="color:#cd2828;font-weight:bold">cfg(test)</span><span style="color:#cd2828;font-weight:bold">]</span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">mod</span> <span style="color:#447fcf;text-decoration:underline">tests</span><span style="color:#666"> </span>{<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">use</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">super</span>::*;<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#cd2828;font-weight:bold">#[</span><span style="color:#cd2828;font-weight:bold">test</span><span style="color:#cd2828;font-weight:bold">]</span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">sample_test</span>()<span style="color:#666"> </span>{<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span><span style="color:#666"></span><span style="color:#666">        </span>assert_eq!(atbash(<span style="color:#ed9d13">&#34;ABC&#34;</span>),<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ZYX&#34;</span>);<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span><span style="color:#666"></span><span style="color:#666">    </span>}<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span><span style="color:#666"></span>}<span style="color:#666">
-</span></code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span><span style="color:#6ab825;font-weight:bold">static</span><span style="color:#666"> </span>ALPHABET: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span> =<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">static</span><span style="color:#666"> </span>TEBAHPLA: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span> =<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ZYXWVUTSRQPONMLKJIHGFEDCBA&#34;</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">atbash</span>(sequence: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span>)<span style="color:#666"> </span>-&gt; <span style="color:#24909d">String</span> {<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>res: <span style="color:#24909d">Vec</span>&lt;<span style="color:#6ab825;font-weight:bold">char</span>&gt;<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">Vec</span>::new();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span>chars: <span style="color:#24909d">Vec</span>&lt;<span style="color:#6ab825;font-weight:bold">char</span>&gt;<span style="color:#666"> </span>=<span style="color:#666"> </span>sequence.chars().collect();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">for</span><span style="color:#666"> </span>c<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">in</span><span style="color:#666"> </span>chars<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span><span style="color:#666">        </span>res.push(TEBAHPLA.chars().nth(ALPHABET.find(c).unwrap()).unwrap());<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span><span><span style="color:#666">    </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span><span style="color:#666">    </span>res.iter().collect::&lt;<span style="color:#24909d">String</span>&gt;()<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">main</span>()<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span><span><span style="color:#666">    </span>println!(<span style="color:#ed9d13">&#34;{}&#34;</span>,<span style="color:#666"> </span>atbash(<span style="color:#ed9d13">&#34;ABC&#34;</span>));<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span><span><span style="color:#666"></span><span style="color:#cd2828;font-weight:bold">#[cfg(test)]</span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">mod</span> <span style="color:#447fcf;text-decoration:underline">tests</span><span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">use</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">super</span>::*;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span><span><span style="color:#666">    </span><span style="color:#cd2828;font-weight:bold">#[test]</span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">sample_test</span>()<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span><span><span style="color:#666">        </span>assert_eq!(atbash(<span style="color:#ed9d13">&#34;ABC&#34;</span>),<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ZYX&#34;</span>);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span><span><span style="color:#666">    </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span></code></pre></div><blockquote>
 <p>The code can also be found on my <a href="https://github.com/cryptopatrick/Everyday/tree/main/day_2021_12_10A">Github</a></p>
 </blockquote>
 

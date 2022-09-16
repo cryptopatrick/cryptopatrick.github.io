@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Cipher: Caesar ~ CryptoPatrick | Seamless Global Nature</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
-rel="stylesheet" href="localhost/css/main.css" />
-<link rel="icon" type="image/png" sizes="16x16" href="localhost/favicon.svg" />
+rel="stylesheet" href="https://cryptopatrick.github.io/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://cryptopatrick.github.io/favicon.svg" />
 
 
 <script
@@ -32,12 +32,12 @@ rel="stylesheet" href="localhost/css/main.css" />
     });
 </script>
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/javascript" src="localhost/js/mathjax.js"></script>
+<script type="text/javascript" src="https://cryptopatrick.github.io/js/mathjax.js"></script>
 
-<script type="text/javascript" src="localhost/%20js%20/jquery.js"></script>
-<script type="text/javascript" src="localhost/js/jquery.fitvids.js"></script>
-<script type="text/javascript" src="localhost/js/index.js"></script>
-<script type="text/javascript" src="localhost/js/mathjax.js"></script>
+<script type="text/javascript" src="https://cryptopatrick.github.io/%20js%20/jquery.js"></script>
+<script type="text/javascript" src="https://cryptopatrick.github.io/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="https://cryptopatrick.github.io/js/index.js"></script>
+<script type="text/javascript" src="https://cryptopatrick.github.io/js/mathjax.js"></script>
 <meta property="og:title" content="Cipher: Caesar ~ CryptoPatrick | Seamless Global Nature" />
     <meta name="twitter:title" content="Cipher: Caesar ~ CryptoPatrick | Seamless Global Nature" />
     <meta itemprop="name" content="Cipher: Caesar ~ CryptoPatrick | Seamless Global Nature" />
@@ -51,15 +51,15 @@ rel="stylesheet" href="localhost/css/main.css" />
     <meta property="og:description" content="This post is part of a small series on the history of cryptology." />
     <meta name="twitter:description" content="This post is part of a small series on the history of cryptology." />
 
-    <link rel="canonical" href="localhost/posts/20211213_01/" itemprop="url" />
-    <meta name="url" content="localhost/posts/20211213_01/" />
-    <meta name="twitter:url" content="localhost/posts/20211213_01/" />
-    <meta property="og:url" content="localhost/posts/20211213_01/" />
+    <link rel="canonical" href="https://cryptopatrick.github.io/posts/20211213_01/" itemprop="url" />
+    <meta name="url" content="https://cryptopatrick.github.io/posts/20211213_01/" />
+    <meta name="twitter:url" content="https://cryptopatrick.github.io/posts/20211213_01/" />
+    <meta property="og:url" content="https://cryptopatrick.github.io/posts/20211213_01/" />
   </head>
   <body>
     <section class="single-post">
       <section class="post-pre-header">
-        <a href="localhost/posts" class="bring-me-back">&larr; all posts</a>
+        <a href="https://cryptopatrick.github.io/posts" class="bring-me-back">&larr; all posts</a>
 
         <div class="meta">
           Posted on Dec 13, 2021
@@ -67,9 +67,8 @@ rel="stylesheet" href="localhost/css/main.css" />
       </section>
 
       <h1>Cipher: Caesar</h1>
-      <h2 id="hahahugoshortcode-s0-hbhb"><figure>
-    <img src="localhost/images/image-for-polybius-683x1024.gif"
-         alt="The Greek historian Polybius"/> <figcaption>
+      <h2 id="hahahugoshortcode-s0-hbhb"><figure><img src="https://cryptopatrick.github.io/images/image-for-polybius-683x1024.gif"
+         alt="The Greek historian Polybius"/><figcaption>
             <p>The Greek historian Polybius</p>
         </figcaption>
 </figure>
@@ -87,48 +86,48 @@ The number of steps we shift can be treated as the <strong>key</strong> of the c
 <p>If our message is based on the Roman alphabet, then the Caesar Cipher
 would encrypt $A \to D$, and $B \to E$.
 So for example, <em>enciphering</em> the plaintext message:
-$$&quot;CAESARMUSTDIE&quot;$$</p>
+$$&ldquo;CAESARMUSTDIE&rdquo;$$</p>
 <p>would result in the ciphertext:</p>
 <p>$$FDHVDUPXVWGLH$$</p>
 <p>The <em>deciphering</em> process would mean <strong>reversing the shifting</strong> the ciphering process, by <strong>rotating</strong> each letter 3 (or however many steps was used during encipherment) steps back (to the left) to its regular position in the alphabet.</p>
 <hr>
 <h2 id="a-simple-code-example">A Simple Code Example</h2>
-<p>Let's try to write a simple <strong>Caesar Cipher</strong> program.</p>
+<p>Let&rsquo;s try to write a simple <strong>Caesar Cipher</strong> program.</p>
 <blockquote>
 <p>The following program makes a lot of assumptions on the input provided to the ciphering function. The program is only meant to illustrate the fundamental idea of the cipher.</p>
 </blockquote>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>ALPHABET: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span> =<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>;<span style="color:#666"> 
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">encipher</span>(message: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span>)<span style="color:#666"> </span>-&gt; <span style="color:#24909d">String</span> {<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>ciphertext<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">String</span>::new();<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>num: <span style="color:#6ab825;font-weight:bold">usize</span>;<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>pos: <span style="color:#6ab825;font-weight:bold">usize</span>;<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span><span style="color:#666"></span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">for</span><span style="color:#666"> </span>letter<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">in</span><span style="color:#666"> </span>message.chars()<span style="color:#666"> </span>{<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span><span style="color:#666"></span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">if</span><span style="color:#666"> </span>ALPHABET.contains(letter)<span style="color:#666"> </span>{<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span style="color:#666"></span><span style="color:#666">            </span>num<span style="color:#666"> </span>=<span style="color:#666"> </span>ALPHABET.find(letter).unwrap();<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span style="color:#666"></span><span style="color:#666">            </span>pos<span style="color:#666"> </span>=<span style="color:#666"> </span>(num<span style="color:#666"> </span>+<span style="color:#666"> </span><span style="color:#3677a9">3</span>)<span style="color:#666"> </span>%<span style="color:#666"> </span><span style="color:#3677a9">26</span>;<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span><span style="color:#666"></span><span style="color:#666">            </span>ciphertext.push(ALPHABET.chars().nth(pos).unwrap());<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span><span style="color:#666"></span><span style="color:#666">        </span>}<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span><span style="color:#666"></span><span style="color:#666">    </span>}<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span><span style="color:#666"></span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span><span style="color:#666"></span><span style="color:#666">    </span>ciphertext<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span><span style="color:#666"></span>}<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span><span style="color:#666"></span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">main</span>()<span style="color:#666"> </span>{<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span><span style="color:#666"></span><span style="color:#666">    </span>println!(<span style="color:#ed9d13">&#34;{}&#34;</span>,<span style="color:#666"> </span>encipher(<span style="color:#ed9d13">&#34;CAESARMUSTDIE&#34;</span>));<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span><span style="color:#666"></span>}<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span><span style="color:#666"></span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span><span style="color:#666"></span><span style="color:#cd2828;font-weight:bold">#[</span><span style="color:#cd2828;font-weight:bold">cfg(test)</span><span style="color:#cd2828;font-weight:bold">]</span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">mod</span> <span style="color:#447fcf;text-decoration:underline">tests</span><span style="color:#666"> </span>{<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">use</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">super</span>::*;<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26</span><span style="color:#666"></span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#cd2828;font-weight:bold">#[</span><span style="color:#cd2828;font-weight:bold">test</span><span style="color:#cd2828;font-weight:bold">]</span><span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28</span><span style="color:#666"></span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">encipher_test</span>()<span style="color:#666"> </span>{<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29</span><span style="color:#666"></span><span style="color:#666">        </span>assert_eq!(encipher(<span style="color:#ed9d13">&#34;CAESARMUSTDIE&#34;</span>),<span style="color:#666"> </span><span style="color:#ed9d13">&#34;FDHVDUPXVWGLH&#34;</span>);<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30</span><span style="color:#666"></span><span style="color:#666">    </span>}<span style="color:#666">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31</span><span style="color:#666"></span>}<span style="color:#666">
-</span></code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>ALPHABET: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span> =<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>;<span style="color:#666"> 
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">encipher</span>(message: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span>)<span style="color:#666"> </span>-&gt; <span style="color:#24909d">String</span> {<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>ciphertext<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">String</span>::new();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>num: <span style="color:#6ab825;font-weight:bold">usize</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>pos: <span style="color:#6ab825;font-weight:bold">usize</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">for</span><span style="color:#666"> </span>letter<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">in</span><span style="color:#666"> </span>message.chars()<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span><span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">if</span><span style="color:#666"> </span>ALPHABET.contains(letter)<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span><span style="color:#666">            </span>num<span style="color:#666"> </span>=<span style="color:#666"> </span>ALPHABET.find(letter).unwrap();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span><span style="color:#666">            </span>pos<span style="color:#666"> </span>=<span style="color:#666"> </span>(num<span style="color:#666"> </span>+<span style="color:#666"> </span><span style="color:#3677a9">3</span>)<span style="color:#666"> </span>%<span style="color:#666"> </span><span style="color:#3677a9">26</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span><span><span style="color:#666">            </span>ciphertext.push(ALPHABET.chars().nth(pos).unwrap());<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span><span><span style="color:#666">        </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span><span><span style="color:#666">    </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span><span><span style="color:#666">    </span>ciphertext<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">main</span>()<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span><span><span style="color:#666">    </span>println!(<span style="color:#ed9d13">&#34;{}&#34;</span>,<span style="color:#666"> </span>encipher(<span style="color:#ed9d13">&#34;CAESARMUSTDIE&#34;</span>));<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span><span><span style="color:#666"></span><span style="color:#cd2828;font-weight:bold">#[cfg(test)]</span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">mod</span> <span style="color:#447fcf;text-decoration:underline">tests</span><span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">use</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">super</span>::*;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27</span><span><span style="color:#666">    </span><span style="color:#cd2828;font-weight:bold">#[test]</span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">encipher_test</span>()<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29</span><span><span style="color:#666">        </span>assert_eq!(encipher(<span style="color:#ed9d13">&#34;CAESARMUSTDIE&#34;</span>),<span style="color:#666"> </span><span style="color:#ed9d13">&#34;FDHVDUPXVWGLH&#34;</span>);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30</span><span><span style="color:#666">    </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span></code></pre></div><blockquote>
 <p>The code can also be found on my <a href="https://github.com/cryptopatrick/Everyday/blob/main/day_2021_12_13A">Github</a></p>
 </blockquote>
 
