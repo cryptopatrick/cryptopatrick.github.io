@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CryptoPatrick | Seamless Global Nature</title>
-    <link>cryptopatrick.github.io/</link>
+    <link>http://cryptopatrick.github.io/</link>
     <description>Recent content on CryptoPatrick | Seamless Global Nature</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="cryptopatrick.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="http://cryptopatrick.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Seamless Global Nature</title>
-      <link>cryptopatrick.github.io/</link>
+      <link>http://cryptopatrick.github.io/</link>
       <pubDate>Thu, 15 Sep 2022 08:23:55 +0200</pubDate>
       
-      <guid>cryptopatrick.github.io/</guid>
+      <guid>http://cryptopatrick.github.io/</guid>
       <description>Link to blog my posts Hi! My name is Patrick!
 I&amp;rsquo;m a Rust developer.
 This is my blog.
