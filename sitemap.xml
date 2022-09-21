@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://cryptopatrick.github.io/</loc>
+    <loc>localhost/</loc>
     <lastmod>2022-09-15T08:23:55+02:00</lastmod>
   </url><url>
-    <loc>https://cryptopatrick.github.io/categories/</loc>
+    <loc>localhost/categories/</loc>
   </url><url>
-    <loc>https://cryptopatrick.github.io/</loc>
+    <loc>localhost/</loc>
   </url><url>
-    <loc>https://cryptopatrick.github.io/tags/</loc>
+    <loc>localhost/tags/</loc>
   </url>
 </urlset>
