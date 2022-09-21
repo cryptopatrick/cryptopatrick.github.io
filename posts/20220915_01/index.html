@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
+rel="stylesheet" href="/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
+
+
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-25416548-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-25416548-1");
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="/js/mathjax.js"></script>
+
+<script type="text/javascript" src="/%20js%20/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/mathjax.js"></script>
+<meta property="og:title" content="Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature" />
+    <meta name="twitter:title" content="Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature" />
+    <meta itemprop="name" content="Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature" />
+    <meta name="application-name" content="Cipher: Atbash ~ CryptoPatrick | Seamless Global Nature" />
+    <meta property="og:site_name" content="" />
+
+    <meta name="keywords" content="" />
+
+    <meta name="description" content="This post is part of a small series on the history of cryptology." />
+    <meta itemprop="description" content="This post is part of a small series on the history of cryptology." />
+    <meta property="og:description" content="This post is part of a small series on the history of cryptology." />
+    <meta name="twitter:description" content="This post is part of a small series on the history of cryptology." />
+
+    <link rel="canonical" href="/posts/20220915_01/" itemprop="url" />
+    <meta name="url" content="/posts/20220915_01/" />
+    <meta name="twitter:url" content="/posts/20220915_01/" />
+    <meta property="og:url" content="/posts/20220915_01/" />
+  </head>
+  <body>
+    <section class="single-post">
+      <section class="post-pre-header">
+        <a href="/posts" class="bring-me-back">&larr; all posts</a>
+
+        <div class="meta">
+          Posted on Sep 15, 2022
+        </div>
+      </section>
+
+      <h1>Cipher: Atbash</h1>
+      <figure><img src="https://cdn.pixabay.com/photo/2019/04/09/17/52/joshua-4115147_960_720.jpg"
+         alt="Credit:"/><figcaption>
+            <p>Credit:
+                    <a href="https://pixabay.com/de/users/fotorieth-837884/">FotoRieth</a></p>
+        </figcaption>
+</figure>
+
+<blockquote>
+<p>&ldquo;And after them the king of Sheshach shall drink.&rdquo;</p>
+</blockquote>
+<p>It might not be obvious, but <em>Sheshach</em> in that phrase is actually one of the
+earliest examples of <strong>secret code</strong>, in this case for the name: <em>Babylon</em>.<br>
+In this brief post I will go over <strong>Atbash</strong>, an old <em>substitution cipher</em> technique from around 500 B.C.</p>
+<blockquote>
+<p>The name Atbash could deride from the story of Babel, where God confused the speech of people, as punishment for trying to build a tower all the way to heaven.</p>
+</blockquote>
+<h2 id="the-atbash-cipher-in-rust-">The Atbash Cipher in Rust 🦀</h2>
+<p>Ancient Hewbrew scribes are believed to have used the following technique
+to secretly encode some words:</p>
+<ol>
+<li>The Hebrew alphabet is &ldquo;doubled back&rdquo; on itself.<br>
+Doing this on the Roman alphabet produces the mapping:<br>
+<code>ABCDEFGHIJKLMNOPQRSTUVWXYZ</code><br>
+<code>ZYXWVUTSRQPONMLKJIHGFEDCBA</code><br>
+As we can see, <code>A</code> is mapped to <code>Z</code>, <code>B</code> is mapped to <code>Y</code>, and so forth.</li>
+<li>In Hebrew, this doubling back of the alphabet, creates a direct correspondence
+between the first letter <strong>aleph</strong> and the last letter in the alphabet <strong>taw</strong>.
+The second letter <strong>beth</strong> is mapped to the next-to-last letter <strong>shin</strong>, and so forth.</li>
+<li>Hebrew scribes used this mapping to turn the word <strong>beth-beth-lamed</strong> into the word <strong>shin-shin-kaph</strong>.</li>
+</ol>
+<blockquote>
+<p>Code: simple Rust implementation of the Atbash cipher.</p>
+</blockquote>
+<hr>
+<h2 id="a-simple-code-example">A Simple Code Example</h2>
+<p>Let&rsquo;s try to write a simple <strong>Atbash</strong> cipher program.</p>
+<blockquote>
+<p>The following program makes a lot of assumptions on the input provided to the ciphering function. The program is only meant to illustrate the fundamental idea of the cipher.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span><span style="color:#6ab825;font-weight:bold">static</span><span style="color:#666"> </span>ALPHABET: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span> =<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">static</span><span style="color:#666"> </span>TEBAHPLA: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span> =<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ZYXWVUTSRQPONMLKJIHGFEDCBA&#34;</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">atbash</span>(sequence: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span>)<span style="color:#666"> </span>-&gt; <span style="color:#24909d">String</span> {<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>res: <span style="color:#24909d">Vec</span>&lt;<span style="color:#6ab825;font-weight:bold">char</span>&gt;<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">Vec</span>::new();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span>chars: <span style="color:#24909d">Vec</span>&lt;<span style="color:#6ab825;font-weight:bold">char</span>&gt;<span style="color:#666"> </span>=<span style="color:#666"> </span>sequence.chars().collect();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">for</span><span style="color:#666"> </span>c<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">in</span><span style="color:#666"> </span>chars<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span><span style="color:#666">        </span>res.push(TEBAHPLA.chars().nth(ALPHABET.find(c).unwrap()).unwrap());<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span><span><span style="color:#666">    </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span><span style="color:#666">    </span>res.iter().collect::&lt;<span style="color:#24909d">String</span>&gt;()<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">main</span>()<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span><span><span style="color:#666">    </span>println!(<span style="color:#ed9d13">&#34;{}&#34;</span>,<span style="color:#666"> </span>atbash(<span style="color:#ed9d13">&#34;ABC&#34;</span>));<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span><span><span style="color:#666"></span><span style="color:#cd2828;font-weight:bold">#[cfg(test)]</span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">mod</span> <span style="color:#447fcf;text-decoration:underline">tests</span><span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">use</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">super</span>::*;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span><span><span style="color:#666">    </span><span style="color:#cd2828;font-weight:bold">#[test]</span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">sample_test</span>()<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span><span><span style="color:#666">        </span>assert_eq!(atbash(<span style="color:#ed9d13">&#34;ABC&#34;</span>),<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ZYX&#34;</span>);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span><span><span style="color:#666">    </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span></code></pre></div>
+    </section>
+  </body>
+</html>

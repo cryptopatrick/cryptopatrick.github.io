@@ -5,6 +5,25 @@
     <link>/categories/</link>
     <description>Recent content in Categories on CryptoPatrick | Seamless Global Nature</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Thu, 15 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cryptography</title>
+      <link>/categories/cryptography/</link>
+      <pubDate>Thu, 15 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/cryptography/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NumberTheory</title>
+      <link>/categories/numbertheory/</link>
+      <pubDate>Thu, 15 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/numbertheory/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

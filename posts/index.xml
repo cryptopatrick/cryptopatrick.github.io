@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Seamless Global Nature on CryptoPatrick | Seamless Global Nature</title>
-    <link>/</link>
-    <description>Recent content in Seamless Global Nature on CryptoPatrick | Seamless Global Nature</description>
+    <title>Posts on CryptoPatrick | Seamless Global Nature</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on CryptoPatrick | Seamless Global Nature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 15 Sep 2022 08:23:55 +0200</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cipher: Atbash</title>
       <link>/posts/20220915_01/</link>

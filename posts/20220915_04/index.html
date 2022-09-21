@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cipher: Caesar ~ CryptoPatrick | Seamless Global Nature</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /> <link
+rel="stylesheet" href="/css/main.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
+
+
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-25416548-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-25416548-1");
+</script>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="/js/mathjax.js"></script>
+
+<script type="text/javascript" src="/%20js%20/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/mathjax.js"></script>
+<meta property="og:title" content="Cipher: Caesar ~ CryptoPatrick | Seamless Global Nature" />
+    <meta name="twitter:title" content="Cipher: Caesar ~ CryptoPatrick | Seamless Global Nature" />
+    <meta itemprop="name" content="Cipher: Caesar ~ CryptoPatrick | Seamless Global Nature" />
+    <meta name="application-name" content="Cipher: Caesar ~ CryptoPatrick | Seamless Global Nature" />
+    <meta property="og:site_name" content="" />
+
+    <meta name="keywords" content="" />
+
+    <meta name="description" content="This post is part of a small series on the history of cryptology." />
+    <meta itemprop="description" content="This post is part of a small series on the history of cryptology." />
+    <meta property="og:description" content="This post is part of a small series on the history of cryptology." />
+    <meta name="twitter:description" content="This post is part of a small series on the history of cryptology." />
+
+    <link rel="canonical" href="/posts/20220915_04/" itemprop="url" />
+    <meta name="url" content="/posts/20220915_04/" />
+    <meta name="twitter:url" content="/posts/20220915_04/" />
+    <meta property="og:url" content="/posts/20220915_04/" />
+  </head>
+  <body>
+    <section class="single-post">
+      <section class="post-pre-header">
+        <a href="/posts" class="bring-me-back">&larr; all posts</a>
+
+        <div class="meta">
+          Posted on Sep 15, 2022
+        </div>
+      </section>
+
+      <h1>Cipher: Caesar</h1>
+      <h2 id="hahahugoshortcode-s0-hbhb"><figure><img src="/images/image-for-polybius-683x1024.gif"
+         alt="The Greek historian Polybius"/><figcaption>
+            <p>The Greek historian Polybius</p>
+        </figcaption>
+</figure>
+</h2>
+<p>Gaius Julius Caesar needs little introduction. The Roman general and politician
+became dictator of Rome. He was assasinated in 44 B.C. by fellow senators who
+feared he was becoming too powerful .</p>
+<p>In his book <em>Gallic Wars</em>, Julis Caesar describes a <em>method of encipherment</em> that
+has come to be known as <strong>The Caesar Cipher</strong>.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="the-ciphering-process">The Ciphering Process</h2>
+<p>The Caesar Cipher is an example of a <strong>shift cipher</strong>. The letters of a plaintext message is <em>shifted</em> (another word is <em>rotated</em>) <strong>three steps forward (to the right)</strong> .<br>
+The number of steps we shift can be treated as the <strong>key</strong> of the cipher.</p>
+<p>If our message is based on the Roman alphabet, then the Caesar Cipher
+would encrypt $A \to D$, and $B \to E$.
+So for example, <em>enciphering</em> the plaintext message:
+$$&ldquo;CAESARMUSTDIE&rdquo;$$</p>
+<p>would result in the ciphertext:</p>
+<p>$$FDHVDUPXVWGLH$$</p>
+<p>The <em>deciphering</em> process would mean <strong>reversing the shifting</strong> the ciphering process, by <strong>rotating</strong> each letter 3 (or however many steps was used during encipherment) steps back (to the left) to its regular position in the alphabet.</p>
+<hr>
+<h2 id="a-simple-code-example">A Simple Code Example</h2>
+<p>Let&rsquo;s try to write a simple <strong>Caesar Cipher</strong> program.</p>
+<blockquote>
+<p>The following program makes a lot of assumptions on the input provided to the ciphering function. The program is only meant to illustrate the fundamental idea of the cipher.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 1</span><span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>ALPHABET: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span> =<span style="color:#666"> </span><span style="color:#ed9d13">&#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>;<span style="color:#666"> 
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 2</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 3</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">encipher</span>(message: <span style="color:#6ab825">&amp;</span><span style="color:#6ab825;font-weight:bold">str</span>)<span style="color:#666"> </span>-&gt; <span style="color:#24909d">String</span> {<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 4</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>ciphertext<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">String</span>::new();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 5</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>num: <span style="color:#6ab825;font-weight:bold">usize</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 6</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">let</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">mut</span><span style="color:#666"> </span>pos: <span style="color:#6ab825;font-weight:bold">usize</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 7</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 8</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">for</span><span style="color:#666"> </span>letter<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">in</span><span style="color:#666"> </span>message.chars()<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868"> 9</span><span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">if</span><span style="color:#666"> </span>ALPHABET.contains(letter)<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">10</span><span><span style="color:#666">            </span>num<span style="color:#666"> </span>=<span style="color:#666"> </span>ALPHABET.find(letter).unwrap();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">11</span><span><span style="color:#666">            </span>pos<span style="color:#666"> </span>=<span style="color:#666"> </span>(num<span style="color:#666"> </span>+<span style="color:#666"> </span><span style="color:#3677a9">3</span>)<span style="color:#666"> </span>%<span style="color:#666"> </span><span style="color:#3677a9">26</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">12</span><span><span style="color:#666">            </span>ciphertext.push(ALPHABET.chars().nth(pos).unwrap());<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">13</span><span><span style="color:#666">        </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">14</span><span><span style="color:#666">    </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">15</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">16</span><span><span style="color:#666">    </span>ciphertext<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">17</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">18</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">19</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">main</span>()<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">20</span><span><span style="color:#666">    </span>println!(<span style="color:#ed9d13">&#34;{}&#34;</span>,<span style="color:#666"> </span>encipher(<span style="color:#ed9d13">&#34;CAESARMUSTDIE&#34;</span>));<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">21</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">22</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">23</span><span><span style="color:#666"></span><span style="color:#cd2828;font-weight:bold">#[cfg(test)]</span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">24</span><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">mod</span> <span style="color:#447fcf;text-decoration:underline">tests</span><span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">25</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">use</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">super</span>::*;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">26</span><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">27</span><span><span style="color:#666">    </span><span style="color:#cd2828;font-weight:bold">#[test]</span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">28</span><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">fn</span> <span style="color:#447fcf">encipher_test</span>()<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">29</span><span><span style="color:#666">        </span>assert_eq!(encipher(<span style="color:#ed9d13">&#34;CAESARMUSTDIE&#34;</span>),<span style="color:#666"> </span><span style="color:#ed9d13">&#34;FDHVDUPXVWGLH&#34;</span>);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">30</span><span><span style="color:#666">    </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#686868">31</span><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span></code></pre></div>
+    </section>
+  </body>
+</html>
