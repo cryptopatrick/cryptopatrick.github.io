@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/post/</link>
+    <description>Recent content in Posts on Seamless Global Nature</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>cryptopatrick@gmail.com (CryptoPatrick)</managingEditor>
+    <webMaster>cryptopatrick@gmail.com (CryptoPatrick)</webMaster>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Tue, 10 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://www.cryptopatrick.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The TypeState Pattern</title>
+      <link>https://www.cryptopatrick.com/blog/2024/12/10/the-typestate-pattern/</link>
+      <pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
+      <author>cryptopatrick@gmail.com (CryptoPatrick)</author>
+      <guid>https://www.cryptopatrick.com/blog/2024/12/10/the-typestate-pattern/</guid>
+      <description>TypeState is a powerful design pattern that we can use to provide compiletime checks based on the state of things. This post is my way of writing about what I&amp;rsquo;m learning with the hopes that it&amp;rsquo;ll stick better.</description>
+    </item>
+    
+  </channel>
+</rss>

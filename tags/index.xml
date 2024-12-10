@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on CryptoPatrick | Seamless Global Nature</title>
-    <link>/tags/</link>
-    <description>Recent content in Tags on CryptoPatrick | Seamless Global Nature</description>
+    <title>Tags on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/tags/</link>
+    <description>Recent content in Tags on Seamless Global Nature</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 15 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-EN</language>
+    <managingEditor>cryptopatrick@gmail.com (CryptoPatrick)</managingEditor>
+    <webMaster>cryptopatrick@gmail.com (CryptoPatrick)</webMaster>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Tue, 10 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://www.cryptopatrick.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Cryptography</title>
-      <link>/tags/cryptography/</link>
-      <pubDate>Thu, 15 Sep 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/cryptography/</guid>
+      <title>Programming</title>
+      <link>https://www.cryptopatrick.com/tags/programming/</link>
+      <pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
+      <author>cryptopatrick@gmail.com (CryptoPatrick)</author>
+      <guid>https://www.cryptopatrick.com/tags/programming/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Mathematics</title>
-      <link>/tags/mathematics/</link>
-      <pubDate>Thu, 15 Sep 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/mathematics/</guid>
+      <title>Rust</title>
+      <link>https://www.cryptopatrick.com/tags/rust/</link>
+      <pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
+      <author>cryptopatrick@gmail.com (CryptoPatrick)</author>
+      <guid>https://www.cryptopatrick.com/tags/rust/</guid>
       <description></description>
     </item>
     

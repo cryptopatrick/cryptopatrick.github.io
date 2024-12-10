@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="The TypeState Pattern - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2024/12/10/the-typestate-pattern/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+
+<title>The TypeState Pattern | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/">
+            
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/">
+            
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">The TypeState Pattern</h1>
+    <h2 class="subtitle is-5">December 10, 2024 by CryptoPatrick</h2>
+    
+      <div class="tags">
+    
+        
+    
+        
+    
+</div>
+
+    
+    <div class="content">
+      <p><img src="https://img.shields.io/badge/Work_In_Progress-orange.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Text_Version-0.1.0-blue.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-No-red.svg" alt="Version:0.1.0"></p>
+<!--[![Version:0.1.0](https://img.shields.io/badge/File-issue-orange.svg)](https://github.com/cryptopatrick/learn_wgpu/issues)-->
+<!--<figure><img src="../../../../../img/the-typestate-pattern/wormhole.jpg"/>
+</figure>
+-->
+<br>
+<blockquote>
+<p><strong>Preface:</strong> In this post I&rsquo;ll go through <em>TypeState</em>, a programming design pattern that I&rsquo;m learning.
+Using the TypeState pattern can provide added security to our code, in the form of <em>compile-time checks</em> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. I want to point to the following excellent resources which have guided my learning so far: <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, and <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, and <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> .</p>
+</blockquote>
+<blockquote>
+<p><strong>Code:</strong> The complete source code for this post is available <a href="#source-code">at the end of this post</a>.</p>
+</blockquote>
+<h2 id="the-art-of-casting-spells">The Art of casting Spells</h2>
+<p>When learning a new concept I often try to come up with an imaginary example.  I feel that it helps me remember things, and generally makes learning more fun.
+Today, the concept is <code>TypeState</code> and I&rsquo;m imagining a wizard casting spells.</p>
+<p>In the classic Role-Playing Game, Dungeons &amp; Dragons (or D&amp;D RPG), magic is a powerful force.<br>
+In order to create a balanced game, there has to be limits to the use of magic.<br>
+The rules of D&amp;D states that:</p>
+<ul>
+<li>It takes Magical Energy to cast spells.</li>
+<li>A wizard has limited magical energy and needs to &ldquo;recharge&rdquo; once it has been spent</li>
+<li>The way a wizard can &ldquo;recharge&rdquo; magical energy is with a full nights sleep</li>
+</ul>
+<p>Also, there has to be a ranking system of spells, from lesser to more powerful,
+where there is a greater &ldquo;cost&rdquo; in magical energy to casting a 5th level spell
+compared to a 1st level (weaker) spell.</p>
+<h2 id="state-machine-magic-energy">State Machine: Magic Energy</h2>
+<p>We can take the the constraints placed by the D&amp;D rules on Wizards and their access to magic energy, and express it as a state machine:</p>
+<ol>
+<li><strong>Rested</strong><br>
+&ldquo;If magic energy is not exhausted&rdquo; -&gt; &ldquo;Can cast spells&rdquo;<br>
+&ldquo;Else if magic energy is exhausted&rdquo; =&gt; Tired</li>
+<li><strong>Tired</strong><br>
+&ldquo;If has no magic energy to cast spells with&rdquo; -&gt; &ldquo;Cannot cast spells&rdquo;<br>
+&ldquo;If go to sleep&rdquo; =&gt; Sleep</li>
+<li><strong>Sleep</strong><br>
+&ldquo;If hasn&rsquo;t slept a full nights sleep&rdquo; -&gt; &ldquo;Cannot cast spells&rdquo;<br>
+&ldquo;If has slept a full nights sleep&rdquo; =&gt; Rested</li>
+</ol>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid"><div class="mermaid">
+stateDiagram
+    direction LR
+    Rested --> Rested : "Magic Energy > 0"
+    Rested --> Tired : "Magic Energy == 0"
+    Tired --> Sleeping
+    Sleeping --> Rested
+</div>
+</code></pre><h2 id="the-typestate-pattern">The TypeState Pattern</h2>
+<p>I&rsquo;m not a D&amp;D player mayself but let&rsquo;s assume our state machine is correct.
+So, next, let&rsquo;s use Rust&rsquo;s mighty type system and the <code>TypeState</code> pattern to  express the constraints previously laid out.<br>
+Given a <code>struct Wizard</code>, our goal is:</p>
+<ol>
+<li>Depending on the state of the Wizard, some methods should be <strong>callable</strong>.</li>
+<li>Depending on the state of the Wizard, some methods should <strong>not be callable</strong>.</li>
+<li>We want to declare <strong>how</strong> a wizard can move from one state to another.</li>
+</ol>
+<p>Okay, neat - but <em>how</em> is the TypeState pattern actually implemented?<br>
+Good question. Let&rsquo;s look at some code and see how we can go about implementing this pattern.</p>
+<h2 id="-creating-a-wizard">🧙‍♂️ Creating a Wizard</h2>
+<figure><img src="../../../../../img/misc/wizard_meteorite_1280.jpg"/>
+</figure>
+
+<blockquote>
+<p><strong>Style:</strong> I&rsquo;m personally not a fan of examples where the code is taken out of context and interspaced with text - I prefer to have <em>one single blob of source code</em> with explanatory comments sprinkled throughout. Please note that these comments are a bit <em>chatty</em>, but only because this is a blog post and not source from an actual project.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#888;font-style:italic">// File: main.rs
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">use</span> <span style="color:#000">std</span>::<span style="color:#000">marker</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">////////////////////////////////////////////////////////////////////////////////
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// TypeStates
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">//
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// We express the different types of `State` that our Wizard can move between.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Each state is its own struct.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">struct</span> <span style="color:#000">Rested</span>;
+</span></span><span style="display:flex;"><span><span style="color:#00f">struct</span> <span style="color:#000">Tired</span>;
+</span></span><span style="display:flex;"><span><span style="color:#00f">struct</span> <span style="color:#000">Sleeping</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// An enum is used to enable us to return multiple state paths from one state.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">enum</span> <span style="color:#000">EnergyCheck</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#000">CanCastAgain</span>(<span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt;),
+</span></span><span style="display:flex;"><span>    <span style="color:#000">NeedsRest</span>(<span style="color:#000">Wizard</span>&lt;<span style="color:#000">Tired</span>&gt;),
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Our wizard is expressed here.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">struct</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">State</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// Every Wizard needs a name.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#000">name</span>: <span style="color:#000">String</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// As the wizard casts spells its energy will go down.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#000">energy</span>: <span style="color:#00f">u8</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// Once the wizard is rested its energy will be set to rested_energy.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#000">rested_energy</span>: <span style="color:#00f">u8</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// The _state field is of type std::marker::PhantomData&lt;State&gt;.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// This is a marker type provided by Rust, which enable us to associate
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// the TypeState without actually storing a value of type.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// 
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// Since we&#39;re not goint to use the field for anything other
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// than to carry state, by Rust convention, the field is prefixed 
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// with an underscore.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#000">_state</span>: <span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>&lt;<span style="color:#000">State</span>&gt;,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">impl</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// When we create a new wizard, that wizard starts off in a Rested state.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// Please note that this is the only constructor for the Wizard struct.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">fn</span> <span style="color:#000">new</span>(<span style="color:#000">name</span>: <span style="color:#000">String</span>, <span style="color:#000">energy</span>: <span style="color:#00f">u8</span>) -&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">println!</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#5a2">&#34;Creating a new Wizard, named: </span><span style="color:#5a2">{}</span><span style="color:#5a2">, with energy: </span><span style="color:#5a2">{}</span><span style="color:#5a2">.&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">name</span>, <span style="color:#000">energy</span>
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Wizard</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#000">name</span>: <span style="color:#000">name</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">energy</span>: <span style="color:#000">energy</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">rested_energy</span>: <span style="color:#000">energy</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">_state</span>: <span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">impl</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">cast_spell</span>(<span style="color:#00f">mut</span> <span style="color:#000">self</span>) -&gt; <span style="color:#000">EnergyCheck</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#888;font-style:italic">// Every time the wizard casts a spell we reduce its magic_energy.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>        <span style="color:#888;font-style:italic">// If the energy is reduced to zero, the wizard becomes tired and
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>        <span style="color:#888;font-style:italic">// cannot cast any spells until rested.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>        <span style="color:#00f">match</span> <span style="color:#000">self</span>.<span style="color:#000">energy</span> &gt; <span style="color:#3af">0</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#00f">true</span> =&gt; {
+</span></span><span style="display:flex;"><span>                <span style="color:#000">self</span>.<span style="color:#000">energy</span> = <span style="color:#000">self</span>.<span style="color:#000">energy</span> - <span style="color:#3af">1</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#000">println!</span>(
+</span></span><span style="display:flex;"><span>                    <span style="color:#5a2">&#34;The rested Wizard, </span><span style="color:#5a2">{}</span><span style="color:#5a2">, cast a spell and now
+</span></span></span><span style="display:flex;"><span><span style="color:#5a2">                    has </span><span style="color:#5a2">{}</span><span style="color:#5a2"> magic energy points left.&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#000">self</span>.<span style="color:#000">name</span>, <span style="color:#000">self</span>.<span style="color:#000">energy</span>
+</span></span><span style="display:flex;"><span>                );
+</span></span><span style="display:flex;"><span>                <span style="color:#00f">return</span> <span style="color:#000">EnergyCheck</span>::<span style="color:#000">CanCastAgain</span>(<span style="color:#000">self</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#00f">false</span> =&gt; {
+</span></span><span style="display:flex;"><span>                <span style="color:#000">println!</span>(
+</span></span><span style="display:flex;"><span>                    <span style="color:#5a2">&#34;The Wizard, </span><span style="color:#5a2">{}</span><span style="color:#5a2">, has exhausted its magic energy and
+</span></span></span><span style="display:flex;"><span><span style="color:#5a2">                    has to sleep to restore its magic energy.&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#000">self</span>.<span style="color:#000">name</span>
+</span></span><span style="display:flex;"><span>                );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000">EnergyCheck</span>::<span style="color:#000">NeedsRest</span>(<span style="color:#000">Wizard</span>::&lt;<span style="color:#000">Tired</span>&gt; {
+</span></span><span style="display:flex;"><span>                    <span style="color:#000">name</span>: <span style="color:#000">self</span>.<span style="color:#000">name</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#000">energy</span>: <span style="color:#000">self</span>.<span style="color:#000">energy</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#000">rested_energy</span>: <span style="color:#000">self</span>.<span style="color:#000">rested_energy</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#000">_state</span>: <span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>                })
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// The only available method for Tired Wizards is to go to sleep.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// There is no way for a Tired Wizard to cast a spell because there
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// is not such method to call.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">impl</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Tired</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">go_to_sleep</span>(<span style="color:#000">self</span>) -&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Sleeping</span>&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;The tired Wizard, </span><span style="color:#5a2">{}</span><span style="color:#5a2">, went to sleep.&#34;</span>, <span style="color:#000">self</span>.<span style="color:#000">name</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Wizard</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#000">name</span>: <span style="color:#000">self</span>.<span style="color:#000">name</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">energy</span>: <span style="color:#000">self</span>.<span style="color:#000">energy</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">rested_energy</span>: <span style="color:#000">self</span>.<span style="color:#000">rested_energy</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">_state</span>: <span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// The only available method for Tired Wizards is to wak up.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// There is no way for a Sleeping Wizard to cast a spell because there
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// is not such method to call.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">impl</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Sleeping</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">wakeup</span>(<span style="color:#000">self</span>) -&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;The Wizard, </span><span style="color:#5a2">{}</span><span style="color:#5a2">, is now fully rested.&#34;</span>, <span style="color:#000">self</span>.<span style="color:#000">name</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Wizard</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#000">name</span>: <span style="color:#000">self</span>.<span style="color:#000">name</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">energy</span>: <span style="color:#000">self</span>.<span style="color:#000">rested_energy</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">rested_energy</span>: <span style="color:#000">self</span>.<span style="color:#000">rested_energy</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">_state</span>: <span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">fn</span> <span style="color:#000">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">Wizard</span>::<span style="color:#000">new</span>(<span style="color:#000">String</span>::<span style="color:#000">from</span>(<span style="color:#5a2">&#34;Gandalf&#34;</span>), <span style="color:#3af">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">gandalf</span>.<span style="color:#000">cast_spell</span>(); <span style="color:#888;font-style:italic">// gandalf is now of type EnergyCheck.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// Fails because EnergyCheck does not have a method called .cast_spell()
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">gandalf</span>.<span style="color:#000">cast_spell</span>();
+</span></span><span style="display:flex;"><span>}  
+</span></span></code></pre></div><!-- Footer Starts Here ------------------------------------------------------->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<head>
+<style>
+<p>.formula-wrap {
+overflow-x: scroll;
+}</p>
+<p></style></p>
+</head>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>In computer science, compile-time checking for undefined behavior refers to the detection of potential issues and violations of the language rules during the compilation process. The compiler analyzes the code and performs static checks to identify situations that may lead to undefined behavior at runtime.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://cliffle.com/blog/rust-typestate">https://cliffle.com/blog/rust-typestate</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://yoric.github.io/post/rust-typestate">https://yoric.github.io/post/rust-typestate/</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://doc.rust-lang.org/std/marker/struct.PhantomData.html">https://doc.rust-lang.org/std/marker/struct.PhantomData.html</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+<script
+  type="application/javascript"
+  src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
+></script>
+<script>
+  var config = {
+    startOnLoad: true,
+    theme:'dark',
+    align:'center',
+  };
+  mermaid.initialize(config);
+</script>
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'cryptopatrick';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>
