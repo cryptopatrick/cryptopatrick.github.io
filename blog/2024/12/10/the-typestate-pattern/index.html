@@ -96,9 +96,8 @@ The rules of D&amp;D states that:</p>
 <li>A wizard has limited magical energy and needs to &ldquo;recharge&rdquo; once it has been spent</li>
 <li>The way a wizard can &ldquo;recharge&rdquo; magical energy is with a full nights sleep</li>
 </ul>
-<p>Also, there has to be a ranking system of spells, from lesser to more powerful,
-where there is a greater &ldquo;cost&rdquo; in magical energy to casting a 5th level spell
-compared to a 1st level (weaker) spell.</p>
+<p>Magic in Dungeons &amp; Dragons is sorted using a ranking system, with spells being categorized by how powerful they are. There is a greater &ldquo;cost&rdquo; in magical energy to cast a 5th level spell than a 1st level spell, and a wizard has to attain a certain level to be able to cast some powerful spells.</p>
+<p>Next, let&rsquo;s have a look at how we can model a wizards magic energy using types.</p>
 <h2 id="state-machine-magic-energy">State Machine: Magic Energy</h2>
 <p>We can take the the constraints placed by the D&amp;D rules on Wizards and their access to magic energy, and express it as a state machine:</p>
 <ol>
@@ -112,109 +111,57 @@ compared to a 1st level (weaker) spell.</p>
 &ldquo;If hasn&rsquo;t slept a full nights sleep&rdquo; -&gt; &ldquo;Cannot cast spells&rdquo;<br>
 &ldquo;If has slept a full nights sleep&rdquo; =&gt; Rested</li>
 </ol>
-<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid"><div class="mermaid">
-stateDiagram
-    direction LR
-    Rested --> Rested : "Magic Energy > 0"
-    Rested --> Tired : "Magic Energy == 0"
-    Tired --> Sleeping
-    Sleeping --> Rested
-</div>
-</code></pre><h2 id="the-typestate-pattern">The TypeState Pattern</h2>
+<figure><img src="../../../../../img/the-typestate-pattern/final.svg"/>
+</figure>
+
+<!--<figure><img src="../../../../../img/the-typestate-pattern/ttt.svg"/>
+</figure>
+-->
+<h2 id="the-typestate-pattern">The TypeState Pattern</h2>
 <p>I&rsquo;m not a D&amp;D player mayself but let&rsquo;s assume our state machine is correct.
-So, next, let&rsquo;s use Rust&rsquo;s mighty type system and the <code>TypeState</code> pattern to  express the constraints previously laid out.<br>
-Given a <code>struct Wizard</code>, our goal is:</p>
+So, next, let&rsquo;s use Rust&rsquo;s mighty type system and the TypeState pattern to  express the constraints previously laid out.<br>
+Given a struct Wizard, our goal is:</p>
 <ol>
 <li>Depending on the state of the Wizard, some methods should be <strong>callable</strong>.</li>
 <li>Depending on the state of the Wizard, some methods should <strong>not be callable</strong>.</li>
-<li>We want to declare <strong>how</strong> a wizard can move from one state to another.</li>
+<li>We want to declare how a wizard can move from one state to another.</li>
 </ol>
 <p>Okay, neat - but <em>how</em> is the TypeState pattern actually implemented?<br>
-Good question. Let&rsquo;s look at some code and see how we can go about implementing this pattern.</p>
-<h2 id="-creating-a-wizard">🧙‍♂️ Creating a Wizard</h2>
-<figure><img src="../../../../../img/misc/wizard_meteorite_1280.jpg"/>
-</figure>
-
-<blockquote>
-<p><strong>Style:</strong> I&rsquo;m personally not a fan of examples where the code is taken out of context and interspaced with text - I prefer to have <em>one single blob of source code</em> with explanatory comments sprinkled throughout. Please note that these comments are a bit <em>chatty</em>, but only because this is a blog post and not source from an actual project.</p>
-</blockquote>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#888;font-style:italic">// File: main.rs
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">use</span> <span style="color:#000">std</span>::<span style="color:#000">marker</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">////////////////////////////////////////////////////////////////////////////////
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// TypeStates
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">//
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// We express the different types of `State` that our Wizard can move between.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Each state is its own struct.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">struct</span> <span style="color:#000">Rested</span>;
-</span></span><span style="display:flex;"><span><span style="color:#00f">struct</span> <span style="color:#000">Tired</span>;
-</span></span><span style="display:flex;"><span><span style="color:#00f">struct</span> <span style="color:#000">Sleeping</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// An enum is used to enable us to return multiple state paths from one state.
+Before we look at the final code, let&rsquo;s look at a  problem I faced while coding this.</p>
+<h2 id="peano-arithmetic-to-the-rescue">Peano Arithmetic to the rescue</h2>
+<p>While working on this post I got stuck on a problem: how can the magic energy level of a wizard be persisted when transitioning between two typestates, <code>Wizard&lt;Rested&gt;</code> and <code>Wizard&lt;Tired&gt;</code>?</p>
+<p>If the wizard has magic energy left then it&rsquo;s able to continue casting spells
+and vice versa - no magic energy, no spell casting, bro.
+I explored having an enum being returned when wizard.cast_spell() is cast.
+Unfortunately, the Rust compiler wasn&rsquo;t having it.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#888;font-style:italic">// We want to check if the wizard has enough magic energy to cast spells.
 </span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">enum</span> <span style="color:#000">EnergyCheck</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#000">CanCastAgain</span>(<span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt;),
 </span></span><span style="display:flex;"><span>    <span style="color:#000">NeedsRest</span>(<span style="color:#000">Wizard</span>&lt;<span style="color:#000">Tired</span>&gt;),
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Our wizard is expressed here.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">struct</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">State</span>&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// Every Wizard needs a name.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#000">name</span>: <span style="color:#000">String</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// As the wizard casts spells its energy will go down.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#000">energy</span>: <span style="color:#00f">u8</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// Once the wizard is rested its energy will be set to rested_energy.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#000">rested_energy</span>: <span style="color:#00f">u8</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// The _state field is of type std::marker::PhantomData&lt;State&gt;.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// This is a marker type provided by Rust, which enable us to associate
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// the TypeState without actually storing a value of type.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// 
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// Since we&#39;re not goint to use the field for anything other
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// than to carry state, by Rust convention, the field is prefixed 
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// with an underscore.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#000">_state</span>: <span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>&lt;<span style="color:#000">State</span>&gt;,
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#00f">impl</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// When we create a new wizard, that wizard starts off in a Rested state.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// Please note that this is the only constructor for the Wizard struct.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">fn</span> <span style="color:#000">new</span>(<span style="color:#000">name</span>: <span style="color:#000">String</span>, <span style="color:#000">energy</span>: <span style="color:#00f">u8</span>) -&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt; {
-</span></span><span style="display:flex;"><span>        <span style="color:#000">println!</span>(
-</span></span><span style="display:flex;"><span>            <span style="color:#5a2">&#34;Creating a new Wizard, named: </span><span style="color:#5a2">{}</span><span style="color:#5a2">, with energy: </span><span style="color:#5a2">{}</span><span style="color:#5a2">.&#34;</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#000">name</span>, <span style="color:#000">energy</span>
-</span></span><span style="display:flex;"><span>        );
-</span></span><span style="display:flex;"><span>        <span style="color:#000">Wizard</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#000">name</span>: <span style="color:#000">name</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#000">energy</span>: <span style="color:#000">energy</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#000">rested_energy</span>: <span style="color:#000">energy</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#000">_state</span>: <span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>,
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#00f">impl</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt; {
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Every time the wizard casts a spell we reduce its magic_energy.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// If the energy is reduced to zero, the wizard becomes tired and
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// cannot cast any spells until rested.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">impl</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt; {
 </span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">cast_spell</span>(<span style="color:#00f">mut</span> <span style="color:#000">self</span>) -&gt; <span style="color:#000">EnergyCheck</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#888;font-style:italic">// Every time the wizard casts a spell we reduce its magic_energy.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>        <span style="color:#888;font-style:italic">// If the energy is reduced to zero, the wizard becomes tired and
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>        <span style="color:#888;font-style:italic">// cannot cast any spells until rested.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>        <span style="color:#00f">match</span> <span style="color:#000">self</span>.<span style="color:#000">energy</span> &gt; <span style="color:#3af">0</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">match</span> <span style="color:#000">self</span>.<span style="color:#000">energy</span> &gt; <span style="color:#3af">0</span> {
 </span></span><span style="display:flex;"><span>            <span style="color:#00f">true</span> =&gt; {
 </span></span><span style="display:flex;"><span>                <span style="color:#000">self</span>.<span style="color:#000">energy</span> = <span style="color:#000">self</span>.<span style="color:#000">energy</span> - <span style="color:#3af">1</span>;
 </span></span><span style="display:flex;"><span>                <span style="color:#000">println!</span>(
-</span></span><span style="display:flex;"><span>                    <span style="color:#5a2">&#34;The rested Wizard, </span><span style="color:#5a2">{}</span><span style="color:#5a2">, cast a spell and now
+</span></span><span style="display:flex;"><span>                    <span style="color:#5a2">&#34;The rested Wizard cast a spell and now
 </span></span></span><span style="display:flex;"><span><span style="color:#5a2">                    has </span><span style="color:#5a2">{}</span><span style="color:#5a2"> magic energy points left.&#34;</span>,
-</span></span><span style="display:flex;"><span>                    <span style="color:#000">self</span>.<span style="color:#000">name</span>, <span style="color:#000">self</span>.<span style="color:#000">energy</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#000">self</span>.<span style="color:#000">energy</span>
 </span></span><span style="display:flex;"><span>                );
 </span></span><span style="display:flex;"><span>                <span style="color:#00f">return</span> <span style="color:#000">EnergyCheck</span>::<span style="color:#000">CanCastAgain</span>(<span style="color:#000">self</span>);
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>            <span style="color:#00f">false</span> =&gt; {
 </span></span><span style="display:flex;"><span>                <span style="color:#000">println!</span>(
-</span></span><span style="display:flex;"><span>                    <span style="color:#5a2">&#34;The Wizard, </span><span style="color:#5a2">{}</span><span style="color:#5a2">, has exhausted its magic energy and
-</span></span></span><span style="display:flex;"><span><span style="color:#5a2">                    has to sleep to restore its magic energy.&#34;</span>,
-</span></span><span style="display:flex;"><span>                    <span style="color:#000">self</span>.<span style="color:#000">name</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#5a2">&#34;The Wizard is exhausted and 
+</span></span></span><span style="display:flex;"><span><span style="color:#5a2">                    has to sleep to restore its magic energy.&#34;</span>
 </span></span><span style="display:flex;"><span>                );
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>                <span style="color:#000">EnergyCheck</span>::<span style="color:#000">NeedsRest</span>(<span style="color:#000">Wizard</span>::&lt;<span style="color:#000">Tired</span>&gt; {
-</span></span><span style="display:flex;"><span>                    <span style="color:#000">name</span>: <span style="color:#000">self</span>.<span style="color:#000">name</span>,
 </span></span><span style="display:flex;"><span>                    <span style="color:#000">energy</span>: <span style="color:#000">self</span>.<span style="color:#000">energy</span>,
 </span></span><span style="display:flex;"><span>                    <span style="color:#000">rested_energy</span>: <span style="color:#000">self</span>.<span style="color:#000">rested_energy</span>,
 </span></span><span style="display:flex;"><span>                    <span style="color:#000">_state</span>: <span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>,
@@ -223,43 +170,203 @@ Good question. Let&rsquo;s look at some code and see how we can go about impleme
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>After tinkering with this for a while I decided to ask on the Rust Discord server. Thanks to Rust Discord members; Morgane for a <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=121e03f66fd23da5dff139e8cabe4346">solution</a>, and Kyuuhachi an improvement using <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=a534f9ebebc4b3537efa26386fad00f6">Peano Arithmetic</a>.</p>
+<p>This Rust code defines a type-level natural number system using traits and structs, commonly used in functional programming and type-level programming to represent and manipulate natural numbers at the type level. Here&rsquo;s a breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#888;font-style:italic">// We define the trait Nat to represent Natural numbers at the type level.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// VAL defines the numeric type of the number system.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">trait</span> <span style="color:#000">Nat</span> { <span style="color:#00f">const</span> <span style="color:#000">VAL</span>: <span style="color:#00f">u8</span>; }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// The only available method for Tired Wizards is to go to sleep.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// There is no way for a Tired Wizard to cast a spell because there
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// is not such method to call.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">impl</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Tired</span>&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">go_to_sleep</span>(<span style="color:#000">self</span>) -&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Sleeping</span>&gt; {
-</span></span><span style="display:flex;"><span>        <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;The tired Wizard, </span><span style="color:#5a2">{}</span><span style="color:#5a2">, went to sleep.&#34;</span>, <span style="color:#000">self</span>.<span style="color:#000">name</span>);
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// We represent the value zero.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">struct</span> <span style="color:#000">Z</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// S representes a _successor type_, the next natural number after N.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// If N == 1, then S&lt;N&gt; == 2.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">struct</span> <span style="color:#000">S</span>&lt;<span style="color:#000">N</span>: <span style="color:#000">Nat</span>&gt;(<span style="color:#000">PhantomData</span>&lt;<span style="color:#000">N</span>&gt;);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// We implement the trait of being a natural number for Z with the value 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// This makes Z the base case of this type-level number system.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">impl</span> <span style="color:#000">Nat</span> <span style="color:#00f">for</span> <span style="color:#000">Z</span> { <span style="color:#00f">const</span> <span style="color:#000">VAL</span>: <span style="color:#00f">u8</span> = <span style="color:#3af">0</span>; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// We implement the trait of being the next natural number for S&lt;T&gt;.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// S&lt;N&gt; gets its value from T::VAL + 1, where T::VAL is the value 
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// of the previous neighboring number.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Z::VAL = 0
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// S&lt;Z&gt; =&gt; 0 + 1 = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// S&lt;S&lt;Z&gt;&gt; =&gt; (0 + 1) + 1 = 2
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">impl</span>&lt;<span style="color:#000">N</span>: <span style="color:#000">Natu</span>&gt; <span style="color:#000">Nat</span> <span style="color:#00f">for</span> <span style="color:#000">S</span>&lt;<span style="color:#000">N</span>&gt; { <span style="color:#00f">const</span> <span style="color:#000">VAL</span>: <span style="color:#00f">u8</span> = <span style="color:#000">N</span>::<span style="color:#000">VAL</span> +<span style="color:#3af">1</span>; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Usage:
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// type Zero = Z; represents 0
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// type One = S&lt;Zero&gt;; represents 1
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// println!(&#34;Usage {}&#34;, Zero::VAL);
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// println!(&#34;Usage {}&#34;, One::VAL);
+</span></span></span></code></pre></div><p>Did this solve everything?<br>
+Well, almost. The current solution has no forks in
+the state-path. When I have more time I&rsquo;d like to rewrite the code and use an
+Enum to model a fork of the state path depending on how much magic energy the wizard has after casting a spell. If the wizard has more then 0 energy, return <code>Wizard&lt;Rested&gt;</code>, if the wizard has 0 energy left, return <code>Wizard&lt;Tired&gt;</code>.<br>
+But for now, this will have to do.</p>
+<h2 id="-creating-a-wizard">🧙‍♂️ Creating a Wizard</h2>
+<!--<figure><img src="../../../../../img/the-typestate-pattern/gg.svg"/>
+</figure>
+-->
+<!--<figure><img src="../../../../../img/the-typestate-pattern/diagram.png"/>
+</figure>
+-->
+<figure><img src="../../../../../img/the-typestate-pattern/wizard_meteorite_800.jpg"/>
+</figure>
+
+<blockquote>
+<p><strong>Style:</strong> I&rsquo;m personally not a fan of examples where the code is taken out of context and interspaced with text - I prefer to have <em>one single blob of source code</em> with explanatory comments sprinkled throughout. Please note that these comments are a bit <em>chatty</em>, but only because this is a blog post and not source from an actual project.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#888;font-style:italic">// File: main.rs
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">use</span> <span style="color:#000">std</span>::<span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">////////////////////////////////////////////////////////////////////////////////
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// TypeStates
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#888;font-style:italic">#[derive(Debug)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">struct</span> <span style="color:#000">Rested</span>&lt;<span style="color:#000">Energy</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#000">_energy</span>: <span style="color:#000">PhantomData</span>&lt;<span style="color:#000">Energy</span>&gt;,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">#[derive(Debug)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">struct</span> <span style="color:#000">Tired</span>&lt;<span style="color:#000">Energy</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#000">_energy</span>: <span style="color:#000">PhantomData</span>&lt;<span style="color:#000">Energy</span>&gt;,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">#[derive(Debug)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">struct</span> <span style="color:#000">Sleeping</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">////////////////////////////////////////////////////////////////////////////////
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Peano Arithmetic
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">trait</span> <span style="color:#000">Nat</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">const</span> <span style="color:#000">VAL</span>: <span style="color:#00f">u8</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#00f">struct</span> <span style="color:#000">Z</span>;
+</span></span><span style="display:flex;"><span><span style="color:#00f">impl</span> <span style="color:#000">Nat</span> <span style="color:#00f">for</span> <span style="color:#000">Z</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">const</span> <span style="color:#000">VAL</span>: <span style="color:#00f">u8</span> = <span style="color:#3af">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">struct</span> <span style="color:#000">S</span>&lt;<span style="color:#000">N</span>: <span style="color:#000">Nat</span>&gt;(<span style="color:#000">PhantomData</span>&lt;<span style="color:#000">N</span>&gt;);
+</span></span><span style="display:flex;"><span><span style="color:#00f">impl</span>&lt;<span style="color:#000">N</span>: <span style="color:#000">Nat</span>&gt; <span style="color:#000">Nat</span> <span style="color:#00f">for</span> <span style="color:#000">S</span>&lt;<span style="color:#000">N</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">const</span> <span style="color:#000">VAL</span>: <span style="color:#00f">u8</span> = <span style="color:#000">N</span>::<span style="color:#000">VAL</span> + <span style="color:#3af">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Quick macro to give Peano numbers less of a nested look.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Turns this:
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// let gandalf = new_wizard::&lt;S&lt;S&lt;S&lt;Z&gt;&gt;&gt;&gt;();
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">//
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// ...into this:
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// let gandalf = new_wizard::&lt;Three&gt;();
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#000">macro_rules</span>! <span style="color:#000">define_peano</span> {
+</span></span><span style="display:flex;"><span>    (<span style="color:#888;font-style:italic">$($name</span>:<span style="color:#000">ident</span> = <span style="color:#888;font-style:italic">$value</span>:<span style="color:#000">ty</span>),*) =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#888;font-style:italic">$(</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#00f">type</span> <span style="color:#888;font-style:italic">$name</span> = <span style="color:#888;font-style:italic">$value</span>;
+</span></span><span style="display:flex;"><span>        )*
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">define_peano!</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#000">Zero</span> = <span style="color:#000">Z</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#000">One</span> = <span style="color:#000">S</span>&lt;<span style="color:#000">Z</span>&gt;,
+</span></span><span style="display:flex;"><span>    <span style="color:#000">Two</span> = <span style="color:#000">S</span>&lt;<span style="color:#000">One</span>&gt;,
+</span></span><span style="display:flex;"><span>    <span style="color:#000">Three</span> = <span style="color:#000">S</span>&lt;<span style="color:#000">Two</span>&gt;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">////////////////////////////////////////////////////////////////////////////////
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Transition between states based on method calls and energy level.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#888;font-style:italic">#[derive(Debug)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">struct</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">State</span>, <span style="color:#000">Energy</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#000">_state</span>: <span style="color:#000">PhantomData</span>&lt;<span style="color:#000">State</span>&gt;,
+</span></span><span style="display:flex;"><span>    <span style="color:#000">_energy</span>: <span style="color:#000">PhantomData</span>&lt;<span style="color:#000">Energy</span>&gt;,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">////////////////////////////////////////////////////////////////////////////////
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Failed to get this impl design to work. Not sure how to solve this.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#888;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">impl&lt;T&gt; Wizard&lt;Rested&lt;T&gt;, T&gt; {
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">    fn new() -&gt; Self {
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">        Wizard {
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">            _state: PhantomData,
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">            _energy: PhantomData,
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">        }
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">}
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">*/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">////////////////////////////////////////////////////////////////////////////////
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Constuctor
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">fn</span> <span style="color:#000">new_wizard</span>&lt;<span style="color:#000">T</span>&gt;() -&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&lt;<span style="color:#000">T</span>&gt;, <span style="color:#000">T</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#000">Wizard</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">_state</span>: <span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#000">_energy</span>: <span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Return the magic energy level of the wizard.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">impl</span>&lt;<span style="color:#000">N</span>: <span style="color:#000">Nat</span>, <span style="color:#000">Energy</span>&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&lt;<span style="color:#000">N</span>&gt;, <span style="color:#000">Energy</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">const</span> <span style="color:#00f">fn</span> <span style="color:#000">energy</span>(&amp;<span style="color:#000">self</span>) -&gt; <span style="color:#00f">u8</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">N</span>::<span style="color:#000">VAL</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">impl</span>&lt;<span style="color:#000">N</span>: <span style="color:#000">Nat</span>, <span style="color:#000">Energy</span>&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&lt;<span style="color:#000">S</span>&lt;<span style="color:#000">N</span>&gt;&gt;, <span style="color:#000">Energy</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">cast_spell</span>(<span style="color:#000">self</span>) -&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&lt;<span style="color:#000">N</span>&gt;, <span style="color:#000">Energy</span>&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Spell was cast!&#34;</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#000">Wizard</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#000">name</span>: <span style="color:#000">self</span>.<span style="color:#000">name</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#000">energy</span>: <span style="color:#000">self</span>.<span style="color:#000">energy</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#000">rested_energy</span>: <span style="color:#000">self</span>.<span style="color:#000">rested_energy</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#000">_state</span>: <span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">_state</span>: <span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">_energy</span>: <span style="color:#000">PhantomData</span>,
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// The only available method for Tired Wizards is to wak up.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// There is no way for a Sleeping Wizard to cast a spell because there
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">// is not such method to call.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">impl</span> <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Sleeping</span>&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">wakeup</span>(<span style="color:#000">self</span>) -&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&gt; {
-</span></span><span style="display:flex;"><span>        <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;The Wizard, </span><span style="color:#5a2">{}</span><span style="color:#5a2">, is now fully rested.&#34;</span>, <span style="color:#000">self</span>.<span style="color:#000">name</span>);
+</span></span><span style="display:flex;"><span><span style="color:#00f">impl</span>&lt;<span style="color:#000">Energy</span>&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&lt;<span style="color:#000">Z</span>&gt;, <span style="color:#000">Energy</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">go_to_sleep</span>(<span style="color:#000">self</span>) -&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Sleeping</span>, <span style="color:#000">Energy</span>&gt; {
 </span></span><span style="display:flex;"><span>        <span style="color:#000">Wizard</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#000">name</span>: <span style="color:#000">self</span>.<span style="color:#000">name</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#000">energy</span>: <span style="color:#000">self</span>.<span style="color:#000">rested_energy</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#000">rested_energy</span>: <span style="color:#000">self</span>.<span style="color:#000">rested_energy</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#000">_state</span>: <span style="color:#000">marker</span>::<span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">_state</span>: <span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">_energy</span>: <span style="color:#000">PhantomData</span>,
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#00f">fn</span> <span style="color:#000">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">Wizard</span>::<span style="color:#000">new</span>(<span style="color:#000">String</span>::<span style="color:#000">from</span>(<span style="color:#5a2">&#34;Gandalf&#34;</span>), <span style="color:#3af">2</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">gandalf</span>.<span style="color:#000">cast_spell</span>(); <span style="color:#888;font-style:italic">// gandalf is now of type EnergyCheck.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// Fails because EnergyCheck does not have a method called .cast_spell()
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">gandalf</span>.<span style="color:#000">cast_spell</span>();
-</span></span><span style="display:flex;"><span>}  
+</span></span><span style="display:flex;"><span><span style="color:#00f">impl</span>&lt;<span style="color:#000">Energy</span>&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Sleeping</span>, <span style="color:#000">Energy</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">wakeup</span>(<span style="color:#000">self</span>) -&gt; <span style="color:#000">Wizard</span>&lt;<span style="color:#000">Rested</span>&lt;<span style="color:#000">Energy</span>&gt;, <span style="color:#000">Energy</span>&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Wizard</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#000">_state</span>: <span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">_energy</span>: <span style="color:#000">PhantomData</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">////////////////////////////////////////////////////////////////////////////////
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">fn</span> <span style="color:#000">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">new_wizard</span>::&lt;<span style="color:#000">Three</span>&gt;();
+</span></span><span style="display:flex;"><span>    <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Wizard created with energy: </span><span style="color:#5a2">{}</span><span style="color:#5a2">&#34;</span>, <span style="color:#000">gandalf</span>.<span style="color:#000">energy</span>(),);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">gandalf</span>.<span style="color:#000">cast_spell</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Gandal&#39;s energy is: </span><span style="color:#5a2">{}</span><span style="color:#5a2">&#34;</span>, <span style="color:#000">gandalf</span>.<span style="color:#000">energy</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">gandalf</span>.<span style="color:#000">cast_spell</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Wizard&#39;s energy is: </span><span style="color:#5a2">{}</span><span style="color:#5a2">&#34;</span>, <span style="color:#000">gandalf</span>.<span style="color:#000">energy</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Wizard trying to cast spell with zero energy.&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">gandalf</span>.<span style="color:#000">cast_spell</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">if</span> <span style="color:#000">gandalf</span>.<span style="color:#000">energy</span>() == <span style="color:#3af">0</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Wizard has 0 energy and is tired. Needs sleep.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">gandalf</span>.<span style="color:#000">go_to_sleep</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Wizard is sleeping.&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">gandalf</span>.<span style="color:#000">wakeup</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Wizard woke up from sleeping.&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Wizard slept and now has energy: </span><span style="color:#5a2">{}</span><span style="color:#5a2">&#34;</span>, <span style="color:#000">gandalf</span>.<span style="color:#000">energy</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">gandalf</span> = <span style="color:#000">gandalf</span>.<span style="color:#000">cast_spell</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Wizard cast a first spell.&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Wizard now has energy: </span><span style="color:#5a2">{}</span><span style="color:#5a2">&#34;</span>, <span style="color:#000">gandalf</span>.<span style="color:#000">energy</span>());
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><!-- Footer Starts Here ------------------------------------------------------->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
