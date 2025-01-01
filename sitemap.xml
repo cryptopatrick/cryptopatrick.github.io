@@ -2,28 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.cryptopatrick.com/tags/hardware/</loc>
-    <lastmod>2024-12-19T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://www.cryptopatrick.com/tags/mathematics/</loc>
-    <lastmod>2024-12-19T00:00:00+00:00</lastmod>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/post/</loc>
-    <lastmod>2024-12-19T00:00:00+00:00</lastmod>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/rust/</loc>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/</loc>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/</loc>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2024/12/23/timed-released-crypto/</loc>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/hardware/</loc>
     <lastmod>2024-12-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/blog/2024/12/19/squarings-modulo-n-per-second/</loc>
     <lastmod>2024-12-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://www.cryptopatrick.com/tags/</loc>
-    <lastmod>2024-12-19T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://www.cryptopatrick.com/tags/programming/</loc>
-    <lastmod>2024-12-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.cryptopatrick.com/tags/rust/</loc>
     <lastmod>2024-12-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/blog/2024/12/10/the-typestate-pattern/</loc>
