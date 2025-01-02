@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="Timed-Release-Crypto - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2024/12/23/timed-release-crypto/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="https://www.cryptopatrick.com/img/time-lock-message/timelockmessage.finger.png" />
+
+
+<title>Timed-Release-Crypto | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/">
+            
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/">
+            
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Timed-Release-Crypto</h1>
+    <h2 class="subtitle is-5">December 23, 2024 by CryptoPatrick</h2>
+    
+      <div class="tags">
+    
+        
+    
+        
+    
+</div>
+
+    
+    <div class="content">
+      <p><img src="https://img.shields.io/badge/Work_In_Progress-orange.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Text_Version-0.4.0-blue.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg" alt="Version:0.1.0"></p>
+<!--![Version:0.1.0](https://img.shields.io/badge/Version-0.5.0-white.svg)  -->
+<!--[![Version:0.1.0](https://img.shields.io/badge/File-issue-orange.svg)](https://github.com/cryptopatrick/learn_wgpu/issues)-->
+<br>
+<blockquote>
+<p><strong>Preface:</strong> I recently coded a tiny Rust library, implementing a cryptographic idea which had caught my interest. This post is my way of cementing my understanding of concepts which I found difficult. I&rsquo;m <em>not</em> a cryptographer and make zero guarantees regarding the correctness of the code or math in this post. One final note, no Ai was used in writing the story in this post, I wrote it myself, so you can expect it to suck lol.</p>
+</blockquote>
+<blockquote>
+<p><strong>Code:</strong> The complete source code is available on my <a href="https://github.com/cryptopatrick/timed_release_crypto">GitHub</a>.</p>
+</blockquote>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h2 id="to-send-a-message-into-the-future">To send a message into the future</h2>
+<p><figure><img src="../../../../../img/time-lock-message/rebellion.jpg"/>
+</figure>
+<br>
+<strong>▲<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></strong> A Rebel ship orbiting above the Federation&rsquo;s top secret military research lab, <em>The Periphery</em>.</p>
+<table></table>
+<p>⠀⠀⠀⠀⠀ Dr. Angela Rae is head of <em>Space Folding Research</em> at <em>The Periphery</em>, a Top
+Secret remote Federation research facility located on the surface of a small moon at the outer fringe of the Kalix system. She and her 20-something-sized team of researchers are working as fast as they possibly can. A single thought is racing through everyone&rsquo;s mind - &ldquo;How did they find us?&rdquo;.<br>
+⠀⠀⠀⠀⠀ Up there, orbiting at a chill 26,000 miles, is death. Having covertly decelerated in the radar shadow of a nearby moon, the Rebel ship suddenly emerged less than an hour ago, catching every living soul on this outer-rim secret research facility by surprise, spreading  fear among its few inhabitants. Wasting no time, the rebels just communicated their terms: astand down all defences, halt all interstellar communication, and prepare to be boarded.<br>
+⠀⠀⠀⠀⠀ With the hostile rebellion force in orbit, and a likely extermination of all Federation members of this facility, Dr. Rae and her team are frantically gathering
+all the key discoveries of advanced Space Folding technology that she and the team have made over the last decade. Realizing the danger of having ground-breaking space-faring technology end up in enemy hands, Angela Rae has decided to initiate <em>Facility End Of Life Protocol 2B: &ldquo;Time-Lock Puzzle&rdquo;</em>. The protocol instructs Angela to encrypt all research findings into a time capsule located in the underground vault below the facility.<br>
+⠀⠀⠀⠀⠀ <em>How did they find us?</em> The thought is stabbing at the back of Angela&rsquo;s mind, while she&rsquo;s frantically navigating authorization steps of top secret subprocesses. <em>This moon isn&rsquo;t even registered in the Federation Naval Charts - it doesn&rsquo;t exist. Do we have a spy on our team?</em><br>
+Allowing the terrifying thought to linger in her mind, Angela faces the group of researchers gathered around her.<br>
+⠀⠀⠀⠀⠀ &ldquo;Everyone, listen up! There is zero chance that Federation forces will reach us in time - we&rsquo;re on our own. None of us expected this, and I have as many questions as you.
+I have been instructed to create a Timed-Release Cryptographic Capsule. We need to hurry and prime its payload with all essential blueprints, the Ingegard algorithm, and confirming test data. If we don&rsquo;t get the capsule ready and locked within the next hour then everything we&rsquo;ve worked for will fall into the wrong hands. That could mean the end of the Federation as we know it.
+I understand this isn&rsquo;t the way any of us expected things to end. I want to extend
+my sincere gratitude to each and every one of you.&rdquo;<br>
+Angela hesitates for a moment, but then decides to follow dictum and with a straight
+face exclaims<br>
+⠀⠀⠀⠀⠀&quot;The Federation thanks you for your sacrifice.&quot;.<br>
+⠀⠀⠀⠀⠀ The research compute room falls silent, its heavenly-white focus-friendly interior
+decoration creating a mockery of the grim situation the team is facing.
+The faint sound of busy compute-hardware carelessly whirring in the background
+sends chills through Angela&rsquo;s spine. Her last statement clearly drove home the
+message, <em>no one in this room will be alive in a couple of hours</em>.
+⠀⠀⠀⠀⠀ The team&rsquo;s predicament, is the delicate challenge of
+keeping top secret research out of Rebel hands, until Federation forces return on their scheduled re-supply mission. On the flip side, locking the research away for an indefinite time would place it too far out of Federation scientist&rsquo;s reach, in a war that the Federation is currently losing.<br>
+⠀⠀⠀⠀⠀ What&rsquo;s needed, is to lock away the secrets for just enough time until Federation
+forces return and retake control of the facility.<br>
+What&rsquo;s needed, is to send a message into the future.</p>
+<table></table>
+<hr>
+<blockquote>
+<p><strong>Interlude</strong>: What follows are three short essays on <em>time</em>, <em>locks</em>, and <em>puzzles</em>. These essays are philosophical, rather than technical, in nature. Feel free to skip them, if the material is boring.</p>
+</blockquote>
+<blockquote>
+<p><strong>Work in Progress:</strong> Just a gentle reminder that the three essays below, are a work in progress. I&rsquo;m hoping to finalize them in the comming days. I appologize in advance if they are hard to read in their current state.</p>
+</blockquote>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="-pmbontime-version010httpsimgshieldsiobadgeversion20070-ffffffsvg">⏱️ $\pmb{On\;time}$ <img src="https://img.shields.io/badge/Version%200.7.0-FFFFFF.svg" alt="Version:0.1.0"></h3>
+<p>This post is about the complexity of sending information <em>into the future</em>.
+Let&rsquo;s put our <em>Pretentious Philosopher</em> hats on, and think about <em>time</em> for a moment.
+We&rsquo;re especially interested in what the word <em>future</em>, in the context
+of a modern day Turing Complete Computing Machines with a Central Processing Unit.</p>
+<p><strong>The Sun, The Moon, and The Stars</strong><br>
+Since the dawn of man, and for a very long time, the sun and the motion
+of celestial bodies, were <em>the</em> authoritative sources of time.
+The position of these have provided carbon based organisms on Earth with a
+shared authoritative source of <em>time</em>.<br>
+⠀⠀⠀⠀⠀For millions of years, this was the
+only way to  - but around 1500 years before Christ, <em>the sundial</em> was invented.
+Until then, estimating <em>the time of day</em> had been highly subjective. With
+this breakthrough technology, man took the first steps towards <em>a shared and
+objective estimate of time</em>.</p>
+<p><strong>Mechanical Clocks</strong><br>
+The 13th century saw the innovation of what would become an immensley important
+technology - mechanical clocks. These would come to replace the existing technology, the sundial,
+a widespread technology which enabled a <em>shared measure of time</em>. The Sun represented
+a reliable authoritative source of establishing morning, noon, and evening,
+but clouds could complicate the reading of a sundial for more precise time readings.</p>
+<p><strong>The Bell Tower</strong><br>
+As Europe dragged it&rsquo;s way out of the Dark Age, one institution successfuly established
+itself as <em>the</em> authority of time - Christianity, and its many bell tower churches.
+Bell towers were used to broadcast an &lsquo;authoritative read&rsquo; of time throughout
+the day. And so, by the end of the 14th century, a <em>shared standard version of time</em>,
+slowly started spreading through Europe.</p>
+<p><strong>Time and Work</strong><br>
+With the advent of supperior time tracking technology, europeans could measure
+and coordinate temoral events with high precision. The 13th century also introduced
+another time technoogy, the sandglass - a technology tracking <em>the passing of time</em>
+rather than <em>the time of day</em>.<br>
+⠀⠀⠀⠀⠀With these two technologies combined, it became
+possible to measure time with mucher higher integrity, <em>how long someone had worked</em>,and thereby
+<em>how much they should be paid</em>. The <em>time-rate contract</em> could now be subdivided
+further, from <em>a full day&rsquo;s of work</em>, and <em>a half a day&rsquo;s of work</em>
+into <em>an hour of work</em>.<br>
+⠀⠀⠀⠀⠀Time-based coordination also improved, making it easier
+to decide <em>when</em> a meeting should take place, and <em>how long</em> it should last
+(it obviously lasted far longer than appreciated by the attendees).</p>
+<p><strong>The Atomic Clock</strong><br>
+The modern day version of the 14th century Bell Tower, continuously broadcasting
+the standard version of time, as a authoritative time-sync service,
+are a few atomic clocks located deep down in cosmic ray protective underground caves.
+These clocks provide a hyperfine and ultra reliable tracking of the dilation of time.<br>
+⠀⠀⠀⠀⠀One such atomic clock is the one in Boulder, Colorado, United States.
+It measures the radation measurements of ceasium atoms. TODO: citation.
+The <em>time</em> of these atomic clocks are then broadcast globally, via the Internet.
+Computers and phones all over the planet, use Network Time Protocol (NTP) to
+periodically synchronize their clock with these atomic clocks. time.google.com
+is an example of an NTP online server which other computers can synch against.<br>
+⠀⠀⠀⠀⠀However, as with any broadcast, there are latency issues to consider when trying to
+synchronize or coordinate actions and events on a very precice level. At some
+level of time-granularity, network latency issues and physical distance from the
+NTP server should start causing considerable uncertainty challenges of tracking the
+standard version of time.</p>
+<p><strong>The Computer Clock</strong><br>
+The clock on a computer is a piece of software that, not supringsingly, keeps track of time.
+The Internet has made it so that computers increasingly get the <em>correct</em> time
+from the Internet. Admitably, most personal computers today are connected to the Internet, but
+let&rsquo;s ignore that for a while, and focus on time for the individual isolated computing machine.<br>
+⠀⠀⠀⠀⠀Anyone who has administrative rights to a computer can change its date and clock
+, both forward (from January 1st to January 2) and backwards (from January 1st,
+2000, to December 31, 1999). Making the same change to the international date
+and time that&rsquo;s used by 8_000_000_000 people, would require a superhuman effort
+since we&rsquo;d be trying to change the massively distributed consensus about the state
+of something.<br>
+⠀⠀⠀⠀⠀ The fact that an individual (non-distributed) computer has no way of <em>knowing</em>
+if the time and date is true, makes it <em>challenging</em> for software to target the <em>future</em>.</p>
+<p><strong>The Second</strong><br>
+The standards organisation, Système International d&rsquo;Unités (SI), defines <em>the second</em>
+as the standard measure of time. But what exactly <em>is</em> a second? According to SI,
+a <em>second</em> is defined (hold on to your philosopher hat)</p>
+<center>"...by taking the fixed 
+numerical value of the caesium frequency $\delta ν_{Cs}$, the unperturbed 
+ground-state hyperfine transition frequency of the caesium-133 atom, to be 9 192 631 770 
+when expressed in the unit Hz, which is equal to $s^{–1}$."
+</center>
+<p>Did you get that? I kinda didn&rsquo;t! 😂</p>
+<p>This is probably something that an Ai can ELI5 to us, but I didn&rsquo;t want to use
+any Ai in writing this post. Let&rsquo;s just leave it at &ldquo;A second has something to do with state changes in a heavy atom.&rdquo; 🤷‍♂️</p>
+<p><strong>The Future</strong></p>
+<p>If we&rsquo;re trying to send a message into the future, then we need to spend some
+time thinking about what <em>the future</em> means for our use case.<br>
+Some questions which need to be answered are:</p>
+<ol>
+<li>Precision - Is the future a fixed date and time, or an approximation?</li>
+<li>Oracle - Who or what shall be the arbitrer of <em>when</em> that future has arrived?</li>
+<li>Attacks - What are security issues related to 1. and 2. ?</li>
+</ol>
+<p>Before we delve into these three questions, let&rsquo;s first spend a moment thinking about <em>locks</em>.</p>
+<hr>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="-pmbonlocks-version010httpsimgshieldsiobadgeversion20020-ffffffsvg">🔒 $\pmb{On\;locks}$ <img src="https://img.shields.io/badge/Version%200.2.0-FFFFFF.svg" alt="Version:0.1.0"></h3>
+<p><strong>List of topics to cover (briefly):</strong> <br>
+[ ] Ancient locks and keys<br>
+[ ] Challenges with online locks<br>
+[ ] Diffie-Hellman core idea<br>
+[ ] Security through fact that factorising is harder than multiplication<br>
+[ ] RSA, AES, and why I chose to use the GCM mode of AES<br>
+[ ] Randomness<br>
+[ ] Bitlength<br>
+[ ] Carmicheal Numbers and the need for primality testing of huge numbers<br>
+[ ] Example of <em>fake primes</em> i.e. 561, that loook prime bu aren&rsquo;t<br>
+[x] Probabilitic Primality Testing with Rabin-Miller<br>
+[x] Deterministic Primality Testing with AKS, and why I implmented both<br>
+[ ] The security issues of throwing away, and <em>not</em> throwing away the (two) primary keys that were used during lock creation.<br>
+[ ] A very important quality of a lock - provide checks that the lock <em>can</em> in fact be opened (we could theoretically create a lock with no key) So, Proof of Existence of key.</p>
+<hr>
+<p><strong>Probabilistic Primality Testing</strong></p>
+<p>Suppose that we want to create a 100-digit prime number.<br>
+<em>The Prime Number Theorem</em> <enter link or footnote> states that the <em>density</em>
+of primes near a large number is <em>approximately</em> $1/\mathbb{ln}\,x$.
+In other words, the probability of a 100-digit number is prime is:
+$$\frac{1}{\mathbb{ln}(10^{100})} \approx \frac{1}{230}$$</p>
+<p>Knowing there are no even primes above 2, we can limit our search to only odd numbers. That improves $\approx \frac{1}{230}$ into $\approx \frac{1}{115}$, essentially doubling our chances of finding a prime number. <br>
+⠀⠀⠀⠀⠀ Expecting to find a lot more <em>composite numbers</em> (numbers that are <em>not</em> prime),
+it would be helpful if we could quickly determine if a number is composite or not.<br>
+The famous <em>Fermat&rsquo;s Theorem</em> comes to our rescue.<br>
+⠀⠀⠀⠀⠀ <em>Theorem:</em> (Fermat&rsquo;s Primality Test) Let $n&gt;1$ be an odd integer.  Choose an integer $b$
+with $1&lt;b&lt;n$, often we simply choose $b=2$. If $b^{n-1} \not\equiv 1 \, (\mathbb{mod} \; n)$ then $n$ is composite.</p>
+<blockquote>
+<p>The theorem can be stated the opposite way: if there exists solutions to $x^2 \equiv 1 (\mathbb{mod} \; n)$ other than $\pm 1$, then $n$ is not a prime number.</p>
+</blockquote>
+<p><strong>Deterministic Primality Testing</strong><br>
+In 2002, _Agrawal, Kayal, and Saxena, published a paper where they outlined the &ldquo;AKS primality test&rdquo; which is deterministic
+in the sense that we get a discreet (Yes/No), rather than probabilitic answer to the question &ldquo;Is this number prime?&rdquo;.
+However, AKS has a pretty high time-comlexity and runs in $O(log_2(n)^{12})$. If we want to find out if a 100-digit number is prime,
+well, that&rsquo;s a whopping . . . $$O(log_2(100)^{12})$$.</p>
+<hr>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="-pmbonpuzzles-version010httpsimgshieldsiobadgeversion20030-ffffffsvg">🧩 $\pmb{On\;puzzles}$ <img src="https://img.shields.io/badge/Version%200.3.0-FFFFFF.svg" alt="Version:0.1.0"></h3>
+<p><strong>List of topics to cover (briefly):</strong>   <br>
+[ ] Moore&rsquo;s Law<br>
+[ ] puzzle needs to be sequential to reduce hardware attack<br>
+[ ] how can we verify that our solution is parallelization-resistant?<br>
+[ ] squaring power varies because of how OS scheduler works<br>
+[ ] Montgomery Multiplication<br>
+[ ] GMP<br>
+[ ] How to guesstimate a solver&rsquo;s squaring power using Moore&rsquo;s Law<br>
+[ ] Mention Post-Quantumn Cryptography alternatives</p>
+<p><strong>The One-Way Trapdoor</strong>
+The security of most modern encryption scheme rely on the fact that it&rsquo;s much harder to factorize a number $n$, into number $p$ and $q$, than to produce $n$ by multiplying $p$ and $q$. For example, can we aggree that it&rsquo;s harder to factorize 143, than to calculate 13 * 11? So, there&rsquo;s an asymmetric relationship, in terms of work, between factorising and multiplying numbers.
+This insight by Witt Diffie, paved the way to what would eventually become, the RSA encryption/decryption protocol.
+The bedrock och modern day cryptography.<br>
+⠀⠀⠀⠀⠀In a paper published in 1996, cryptologists Rivest, Shamir, and Wagner suggested the following solution: encrypt a message to such degree that it is unlikely to be decrypted until a pre-determined amount of time has passed.<br>
+Decrypting the message boils down to solving a cryptographic <em>puzzle</em>: namely, the classic RSA (Rivest-Shamir-Adelmann); security by requiring factorization of a large prime.</p>
+<blockquote>
+<p><strong>Clarification:</strong> It&rsquo;s important to note that with <strong>future</strong> we really mean <strong>after a computer has continuously worked on the puzzle for an approximate amount of time</strong>. So &ldquo;two years in the future&rdquo; means &ldquo;a computer working on trying to decrypt the message for 24 hours each day, over a period of <strong>approximately</strong> two years.&rdquo;.</p>
+</blockquote>
+<!--
+__Moore's Law__
+-->
+<!-- <figure><img src="../../../../../img/time-lock-message/tyjWM.jpg"/>
+</figure>
+  -->
+<blockquote>
+<p><strong>Insight</strong>: A human pregnancy (normally) takes 9 months. The process cannot be parallelized by two women having a baby in 4.5 months.</p>
+</blockquote>
+<p><strong>Parallelization-Resistant Puzzles</strong></p>
+<p>We want to reduce the computational hardware advantage that an attacker might
+exploit by mounting a massively parallelized attack to break our encryption.<br>
+We do this by using a process that is hard to parallelize.<br>
+⠀⠀⠀⠀⠀ A <em>Time-Lock Puzzle</em> is a computational challenge which requires a precise amount of
+computational <em>work</em> in order to <em>solve</em> the puzzle. The <em>solution</em> to the puzzle
+is a number $b$ which was generated by the repeated squaring (mod n) of a seed number $a$.
+The output of each squaring operation becomes the input of the next squaring operation.<br>
+⠀⠀⠀⠀⠀ If we know the average number of squaring operations that a particular machine can
+perform per second, then we can calculate how much time it would take that machine
+to square $a$ all the way up to $b$.</p>
+<hr>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h2 id="the-time-lock-puzzle-algorithm">The Time-Lock Puzzle Algorithm</h2>
+<p>We are now throughly prepared to delve into the prorocess of creating a Time-Lock Puzzle.<br>
+Let&rsquo;s have look at the seven steps that need to be performed.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Step</th>
+<th style="text-align:left">Process</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="#step-0-preparing-the-payload">0.</a></td>
+<td style="text-align:left">Gather message data, calculate time-lock duration, estimate attacker&rsquo;s squaring power</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#step-1-compute-the-composite-modulus">1.</a></td>
+<td style="text-align:left">Choose two secret primes, $p$ and $q$, and compute the composite modulus: $n=p \cdot q$</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#step-2-the-euler-phi-function">2.</a></td>
+<td style="text-align:left">Compute the Euler Phi function: $\phi(n)$</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#step-3-compute-the-puzzle-strength">3.</a></td>
+<td style="text-align:left">Compute the difficulty of the time-lock puzzle: $t=T \cdot S$</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#step-4-generating-the-key-to-the-kingdom">4.</a></td>
+<td style="text-align:left">Generate the private key for an AES-GCM cryptosystem: $C_K$</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#step-5-encrypting-a-lives-work">5.</a></td>
+<td style="text-align:left">Pick random $a$ modulo $n$ and encrypt $K$</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#step-6-constructing-the-cipher-key">6.</a></td>
+<td style="text-align:left">Encrypt the message $M$ using AES-GCM and the private key  $K$:  $C_M = ENC(M,K)$</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#step-7-endgame">7.</a></td>
+<td style="text-align:left">Output the Time-Lock Puzzle, and delete $p$ and $q$</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#appendix-how-to-solve-the-time-lock-puzzle">A.</a></td>
+<td style="text-align:left">Optional: Provide instructions to Solver on how to solve the Puzzle</td>
+</tr>
+</tbody>
+</table>
+<p><strong>▲</strong> The seven steps of creating a Time-Lock Puzzle.</p>
+<p>We are now ready to implement these steps.</p>
+<hr>
+<h1 id="-implementation">🦀 Implementation</h1>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h4 id="step-0-preparing-the-payload">Step 0: Preparing the Payload</h4>
+<p>$M$: <strong>Message to Protect</strong><br>
+Dr. Angela Rae, and her team of fellow researchers, have quickly collected all
+essential research data related to their groundbreaking <em>Space Folding</em> innovation.
+Blueprints of machines, the Ingegard algorithm, and confirming test data.
+An assistant checks the total bitsize of the data;<br>
+⠀⠀⠀⠀⠀ &ldquo;We&rsquo;ve wiped all non-essential data from the mainframe, we&rsquo;re down to just three data files containing project essential information, for a total of <code>886 kb of message data</code>.&rdquo;<br>
+⠀⠀⠀⠀⠀Angela raises an eyebrow.<br>
+⠀⠀⠀⠀⠀&quot;That&rsquo;s all? A decade&rsquo;s worth of research in less than a megabyte?&quot;.<br>
+⠀⠀⠀⠀⠀The assistant looks around nervously, then returns to face the
+penetrating gaze of a woman who&rsquo;s infamous for ferreting out mistakes.
+He shrugs, then starts with a panicky voice. . .<br>
+⠀⠀⠀⠀⠀&quot;I mean, it&rsquo;s all the data that Federation scientists will need
+to recreate the space folding machine without our help, considering we&rsquo;ll all be —&quot;<br>
+⠀⠀⠀⠀⠀&quot;FINE!&quot;, Angela cuts him off.<br>
+⠀⠀⠀⠀⠀&quot;Excellent. Let&rsquo;s move on. We need to calculate the
+duration of the Time-Lock. Remember, we want to aim for a date that is close to
+the expected return and facility-take-over by Federation forces. Go!&quot;</p>
+<p>$T$: <strong>Duration of Protection</strong><br>
+One of Dr. Rae&rsquo;s assistants, Embla Garpe - an introvert dark-haired mathematician,
+has attracted the attention of everyone in the facility command room.<br>
+⠀⠀⠀⠀⠀To Angela and her crew&rsquo;s utter amazement, and against every facility protocol in
+the entire Federation, Embla . . . is smoking . . . a nicotine cigarette.
+For a brief moment, everyone just stares at the young woman - white smoke slowly
+shrouding her in ethereal mysticism. Equally amazing is the fact that Embla
+doesn&rsquo;t seem to be aware of it. The slender woman is focused on the delicate
+task of calculating time-lock duration estimations, browsing through
+Federation re-supply frequency logs, and looking up solar system outlier event probabilities.<br>
+⠀⠀⠀⠀⠀If it wasn&rsquo;t for the fact, that death is pretty much knocking on the facility bulk door, Angela would curse out the young assistant, instruct security to throw her in the
+brig, and have her shipped out on the next rotation. Instead, she smiles, and calmly asks Embla . . .<br>
+⠀⠀⠀⠀⠀&quot;Do you have an ETA of the next Federation ship?&quot;.<br>
+⠀⠀⠀⠀⠀Without turning in her chair, Embla takes a deep drag on the cigarette, which is quickly reaching its <em>own</em> end of life. The moment seems frozen in time, a slow irreversible stream of entropy particles drifting through the room.<br>
+⠀⠀⠀⠀⠀&quot;I do.&quot;.<br>
+⠀⠀⠀⠀⠀By now, the team&rsquo;s focus has completely switched from Embla to the cigarette in her hand, which is close to burning her fingers. As if on queue, she puts out the cigarette (to Angela&rsquo;s horror <em>On the fucking terminal desk!</em>), and with complete disregard for Facility Code of Conduct, flicks away the bud into the far corner.
+Embla leans back in her chair, starring into a distant future she&rsquo;ll never get to experience, and then says. . .<br>
+⠀⠀⠀⠀⠀ &ldquo;Based on the Poisson distribution and Principal Component Analysis of all available time-frequency logs, the limit of the log-linear converges with a high confidence and acceptable error margin on the value, 8.02999&rdquo;. She finally turns to face Angela and the rest of the team . . .<br>
+&ldquo;In other words, a Federation ship will arrive . . . in <code>8 days</code>.&rdquo;</p>
+<p>$S$ : <strong>Squaring Power of the Attacker</strong>   <img src="https://img.shields.io/badge/Version%200.8.0-FFFFFF.svg" alt="Version:0.1.0"><br>
+An entity that tries to <em>solve the puzzle</em> contained inside the Capsule, is
+denoted <em>an attacker</em>. Solving the puzzle requires the solver to perform a specific number of <em>squarings modulo n</em>, until the cipherkey $C_K$ is found. The attacker in this case is the <em>compute hardware of the Rebellion ship</em>, currently in orbit above Angela Rae&rsquo;s research facility.<br>
+⠀⠀⠀⠀⠀ &ldquo;Long-range optics confirm it. That&rsquo;s a Class IV Blüm Blüm Shub - an old rebel scout ship.&rdquo; someone shouts from behind a computer screen. &ldquo;We&rsquo;ll simply have to pray that it hasn&rsquo;t been refitted with a Quantumn Shor Solver&rdquo;. Test engineer Tania Teigen pops up, she looks at them with a cynical smile. &ldquo;Because if they have one onboard, then our cute little puzzle won&rsquo;t last 1 quecto second.&rdquo;.<br>
+⠀⠀⠀⠀⠀ Having identified the ship&rsquo;s type, the team quickly cross-reference the research facility&rsquo;s military Knowledge Base, &ldquo;. . . the Rebel ship-computer should have <em>a computing power of around</em><br>
+<code>3 million squarings per second</code>. . . and that&rsquo;s assuming the rebels manage to allocate 90% of the ship&rsquo;s compute power to the decryption of the Time-Lock Puzzle. It&rsquo;s going to get cold as hell in that ugly ass ship!&rdquo;, jokes Yuyeh - Angela&rsquo;s longtime research assistant.<br>
+⠀⠀⠀⠀⠀ &ldquo;I know I&rsquo;m not the genius around here, but—&rdquo;.<br>
+⠀⠀⠀⠀⠀ It&rsquo;s Jenz, a member of the Periphery&rsquo;s Residential Support Team.<br>
+⠀⠀⠀⠀⠀ &ldquo;How do we know the Rebels won&rsquo;t simply steal the
+capsule, load it onboard their ship, and make a run for it? What am I missing here?&rdquo;<br>
+⠀⠀⠀⠀⠀ Angela Rae looks up from the delicate calculations in front of her. She smiles.
+In a few hours she, and everyone else on this remote research facility, will likely
+be dead or captives on a Rebel ship. The chances of anyone ever seeing their family
+or loved ones are basically zero. And despite this grim state of affairs, her team
+is actively trying to solve the problem.<br>
+⠀⠀⠀⠀⠀ &ldquo;No, it&rsquo;s a fair question, Jenz.&rdquo; Angela starts with a weary, but forgiving tone.<br>
+⠀⠀⠀⠀⠀ &ldquo;As most of you know, the research we&rsquo;ve done here is considered by the Federation to be
+a top priority. In the creation of this site, no cost was considered too high, no resources were spared. The Capsule, located 3 kilometers below this room, is protected by a state of the art military force field. There&rsquo;s no technology, that we know of, capable of displacing the Capsule even one milimeter from its locus. Not even a nuclear strike. The Rebels can interact with it, but it can&rsquo;t be physically moved. You can think of it, as a pretty good safe.&rdquo;.<br>
+⠀⠀⠀⠀⠀ Angela returns to the work at hand, fighting back tears.<br>
+⠀⠀⠀⠀⠀ &ldquo;Listen up, everyone. . . .please! These estimates will have to do - we&rsquo;re simply out of time. Rebel fighters will land on this site in less than an hour. We must proceed to the next phase, and start priming the Capsule payload.&rdquo;</p>
+<blockquote>
+<p><strong>Read More:</strong> I wrote about <em>squaring mod p</em> in this <a href="https://cryptopatrick.com/blog/2024/12/19/squarings-modulo-n-per-second/">post</a>.</p>
+</blockquote>
+<table></table>
+<p><strong>The Capsule Payload</strong><br>
+Dr. Angela Rae and her team have gathered all the information necessary to
+initiate the creation of a Time-Lock Puzzle. The puzzle will be stored inside
+the Capsule, which is located in the underground vault. Angela takes one last look at the details:</p>
+<ul>
+<li>$M$ (Message in the form of blueprints and test data): <code>886 kb of message data</code></li>
+<li>$T$ (Time-Lock duration): 8 days = 60 seconds * 60 minutes * 24 hours = <code>691_200 seconds</code></li>
+<li>$S$ (Squaring power of the Rebel Attackers): <code>3_000_000 squarings per second</code></li>
+</ul>
+<p>A loud &ldquo;PING!&rdquo; startles Angela, and everyone else in the command center.
+A proximity warning informs them that Kalman-tracking-procedures have detected
+an inbound non-Federation-registered vessel - a highly unlawful and equally unusual occurrence.<br>
+⠀⠀⠀⠀⠀ &ldquo;Oh, God! The Rebels are almost here. Quick, someone fetch me a Vanguard
+suit and help me put it on. I have to get down to the Capsule in the vault, and start the Time-Lock procedure.&rdquo;.<br>
+⠀⠀⠀⠀⠀ Angela looks at her team, wondering if they still respect her authority.<br>
+⠀⠀⠀⠀⠀ &ldquo;On my way.&rdquo;, Yuyeh shouts as he scrambles through the room
+to go and get a Vanguard hazardous environment suit, capable of withstanding
+the -90°C temperature inside the vault.</p>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="step-1-compute-the-composite-modulus">Step 1: Compute the Composite Modulus</h3>
+<p><figure><img src="../../../../../img/time-lock-message/ilmari-kumpunen-cursedchest-rebound.jpg"/>
+</figure>
+<br>
+<strong>▲<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></strong> With Rebels having breached the Federation Command Room, Dr. Angela Rae
+makes her way down to the underground vault and the mysterious Capsule.</p>
+<p>⠀⠀⠀⠀⠀ <strong>It&rsquo;s been six minutes</strong>, Dr. Angela Rae is riding the elevator down
+to the vault, which houses the Capsule. Breathing in the Vanguard suite bothers
+her, but given the circumstances she doesn&rsquo;t care.<br>
+Communication with the topside command center was suddenly cut off when she passed 2.7 km below
+ground level. She doesn&rsquo;t know if it was due to Rebels finally cutting through blast doors
+and killing everyone, or if the Kalix moon&rsquo;s radiation levels modulate the
+communication frequencies into static noise. Regardless, no one topside has responded to her last
+couple of half-hearted &ldquo;Hello? Do you hear up there? YuYeh, come in! SitRep, please!&rdquo;.<br>
+No answer.<br>
+⠀⠀⠀⠀⠀ The elevator decelarates to a complete standstill.
+A voice-assisted control panel on Angela&rsquo;s right demands that she accepts a full biometric authorization scan. She complies. &ldquo;Scanning. . . . Welcome Dr. Rae.&rdquo;
+The female voice is provokingly calm, and as the elevator door opens, Angela can&rsquo;t
+help but curse the syntetic voice from the inside her suit.<br>
+&ldquo;Bitch, I&rsquo;m about to die, okay? Nevermind, don&rsquo;t answer that.&rdquo;  She reminds herself that she&rsquo;s there to do a job. At this very moment, members of her team
+might be tortured by Rebels, hoping to gain access to the capsule. She needs to hurry.<br>
+⠀⠀⠀⠀⠀ The Vault is actually much smaller than she imagined. She&rsquo;s been
+briefed about it, but that was over ten years ago. But there is one thing that
+align well with the fragments of memories that she has&hellip;some fifty meters straight
+ahead of her is a massive construct and in the middle of it floats a dark orb-like
+construct - The Capsule.<br>
+⠀⠀⠀⠀⠀ As she approaches the Capsule it seems to react to her
+presence. There&rsquo;s a humming sound, some kind of vibration in the air - <em>The force field?</em>.
+The Capsule is beautiful, and ugly, at the same time. A mix of organic and synthetic technology.<br>
+⠀⠀⠀⠀⠀ Suddenly a request for a direct neural link is made . . . from the Capsule
+it seems.<br>
+She recognizes the procedure from the training she received
+as a young cadet at the Federation Military Research Academy.<br>
+⠀⠀⠀⠀⠀She authorizes herself. A tremendous feeling of power flows through
+Angela, as she gains direct control of the Capsule.</p>
+<p><strong>Generating Large Prime Numbers:</strong><br>
+Following protocol, Angela instructs the Capsule to generate two large random prime numbers
+$p$, and $q$. She then accepts the Capsule&rsquo;s suggestion to produce their composite modulus $n$.</p>
+<p>$$n=p \cdot q$$</p>
+<p>The implementation of this step is pretty straightforward,</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#00f">pub</span> <span style="color:#00f">struct</span> <span style="color:#000">Capsule</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#000">p</span>: <span style="color:#000">BigUint</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#000">q</span>: <span style="color:#000">BigUint</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#000">a</span>: <span style="color:#000">BigUint</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#000">tlp</span>: <span style="color:#000">Option</span>&lt;<span style="color:#000">TimeLockPuzzle</span>&gt;,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">impl</span> <span style="color:#000">Capsule</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">pub</span> <span style="color:#00f">fn</span> <span style="color:#000">new</span>(&amp;<span style="color:#000">self</span>, <span style="color:#000">bits</span>: <span style="color:#00f">u64</span>) -&gt; <span style="color:#000">Self</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Capsule</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#000">p</span>: <span style="color:#000">Capsule</span>::<span style="color:#000">generate_large_random_prime</span>(<span style="color:#000">bits</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#000">q</span>: <span style="color:#000">Capsule</span>::<span style="color:#000">generate_large_random_prime</span>(<span style="color:#000">bits</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#000">a</span>: <span style="color:#000">BigUint</span>::<span style="color:#000">from</span>(<span style="color:#3af">2</span><span style="color:#00f">u32</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#000">tlp</span>: <span style="color:#000">None</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">compute_composite</span>(&amp;<span style="color:#000">self</span>, <span style="color:#000">p</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>, <span style="color:#000">q</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>) -&gt; <span style="color:#000">BigUint</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">p</span> * <span style="color:#000">q</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="step-2-the-euler-phi-function">Step 2: The Euler Phi Function</h3>
+<p>To understand the next step, let&rsquo;s first look at a concept from Number Theory, that of a <em>divisor</em>.<br>
+The negative and positive whole numbers are collectively denoted as:
+$$\mathbb{Z} = \{ &hellip;, -3, -2, -1, 0, 1, 2, 3, &hellip; \}$$</p>
+<p>In elementary school we learned that $4$ <em>divides</em> $12$, because $4 \cdot 3=12$ (if we
+have $3$ multiples of $4$ the sum is $12$). The same goes for $-4$ dividing $12$,
+because $-4 \cdot -3=12$.
+So, $4$ is a <em>divisor</em> of $12$.</p>
+<p><strong>Definition: Divisor</strong><br>
+Let $p,q\in \mathbb{Z}$. If there exist an $m \in \mathbb{Z}$, such that
+$p \cdot m = q$, then we say that $p$ is a divisor of $q$, or that $q$ is a multiple
+of $p$.</p>
+<p>The <em>positive</em> divisors of 8 are 1,2, and 4. The <em>positive</em> divisors of 15 are 1,3, and 5.
+Neither 8, nor 15 is a prime number (remember that a prime number is only divisible by itself and 1).<br>
+Further, they only share one single divisor which is 1. Let&rsquo;s define that relation:</p>
+<p><strong>Definition: Relative Prime</strong><br>
+Two numbers $p,q\in Z$ are <em>relatively prime</em> if their greates common divisor is 1.</p>
+<blockquote>
+<p>We can shorten <em>greatest common divisor</em> into $gcd$, for example, $gcd(8,15)=1$.</p>
+</blockquote>
+<p>If $gcd(p,q)=1$ then there is <em>exactly</em> one solution, $e$. We can find that value
+$e$ by computing $a \cdot c \; (mod\, \mathbf{N})$ and then compute $b \cdot c \; (mod\, \mathbf{N})$ .
+Euler&rsquo;s Phi function $phi(n)$ will inform us about <em>the number of positive whole numbers &lt; n</em>, that are relative primes with n.</p>
+<p>Next, the Capsule computes:</p>
+<p>$$\phi(n) = (p-1)(q-1)$$</p>
+<p>Which in code is implemented this way:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#00f">fn</span> <span style="color:#000">phi</span>(&amp;<span style="color:#000">self</span>, <span style="color:#000">p</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>, <span style="color:#000">q</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>) -&gt; <span style="color:#000">BigUint</span> {
+</span></span><span style="display:flex;"><span>    (<span style="color:#000">p</span> - &amp;<span style="color:#000">BigUint</span>::<span style="color:#000">from</span>(<span style="color:#3af">1</span><span style="color:#00f">u32</span>)) * (<span style="color:#000">q</span> - &amp;<span style="color:#000">BigUint</span>::<span style="color:#000">from</span>(<span style="color:#3af">1</span><span style="color:#00f">u32</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">#[cfg(test)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">mod</span> <span style="color:#000">test</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">use</span> <span style="color:#00f">super</span>::*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">test_phi</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">let</span> <span style="color:#000">p</span> = <span style="color:#000">BigUint</span>::<span style="color:#000">from</span>(<span style="color:#3af">631</span><span style="color:#00f">u32</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">let</span> <span style="color:#000">q</span> = <span style="color:#000">BigUint</span>::<span style="color:#000">from</span>(<span style="color:#3af">2153</span><span style="color:#00f">u32</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">let</span> <span style="color:#000">c</span> = <span style="color:#000">Capsule</span>::<span style="color:#000">default</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#000">assert_eq!</span>(<span style="color:#000">c</span>.<span style="color:#000">phi</span>(&amp;<span style="color:#000">p</span>, &amp;<span style="color:#000">q</span>), <span style="color:#000">BigUint</span>::<span style="color:#000">from</span>(<span style="color:#3af">1355760</span><span style="color:#00f">u32</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="step-3-compute-the-puzzle-strength">Step 3: Compute the Puzzle Strength</h3>
+<p>Angela is exhausted. She has lost count of the number of physical concern warnings
+that the Vanguard suite is flashing.  Right now, she needs to focus on the next
+phase of the Time-Lock Puzzle activation procedure. In this cold and fateful place,
+the Capsule in front of her is waiting for Angela to provide two
+pieces of information, $T$ and $S$:
+$$T \cdot S = t$$
+⠀⠀⠀⠀⠀She takes a moment to remind herself that $T$ is the approximate
+number of seconds that they want the Time-Lock Puzzle to withstand an attacker&rsquo;s
+decryption efforts. Further, $S$ is the number of squarings modulo $n$ per second that the
+attacker&rsquo;s compute hardware can perform. The resulting $t$, is the Time-Lock&rsquo;s Puzzle Strength - the
+total number of squarings that the attacker will have to perform to <em>solve</em>
+Time-Lock Puzzle.<br>
+⠀⠀⠀⠀⠀ Angela enters Ebmla Garpe&rsquo;s estimates of time left until the
+next Federation ship will arrive: 691,200 seconds (8 days). Next, Angela enters
+Tania Teigen&rsquo;s guestimated squaring power of the Rebel ship: 3,000,000.
+The Capsule instantly displays the total number of squarings needed to unlock
+it, once its Time-Lock Puzzle is activated:<br>
+$$691,200 \cdot 3,000,000 = 2,073,600,000,000$$</p>
+<p>&ldquo;Two trillion squarings to solve the Time-Lock Puzzle. Is that really strong enough?&rdquo;<br>
+Feelings of anxiety wash over Angela, &ldquo;. . .what if that pretentious cigarette-smoking
+bitch made an arithmetic mistake and we die for nothing?&rdquo;.<br>
+⠀⠀⠀⠀⠀ Realising that she&rsquo;s talking to herself, and feeling ashamed
+of the way she&rsquo;s expressing her doubts over colleagues who are probably dead or
+dying - Angela squashes the urge to 10x the Puzzle Strength. She decides to trust
+her team, and proceeds by carefully entering the values for $T$ and $S$ via the
+Capsule&rsquo;s neural arming interface.</p>
+<p>The implementation is pretty straightforward,</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#00f">fn</span> <span style="color:#000">compute_composite</span>(&amp;<span style="color:#000">self</span>, <span style="color:#000">p</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>, <span style="color:#000">q</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>) -&gt; <span style="color:#000">BigUint</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#000">p</span> * <span style="color:#000">q</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">fn</span> <span style="color:#000">compute_puzzle_strength</span>(&amp;<span style="color:#000">self</span>, <span style="color:#000">s</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>, <span style="color:#000">t</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>) -&gt; <span style="color:#000">BigUint</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">_t</span> = <span style="color:#000">t</span> * <span style="color:#000">s</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#000">_t</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">#[cfg(test)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">mod</span> <span style="color:#000">test</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">use</span> <span style="color:#00f">super</span>::*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">fn</span> <span style="color:#000">angela_rae_test_run__step_03</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#888;font-style:italic">#[allow(non_snake_case)]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">let</span> <span style="color:#000">T</span> = <span style="color:#000">BigUint</span>::<span style="color:#000">from</span>(<span style="color:#3af">691_200</span><span style="color:#00f">u32</span>); <span style="color:#888;font-style:italic">// time-lock duration in seconds.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#888;font-style:italic">#[allow(non_snake_case)]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">let</span> <span style="color:#000">S</span> = <span style="color:#000">BigUint</span>::<span style="color:#000">from</span>(<span style="color:#3af">3_000_000</span><span style="color:#00f">u32</span>); <span style="color:#888;font-style:italic">// number of squarings per second.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00f">let</span> <span style="color:#000">c</span> = <span style="color:#000">Capsule</span>::<span style="color:#000">default</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#000">assert_eq!</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#000">c</span>.<span style="color:#000">compute_puzzle_strength</span>(&amp;<span style="color:#000">S</span>,&amp;<span style="color:#000">T</span>), 
+</span></span><span style="display:flex;"><span>            <span style="color:#000">BigUint</span>::<span style="color:#000">from</span>(<span style="color:#3af">2_073_600_000_000</span><span style="color:#00f">u64</span>)
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="step-4-generating-the-key-to-the-kingdom">Step 4: Generating the Key to the Kingdom</h3>
+<p><figure><img src="../../../../../img/time-lock-message/orb3.jpg"/>
+</figure>
+<br>
+<strong>▲<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></strong> The Capsule containing an encrypted message, which can only be accessed
+by solving a Time-Lock Puzzle protecting it.</p>
+<p>⠀⠀⠀⠀⠀ <strong>Having assumed that</strong> she&rsquo;s the only living organism in the vault,
+Dr. Angela Rae can barely believe her senses when she hears a sound behind her.
+She slowly turns around, just in time to see the elevator doors closing. . .
+and in horror witness the elevator accelerate up, towards the topside facility Command Center.<br>
+⠀⠀⠀⠀⠀&quot;I&rsquo;m the only Federation member with a security clearance to
+access that elevator. The Rebels must have breached our computer systems and
+somehow circumvented our security systems to gain access to the Vault elevator.&quot;.<br>
+⠀⠀⠀⠀⠀ Angela&rsquo;s mind is racing in different directions,
+desperately looking for a probable scenario that does <em>not</em> land in the one
+that is staring right at her. &ldquo;The elevator ride took 6 minutes to get down here.
+That means. . . I have less than 12 minutes to finish the locking procedure
+before this place is swarming with Rebels.&rdquo;. She instructs her Vanguard to set a countdown timer for 12 minutes. In the top right corner of her helmet, numbers start counting down.<br>
+⠀⠀⠀⠀⠀The next phase of the Time-Lock Puzzle creation calls for Angela <em>to initiate a
+Capsule procedure that will generate a secret key</em> that will later be used to encrypt
+her message payload.   <br>
+⠀⠀⠀⠀⠀ The key should be long enough so that brute searching for it is pointless,
+even with expected advances in computing power during the lifetime of the puzzle.
+Well, nothing groundbreaking in terms of computing power is likely to materialize
+in the hands of the Rebels within 8 days, the estimated time of arrival of the
+next Federation ship.</p>
+<p>The implemention is as straightforward, as an inbound group of Rebels hoping to
+<em>disturb your circles.</em>&quot;,</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#00f">fn</span> <span style="color:#000">compute_cm</span>(&amp;<span style="color:#000">self</span>, <span style="color:#000">plaintext</span>: <span style="color:#00f">&amp;</span>[<span style="color:#00f">u8</span>]) -&gt; (<span style="color:#000">Key</span>&lt;<span style="color:#000">Aes256Gcm</span>&gt;, <span style="color:#000">Vec</span>&lt;<span style="color:#00f">u8</span>&gt;) {
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// The Capsule generates an AES-GCM mode private key.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#000">key</span>: <span style="color:#000">Key</span>&lt;<span style="color:#000">Aes256Gcm</span>&gt; = <span style="color:#000">Aes256Gcm</span>::<span style="color:#000">generate_key</span>(&amp;<span style="color:#00f">mut</span> <span style="color:#000">OsRng</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// This part is implemented in Step 5, below.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    (<span style="color:#000">key</span>, <span style="color:#000">cm</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="step-5-encrypting-a-lives-work">Step 5: Encrypting a Live&rsquo;s Work</h3>
+<p>The blinking 00:08:37, in the upper right corner of her helmet&rsquo;s information display,
+informs Angela that she has around eight minutes left to live. She started the
+countdown the moment she realized that the Rebels had likely succeeded in gaining
+access to the elevator, which is the only way to reach the vault.<br>
+⠀⠀⠀⠀⠀ Angela starts the transfer of the tiny <em>886 kb message</em> payload, from the computer
+of her Vanguard suit, over to the Capsule. She authorizes a long list of security requests regarding
+the encryption of message data. &ldquo;The folks who created this alien bowling bowl sure weren&rsquo;t in a hurry.
+I&rsquo;ll be dead long before this thing. . .&rdquo;<br>
+A brief a humming sound, is followed by the Capsule informing Angela that the
+message payload, containing blueprints, the Ingegard algorithm, and the
+confirming test data - was successfully encrypted and stored inside the Capsule.<br>
+⠀⠀⠀⠀⠀ With the private key $K$, and the nonce generated in the previous step,
+the Capsule proceeds to <em>encrypt</em> Dr. Angela Rae&rsquo;s message payload $M$.
+Surprisingly, it uses a Federation standard issue AES-GSM mode cryptosystem.</p>
+<p>Formally, we get the encrypted text message, $C_M$, via:
+$$C_M = ENC(K,M)$$</p>
+<p>Which we can implement using,</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#00f">fn</span> <span style="color:#000">compute_cm</span>(&amp;<span style="color:#000">self</span>, <span style="color:#000">plaintext</span>: <span style="color:#00f">&amp;</span>[<span style="color:#00f">u8</span>]) -&gt; (<span style="color:#000">Key</span>&lt;<span style="color:#000">Aes256Gcm</span>&gt;, <span style="color:#000">Vec</span>&lt;<span style="color:#00f">u8</span>&gt;) {
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// The Capsule generates an AES-GCM mode private key.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#000">key</span>: <span style="color:#000">Key</span>&lt;<span style="color:#000">Aes256Gcm</span>&gt; = <span style="color:#000">Aes256Gcm</span>::<span style="color:#000">generate_key</span>(&amp;<span style="color:#00f">mut</span> <span style="color:#000">OsRng</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// To make the encryption procedure unique, a 96 bit nonce (number used once)
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// is generated and used to uniquely seed the encryption.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#00f">mut</span> <span style="color:#000">nonce_bytes</span> = [<span style="color:#3af">0</span><span style="color:#00f">u8</span>; <span style="color:#3af">12</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#000">OsRng</span>.<span style="color:#000">fill_bytes</span>(&amp;<span style="color:#00f">mut</span> <span style="color:#000">nonce_bytes</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">nonce</span> = <span style="color:#000">Nonce</span>::<span style="color:#000">from_slice</span>(&amp;<span style="color:#000">nonce_bytes</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// The message payload is encrypted with the nonce and the key.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#000">cipher</span> = <span style="color:#000">Aes256Gcm</span>::<span style="color:#000">new</span>(&amp;<span style="color:#000">key</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">cm</span> = <span style="color:#000">cipher</span>
+</span></span><span style="display:flex;"><span>        .<span style="color:#000">encrypt</span>(&amp;<span style="color:#000">nonce</span>, <span style="color:#000">plaintext</span>.<span style="color:#000">as_ref</span>())
+</span></span><span style="display:flex;"><span>        .<span style="color:#000">expect</span>(<span style="color:#5a2">&#34;Encryption failed&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// The encryption key and the encrypted message.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    (<span style="color:#000">key</span>, <span style="color:#000">cm</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="step-6-constructing-the-cipher-key">Step 6: Constructing the Cipher Key</h3>
+<p>&ldquo;I knew this idea would <em>never</em> work.&rdquo;</p>
+<p>Dr. Angela Rae is close to having a mental breakdown. Her Vanguard environment
+suite is scrambling to issue a truckload of chemicals into her bloodstream, all in an effort to lower her racing heart rate.
+A 300 milliseconds long stream of positive imagery is flashed directly into Angela&rsquo;s iris,
+an effort to trigger a serotonin response that will offset her accelerating depression.<br>
+⠀⠀⠀⠀⠀ &ldquo;Cows on green spring pastures? Really? I&rsquo;m minutes from having
+my brain split open by Rebel lasers, or worse, be tortured for hours until my mind caves in. . . and some Federation astro psychiatrist had the idea that images of happy cows will make me calm down?&rdquo;.<br>
+⠀⠀⠀⠀⠀No answer. Not even from the dark mysterious orb floating in midair, in front of her. If only she had someone to talk to. &ldquo;Yuhey?!&rdquo;, she tries -  nothing but silence.<br>
+⠀⠀⠀⠀⠀The countdown has just entered the territory of 2 minutes, 00:02:58 to be exact.
+Leaning on decades of discipline, and soothing images of cows on green pastures,
+Angela wills herself into action. The cipher key is one of the last elements that needs to be created, in order to activate the Time-Lock Puzzle, lock the Capsule, and declare mission
+accomplished.</p>
+<p><strong>The Capsule CipherKey Procedure:</strong><br>
+Having generated the private key $K$ in <a href="#step-4-generating-the-key-to-the-kingdom">step 4</a>,
+Dr. Angela Rae initiates a Capsule procedure which performs the following calculation:<br>
+6.1 First, the Capsule picks a random $\mathbf{a}$ modulo $\mathbf{n}$, with $1&lt;\mathbf{a}&lt;\mathbf{n}$.</p>
+<p>6.2. To be able to perform the computation which will produce the cipherkey $C_K$,
+the Capsule first has to compute:
+$$\mathbf{e}=2^\mathbf{t}\quad (mod\; \phi(\mathbf{n}))$$</p>
+<p>6.3 It then computes $\mathbf{b}$, which is, in fact, the <a href="#appendix-how-to-solve-the-time-lock-puzzle"><em>solution</em></a> to the puzzle:
+$$\mathbf{b}=\mathbf{a}^\mathbf{e} \quad (mod\; \mathbf{n})$$</p>
+<p>6.4. The output of the procedure will be a cipherkey $C_K$ which can be used to unlock the Time-Lock Puzzle. The cipherkey is produced with the following computation:<br>
+$$C_K = K + \mathbf{a}^{2^\mathbf{t}}\quad (mod\; \mathbf{n})$$</p>
+<p>6.5. To verify that the cipherkey $C_K$ is actually working, the Capsule will
+use it to open a simulated version of the Time-Lock Puzzle. This step is described in the <a href="#appendix-how-to-solve-the-time-lock-puzzle">Appendix</a>.</p>
+<p>Implementation:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span> <span style="color:#00f">fn</span> <span style="color:#000">compute_ck</span>(&amp;<span style="color:#000">self</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#000">a</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>, <span style="color:#000">phi_n</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>, <span style="color:#000">t</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#000">n</span>: <span style="color:#00f">&amp;</span><span style="color:#000">BigUint</span>, <span style="color:#000">k</span>: <span style="color:#00f">&amp;</span><span style="color:#000">Key</span>&lt;<span style="color:#000">Aes256Gcm</span>&gt;
+</span></span><span style="display:flex;"><span>        ) -&gt; <span style="color:#000">BigUint</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">e</span>: <span style="color:#000">BigUint</span> = <span style="color:#000">a</span>.<span style="color:#000">modpow</span>(<span style="color:#000">t</span>, <span style="color:#000">phi_n</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">b</span>: <span style="color:#000">BigUint</span> = <span style="color:#000">a</span>.<span style="color:#000">modpow</span>(&amp;<span style="color:#000">e</span>, <span style="color:#000">n</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#000">ck</span> = (<span style="color:#000">BigUint</span>::<span style="color:#000">from_bytes_be</span>(<span style="color:#000">k</span>.<span style="color:#000">as_slice</span>()) + <span style="color:#000">b</span>) % <span style="color:#000">n</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">ck</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="step-7-endgame">Step 7: Endgame</h3>
+<p>With one minute left of her life,
+Dr. Angela Rae - Head of a Top Secret Federation advanced research program,
+located on a remote moonbase no one will ever hear about - is enjoying the
+sweet ouverture of Johann Sebastian Bach&rsquo;s <em>Orchestral Suite No.3 in D-dur</em>.
+The 1,281 year-old masterpiece, is flowing through the loudspeakers of the Vanguard suite,
+a serenade of Angela&rsquo;s accomplishment.<br>
+⠀⠀⠀⠀⠀ &ldquo;One last step, and it&rsquo;s Check Mate on these Rebel bitches!&rdquo;<br>
+⠀⠀⠀⠀⠀ In front of her, the black alien-like Capsule, is patiently waiting for Angela to issue the final <em>Initiate Locking</em> command,
+which will seal the Capsule for a duration of 2 trillion squarings.<br>
+⠀⠀⠀⠀⠀ As a Federation Officer assigned to a military research program, and the only
+holder of the secret key which can instantly open the Capsule - Angela knows
+she cannot let the Rebels capture her alive. They would simply torture her
+until she told them everything, including the name of her secret lover.<br>
+⠀⠀⠀⠀⠀ She has ordered and authorized her Vanguard suit to inject
+instantly fatal doses of a military nerve agent, into her bloodstream at her command.
+Angela initiates the final step, authorizing the destruction of the secret keys
+$p$ and $q$ that were used to seed the whole creation of the Time-Lock Puzzle.
+Without these two keys, it&rsquo;s impossible to open the Time-Lock without having to decrypt it
+by performing 2 trillion squaring operations.<br>
+⠀⠀⠀⠀⠀ The Capsule confirms the deletion of the two keys.<br>
+Beaming with a bittersweet mix of pride and sorrow, Angela orders the Capsule to
+commence the <em>Locking Procedure</em>,<br>
+⠀⠀⠀⠀⠀ &ldquo;Give me a Softcopy when the locking procedure is - &quot;<br>
+Angela stops mid-sentence, something in the corner of her eye is screaming
+for her attention. About 30 meters away from her, the elevator decelerates to a complete standstill. Doors open.<br>
+⠀⠀⠀⠀⠀ &ldquo;Yuyeh?!&rdquo; _What is <em>he</em> doing here?<br>
+Angela is surprised to see the face of her longtime colleague.<br>
+But she&rsquo;s stunned to see dark shadows with raised weapons
+flash towards her.<br>
+She raises her arms in a fencing posture, screaming for the Vanguard computer
+to deliver the killing toxin into her bloodstream. <br>
+⠀⠀⠀⠀⠀ With shocking speed, Rebel hands are already upon her, ripping
+open the Vanguard. A sharp blow from an instrument, just below her right kidney.
+<em>Chemically induced stasis? Are they trying to put me. . . in a . . . in a coma?</em>.<br>
+⠀⠀⠀⠀⠀ Angela can feel two chemicals, Vanguard vs Rebel, fighting each other.
+One trying to kill her, the other trying to <em>prevent</em> her from dying.
+An unbelievably sharp pain seers her brain.<br>
+Screaming, she drops to the ground. Minus -90 degrees Celsius sweeps across her
+suitless body, but is barely registered by her failing nervous system.
+Her exposed retinas fail to deliver any signals that her brain can make sense of - darkness caves in on her.<br>
+⠀⠀⠀⠀⠀ A synthetically amplified human voice cuts through the darkness . . .<br>
+⠀⠀⠀⠀⠀ &ldquo;Sir, we&rsquo;re losing her. She managed to take a suicide toxin before
+we got to her. Our nanoserum is keeping her alive, but she&rsquo;s in pretty bad shape.&rdquo;<br>
+⠀⠀⠀⠀⠀ Another voice, this one much older . . . and calmer.<br>
+⠀⠀⠀⠀⠀ &ldquo;Severe the blood flow to her brain. Tap into her cortex. Full
+tissue hardcopy. Do it!&rdquo;<br>
+⠀⠀⠀⠀⠀ On the floor, a tiny part of what was once Dr. Angela Rae&rsquo;s is trapped in limbo. A deadly neurotoxin compelling her to give up, give in, and die. But hardcoded organic reflexes, of what&rsquo;s left of her neural system, are refusing the offer. Something, somewhere, is enticing her to remain&hellip;and reveal? Reveal what? Her curiosity piqued, the balance shifting towards . . . something.<br>
+⠀⠀⠀⠀⠀ &ldquo;Sir, the neurotoxin has been neutralized. Brain tissue corruption
+is over 85%. I cannot confirm that the keys to the Capsule can be extracted from
+what&rsquo;s left of her brain.&rdquo;<br>
+⠀⠀⠀⠀⠀ The Rebel Strike Team Commander, standing over what remains of
+Dr. Angela Rae, is clearly disapointed . . . but hopeful.<br>
+⠀⠀⠀⠀⠀ &ldquo;Copy. Transfer her to the Shub and initiate extraction
+procedures - salvaging that key is of extreme importance. And bring <em>that guy!</em>&rdquo;.<br>
+⠀⠀⠀⠀⠀ The commander points to Yuyeh.<br>
+⠀⠀⠀⠀⠀ &ldquo;He might be useful in creating a memory trap, that we can lure her conscious into. You two!, secure the facility, cut off any lines of escape, and set up T1C comms.
+We might be here longer than we plan-&rdquo;<br>
+⠀⠀⠀⠀⠀ There&rsquo;s a, barely noticeable, shift in the airwaves.<br>
+⠀⠀⠀⠀⠀ The Rebel commander swings around, weapon raised at the Capsule.<br>
+⠀⠀⠀⠀⠀ &ldquo;What just happened?&rdquo;<br>
+A tiny status indicator on a nearby panel enlightens him.
+$\text{LOCKING PROCEDURE COMPLETE}$.<br>
+⠀⠀⠀⠀⠀ &ldquo;Fuck!&rdquo;</p>
+<blockquote>
+<p><strong>Epilogue:</strong> I hope that someone enjoyed this format, of mixing math, code, a cheezy narrative, to try and make these technical concepts more fun to read about.</p>
+</blockquote>
+<hr>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h2 id="appendix-how-to-solve-the-time-lock-puzzle">Appendix: How to solve the Time-Lock Puzzle</h2>
+<p>The Rebel Commander never expected this mission to be a walk in the Sim Park,
+but the current situation is best described as a tactical conundrum.<br>
+⠀⠀⠀⠀⠀ &ldquo;Our medical team sure know their shit.&rdquo;<br>
+⠀⠀⠀⠀⠀ On the table in front of him lies a grainy image printout of a number.
+During the last four hours, the team managed to salvage and extract fragments of a few visual memories from the female Federalist&rsquo;s damaged brain. Most memories were stored in old neuron clusters, encoding what the team interpreted to be childhood memories;
+learning to ride a jetbike, some kind of 1st-in-class trophy, acceptance to the Federation Juvenile Military Academy, and so forth.</p>
+<p>⠀⠀⠀⠀⠀ On the verge of giving up, the Rebel medical team then stumbled on a
+tiny neuro-cluster, bordering a massive volume of dead neurons.
+Similar to the childhood memory cluster, the tiny cluster appeared to encode the
+aggregate feeling of &ldquo;pride and accomplishment&rdquo;. However, in contrast to the <em>old</em>
+childhood cluster, these neurons had <em>recently</em> been stimulated!, not by the medical
+team&rsquo;s nanorobotics, but by a surge of pure old-fashioned neurotransmitters, presumably belonging to the host.</p>
+<p>⠀⠀⠀⠀⠀ Nanorobots successfully managed to entice a few individual neurons
+in the tiny cluster to connect to them, thereby creating a bridge to the remaining neurons.
+Building on top of that breakthrough, the team then relied on 31st century standard
+medical procedures for patients with traumatic brain injury - to map, copy, and
+virtualize the structure, density, and impedance of the cluster.
+Basically creating a biosynthetic 1:1 copy of the memory cluster, which could then be
+rendered <em>back</em> into the format that triggered the memory encoding in the first place.
+The final result of the entire operation now lay in front of the Rebel commander,
+in the form of a printed image, depicting a number:<br>
+$$691200$$</p>
+<p>On the other side of the table, a female Sargent is the first one to speak.
+We&rsquo;ve run a few million Posits on the ship&rsquo;s computer. Provided our context,
+they all converge on <em>that</em> number representing <em>time</em>, which its standard unit being <em>seconds</em>.
+The amount corresponds to <em>8 days</em>. From there, however, the confidence value in any
+extrapolation, into how 8 days relates to anything, drops quickly . . . except
+for one –&rdquo;<br>
+⠀⠀⠀⠀⠀ &ldquo;It&rsquo;s the number of days left,&rdquo; the commander interrupts,
+&ldquo;until a military Federation ship will enter this system, hail this base, understand that something is wrong,<br>
+. . . and we&rsquo;ll be knee-deep in shit.&rdquo;<br>
+⠀⠀⠀⠀⠀ With obvious concern, the commander looks at the handful of senior rebels
+gathered around the planning table in the center of the Shub&rsquo;s brig.<br>
+⠀⠀⠀⠀⠀ “In other words, we have 8 days to break into that Capsule.”</p>
+<p><strong>The Puzzle Solver</strong><br>
+Let&rsquo;s assume that the bitlength, of the chosen encryption scheme used, is large enough.
+In that case, &ldquo;all&rdquo; a Puzzle-solver needs to do, is to brute force search for the
+key $K$. However, brute-force-finding the key $K$ to the encryption $ENC$,
+this way is deemed <em>infeasable</em>, unless a Quantumn Computer is used.
+Intead, the fastest way to solve a Time-Lock Puzzle
+is to compute $\mathbf{b}$ (which was done by the Capsule in step 6.3.) :
+$$\mathbf{b}= \mathbf{a}^{2^\mathbf{t}} \quad (mod\; \mathbf{n})$$</p>
+<blockquote>
+<p><strong>Shortcut:</strong> Knowing the Euler Totient $\phi(n)$ enables $2^t$ to be <em>reduced</em> to $e\;(mod\; n)$, so that $b$ can be efficiently computed using the equation expressed in step 6.3.</p>
+</blockquote>
+<p>However, computing $\phi(n)$ from $n$ is provably as hard as factoring $n$.
+Remember, Dr. Angela Rae managed to delete the primes $p$ and $q$, which were
+used to create the composite $n$, and! she also managed to get the Capsule <em>locked</em>
+before the Rebels got to her.<br>
+⠀⠀⠀⠀⠀ So, the fastest way to compute $b$, <em>the answer to the puzzle</em>,
+seems to be, to start with the number $a$ and then perform $t$ number of squarings
+in sequence (where the output of each squaring becomes the input of the next
+squaring) until $b$ is computed.<br>
+⠀⠀⠀⠀⠀ Let&rsquo;s wrap up this little excursion by helping the Rebels with a subroutine
+which they can run on the Shub&rsquo;s computer. Weather they manage to solve the
+puzzle and extract the blueprint to the Space Folding machine, before Federation
+forces return, we&rsquo;ll never know.</p>
+<p>Implementation,</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#00f">use</span> <span style="color:#000">num_bigint</span>::<span style="color:#000">BigUint</span>;
+</span></span><span style="display:flex;"><span><span style="color:#00f">use</span> <span style="color:#000">num_traits</span>::<span style="color:#000">FromPrimitive</span>;
+</span></span><span style="display:flex;"><span><span style="color:#00f">use</span> <span style="color:#000">std</span>::<span style="color:#000">io</span>::{<span style="color:#000">self</span>, <span style="color:#000">Write</span>};
+</span></span><span style="display:flex;"><span><span style="color:#00f">use</span> <span style="color:#000">std</span>::<span style="color:#000">time</span>::<span style="color:#000">Instant</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00f">fn</span> <span style="color:#000">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// The Time-Lock Puzzle has the form of a tuple: (n,a,t,CK,CM)
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#000">modulus_n</span> = <span style="color:#000">BigUint</span>::<span style="color:#000">from_u32</span>(<span style="color:#3af">1355760</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// The seed value that will be squared t times.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#00f">mut</span> <span style="color:#000">squaring_seed_a</span> = <span style="color:#000">BigUint</span>::<span style="color:#000">from_u64</span>(<span style="color:#3af">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// Number of required squarings.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#000">required_squarings_t</span>: <span style="color:#00f">u64</span> = <span style="color:#3af">2_073_600_000_000</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// Keeping track of time since squaring started.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#000">start</span> = <span style="color:#000">Instant</span>::<span style="color:#000">now</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// Starting the squaring procedure.
+</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">for</span> <span style="color:#000">i</span> <span style="color:#00f">in</span> <span style="color:#3af">0</span><span style="color:#00f">u64</span>..=<span style="color:#000">required_squarings_t</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#000">squaring_seed_a</span> = <span style="color:#000">Some</span>(<span style="color:#000">squaring_seed_a</span>
+</span></span><span style="display:flex;"><span>            .<span style="color:#000">as_mut</span>()
+</span></span><span style="display:flex;"><span>            .<span style="color:#000">expect</span>(<span style="color:#5a2">&#34;Squaring Failed&#34;</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#000">modpow</span>(
+</span></span><span style="display:flex;"><span>                &amp;<span style="color:#000">BigUint</span>::<span style="color:#000">from_u64</span>(<span style="color:#000">required_squarings_t</span>).<span style="color:#000">unwrap</span>(),
+</span></span><span style="display:flex;"><span>                &amp;<span style="color:#000">modulus_n</span>.<span style="color:#000">as_ref</span>().<span style="color:#000">unwrap</span>(),
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">print!</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#5a2">&#34;</span><span style="color:#5a2">\r</span><span style="color:#5a2">Squarings: </span><span style="color:#5a2">{:013}</span><span style="color:#5a2"> Time:</span><span style="color:#5a2">{}</span><span style="color:#5a2">  Result:</span><span style="color:#5a2">{:?}</span><span style="color:#5a2">&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000">i</span>, <span style="color:#000">start</span>.<span style="color:#000">elapsed</span>().<span style="color:#000">as_secs</span>(), <span style="color:#000">squaring_seed_a</span>.<span style="color:#000">clone</span>().<span style="color:#000">unwrap</span>(),
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">io</span>::<span style="color:#000">stdout</span>().<span style="color:#000">flush</span>().<span style="color:#000">unwrap</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><!--
+<table><td border=1 paddingbottom="10px">
+</td></table>
+<img src="http://ghchart.rshah.org/cryptopatrick" alt="CryptoPatrick's GitHub Contributions" width="800px"/>
+-->
+<!-- Carl Pomerance on using Lucas numbers to improve AKS from O(log(n)^10) down to 6-->
+<!--
+[^4]: [https://doc.rust-lang.org/std/marker/struct.PhantomData.html](https://doc.rust-lang.org/std/marker/struct.PhantomData.html)
+ ![Version:0.1.0](https://img.shields.io/badge/Version%200.1.0-FFFFFF.svg)
+-->
+<!-- Footer Starts Here -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<head>
+<style>
+<p>.formula-wrap {
+overflow-x: scroll;
+}</p>
+<p></style></p>
+</head>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Ai-generated image of Rebel spaceship.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.artstation.com/artwork/Ga06Rz">Image: Ilmari Kumpunen, Returnal Video Game</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.behance.net/gallery/129428417/BLACK-ORB/modules/733465387">Image: Quentin Legele, Black Orb</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'cryptopatrick';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

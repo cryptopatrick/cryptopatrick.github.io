@@ -11,12 +11,12 @@
     <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
     <lastBuildDate>Mon, 23 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://www.cryptopatrick.com/tags/rust/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Timed-Released-Crypto</title>
-      <link>https://www.cryptopatrick.com/blog/2024/12/23/timed-released-crypto/</link>
+      <title>Timed-Release-Crypto</title>
+      <link>https://www.cryptopatrick.com/blog/2024/12/23/timed-release-crypto/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
       <author>cryptopatrick@gmail.com (CryptoPatrick)</author>
-      <guid>https://www.cryptopatrick.com/blog/2024/12/23/timed-released-crypto/</guid>
-      <description>Preface: I recently coded a tiny Rust library, implenting a cryptographic idea which had caught my interest. This post is my way of cementing my understanding of concepts which I found difficult. I&amp;rsquo;m not a cryptographer and make zero guarantees regarding the correctness of the cor or math in this post. One final note, no Ai was used in writing the story in this post, I wrote it myself, so you can expect it to suck lol.</description>
+      <guid>https://www.cryptopatrick.com/blog/2024/12/23/timed-release-crypto/</guid>
+      <description>Preface: I recently coded a tiny Rust library, implementing a cryptographic idea which had caught my interest. This post is my way of cementing my understanding of concepts which I found difficult. I&amp;rsquo;m not a cryptographer and make zero guarantees regarding the correctness of the code or math in this post. One final note, no Ai was used in writing the story in this post, I wrote it myself, so you can expect it to suck lol.</description>
     </item>
     
     <item>
