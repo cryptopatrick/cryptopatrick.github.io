@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hardware on Seamless Global Nature</title>
+    <title>Hardware on Seamless Global Nature</title>
     <link>https://www.cryptopatrick.com/tags/hardware/</link>
-    <description>Recent content in hardware on Seamless Global Nature</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Hardware on Seamless Global Nature</description>
+    <generator>Hugo</generator>
     <language>en-EN</language>
-    <managingEditor>cryptopatrick@gmail.com (CryptoPatrick)</managingEditor>
-    <webMaster>cryptopatrick@gmail.com (CryptoPatrick)</webMaster>
     <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
-    <lastBuildDate>Thu, 19 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://www.cryptopatrick.com/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Squarings modulo n per second</title>
       <link>https://www.cryptopatrick.com/blog/2024/12/19/squarings-modulo-n-per-second/</link>
       <pubDate>Thu, 19 Dec 2024 00:00:00 +0000</pubDate>
-      <author>cryptopatrick@gmail.com (CryptoPatrick)</author>
       <guid>https://www.cryptopatrick.com/blog/2024/12/19/squarings-modulo-n-per-second/</guid>
       <description>A quick, non-scientific, look at how we might estimate the number of squarings modulo n that a computer can perform per second.</description>
     </item>
-    
   </channel>
 </rss>

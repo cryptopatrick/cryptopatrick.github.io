@@ -4,20 +4,17 @@
     <title>Programming on Seamless Global Nature</title>
     <link>https://www.cryptopatrick.com/tags/programming/</link>
     <description>Recent content in Programming on Seamless Global Nature</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-EN</language>
-    <managingEditor>cryptopatrick@gmail.com (CryptoPatrick)</managingEditor>
-    <webMaster>cryptopatrick@gmail.com (CryptoPatrick)</webMaster>
     <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
-    <lastBuildDate>Tue, 10 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://www.cryptopatrick.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The TypeState Pattern</title>
       <link>https://www.cryptopatrick.com/blog/2024/12/10/the-typestate-pattern/</link>
       <pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
-      <author>cryptopatrick@gmail.com (CryptoPatrick)</author>
       <guid>https://www.cryptopatrick.com/blog/2024/12/10/the-typestate-pattern/</guid>
       <description>TypeState is a powerful design pattern that we can use to provide compiletime checks based on the state of things. This post is my way of writing about what I&amp;rsquo;m learning with the hopes that it&amp;rsquo;ll stick better.</description>
     </item>
-    
   </channel>
 </rss>
