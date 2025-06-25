@@ -17,6 +17,7 @@
 <title>Squarings modulo n per second | Seamless Global Nature</title>
 
 <link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
 
@@ -194,39 +195,39 @@ of 5 million squaring mod n operations per second.</p>
 <p>So, after a few assumptions we got an estimated number of modular squarings per second on a <em>256-bit modulus</em> with our <em>1.3 GHz</em> Dual-Core Intel i5 machine working overtime, of
 5 million squarings mod n per second. Let&rsquo;s see how our estimated number compares to <em>actual</em> work by the machine itself.</p>
 <p>Let&rsquo;s write a program to measure how close to the upper theoretical bound that our 1.3 GHz Dual-Core machine can get on a 256-bit moduli. I&rsquo;ll use Rust, but I assume that any compiled code should more or less give the same result.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#888;font-style:italic">// Cargo.toml
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic">//  We need a library for working with huge numbers.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>[<span style="color:#000">dependencies</span>]
-</span></span><span style="display:flex;"><span><span style="color:#000">num</span>-<span style="color:#000">bigint</span> = <span style="color:#5a2">&#34;0.4&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">num</span>-<span style="color:#000">traits</span> = <span style="color:#5a2">&#34;0.2&#34;</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#888;font-style:italic">//main.rs
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span><span style="color:#00f">use</span> <span style="color:#000">num_bigint</span>::<span style="color:#000">BigUint</span>;
-</span></span><span style="display:flex;"><span><span style="color:#00f">use</span> <span style="color:#000">num_traits</span>::{<span style="color:#000">One</span>, <span style="color:#000">Zero</span>};
-</span></span><span style="display:flex;"><span><span style="color:#00f">use</span> <span style="color:#000">std</span>::<span style="color:#000">time</span>::<span style="color:#000">Instant</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#95a5a6">// Cargo.toml
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6">//  We need a library for working with huge numbers.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">[</span><span style="color:#00979d">dependencies</span><span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">num</span><span style="color:#728e00">-</span><span style="color:#434f54">bigint</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;0.4&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">num</span><span style="color:#728e00">-</span><span style="color:#434f54">traits</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;0.2&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#95a5a6">//main.rs
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">use</span> <span style="color:#434f54">num_bigint</span><span style="color:#728e00">:</span><span style="color:#00979d">:BigUint</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">num_traits</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span><span style="color:#00979d">One</span><span style="color:#728e00">,</span> <span style="color:#00979d">Zero</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">std</span><span style="color:#728e00">:</span><span style="color:#00979d">:time::Instant</span><span style="color:#728e00">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#00f">fn</span> <span style="color:#000">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// Size matters. We&#39;re using a prime in the 256-bit space that is close
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#888;font-style:italic">// to the upper bound: 2^256.
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#000">modulus</span> = <span style="color:#000">BigUint</span>::<span style="color:#000">parse_bytes</span>(
-</span></span><span style="display:flex;"><span>        <span style="color:#5a2">b</span><span style="color:#5a2">&#34;FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF43&#34;</span>, <span style="color:#3af">16</span>,
-</span></span><span style="display:flex;"><span>    ).<span style="color:#000">expect</span>(<span style="color:#5a2">&#34;Invalid modulus, Sir! Are you really supposed to be here?&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#434f54">fn</span> <span style="color:#434f54">main</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Size matters. We&#39;re using a prime in the 256-bit space that is close
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">// to the upper bound: 2^256.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">modulus</span> <span style="color:#728e00">=</span> <span style="color:#434f54">BigUint</span><span style="color:#728e00">:</span><span style="color:#00979d">:parse_bytes</span><span style="color:#728e00">(</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">b</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF43</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">,</span> <span style="color:#a61717">16</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">).</span><span style="color:#434f54">expect</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;Invalid modulus, Sir! Are you really supposed to be here?&#34;</span><span style="color:#728e00">);</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#00f">mut</span> <span style="color:#000">value</span> = <span style="color:#000">BigUint</span>::<span style="color:#000">one</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#00f">let</span> <span style="color:#00f">mut</span> <span style="color:#000">count</span> = <span style="color:#3af">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">mut</span> <span style="color:#434f54">value</span> <span style="color:#728e00">=</span> <span style="color:#434f54">BigUint</span><span style="color:#728e00">:</span><span style="color:#00979d">:one</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">mut</span> <span style="color:#434f54">count</span> <span style="color:#728e00">=</span> <span style="color:#8a7b52">0</span><span style="color:#728e00">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#888;font-style:italic">// Perform squaring mod n operations for 1000 millisecs (1 second).
-</span></span></span><span style="display:flex;"><span><span style="color:#888;font-style:italic"></span>    <span style="color:#00f">let</span> <span style="color:#000">start</span> = <span style="color:#000">Instant</span>::<span style="color:#000">now</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#00f">while</span> <span style="color:#000">start</span>.<span style="color:#000">elapsed</span>().<span style="color:#000">as_secs</span>() &lt; <span style="color:#3af">1</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#000">value</span> = (&amp;<span style="color:#000">value</span> * &amp;<span style="color:#000">value</span>) % &amp;<span style="color:#000">modulus</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#000">count</span> += <span style="color:#3af">1</span>;
-</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Perform squaring mod n operations for 1000 millisecs (1 second).
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">start</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Instant</span><span style="color:#728e00">:</span><span style="color:#00979d">:now</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">while</span> <span style="color:#434f54">start</span><span style="color:#728e00">.</span><span style="color:#434f54">elapsed</span><span style="color:#728e00">().</span><span style="color:#434f54">as_secs</span><span style="color:#728e00">()</span> <span style="color:#728e00">&lt;</span> <span style="color:#8a7b52">1</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">value</span> <span style="color:#728e00">=</span> <span style="color:#728e00">(&amp;</span><span style="color:#434f54">value</span> <span style="color:#728e00">*</span> <span style="color:#728e00">&amp;</span><span style="color:#434f54">value</span><span style="color:#728e00">)</span> <span style="color:#728e00">%</span> <span style="color:#728e00">&amp;</span><span style="color:#434f54">modulus</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">count</span> <span style="color:#728e00">+=</span> <span style="color:#8a7b52">1</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">println!</span>(<span style="color:#5a2">&#34;Modular Squarings Per Second: </span><span style="color:#5a2">{}</span><span style="color:#5a2">&#34;</span>, <span style="color:#000">count</span>);
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;Modular Squarings Per Second: {}&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">count</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
 </span></span></code></pre></div><h3 id="right-lets-see-what-we-get">Right, let&rsquo;s see what we get&hellip;</h3>
 <p>If I run the Rust program above on my trusty but dusty old <em>1.3 GHz</em> Mac,
 I get the following result:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Modular Squarings Per Second: <span style="color:#3af">1192311</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Modular Squarings Per Second: <span style="color:#8a7b52">1192311</span>
 </span></span></code></pre></div><p>Which equals about 1.2 million squarings per second. 🤔 Hmm, that&rsquo;s far below the
 5 million squarings the guy at the computer store sold me on. What&rsquo;s going on?
 If I look at the <em>Activity Monitor</em> I see that the CPU is idling at around 80%+.
@@ -234,7 +235,7 @@ I&rsquo;ve been using the computer for a few hours this morning so there are lot
 processes which are simply <em>hanging around</em>.</p>
 <p>Let&rsquo;s reboot the machine, and run the squaring binary first thing when we log in.<br>
 Now I get the following result:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Modular Squarings Per Second: <span style="color:#3af">3252342</span> 👀
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Modular Squarings Per Second: <span style="color:#8a7b52">3252342</span> 👀
 </span></span></code></pre></div><p>Nice! 🥳 That&rsquo;s much better. Still not anywhere close to 5 million squarings, but that was never going to happen with a machine running a bloated consumer Operating System.</p>
 <p>To wrap this up, I wrote this post to learn a little bit about squaring modular n per second. I&rsquo;ll be the first to admit that the steps taken here are far from scientific.<br>
 Cheers!</p>

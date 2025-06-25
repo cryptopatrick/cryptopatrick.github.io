@@ -1,0 +1,15 @@
+code {
+    font-family: Courier,SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    font-weight: 400;
+    font-size: 0.95em;
+    line-height: 1.5;
+    background-color: #000000;
+    padding: 0.5em;
+    border-radius: 4px;
+    overflow-x: auto;
+    background-color: #f5f7fa;
+    color: #ed6c63;
+    font-size: 12px;
+    font-weight: normal;
+    padding: 1px 2px 2px
+}
