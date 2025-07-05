@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 Rust: Everydays - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2025/07/05/rust-everydays/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="https://www.cryptopatrick.com/img/post-name/name.jpg" />
+
+
+<title>🦀 Rust: Everydays | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/">
+            
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/">
+            
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 Rust: Everydays</h1>
+    <h2 class="subtitle is-5">July 5, 2025 by CryptoPatrick</h2>
+    
+      <div class="tags">
+    
+        
+    
+        
+    
+</div>
+
+    
+    <div class="content">
+      <!-- ////////////////////////////////////////////////////////////////////////-->
+<p><img src="https://img.shields.io/badge/Work_In_Progress-orange.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Text_Version-0.4.5-blue.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg" alt="Version:0.1.0"></p>
+<!--![Version:0.1.0](https://img.shields.io/badge/Version-0.5.0-white.svg)  -->
+<!--[![Version:0.1.0](https://img.shields.io/badge/File-issue-orange.svg)](https://github.com/cryptopatrick/learn_wgpu/issues)-->
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<br>
+<blockquote>
+<p><strong>Preface:</strong> In this post we won&rsquo;t be doing much, just install Rust and get set up with an editor.</p>
+</blockquote>
+<blockquote>
+<p><strong>Code:</strong> none</p>
+</blockquote>
+<br>
+<!-- ////////////////////////////////////////////////////////////////////////## Installing Rust
+**▲[^1]** A Rebel ship orbiting above the Federation's top secret military research lab, _The Periphery_.
+ -->
+<p><figure><img src="../../../../../img/rust_everydays/800_400_rust_everydays_01.jpg">
+</figure>
+<br>
+<br>
+Getting set up to start coding in Rust is pretty simple. Rust has a tool called
+<code>Rustup</code> which we can use to update our local Rust toolchain.<br>
+⠀⠀⠀⠀⠀ We&rsquo;ll head to <a href="https://www.rust-lang.org/tools/install">https://www.rust-lang.org/tools/install</a>. Once there, we copy the following command, which we run in a terminal on the computer that we&rsquo;ll be coding on:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl --proto <span style="color:#7f8c8d">&#39;=https&#39;</span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</span></span></code></pre></div><blockquote>
+<p><strong>Configuration:</strong> On some operating systems you might have to configure the PATH variable.</p>
+</blockquote>
+<blockquote>
+<p><strong>Windows:</strong> If you&rsquo;re on Windows, or some other non-Unix operating system, please refer to <a href="https://forge.rust-lang.org/infra/other-installation-methods.html">this page</a> on alternative ways to install Rust.</p>
+</blockquote>
+<h3 id="check-installation">Check installation</h3>
+<p>We can check that our installation was successful by running:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rustc --version
+</span></span></code></pre></div><h3 id="updating-rust">Updating Rust</h3>
+<p>Now, since we have Rustup installed, we can update to the latest version of Rust:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rustup update
+</span></span></code></pre></div><h3 id="stable-and-nightly">Stable and Nightly</h3>
+<p>Rust is continuously being improved. Every two weeks there.
+There are two main branches, <code>stable</code> (consolidated) and <code>nightly</code> (experimental).<br>
+⠀⠀⠀⠀⠀ If we&rsquo;re building a project, using a new experimental feature in the <code>nightly</code> branch, there are no guarantee (from the Rust dev team) that the feature will be included in the next stable version, or ever for that matter. Because of that we need to be careful in using nightly in client facing production software.<br>
+⠀⠀⠀⠀⠀ Regardless, if we want to use the nightly branch, we need to swith to it.
+Switching back to the stable branch is done the same way:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rustup show <span style="color:#95a5a6"># which toolschains are installed and which is default</span>
+</span></span><span style="display:flex;"><span>rustup install nightly
+</span></span><span style="display:flex;"><span>rustup default nightly <span style="color:#95a5a6"># switch toolchain to nightly</span>
+</span></span><span style="display:flex;"><span>rustup default stable <span style="color:#95a5a6"># switch back to stable</span>
+</span></span><span style="display:flex;"><span>rustup <span style="color:#95a5a6"># get a list of other commands</span>
+</span></span></code></pre></div><blockquote>
+<p><strong>tip:</strong> By placing a <code>rust-toolchain.toml</code> file in our project root, we can specify these things more formally, by including a <code>[toolchain] channel = &quot;nightly&quot;</code>.</p>
+</blockquote>
+<h3 id="package-manager">Package Manager</h3>
+<p>Rust has an amazingly handy utility called <code>cargo</code>. We can use it to install
+<em>crates</em>, which is Rust&rsquo;s name for external dependencies/packages/libraries.
+We can also use cargo to build/compile our Rust code project.</p>
+<h3 id="pick-an-editor">Pick an editor</h3>
+<p>There are lots of editors that we can use to code Rust. Personally, I really like
+Microsoft&rsquo;s free editor, <em>Code</em>, so that&rsquo;s what I&rsquo;ll use. Two other editors I&rsquo;d
+like to mention are <em>Zed</em> from Zed Industries, and <em>Rover</em> from JetBrains. But use whatever editor you like.</p>
+<h2 id="the-end">The End</h2>
+<p>Okay, so this post was mostly about me getting started with a series of posts, aimed at
+refreshing/revising my Rust skills.</p>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<!-- Footer Starts Here -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<head>
+<style>
+<p>.formula-wrap {
+overflow-x: scroll;
+}</p>
+<p></style></p>
+</head>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

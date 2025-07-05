@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Everydays on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/tags/everydays/</link>
+    <description>Recent content in Everydays on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Sat, 05 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/everydays/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🦀 Rust: Everydays</title>
+      <link>https://www.cryptopatrick.com/blog/2025/07/05/rust-everydays/</link>
+      <pubDate>Sat, 05 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/07/05/rust-everydays/</guid>
+      <description>Having spent considerable time with mathematics, Python, and reading up on Ai, I wanted to spend the next couple of weeks revising my Rust knowledge, from the ground up. I&amp;rsquo;ll be writing short posts everyday where I cover the language, idiomatic patterns, and interesting crates. This series is inspired by one of my favorite artists, Beeple, who creates a piece of art everyday - hence the title of this series (Rust: Everyday).</description>
+    </item>
+  </channel>
+</rss>

@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>en-EN</language>
     <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
-    <lastBuildDate>Sun, 22 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 05 Jul 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.cryptopatrick.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Everydays</title>
+      <link>https://www.cryptopatrick.com/tags/everydays/</link>
+      <pubDate>Sat, 05 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/tags/everydays/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rust</title>
+      <link>https://www.cryptopatrick.com/tags/rust/</link>
+      <pubDate>Sat, 05 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/tags/rust/</guid>
+      <description></description>
+    </item>
     <item>
       <title>MATHML</title>
       <link>https://www.cryptopatrick.com/tags/mathml/</link>
@@ -21,13 +35,6 @@
       <link>https://www.cryptopatrick.com/tags/mathematics/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
       <guid>https://www.cryptopatrick.com/tags/mathematics/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Rust</title>
-      <link>https://www.cryptopatrick.com/tags/rust/</link>
-      <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>https://www.cryptopatrick.com/tags/rust/</guid>
       <description></description>
     </item>
     <item>
