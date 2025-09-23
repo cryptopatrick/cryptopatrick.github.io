@@ -1,0 +1,51 @@
++++
+title = ":book: Read: Topic"
+description = "Notes taken while reading."
+tags = ["Reading", "Concepts"]
+date = "2025-07-05"
+draft = "true"
+keywords = ["Rust"]
+author = "CryptoPatrick"
+og_image = "/img/post-name/name.jpg"
+summary = "Just something I read and found interesting."
++++
+
+<!-- ////////////////////////////////////////////////////////////////////////-->
+![Version:0.1.0](https://img.shields.io/badge/Work_In_Progress-orange.svg)
+![Version:0.1.0](https://img.shields.io/badge/Text_Version-0.4.5-blue.svg)
+![Version:0.1.0](https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg)
+
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<br>
+
+> __Preface:__ 
+
+<!-- ////////////////////////////////////////////////////////////////////////-->
+## Heading
+
+{{< figure src="/img/time-lock-message/rebellion.jpg">}}  
+**▲[^1]** A Rebel ship orbiting above the Federation's top secret military research lab, _The Periphery_.
+
+{{<indentline>}} This is a paragraph.
+{{<indentline>}} This is another paragraph.
+
+<!-- Footer Starts Here -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<head>
+<style>
+
+.formula-wrap {
+overflow-x: scroll;
+}
+
+</style>
+</head>

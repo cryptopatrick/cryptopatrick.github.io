@@ -13,3 +13,19 @@ code {
     font-weight: normal;
     padding: 1px 2px 2px
 }
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    .title.is-4 {
+        font-size: 1.25rem !important;
+    }
+    
+    .nav-item .level-item {
+        font-size: 0;
+    }
+    
+    .nav-item .level-item .icon {
+        font-size: 1rem;
+        margin-right: 0 !important;
+    }
+}
