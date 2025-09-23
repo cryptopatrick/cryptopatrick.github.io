@@ -15,11 +15,13 @@ code {
 }
 
 /* Mobile adjustments */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
     .title.is-4 {
-        font-size: 1.25rem !important;
+        display: none !important;
     }
-    
+}
+
+@media screen and (max-width: 768px) {
     .nav-item .level-item {
         font-size: 0;
     }
