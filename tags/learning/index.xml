@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Learning on Seamless Global Nature</title>
+    <link>http://localhost:60544/tags/learning/</link>
+    <description>Recent content in Learning on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Mon, 04 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:60544/tags/learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🦀 Full Stack P02</title>
+      <link>http://localhost:60544/blog/2022/04/04/full-stack-p02/</link>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2022/04/04/full-stack-p02/</guid>
+      <description>&lt;h2 id=&#34;step-2-cli-application&#34;&gt;Step 2: CLI Application&lt;/h2&gt;&#xA;&lt;p&gt;`&lt;figure&gt;&lt;img src=&#34;../../img/post-13-eurorap/fe_end.png&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;h4&gt;Feature extractions in the last layer.&lt;/h4&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;``&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Chapter02_processing_structs_and_traits&#xA;We start by modeling the core functionality of a CLI application. Later we will extend this CLI into a complete web app.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;step-21-create-the-initial-structure-for-the-project&#34;&gt;Step 2.1: Create the initial structure for the project&lt;/h3&gt;&#xA;&lt;h4 id=&#34;in-rootsrc-create-the-following-structure&#34;&gt;In: &lt;code&gt;.root/src/&lt;/code&gt; create the following structure&lt;/h4&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;to_do&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├── mod.rs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└── structs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├── base.rs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├── &lt;span style=&#34;color:#728e00&#34;&gt;done&lt;/span&gt;.rs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├── mod.rs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├── pending.rs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └── traits&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ├── create.rs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ├── delete.rs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ├── edit.rs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ├── get.rs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        └── mod.rs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;step-22-create-structs-to-model-the-domain&#34;&gt;Step 2.2: Create structs to model the domain&lt;/h3&gt;&#xA;&lt;p&gt;We model the domain of our application by expressing &lt;em&gt;things (a todo-list item)&lt;/em&gt; as structs and &lt;em&gt;processes (deleting a todo-list item)&lt;/em&gt; as traits.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>🦀 Full Stack P06</title>
+      <link>http://localhost:60544/blog/2022/04/04/full-stack-p06/</link>
+      <pubDate>Mon, 04 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2022/04/04/full-stack-p06/</guid>
+      <description>&lt;h2 id=&#34;step-6-data-persistence-with-postgresql&#34;&gt;Step 6: Data Persistence with PostgreSQL&lt;/h2&gt;&#xA;&lt;h3 id=&#34;step-61-install-docker-desktop-engine&#34;&gt;Step 6.1: Install Docker Desktop Engine&lt;/h3&gt;&#xA;&lt;p&gt;For Mac we install the Docker engine&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;https://docs.docker.com/desktop/mac/install/&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;brew install --cask docker&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;&#xA;&lt;p&gt;Also make sure to create an account on Docker Hub (we can think of Docker Hub as a Github for containers).&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Docker Compose relies on Docker Engine so we need to have that installed.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Docker Desktop for Mac includes Compose along with other Docker apps, so Mac users do not need to install Compose separately.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

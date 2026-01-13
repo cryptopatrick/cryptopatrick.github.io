@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>QuickStart on Seamless Global Nature</title>
+    <link>http://localhost:60544/tags/quickstart/</link>
+    <description>Recent content in QuickStart on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Fri, 26 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:60544/tags/quickstart/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🧗‍♂️ Quick Start: MLX</title>
+      <link>http://localhost:60544/blog/2025/09/26/%EF%B8%8F-quick-start-mlx/</link>
+      <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/09/26/%EF%B8%8F-quick-start-mlx/</guid>
+      <description>&lt;!-- ////////////////////////////////////////////////////////////////////////--&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://img.shields.io/badge/Work_In_Progress-orange.svg&#34; alt=&#34;Version:0.1.0&#34;&gt;&#xA;&lt;img src=&#34;https://img.shields.io/badge/Text_Version-0.4.5-blue.svg&#34; alt=&#34;Version:0.1.0&#34;&gt;&#xA;&lt;img src=&#34;https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg&#34; alt=&#34;Version:0.1.0&#34;&gt;&lt;/p&gt;&#xA;&lt;!--![Version:0.1.0](https://img.shields.io/badge/Version-0.5.0-white.svg)  --&gt;&#xA;&lt;!--[![Version:0.1.0](https://img.shields.io/badge/File-issue-orange.svg)](https://github.com/cryptopatrick/learn_wgpu/issues)--&gt;&#xA;&lt;!-- ////////////////////////////////////////////////////////////////////////--&gt;&#xA;&lt;br&gt;&#xA;MLX core API closely follows NumPy and can work as a drop-in replacement of this famous library.&#xA;The functionality of MLX is similar to that found in PyTorch and JAX.&#xA;MLX language front-ends include: Python, Swift, C++, and C.&#xA;While many HPC architectures separate GPU from CPU memory, MLX uses a Unified memory&#xA;for both GPU and CPU operations.&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;github.com/ml-explore&#xA;hugginface&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;LM Studio uses MLX.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Felix Browder</title>
+      <link>http://localhost:60544/blog/2024/09/25/felix-browder/</link>
+      <pubDate>Wed, 25 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2024/09/25/felix-browder/</guid>
+      <description>We start from scratch and try to build our understanding of the most fundamental idea of Fixed Point Theory- &lt;strong&gt;the Banach Contraction Principle&lt;/strong&gt;.</description>
+    </item>
+  </channel>
+</rss>

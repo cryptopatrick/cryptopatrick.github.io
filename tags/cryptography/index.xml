@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cryptography on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/tags/cryptography/</link>
+    <description>Recent content in Cryptography on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Thu, 12 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/cryptography/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Block Time-Lock Messages</title>
+      <link>https://www.cryptopatrick.com/blog/2024/12/12/block-time-lock-messages/</link>
+      <pubDate>Thu, 12 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2024/12/12/block-time-lock-messages/</guid>
+      <description>Exploring how to use Bitcoin block hashes as time-dependent keys for encrypting messages that can only be decrypted after a specific block is mined.</description>
+    </item>
+  </channel>
+</rss>

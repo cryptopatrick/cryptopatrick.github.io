@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 Solana 101 - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2024/04/12/solana-101/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="https://www.cryptopatrick.com/img/post-name/name.jpg" />
+
+
+<title>🦀 Solana 101 | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 Solana 101</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      April 12, 2024
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/rust/" style="margin-left:0.25em;">rust</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/solana/" style="margin-left:0.25em;">solana</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <p>Solana is a high-performance blockchain platform designed for decentralized applications and crypto projects. It uses a unique Proof of History consensus mechanism combined with Proof of Stake to achieve fast transaction speeds and low costs. In this guide, I&rsquo;ll walk through setting up a Solana development environment and building a basic smart contract using the Anchor framework.</p>
+<h3 id="step-01-install-dependencies">Step 01: Install Dependencies</h3>
+<p>We start by installing the following deps:</p>
+<ol>
+<li><a href="https://www.rust-lang.org">Rust</a></li>
+<li><a href="https://solana.com">Solana</a></li>
+<li><a href="https://www.anchor-lang.com/docs">Anchor</a></li>
+</ol>
+<p>Install the Solana development tools.
+Running this command will install mucho,
+rust, solana, avm, anchor, solana-verify, yarn.</p>
+<blockquote>
+<p>Instead of a quickinstall we can also do a detailed installation using the <a href="https://solana.com/docs/intro/installation/dependencies">Solana docs</a> .</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>npx mucho install
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># On MacOS, we can use this command to install all dependencies.</span>
+</span></span><span style="display:flex;"><span>$ curl --proto <span style="color:#7f8c8d">&#39;=https&#39;</span> --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Verify that we got anchor installed</span>
+</span></span><span style="display:flex;"><span>$ anchor -V <span style="color:#95a5a6"># will outputs: anchor-cli 0.31.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># To install latest and use it</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># avm install latest</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># avm use latest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Initialize a Anchor project template</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># You may have to install Yarn before this next step.</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># I&#39;m on a Mac, so I simply did: brew install yarn</span>
+</span></span><span style="display:flex;"><span>$ anchor init solana_webpage
+</span></span></code></pre></div><h4 id="optional-ai-development-tools">Optional: AI Development Tools</h4>
+<p>We can setup AI tooling for Solana development</p>
+<ol>
+<li><a href="https://mcp.solana.com/">MCP</a>	- Solana has an MCP server that we can connect to improve Solana AI assisted development.</li>
+<li><a href="https://solana.com/llms.txt">LLMs.txt</a>	LLM optimized documentation that we can use to train LLMs on Solana docs.</li>
+</ol>
+<p>Anyway - if all went well with our installation then we can move on to building with Solana.</p>
+<hr>
+<h3 id="step-02-select-a-blockchain-network">Step 02: Select a blockchain network</h3>
+<p>The solana cli will be our main tool during our build process. We can use it to configure our build environment.</p>
+<p><strong>Configuration</strong></p>
+<ul>
+<li>config file</li>
+<li>rpc url and websockets url</li>
+<li>keypair path (By default, this file is stored at ~/.config/solana/id.json.)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#95a5a6"># To check our current configuration we run:</span>
+</span></span><span style="display:flex;"><span>solana config get
+</span></span></code></pre></div><p><strong>Network</strong><br>
+On Solana we have a few different networks to choose from. Let&rsquo;s go through them:</p>
+<ul>
+<li>Mainnet Beta : main net production</li>
+<li>Testnet</li>
+<li>Devnet : if we&rsquo;re building an application then this is the net we want to use.</li>
+<li>Local : Solan comes with a built-in validator for local development.</li>
+</ul>
+<pre tabindex="0"><code># Choose network
+solana config set --url mainnet-beta  # -um
+solana config set --url testnet       # -ut
+solana config set --url devnet        # -ud
+solana config set --url localhost     # -ul
+</code></pre><p><strong>Wallet</strong><br>
+We need a wallet with SOL before we can do anything on any chain. So, let&rsquo;s create a wallet and generate a keypair.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>solana-keygen new
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># View the wallet&#39;s public address.</span>
+</span></span><span style="display:flex;"><span>solana address
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Request Devnet faucet to airdrop max 5 SOL to wallet</span>
+</span></span><span style="display:flex;"><span>solana config <span style="color:#728e00">set</span> --url devnet
+</span></span><span style="display:flex;"><span>solana airdrop <span style="color:#8a7b52">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Check wallet balance</span>
+</span></span><span style="display:flex;"><span>solana balance
+</span></span></code></pre></div><blockquote>
+<p>We&rsquo;l use the local network as our validator.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#95a5a6"># First we need to configure the Solana CLI to use</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># the local cluster</span>
+</span></span><span style="display:flex;"><span>solana config <span style="color:#728e00">set</span> -ul
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Next, we start the local validator.</span>
+</span></span><span style="display:flex;"><span>solana-test-validator
+</span></span></code></pre></div><p>If everything went well, then Solana will respond with some inormation:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ solana-test-validator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Notice! No wallet available. <span style="color:#7f8c8d">`</span>solana airdrop<span style="color:#7f8c8d">`</span> localnet SOL after creating one
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Ledger location: test-ledger
+</span></span><span style="display:flex;"><span>Log: test-ledger/validator.log
+</span></span><span style="display:flex;"><span>⠄ Initializing...                                            Waiting <span style="color:#728e00">for</span> fees to stabilize 1...
+</span></span><span style="display:flex;"><span>Identity: 6Xm6q5QAN2anQUW42Gs9qsq7BYTgSeabwy91MRys6s5f
+</span></span><span style="display:flex;"><span>Genesis Hash: 2a3zWsgHgQB94tW4w1WgRAnnMd1tZmfJgLXUKcrw1zD3
+</span></span><span style="display:flex;"><span>Version: 2.1.19
+</span></span><span style="display:flex;"><span>Shred Version: <span style="color:#8a7b52">21999</span>
+</span></span><span style="display:flex;"><span>Gossip Address: 127.0.0.1:1024
+</span></span><span style="display:flex;"><span>TPU Address: 127.0.0.1:1027
+</span></span><span style="display:flex;"><span>JSON RPC URL: http://127.0.0.1:8899
+</span></span><span style="display:flex;"><span>WebSocket PubSub URL: ws://127.0.0.1:8900
+</span></span></code></pre></div><h4 id="anchor-cli">Anchor CLI</h4>
+<p>Anchor is a framework which makes it easier to build secure Solana smart contracts (sc), called <em>programs</em> in Solana.</p>
+<p>The Anchor CLI assits us in <em>writing, testing, deploying, and interacting</em> with Solana smart contracts.
+Coming from Rust, we can think of it as <em>cargo</em> but for smart contracts development.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#95a5a6"># The following command generates  a directory with</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 1) a Rust program (smart contract)</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2) a TypeScript test template</span>
+</span></span><span style="display:flex;"><span>anchor init &lt;project-name&gt;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">cd</span> &lt;project-name&gt;
+</span></span><span style="display:flex;"><span>anchor build 
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># the compiled binary is in /target/deploy</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Deploy the smart contract to the network that is</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># specified in Anchor.toml</span>
+</span></span><span style="display:flex;"><span>anchor deploy
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Test the smart contract</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Note: if we are building on localnet then Anchor</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># will start a local validator, deploy the sc, run tests</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># and when finished, stop the validator.</span>
+</span></span><span style="display:flex;"><span>anchor <span style="color:#728e00">test</span>
+</span></span></code></pre></div><hr>
+<p>We can see that we don&rsquo;t have a wallet installed.</p>
+<h1 id="step-02-build">Step 02: Build</h1>
+<p>We open our project (solana_webapp) in an editor.
+What&rsquo;s called a <em>Smart Contract</em> in Bitcoin and Ethereum, is called a <em>program</em> in Solana.
+Anchor scaffolding left us with a base that we can buld on:</p>
+<ul>
+<li>app : this is where we will put our frontend code</li>
+<li>migrations</li>
+<li>node_modules</li>
+<li>programs : this is where we will put our smart contracts.</li>
+<li>target</li>
+<li>tests</li>
+<li>Anchor.toml</li>
+<li>Cargo.toml</li>
+<li>package.json</li>
+<li>tsconfig.json</li>
+<li>yarn.lock</li>
+</ul>
+<h1 id="step-03-librs">Step 03: lib.rs</h1>
+<p>Let&rsquo;s have a look at the code that Anchor generates for us when we call <code>anchor init</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#95a5a6">// The Anchor library is imported.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">use</span> <span style="color:#434f54">anchor_lang</span><span style="color:#728e00">:</span><span style="color:#00979d">:prelude::*</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Our smart contract is provdided a unique id, which consists of a Base58 
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6">// encoding of the public key of the smart contract.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">declare_id</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;H7h2mdumYg5ssTq3e1TfU86sFwDa6UPoAWGjPF8hxuNE&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">program</span><span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">mod</span> <span style="color:#434f54">solana_webapp</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">use</span> <span style="color:#728e00">super:</span><span style="color:#00979d">:*</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">pub</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">initialize</span><span style="color:#728e00">(</span><span style="color:#434f54">ctx</span><span style="color:#728e00">:</span> <span style="color:#00979d">Context&lt;Initialize&gt;</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">Result</span><span style="color:#728e00">&lt;()&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">msg</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;Greetings from: {:?}&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">ctx</span><span style="color:#728e00">.</span><span style="color:#434f54">program_id</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Ok</span><span style="color:#728e00">(())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">derive</span><span style="color:#728e00">(</span><span style="color:#00979d">Accounts</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">struct</span> <span style="color:#434f54">Initialize</span> <span style="color:#728e00">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">account</span><span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">struct</span> <span style="color:#434f54">MyAccount</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">pub</span> <span style="color:#434f54">data</span><span style="color:#728e00">:</span> <span style="color:#00979d">u64</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><h1 id="step-4-build-early-build-often">Step 4: build early, build often</h1>
+<p>We can now build the project to make sure that everything in our toolchain and
+dependencies works:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ anchor build
+</span></span></code></pre></div><p>The build process will generate an Interface Description Language (IDL) file and compile your program to the BPF (Berkeley Packet Filter) bytecode format that Solana uses.</p>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

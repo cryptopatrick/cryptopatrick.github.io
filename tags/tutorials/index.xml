@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tutorials on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/tags/tutorials/</link>
+    <description>Recent content in Tutorials on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Mon, 22 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/tutorials/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🦀 miniFIX Tutorial | Part 08</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/22/minifix-tutorial-part-08/</link>
+      <pubDate>Mon, 22 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/22/minifix-tutorial-part-08/</guid>
+      <description>In production financial systems, security is paramount. FIX messages often contain sensitive trading information that must be protected during transmission. TLS (Transport Layer Security) provides the cryptographic foundation for secure FIX communication. This post explores building a TLS-enabled FIX acceptor using miniFIX, focusing on security best practices for financial applications.</description>
+    </item>
+    <item>
+      <title>🦀 miniFIX Tutorial | Part 07</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/21/minifix-tutorial-part-07/</link>
+      <pubDate>Sun, 21 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/21/minifix-tutorial-part-07/</guid>
+      <description>Simple Open Framing Header (SOFH) is a lightweight framing protocol often used to wrap FIX messages for reliable transport over TCP connections. When building high-throughput financial systems, combining SOFH framing with async Rust provides excellent performance characteristics. This post demonstrates how to build a SOFH-enabled TCP server using miniFIX and Tokio.</description>
+    </item>
+    <item>
+      <title>🦀 miniFIX Tutorial | Part 06</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/20/minifix-tutorial-part-06/</link>
+      <pubDate>Sat, 20 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/20/minifix-tutorial-part-06/</guid>
+      <description>Modern trading systems require interactive, user-friendly interfaces that can handle real-time market data and order management. This post explores building an interactive trading client using miniFIX with Tokio for async operations, combined with a command-line interface for trader interaction.</description>
+    </item>
+    <item>
+      <title>🦀 miniFIX Tutorial | Part 05</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/19/minifix-tutorial-part-05/</link>
+      <pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/19/minifix-tutorial-part-05/</guid>
+      <description>Modern financial systems often need to work with multiple message formats. While FIX is the standard for electronic trading, many systems also use JSON for APIs, configuration, testing, and integration with web-based interfaces. miniFIX provides seamless conversion between JSON and FIX tag=value formats, enabling flexible system architectures.</description>
+    </item>
+    <item>
+      <title>🦀 miniFIX Tutorial | Part 04</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/18/minifix-tutorial-part-04/</link>
+      <pubDate>Thu, 18 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/18/minifix-tutorial-part-04/</guid>
+      <description>While standard FIX specifications (4.0, 4.1, 4.2, 4.4, etc.) cover most trading scenarios, many organizations need custom fields and message types. Exchanges like Coinbase often extend FIX with proprietary fields for their specific business needs. miniFIX supports custom specifications through QuickFIX XML format and provides code generation capabilities to create type-safe Rust definitions.</description>
+    </item>
+    <item>
+      <title>🦀 miniFIX Tutorial | Part 03</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/17/minifix-tutorial-part-03/</link>
+      <pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/17/minifix-tutorial-part-03/</guid>
+      <description>While decoding FIX messages is essential for processing incoming data, encoding messages is equally important for sending orders, confirmations, and other trading instructions. miniFIX provides a powerful, type-safe encoder that makes creating FIX messages straightforward while maintaining the performance and reliability needed for financial applications.</description>
+    </item>
+    <item>
+      <title>🦀 miniFIX Tutorial | Part 02</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/16/minifix-tutorial-part-02/</link>
+      <pubDate>Tue, 16 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/16/minifix-tutorial-part-02/</guid>
+      <description>In real-world trading applications, FIX messages often arrive as continuous streams over network connections. Unlike processing individual complete messages, streaming scenarios require handling partial messages, buffering incomplete data, and parsing messages as they arrive. miniFIX provides excellent support for streaming FIX message decoding.</description>
+    </item>
+    <item>
+      <title>🦀 miniFIX Tutorial | Part 01</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/15/minifix-tutorial-part-01/</link>
+      <pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/15/minifix-tutorial-part-01/</guid>
+      <description>The Financial Information eXchange (FIX) protocol is the backbone of electronic trading in financial markets. If you&amp;rsquo;re building trading systems in Rust, miniFIX provides a modern, type-safe way to work with FIX messages. In this post, we&amp;rsquo;ll explore how to decode FIX messages using miniFIX&amp;rsquo;s powerful decoding capabilities.</description>
+    </item>
+  </channel>
+</rss>

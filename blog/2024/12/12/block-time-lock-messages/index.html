@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="Block Time-Lock Messages - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2024/12/12/block-time-lock-messages/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="https://www.cryptopatrick.com/img/post-name/name.jpg" />
+
+
+<title>Block Time-Lock Messages | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Block Time-Lock Messages</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      December 12, 2024
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/bitcoin/" style="margin-left:0.25em;">bitcoin</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/cryptography/" style="margin-left:0.25em;">cryptography</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/rust/" style="margin-left:0.25em;">rust</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <h2 id="key-idea">Key Idea</h2>
+<p>Bitcoin blocks are timestamped and generated approximately every 10 minutes. These timestamps, along with data from the block (e.g., block hash), can act as a dynamic, time-dependent key or seed in a cryptographic scheme.</p>
+<h2 id="how-it-works">How It Works</h2>
+<p><strong>Block Hash as Key Material:</strong>
+Use the hash of a specific Bitcoin block as part of the key material. For example, block N&rsquo;s hash (or a portion of it) could serve as the encryption key for data until block N+1 is mined.</p>
+<p><strong>Encryption Process:</strong></p>
+<ol>
+<li>Obtain the latest block hash (or a specific part of the block data)</li>
+<li>Use a cryptographic function like AES to encrypt data with the block hash as the key</li>
+</ol>
+<p><strong>Decryption Process:</strong></p>
+<ol>
+<li>The recipient waits for the corresponding block to be mined or refers to the same block that was used for encryption</li>
+<li>They retrieve the block hash from a reliable source (e.g., Bitcoin network or block explorer)</li>
+<li>Decrypt the data using the block hash as the key</li>
+</ol>
+<p><strong>Time-Locking:</strong>
+By specifying which block hash to use, you can enforce a time-locking mechanism. For example, &ldquo;This message can only be decrypted after block N+2&rdquo; requires the recipient to wait until that block is mined.</p>
+<h2 id="algorithm">Algorithm</h2>
+<ol>
+<li>At encryption time, take the current latest block_id (BID) and its blockhash - this is the root of the encryption</li>
+<li>State how much time you want to lock the message for (e.g., 20 minutes)</li>
+<li>Divide the time by the average new blocktime to get the number of block hashes that need to be collected between BID and THEN</li>
+<li>n is the number of consecutive individual blockhashes that needs to be collected, starting from the current BID</li>
+<li>Encrypt the message with the current blockhash and a private key</li>
+<li>To decrypt the message, the hash of BID + n consecutive hashes must be entered to reveal the message</li>
+</ol>
+<h2 id="implementation-in-rust">Implementation in Rust</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">sha2</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span><span style="color:#00979d">Sha256</span><span style="color:#728e00">,</span> <span style="color:#00979d">Digest</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">aes_gcm</span><span style="color:#728e00">:</span><span style="color:#00979d">:aead::</span><span style="color:#728e00">{</span><span style="color:#00979d">Aead</span><span style="color:#728e00">,</span> <span style="color:#00979d">KeyInit</span><span style="color:#728e00">,</span> <span style="color:#434f54">OsRng</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">aes_gcm</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span><span style="color:#00979d">Aes256Gcm</span><span style="color:#728e00">,</span> <span style="color:#00979d">Nonce</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">fn</span> <span style="color:#434f54">encrypt_with_block_hash</span><span style="color:#728e00">(</span><span style="color:#434f54">data</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;</span><span style="color:#728e00">[</span><span style="color:#00979d">u8</span><span style="color:#728e00">],</span> <span style="color:#434f54">block_hash</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;str</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">Vec</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">u8</span><span style="color:#728e00">&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Hash the block hash to derive a symmetric key
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">mut</span> <span style="color:#434f54">hasher</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Sha256</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">hasher</span><span style="color:#728e00">.</span><span style="color:#434f54">update</span><span style="color:#728e00">(</span><span style="color:#434f54">block_hash</span><span style="color:#728e00">.</span><span style="color:#434f54">as_bytes</span><span style="color:#728e00">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">key</span> <span style="color:#728e00">=</span> <span style="color:#434f54">hasher</span><span style="color:#728e00">.</span><span style="color:#434f54">finalize</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Use AES-GCM encryption
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">cipher</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Aes256Gcm</span><span style="color:#728e00">:</span><span style="color:#00979d">:new_from_slice</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;key</span><span style="color:#728e00">)</span><span style="color:#00979d">.expect</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">Key</span> <span style="color:#00979d">generation</span> <span style="color:#00979d">failed</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">nonce</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Nonce</span><span style="color:#728e00">:</span><span style="color:#00979d">:from_slice</span><span style="color:#728e00">(</span><span style="color:#00979d">b</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">unique</span> <span style="color:#00979d">nonce</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">);</span> <span style="color:#95a5a6">// Use a secure method to generate this in production
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">cipher</span><span style="color:#728e00">.</span><span style="color:#434f54">encrypt</span><span style="color:#728e00">(</span><span style="color:#434f54">nonce</span><span style="color:#728e00">,</span> <span style="color:#434f54">data</span><span style="color:#728e00">).</span><span style="color:#434f54">expect</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;Encryption failed&#34;</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><p><strong>Decrypt:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">fn</span> <span style="color:#434f54">decrypt_with_block_hash</span><span style="color:#728e00">(</span><span style="color:#434f54">encrypted_data</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;</span><span style="color:#728e00">[</span><span style="color:#00979d">u8</span><span style="color:#728e00">],</span> <span style="color:#434f54">block_hash</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;str</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">Vec</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">u8</span><span style="color:#728e00">&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">mut</span> <span style="color:#434f54">hasher</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Sha256</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">hasher</span><span style="color:#728e00">.</span><span style="color:#434f54">update</span><span style="color:#728e00">(</span><span style="color:#434f54">block_hash</span><span style="color:#728e00">.</span><span style="color:#434f54">as_bytes</span><span style="color:#728e00">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">key</span> <span style="color:#728e00">=</span> <span style="color:#434f54">hasher</span><span style="color:#728e00">.</span><span style="color:#434f54">finalize</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">cipher</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Aes256Gcm</span><span style="color:#728e00">:</span><span style="color:#00979d">:new_from_slice</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;key</span><span style="color:#728e00">)</span><span style="color:#00979d">.expect</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">Key</span> <span style="color:#00979d">generation</span> <span style="color:#00979d">failed</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">nonce</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Nonce</span><span style="color:#728e00">:</span><span style="color:#00979d">:from_slice</span><span style="color:#728e00">(</span><span style="color:#00979d">b</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">unique</span> <span style="color:#00979d">nonce</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">);</span> <span style="color:#95a5a6">// Same nonce as used during encryption
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">cipher</span><span style="color:#728e00">.</span><span style="color:#434f54">decrypt</span><span style="color:#728e00">(</span><span style="color:#434f54">nonce</span><span style="color:#728e00">,</span> <span style="color:#434f54">encrypted_data</span><span style="color:#728e00">).</span><span style="color:#434f54">expect</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;Decryption failed&#34;</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><h2 id="use-cases">Use Cases</h2>
+<p><strong>Block Hash Retrieval:</strong>
+Use a Bitcoin RPC client or a block explorer API to get the latest block hash.</p>
+<p><strong>Time-Locking Messages:</strong>
+Encrypt messages that can only be decrypted after a specific block is mined.</p>
+<p><strong>Proof of Time:</strong>
+The encryption key&rsquo;s dependency on the block hash proves that the data was encrypted at a specific point in the blockchain timeline.</p>
+<h2 id="dependencies">Dependencies</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#728e00">[</span><span style="color:#00979d">dependencies</span><span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">aes</span><span style="color:#728e00">-</span><span style="color:#434f54">gcm</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;0.10&#34;</span> <span style="color:#728e00">#</span> <span style="color:#434f54">AES</span><span style="color:#728e00">-</span><span style="color:#434f54">GCM</span> <span style="color:#728e00">for</span> <span style="color:#434f54">encryption</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">aes</span><span style="color:#728e00">-</span><span style="color:#434f54">gcm</span><span style="color:#728e00">-</span><span style="color:#434f54">siv</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;0.10&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">rand</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;0.8&#34;</span> <span style="color:#728e00">#</span> <span style="color:#434f54">For</span> <span style="color:#434f54">generating</span> <span style="color:#434f54">random</span> <span style="color:#434f54">initialization</span> <span style="color:#434f54">vectors</span> <span style="color:#728e00">(</span><span style="color:#434f54">IVs</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">clap</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;4.0&#34;</span> <span style="color:#728e00">#</span> <span style="color:#434f54">Command</span><span style="color:#728e00">-</span><span style="color:#434f54">line</span> <span style="color:#434f54">argument</span> <span style="color:#434f54">parsing</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">aes_gcm</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span><span style="color:#00979d">Aes256Gcm</span><span style="color:#728e00">,</span> <span style="color:#00979d">KeyInit</span><span style="color:#728e00">,</span> <span style="color:#434f54">Nonce</span><span style="color:#728e00">};</span> <span style="color:#95a5a6">// Or `Aes128Gcm`
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">use</span> <span style="color:#434f54">aes_gcm</span><span style="color:#728e00">:</span><span style="color:#00979d">:aead::</span><span style="color:#728e00">{</span><span style="color:#00979d">Aead</span><span style="color:#728e00">,</span> <span style="color:#00979d">OsRng</span><span style="color:#728e00">};</span> <span style="color:#95a5a6">// Random number generator
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">use</span> <span style="color:#434f54">clap</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span><span style="color:#00979d">Parser</span><span style="color:#728e00">,</span> <span style="color:#00979d">Subcommand</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">std</span><span style="color:#728e00">:</span><span style="color:#00979d">:fs</span><span style="color:#728e00">;</span>
+</span></span></code></pre></div><h2 id="command-line-interface">Command-Line Interface</h2>
+<p><strong>CLI Structure:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#95a5a6">/// Struct for command-line argument parsing
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">#[</span><span style="color:#00979d">derive</span><span style="color:#728e00">(</span><span style="color:#00979d">Parser</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">command</span><span style="color:#728e00">(</span><span style="color:#00979d">name</span> <span style="color:#00979d">=</span> <span style="color:#a61717">&#34;</span><span style="color:#00979d">File</span> <span style="color:#00979d">Encryptor</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">command</span><span style="color:#728e00">(</span><span style="color:#00979d">about</span> <span style="color:#00979d">=</span> <span style="color:#a61717">&#34;</span><span style="color:#00979d">Encrypt</span> <span style="color:#00979d">and</span> <span style="color:#00979d">decrypt</span> <span style="color:#00979d">files</span> <span style="color:#00979d">using</span> <span style="color:#00979d">a</span> <span style="color:#00979d">password</span><span style="color:#a61717">&#34;</span>, <span style="color:#00979d">long_about</span> <span style="color:#00979d">=</span> <span style="color:#00979d">None</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">struct</span> <span style="color:#434f54">Cli</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">#[</span><span style="color:#00979d">command</span><span style="color:#728e00">(</span><span style="color:#00979d">subcommand</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">operation</span><span style="color:#728e00">:</span> <span style="color:#00979d">Operation</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">derive</span><span style="color:#728e00">(</span><span style="color:#00979d">Subcommand</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">enum</span> <span style="color:#434f54">Operation</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Encrypt</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">#[</span><span style="color:#00979d">arg</span><span style="color:#728e00">(</span><span style="color:#00979d">short</span>, <span style="color:#00979d">long</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">input</span><span style="color:#728e00">:</span> <span style="color:#00979d">String</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">#[</span><span style="color:#00979d">arg</span><span style="color:#728e00">(</span><span style="color:#00979d">short</span>, <span style="color:#00979d">long</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">output</span><span style="color:#728e00">:</span> <span style="color:#00979d">String</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">#[</span><span style="color:#00979d">arg</span><span style="color:#728e00">(</span><span style="color:#00979d">short</span>, <span style="color:#00979d">long</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">password</span><span style="color:#728e00">:</span> <span style="color:#00979d">String</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Decrypt</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">#[</span><span style="color:#00979d">arg</span><span style="color:#728e00">(</span><span style="color:#00979d">short</span>, <span style="color:#00979d">long</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">input</span><span style="color:#728e00">:</span> <span style="color:#00979d">String</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">#[</span><span style="color:#00979d">arg</span><span style="color:#728e00">(</span><span style="color:#00979d">short</span>, <span style="color:#00979d">long</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">output</span><span style="color:#728e00">:</span> <span style="color:#00979d">String</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">#[</span><span style="color:#00979d">arg</span><span style="color:#728e00">(</span><span style="color:#00979d">short</span>, <span style="color:#00979d">long</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">password</span><span style="color:#728e00">:</span> <span style="color:#00979d">String</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">},</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">fn</span> <span style="color:#434f54">derive_key</span><span style="color:#728e00">(</span><span style="color:#434f54">password</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;str</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#728e00">[</span><span style="color:#00979d">u8</span><span style="color:#a61717">;</span> <span style="color:#a61717">32</span><span style="color:#728e00">]</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">mut</span> <span style="color:#434f54">hasher</span> <span style="color:#728e00">=</span> <span style="color:#434f54">sha2</span><span style="color:#728e00">:</span><span style="color:#00979d">:Sha256::new</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">hasher</span><span style="color:#728e00">.</span><span style="color:#434f54">update</span><span style="color:#728e00">(</span><span style="color:#434f54">password</span><span style="color:#728e00">.</span><span style="color:#434f54">as_bytes</span><span style="color:#728e00">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">result</span> <span style="color:#728e00">=</span> <span style="color:#434f54">hasher</span><span style="color:#728e00">.</span><span style="color:#434f54">finalize</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">mut</span> <span style="color:#434f54">key</span> <span style="color:#728e00">=</span> <span style="color:#728e00">[</span><span style="color:#a61717">0</span><span style="color:#00979d">u8</span><span style="color:#a61717">;</span> <span style="color:#a61717">32</span><span style="color:#728e00">];</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">key</span><span style="color:#728e00">.</span><span style="color:#434f54">copy_from_slice</span><span style="color:#728e00">(&amp;</span><span style="color:#434f54">result</span><span style="color:#728e00">[</span><span style="color:#00979d">..</span><span style="color:#a61717">32</span><span style="color:#728e00">]);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">key</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">fn</span> <span style="color:#434f54">encrypt_file</span><span style="color:#728e00">(</span><span style="color:#434f54">input_path</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;str</span><span style="color:#728e00">,</span> <span style="color:#434f54">output_path</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;str</span><span style="color:#728e00">,</span> <span style="color:#434f54">password</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;str</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">Result</span><span style="color:#728e00">&lt;(),</span> <span style="color:#434f54">Box</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">dyn</span> <span style="color:#434f54">std</span><span style="color:#728e00">:</span><span style="color:#00979d">:error::Error&gt;&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00979d">let</span> <span style="color:#00979d">plaintext</span> <span style="color:#728e00">=</span> <span style="color:#00979d">fs::read</span><span style="color:#728e00">(</span><span style="color:#00979d">input_path</span><span style="color:#728e00">)</span><span style="color:#00979d">?</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">key</span> <span style="color:#728e00">=</span> <span style="color:#434f54">derive_key</span><span style="color:#728e00">(</span><span style="color:#434f54">password</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">cipher</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Aes256Gcm</span><span style="color:#728e00">:</span><span style="color:#00979d">:new_from_slice</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;key</span><span style="color:#728e00">)</span><span style="color:#00979d">.expect</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">Invalid</span> <span style="color:#00979d">key</span> <span style="color:#00979d">length</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">nonce</span> <span style="color:#728e00">=</span> <span style="color:#434f54">aes_gcm</span><span style="color:#728e00">:</span><span style="color:#00979d">:Nonce::from_slice</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;rand::random::&lt;</span><span style="color:#728e00">[</span><span style="color:#00979d">u8</span><span style="color:#a61717">;</span> <span style="color:#a61717">12</span><span style="color:#728e00">]</span><span style="color:#00979d">&gt;</span><span style="color:#728e00">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">ciphertext</span> <span style="color:#728e00">=</span> <span style="color:#434f54">cipher</span><span style="color:#728e00">.</span><span style="color:#434f54">encrypt</span><span style="color:#728e00">(</span><span style="color:#434f54">nonce</span><span style="color:#728e00">,</span> <span style="color:#434f54">plaintext</span><span style="color:#728e00">.</span><span style="color:#434f54">as_ref</span><span style="color:#728e00">())</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">expect</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;Encryption failed&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">mut</span> <span style="color:#434f54">output_data</span> <span style="color:#728e00">=</span> <span style="color:#434f54">nonce</span><span style="color:#728e00">.</span><span style="color:#434f54">to_vec</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">output_data</span><span style="color:#728e00">.</span><span style="color:#434f54">extend_from_slice</span><span style="color:#728e00">(&amp;</span><span style="color:#434f54">ciphertext</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fs</span><span style="color:#728e00">:</span><span style="color:#00979d">:write</span><span style="color:#728e00">(</span><span style="color:#00979d">output_path</span><span style="color:#728e00">,</span> <span style="color:#00979d">output_data</span><span style="color:#728e00">)?;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;File encrypted successfully!&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Ok</span><span style="color:#728e00">(())</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">fn</span> <span style="color:#434f54">decrypt_file</span><span style="color:#728e00">(</span><span style="color:#434f54">input_path</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;str</span><span style="color:#728e00">,</span> <span style="color:#434f54">output_path</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;str</span><span style="color:#728e00">,</span> <span style="color:#434f54">password</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;str</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">Result</span><span style="color:#728e00">&lt;(),</span> <span style="color:#434f54">Box</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">dyn</span> <span style="color:#434f54">std</span><span style="color:#728e00">:</span><span style="color:#00979d">:error::Error&gt;&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00979d">let</span> <span style="color:#00979d">input_data</span> <span style="color:#728e00">=</span> <span style="color:#00979d">fs::read</span><span style="color:#728e00">(</span><span style="color:#00979d">input_path</span><span style="color:#728e00">)</span><span style="color:#00979d">?</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#728e00">(</span><span style="color:#434f54">nonce</span><span style="color:#728e00">,</span> <span style="color:#434f54">ciphertext</span><span style="color:#728e00">)</span> <span style="color:#728e00">=</span> <span style="color:#434f54">input_data</span><span style="color:#728e00">.</span><span style="color:#434f54">split_at</span><span style="color:#728e00">(</span><span style="color:#8a7b52">12</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">key</span> <span style="color:#728e00">=</span> <span style="color:#434f54">derive_key</span><span style="color:#728e00">(</span><span style="color:#434f54">password</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">cipher</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Aes256Gcm</span><span style="color:#728e00">:</span><span style="color:#00979d">:new_from_slice</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;key</span><span style="color:#728e00">)</span><span style="color:#00979d">.expect</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">Invalid</span> <span style="color:#00979d">key</span> <span style="color:#00979d">length</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">plaintext</span> <span style="color:#728e00">=</span> <span style="color:#434f54">cipher</span><span style="color:#728e00">.</span><span style="color:#434f54">decrypt</span><span style="color:#728e00">(</span><span style="color:#434f54">Nonce</span><span style="color:#728e00">:</span><span style="color:#00979d">:from_slice</span><span style="color:#728e00">(</span><span style="color:#00979d">nonce</span><span style="color:#728e00">),</span> <span style="color:#434f54">ciphertext</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">expect</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;Decryption failed: Incorrect password or corrupted file&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fs</span><span style="color:#728e00">:</span><span style="color:#00979d">:write</span><span style="color:#728e00">(</span><span style="color:#00979d">output_path</span><span style="color:#728e00">,</span> <span style="color:#00979d">plaintext</span><span style="color:#728e00">)?;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;File decrypted successfully!&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Ok</span><span style="color:#728e00">(())</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">fn</span> <span style="color:#434f54">main</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">cli</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Cli</span><span style="color:#728e00">:</span><span style="color:#00979d">:parse</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">match</span> <span style="color:#434f54">cli</span><span style="color:#728e00">.</span><span style="color:#434f54">operation</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Operation</span><span style="color:#728e00">:</span><span style="color:#00979d">:Encrypt</span> <span style="color:#728e00">{</span> <span style="color:#00979d">input</span><span style="color:#728e00">,</span> <span style="color:#00979d">output</span><span style="color:#728e00">,</span> <span style="color:#434f54">password</span> <span style="color:#728e00">}</span> <span style="color:#728e00">=&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">if</span> <span style="color:#434f54">let</span> <span style="color:#434f54">Err</span><span style="color:#728e00">(</span><span style="color:#434f54">e</span><span style="color:#728e00">)</span> <span style="color:#728e00">=</span> <span style="color:#434f54">encrypt_file</span><span style="color:#728e00">(&amp;</span><span style="color:#434f54">input</span><span style="color:#728e00">,</span> <span style="color:#728e00">&amp;</span><span style="color:#434f54">output</span><span style="color:#728e00">,</span> <span style="color:#728e00">&amp;</span><span style="color:#434f54">password</span><span style="color:#728e00">)</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">eprintln</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;Error during encryption: {}&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">e</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Operation</span><span style="color:#728e00">:</span><span style="color:#00979d">:Decrypt</span> <span style="color:#728e00">{</span> <span style="color:#00979d">input</span><span style="color:#728e00">,</span> <span style="color:#00979d">output</span><span style="color:#728e00">,</span> <span style="color:#434f54">password</span> <span style="color:#728e00">}</span> <span style="color:#728e00">=&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">if</span> <span style="color:#434f54">let</span> <span style="color:#434f54">Err</span><span style="color:#728e00">(</span><span style="color:#434f54">e</span><span style="color:#728e00">)</span> <span style="color:#728e00">=</span> <span style="color:#434f54">decrypt_file</span><span style="color:#728e00">(&amp;</span><span style="color:#434f54">input</span><span style="color:#728e00">,</span> <span style="color:#728e00">&amp;</span><span style="color:#434f54">output</span><span style="color:#728e00">,</span> <span style="color:#728e00">&amp;</span><span style="color:#434f54">password</span><span style="color:#728e00">)</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">eprintln</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;Error during decryption: {}&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">e</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><h2 id="how-the-encryption-works">How The Encryption Works</h2>
+<p><strong>Key Derivation:</strong></p>
+<ul>
+<li>A SHA-256 hash of the password is used as the encryption key</li>
+<li>This ensures consistent and strong key generation</li>
+</ul>
+<p><strong>Nonce:</strong></p>
+<ul>
+<li>A 12-byte random nonce is generated for each encryption</li>
+<li>It is prepended to the ciphertext and stored in the output file</li>
+</ul>
+<p><strong>Encrypt/Decrypt Workflow:</strong></p>
+<ul>
+<li>During encryption, the file content is read, encrypted with AES-GCM, and written along with the nonce to the output file</li>
+<li>During decryption, the nonce is extracted, and the ciphertext is decrypted</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p><strong>Encrypt a file:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo run -- encrypt -i input.txt -o encrypted.bin -p mypassword
+</span></span></code></pre></div><p><strong>Decrypt a file:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo run -- decrypt -i encrypted.bin -o decrypted.txt -p mypassword
+</span></span></code></pre></div><h2 id="security-notes">Security Notes</h2>
+<p><strong>Password Strength:</strong>
+Ensure the password is strong, as it directly affects the security of the encryption.</p>
+<p><strong>Nonce Management:</strong>
+The nonce is unique per file and stored with the ciphertext. Reusing nonces with the same key would compromise security.</p>
+<p><strong>Error Handling:</strong>
+The program gracefully handles errors, like incorrect passwords or corrupted files, and informs the user.</p>
+<p>This program is secure and flexible for encrypting and decrypting files with a password. You can extend it further by adding support for key files or integrating it with a secure storage system.</p>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

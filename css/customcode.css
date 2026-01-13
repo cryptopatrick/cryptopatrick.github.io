@@ -25,9 +25,79 @@ code {
     .nav-item .level-item {
         font-size: 0;
     }
-    
+
     .nav-item .level-item .icon {
         font-size: 1rem;
         margin-right: 0 !important;
     }
+}
+
+/* Remove underline from image links */
+a img {
+    text-decoration: none;
+    border: 0;
+}
+
+/* Remove border-bottom from links containing images */
+.content a:has(img) {
+    border-bottom: none !important;
+}
+
+/* Fallback for older browsers */
+.content a img {
+    display: block;
+}
+
+.content figure a {
+    border-bottom: none !important;
+}
+
+/* Reduce h2 top spacing by 30% */
+.content h2:not(:first-child) {
+    margin-top: 28px !important;
+}
+
+@media screen and (min-width: 1024px) {
+    .content h2:not(:first-child) {
+        margin-top: 56px !important;
+    }
+}
+
+/* Tag filter styling */
+.tag-filter-bar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-tag {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: white !important;
+    border: 1px solid black !important;
+    border-radius: 3px !important;
+    font-size: 0.8em !important;
+    color: black !important;
+}
+
+.filter-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    background-color: #f5f5f5 !important;
+}
+
+.filter-tag.active {
+    font-weight: bold;
+    background-color: #333 !important;
+    color: white !important;
+    border-color: #333 !important;
+}
+
+/* Increase spacing between numbered list items by 40% */
+.content ol li+li {
+    margin-top: 0.35em !important;
+}
+
+/* Increase spacing between navbar items by 40% */
+.level-left .level-item:not(:last-child),
+.level-right .level-item:not(:last-child) {
+    margin-right: 14px !important;
 }

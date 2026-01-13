@@ -10,11 +10,18 @@
     <lastBuildDate>Tue, 10 Dec 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.cryptopatrick.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>The TypeState Pattern</title>
+      <title>🦀 The TypeState Pattern</title>
       <link>https://www.cryptopatrick.com/blog/2024/12/10/the-typestate-pattern/</link>
       <pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
       <guid>https://www.cryptopatrick.com/blog/2024/12/10/the-typestate-pattern/</guid>
       <description>TypeState is a powerful design pattern that we can use to provide compiletime checks based on the state of things. This post is my way of writing about what I&amp;rsquo;m learning with the hopes that it&amp;rsquo;ll stick better.</description>
+    </item>
+    <item>
+      <title>🦀 Const Generics</title>
+      <link>https://www.cryptopatrick.com/blog/2024/12/06/const-generics/</link>
+      <pubDate>Fri, 06 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2024/12/06/const-generics/</guid>
+      <description>A look at const generics in Rust, explained through a Dungeons &amp;amp; Dragons magic system analogy.</description>
     </item>
   </channel>
 </rss>

@@ -1311,7 +1311,7 @@ a.box:active {
     background-color: transparent;
     border-color: transparent;
     color: #42464c;
-    text-decoration: underline
+    text-decoration: none
 }
 
 .button.is-link:hover,
@@ -5427,8 +5427,7 @@ a.nav-item.is-tab.is-active {
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     justify-content: flex-start;
-    overflow: hidden;
-    overflow-x: auto;
+    overflow: visible;
     white-space: nowrap
 }
 

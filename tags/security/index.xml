@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on Seamless Global Nature</title>
+    <link>http://localhost:60544/tags/security/</link>
+    <description>Recent content in Security on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Tue, 28 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:60544/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🔐 x402 on Solana </title>
+      <link>http://localhost:60544/blog/2025/10/28/x402-on-solana/</link>
+      <pubDate>Tue, 28 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/10/28/x402-on-solana/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>📐 Exploring Blockchain Primitives</title>
+      <link>http://localhost:60544/blog/2025/10/10/exploring-blockchain-primitives/</link>
+      <pubDate>Fri, 10 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/10/10/exploring-blockchain-primitives/</guid>
+      <description>Having spent considerable time with mathematics, Python, and reading up on Ai, I wanted to spend the next couple of weeks revising my Rust knowledge, from the ground up. I&amp;rsquo;ll be writing short posts everyday where I cover the language, idiomatic patterns, and interesting crates. This series is inspired by one of my favorite artists, Beeple, who creates a piece of art everyday - hence the title of this series (Rust: Everyday).</description>
+    </item>
+  </channel>
+</rss>

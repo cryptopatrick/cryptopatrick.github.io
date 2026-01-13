@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ai on Seamless Global Nature</title>
+    <link>http://localhost:60544/tags/ai/</link>
+    <description>Recent content in Ai on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Mon, 03 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:60544/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quickstart: Corbits x402</title>
+      <link>http://localhost:60544/blog/2025/11/03/quickstart-corbits-x402/</link>
+      <pubDate>Mon, 03 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/11/03/quickstart-corbits-x402/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>🧗‍♂️ Quick Start: MLX</title>
+      <link>http://localhost:60544/blog/2025/09/26/%EF%B8%8F-quick-start-mlx/</link>
+      <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/09/26/%EF%B8%8F-quick-start-mlx/</guid>
+      <description>&lt;!-- ////////////////////////////////////////////////////////////////////////--&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://img.shields.io/badge/Work_In_Progress-orange.svg&#34; alt=&#34;Version:0.1.0&#34;&gt;&#xA;&lt;img src=&#34;https://img.shields.io/badge/Text_Version-0.4.5-blue.svg&#34; alt=&#34;Version:0.1.0&#34;&gt;&#xA;&lt;img src=&#34;https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg&#34; alt=&#34;Version:0.1.0&#34;&gt;&lt;/p&gt;&#xA;&lt;!--![Version:0.1.0](https://img.shields.io/badge/Version-0.5.0-white.svg)  --&gt;&#xA;&lt;!--[![Version:0.1.0](https://img.shields.io/badge/File-issue-orange.svg)](https://github.com/cryptopatrick/learn_wgpu/issues)--&gt;&#xA;&lt;!-- ////////////////////////////////////////////////////////////////////////--&gt;&#xA;&lt;br&gt;&#xA;MLX core API closely follows NumPy and can work as a drop-in replacement of this famous library.&#xA;The functionality of MLX is similar to that found in PyTorch and JAX.&#xA;MLX language front-ends include: Python, Swift, C++, and C.&#xA;While many HPC architectures separate GPU from CPU memory, MLX uses a Unified memory&#xA;for both GPU and CPU operations.&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;github.com/ml-explore&#xA;hugginface&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;LM Studio uses MLX.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>🤖 Ai: Fair Use</title>
+      <link>http://localhost:60544/blog/2025/07/06/ai-fair-use/</link>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/07/06/ai-fair-use/</guid>
+      <description>Having spent considerable time with mathematics, Python, and reading up on Ai, I wanted to spend the next couple of weeks revising my Rust knowledge, from the ground up. I&amp;rsquo;ll be writing short posts everyday where I cover the language, idiomatic patterns, and interesting crates. This series is inspired by one of my favorite artists, Beeple, who creates a piece of art everyday - hence the title of this series (Rust: Everyday).</description>
+    </item>
+    <item>
+      <title>🤖 Diffusion Models 101</title>
+      <link>http://localhost:60544/blog/2025/06/08/diffusion-models-101/</link>
+      <pubDate>Sun, 08 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/06/08/diffusion-models-101/</guid>
+      <description>&lt;br&gt;&#xA;&lt;p&gt;Notes:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;related to Markov Chains&lt;/li&gt;&#xA;&lt;li&gt;are probabilitic models&lt;/li&gt;&#xA;&lt;li&gt;idea introduced in C. Spearman, The proof and measurement of association between two things, Am. J. Psychol. 100 (3-4)&#xA;(1987) 441-471 (republished).&lt;/li&gt;&#xA;&lt;li&gt;related to statictical physics&lt;/li&gt;&#xA;&lt;li&gt;2-stage process to generate model&lt;/li&gt;&#xA;&lt;li&gt;first - iteratively destroy structure in data (forward or diffusion)&lt;/li&gt;&#xA;&lt;li&gt;second- learn to reverse the process and restore structure&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;diffusion-process---three-directions&#34;&gt;Diffusion Process - Three Directions&lt;/h2&gt;&#xA;&lt;p&gt;We diffuse the data by adding Gaussian noise to it in a step-wise manner.&#xA;There are three main ways to implement the diffusion model:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>🤖 Agent Architecture</title>
+      <link>http://localhost:60544/blog/2025/05/14/agent-architecture/</link>
+      <pubDate>Wed, 14 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/05/14/agent-architecture/</guid>
+      <description>A look at Agent infrastructure using Opik.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60544&amp;path=livereload" data-no-instant defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🤖 Ai: RL.101_CH02 - Seamless Global Nature">
+<meta property="og:url" content="http://localhost:60544/blog/2025/05/13/ai-rl.101_ch02/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="http://localhost:60544/img/post-name/name.jpg" />
+
+
+<title>🤖 Ai: RL.101_CH02 | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="http://localhost:60544//css/style.css">
+<link rel="stylesheet" href="http://localhost:60544//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="http://localhost:60544/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="http://localhost:60544/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="http://localhost:60544/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🤖 Ai: RL.101_CH02</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      May 13, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/" style="margin-left:0.25em;"></a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/" style="margin-left:0.25em;"></a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <h2 id="the-k-armed-bandit-problem">The k-armed Bandit Problem</h2>
+<p>We have an <em>agent</em> who chooses between $k$ different <em>actions</em>
+and receives a <em>reward</em> based on the action chosen.
+For example, a doctor chooses between $k$=three different aspirines,  A, B, and C, with the hopes of treating a patient with a fever.</p>
+<p>Each different treatment is an action that can <em>yield</em> some
+unknown <em>reward</em>, expressed as the welbeing of the patient <em>after</em> being treated with one of the three aspirines.</p>
+<h3 id="the-action-value-function">The Action-Value Function</h3>
+<p>We start by defining the following concepts:</p>
+<ul>
+<li>$a$: an arbitrary action</li>
+<li>$A_t$: action selected at time $t$.</li>
+<li>$R_t$: reward received at time $t$.</li>
+<li>$ \mathbb{E} [\;]$: expectation</li>
+</ul>
+<p>We define <em>the value</em> of action $a$, $q_*(a)$, as the expected reward for taking action $a$ at time $t$, for each possible action $a_k$:</p>
+<p>$$q_*(a) \dot{=} \mathbb{E} [  R_t \vert A_t = a]
+\\
+\forall a \in \{1, \dots, k\}$$</p>
+<p>It&rsquo;s important to note that we may not <em>know</em> the reward, $R_t$, it may only be our <em>estimate</em> of taking action $a$ and time $t$, which we denote $Q_t(a)$.<br>
+Our goal is for $Q_t(a)$to be close to $q_t(a)$.</p>
+<p>$$A_t\, \dot{=}\, \underset{a}{argmax}\; Q_t(a)$$</p>
+<p>A commander chooses between 3 different types of aerial drones to deploy on reconnaissance missions:</p>
+<ul>
+<li>Drone A: Lightweight, agile.</li>
+<li>Drone B: Medium range, balanced sensors.</li>
+<li>Drone C: Heavyweight, long-range.</li>
+</ul>
+<p>Each deployment gives a reconnaissance value (reward), which varies and is initially unknown. Over time, the commander learns which drone gives the best average reconnaissance value.</p>
+<p>Action (a) → Choice of Drone (A, B, C)</p>
+<p>Reward (Rt) → Recon value from a mission (simulated randomly)</p>
+<p>Estimate Qt(a) → Running average of rewards per drone</p>
+<p>Goal: Learn to pick the drone with the best reward (explore/exploit)
+<img src="https://img.shields.io/badge/Work_In_Progress-orange.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Text_Version-0.4.5-blue.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg" alt="Version:0.1.0"></p>
+<!--![Version:0.1.0](https://img.shields.io/badge/Version-0.5.0-white.svg)  -->
+<!--[![Version:0.1.0](https://img.shields.io/badge/File-issue-orange.svg)](https://github.com/cryptopatrick/learn_wgpu/issues)-->
+<br>
+<blockquote>
+<p><strong>Preface:</strong> I recently coded a tiny Rust library,</p>
+</blockquote>
+<blockquote>
+<p><strong>Code:</strong> The complete source code is available on my <a href="https://github.com/cryptopatrick/timed_release_crypto">GitHub</a>.</p>
+</blockquote>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h2 id="to-send-a-message-into-the-future">To send a message into the future</h2>
+<p><figure><img src="../../../../../img/time-lock-message/rebellion.jpg">
+</figure>
+<br>
+<strong>▲<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></strong> A Rebel ship orbiting above the Federation&rsquo;s top secret military research lab, <em>The Periphery</em>.</p>
+<table></table>
+<p>⠀⠀⠀⠀⠀ Dr. Angela Rae is head of <em>Space Folding Research</em> at <em>The Periphery</em>, a Top
+Secret remote Federation research facility located on the surface of a small
+is racing through everyone&rsquo;s mind - &ldquo;How did they find us?&rdquo;.<br>
+⠀⠀⠀⠀⠀ Up there, orbiting at a chill 26,000 miles, is death. Having covertly decelerated in the radar shadow of a nearby moon, the Rebel ship</p>
+<center>"...by taking the fixed 
+numerical value of the caesium frequency $\delta ν_{Cs}$, the unperturbed 
+ground-state hyperfine transition frequency of the caesium-133 atom, to be 9 192 631 770 
+when expressed in the unit Hz, which is equal to $s^{–1}$."
+</center>
+<p>Emojis: Did you get that? I kinda didn&rsquo;t! 😂 🤷‍♂️</p>
+<p><strong>The Future</strong></p>
+<p>If we&rsquo;re trying to send a message into the future, then we need to spend some</p>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="-pmbonlocks-version010httpsimgshieldsiobadgeversion20020-ffffffsvg">🔒 $\pmb{On\;locks}$ <img src="https://img.shields.io/badge/Version%200.2.0-FFFFFF.svg" alt="Version:0.1.0"></h3>
+<p><strong>List of topics to cover (briefly):</strong> <br>
+[ ] Carmicheal Numbers and the need for primality testing of huge numbers<br>
+[x] Probabilitic Primality Testing with Rabin-Miller</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Step</th>
+          <th style="text-align: left">Process</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><a href="#step-0-preparing-the-payload">0.</a></td>
+          <td style="text-align: left">Gather message data, calculate time-lock duration, estimate attacker&rsquo;s squaring power</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-1-compute-the-composite-modulus">1.</a></td>
+          <td style="text-align: left">Choose two secret primes, $p$ and $q$, and compute the composite modulus: $n=p \cdot q$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-2-the-euler-phi-function">2.</a></td>
+          <td style="text-align: left">Compute the Euler Phi function: $\phi(n)$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-3-compute-the-puzzle-strength">3.</a></td>
+          <td style="text-align: left">Compute the difficulty of the time-lock puzzle: $t=T \cdot S$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-4-generating-the-key-to-the-kingdom">4.</a></td>
+          <td style="text-align: left">Generate the private key for an AES-GCM cryptosystem: $C_K$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-5-encrypting-a-lives-work">5.</a></td>
+          <td style="text-align: left">Pick random $a$ modulo $n$ and encrypt $K$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-6-constructing-the-cipher-key">6.</a></td>
+          <td style="text-align: left">Encrypt the message $M$ using AES-GCM and the private key  $K$:  $C_M = ENC(M,K)$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-7-endgame">7.</a></td>
+          <td style="text-align: left">Output the Time-Lock Puzzle, and delete $p$ and $q$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#appendix-how-to-solve-the-time-lock-puzzle">A.</a></td>
+          <td style="text-align: left">Optional: Provide instructions to Solver on how to solve the Puzzle</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>▲</strong> The seven steps of creating a Time-Lock Puzzle.</p>
+<hr>
+<h1 id="-implementation">🦀 Implementation</h1>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h4 id="step-0-preparing-the-payload">Step 0: Preparing the Payload</h4>
+<p>$M$: <strong>Message to Protect</strong><br>
+Dr. Angela Rae, and her team of fellow researchers, have quickly collected all</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Ai-generated image of Rebel spaceship.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

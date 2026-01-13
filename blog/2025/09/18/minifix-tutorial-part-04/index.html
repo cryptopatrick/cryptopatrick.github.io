@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 miniFIX Tutorial | Part 04 - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2025/09/18/minifix-tutorial-part-04/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+
+<title>🦀 miniFIX Tutorial | Part 04 | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 miniFIX Tutorial | Part 04</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      September 18, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/rust/" style="margin-left:0.25em;">Rust</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <h1 id="custom-fix-specifications-and-code-generation-with-minifix">Custom FIX Specifications and Code Generation with miniFIX</h1>
+<h2 id="introduction">Introduction</h2>
+<p>While standard FIX specifications (4.0, 4.1, 4.2, 4.4, etc.) cover most trading scenarios, many organizations need custom fields and message types. Exchanges like Coinbase often extend FIX with proprietary fields for their specific business needs. miniFIX supports custom specifications through QuickFIX XML format and provides code generation capabilities to create type-safe Rust definitions.</p>
+<h2 id="what-youll-learn">What You&rsquo;ll Learn</h2>
+<ul>
+<li>How to define custom FIX specifications using QuickFIX XML</li>
+<li>Loading custom dictionaries at runtime</li>
+<li>Code generation for type-safe custom fields</li>
+<li>Working with exchange-specific FIX extensions</li>
+</ul>
+<h2 id="the-problem-exchange-specific-fields">The Problem: Exchange-Specific Fields</h2>
+<p>Standard FIX doesn&rsquo;t cover all the fields that modern exchanges need. For example, Coinbase might need:</p>
+<ul>
+<li><code>TradeID</code> (1003): Unique identifier for each trade</li>
+<li><code>AggressorIndicator</code> (1057): Whether the trade was buyer or seller initiated</li>
+<li>Custom message types for cryptocurrency-specific operations</li>
+</ul>
+<h2 id="quickfix-xml-specification">QuickFIX XML Specification</h2>
+<p>miniFIX uses QuickFIX XML format to define custom specifications. Here&rsquo;s how you might define Coinbase-specific fields:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#434f54">&lt;fix</span> <span style="color:#434f54">major=</span><span style="color:#7f8c8d">&#34;4&#34;</span> <span style="color:#434f54">minor=</span><span style="color:#7f8c8d">&#34;2&#34;</span> <span style="color:#434f54">servicepack=</span><span style="color:#7f8c8d">&#34;0&#34;</span><span style="color:#434f54">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;header&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;BeginString&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;Y&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;BodyLength&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;Y&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;MsgType&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;Y&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">&lt;!-- Standard header fields --&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;/header&gt;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;messages&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;message</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;ExecutionReport&#34;</span> <span style="color:#434f54">msgtype=</span><span style="color:#7f8c8d">&#34;8&#34;</span> <span style="color:#434f54">msgcat=</span><span style="color:#7f8c8d">&#34;app&#34;</span><span style="color:#434f54">&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;TradeID&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;N&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;AggressorIndicator&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;N&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#95a5a6">&lt;!-- Other fields --&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;/message&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;/messages&gt;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;fields&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">number=</span><span style="color:#7f8c8d">&#34;1003&#34;</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;TradeID&#34;</span> <span style="color:#434f54">type=</span><span style="color:#7f8c8d">&#34;STRING&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">number=</span><span style="color:#7f8c8d">&#34;1057&#34;</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;AggressorIndicator&#34;</span> <span style="color:#434f54">type=</span><span style="color:#7f8c8d">&#34;BOOLEAN&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">&lt;!-- Standard fields --&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;/fields&gt;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;trailer&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;CheckSum&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;Y&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;/trailer&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">&lt;/fix&gt;</span>
+</span></span></code></pre></div><h2 id="loading-custom-specifications">Loading Custom Specifications</h2>
+<p>miniFIX can load custom specifications at runtime from XML:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">prelude</span>::<span style="color:#728e00">*</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">tagvalue</span>::<span style="color:#434f54">Decoder</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">const</span> <span style="color:#434f54">COINBASE_QUICKFIX_SPEC</span>: <span style="color:#00979d">&amp;</span><span style="color:#00979d">str</span> <span style="color:#728e00">=</span> <span style="color:#434f54">include_str!</span>(<span style="color:#7f8c8d">&#34;coinbase_quickfix.xml&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">create_coinbase_decoder</span>() -&gt; <span style="color:#434f54">Decoder</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">fix_dictionary</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Dictionary</span>::<span style="color:#434f54">from_quickfix_spec</span>(<span style="color:#434f54">COINBASE_QUICKFIX_SPEC</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#434f54">expect</span>(<span style="color:#7f8c8d">&#34;Failed to load Coinbase FIX specification&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Decoder</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">fix_dictionary</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="code-generation-for-type-safety">Code Generation for Type Safety</h2>
+<p>For better type safety and IDE support, you can generate Rust code from your custom specification. The build script handles this:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// build.rs
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">Dictionary</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">fs</span>::<span style="color:#434f54">File</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">io</span>::<span style="color:#434f54">Write</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">main</span>() -&gt; <span style="color:#434f54">std</span>::<span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">quickfix_spec</span> <span style="color:#728e00">=</span> <span style="color:#434f54">include_str!</span>(<span style="color:#7f8c8d">&#34;src/coinbase_quickfix.xml&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">dictionary</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Dictionary</span>::<span style="color:#434f54">from_quickfix_spec</span>(<span style="color:#434f54">quickfix_spec</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#434f54">expect</span>(<span style="color:#7f8c8d">&#34;Failed to parse QuickFIX spec&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">settings</span> <span style="color:#728e00">=</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">codegen</span>::<span style="color:#434f54">Settings</span>::<span style="color:#434f54">default</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">rust_code</span> <span style="color:#728e00">=</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">codegen</span>::<span style="color:#434f54">gen_definitions</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">dictionary</span>, <span style="color:#728e00">&amp;</span><span style="color:#434f54">settings</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">path</span> <span style="color:#728e00">=</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">path</span>::<span style="color:#434f54">PathBuf</span>::<span style="color:#434f54">from</span>(<span style="color:#434f54">std</span>::<span style="color:#434f54">env</span>::<span style="color:#434f54">var</span>(<span style="color:#7f8c8d">&#34;OUT_DIR&#34;</span>).<span style="color:#434f54">unwrap</span>())
+</span></span><span style="display:flex;"><span>        .<span style="color:#434f54">join</span>(<span style="color:#7f8c8d">&#34;coinbase_fields.rs&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">file</span> <span style="color:#728e00">=</span> <span style="color:#434f54">File</span>::<span style="color:#434f54">create</span>(<span style="color:#434f54">path</span>)<span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">file</span>.<span style="color:#434f54">write_all</span>(<span style="color:#434f54">rust_code</span>.<span style="color:#434f54">as_bytes</span>())<span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="using-generated-code">Using Generated Code</h2>
+<p>The generated code provides type-safe access to your custom fields:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// Include the generated code
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">#[allow(dead_code)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[rustfmt::skip]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">mod</span> <span style="color:#434f54">gdax</span>;  <span style="color:#95a5a6">// Generated from coinbase_quickfix.xml
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">prelude</span>::<span style="color:#728e00">*</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">tagvalue</span>::<span style="color:#434f54">Decoder</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">const</span> <span style="color:#434f54">FIX_MESSAGE_EXEC_REPORT</span>: <span style="color:#00979d">&amp;</span>[<span style="color:#00979d">u8</span>] <span style="color:#728e00">=</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;8=FIX.4.2|9=21|35=8|1003=123|1057=Y|10=090|&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">create_coinbase_decoder</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">decoder</span>.<span style="color:#434f54">config_mut</span>().<span style="color:#434f54">separator</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#39;|&#39;</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">decoder</span>
+</span></span><span style="display:flex;"><span>        .<span style="color:#434f54">decode</span>(<span style="color:#434f54">FIX_MESSAGE_EXEC_REPORT</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#434f54">expect</span>(<span style="color:#7f8c8d">&#34;Invalid FIX message&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Type-safe access to standard fields
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">assert_eq!</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">gdax</span>::<span style="color:#434f54">BEGIN_STRING</span>), <span style="color:#728e00">Ok</span>(<span style="color:#434f54">gdax</span>::<span style="color:#434f54">BeginString</span>::<span style="color:#434f54">Fix42</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">assert_eq!</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">gdax</span>::<span style="color:#434f54">MSG_TYPE</span>), <span style="color:#728e00">Ok</span>(<span style="color:#434f54">gdax</span>::<span style="color:#434f54">MsgType</span>::<span style="color:#434f54">ExecutionReport</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Type-safe access to custom fields
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">assert_eq!</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">gdax</span>::<span style="color:#434f54">TRADE_ID</span>), <span style="color:#728e00">Ok</span>(<span style="color:#7f8c8d">&#34;123&#34;</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">assert_eq!</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">gdax</span>::<span style="color:#434f54">AGGRESSOR_INDICATOR</span>), <span style="color:#728e00">Ok</span>(<span style="color:#00979d">true</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="benefits-of-code-generation">Benefits of Code Generation</h2>
+<ol>
+<li><strong>Compile-time Safety</strong>: Invalid field access caught at compile time</li>
+<li><strong>IDE Support</strong>: Auto-completion and documentation for all fields</li>
+<li><strong>Type Conversion</strong>: Automatic conversion between string and native types</li>
+<li><strong>Enum Values</strong>: Type-safe enums for fields with limited values</li>
+<li><strong>Documentation</strong>: Generated docs include field descriptions</li>
+</ol>
+<h2 id="advanced-customization">Advanced Customization</h2>
+<h3 id="custom-data-types">Custom Data Types</h3>
+<p>You can define custom validation and conversion for specific field types:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#434f54">&lt;fields&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">number=</span><span style="color:#7f8c8d">&#34;1003&#34;</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;TradeID&#34;</span> <span style="color:#434f54">type=</span><span style="color:#7f8c8d">&#34;STRING&#34;</span><span style="color:#434f54">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;description&gt;</span>Unique trade identifier<span style="color:#434f54">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;/field&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">number=</span><span style="color:#7f8c8d">&#34;9001&#34;</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;CryptoAmount&#34;</span> <span style="color:#434f54">type=</span><span style="color:#7f8c8d">&#34;AMT&#34;</span><span style="color:#434f54">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;description&gt;</span>Amount in cryptocurrency units<span style="color:#434f54">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;/field&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">&lt;/fields&gt;</span>
+</span></span></code></pre></div><h3 id="message-validation">Message Validation</h3>
+<p>Custom specifications can include validation rules:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#434f54">&lt;message</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;NewOrderSingle&#34;</span> <span style="color:#434f54">msgtype=</span><span style="color:#7f8c8d">&#34;D&#34;</span> <span style="color:#434f54">msgcat=</span><span style="color:#7f8c8d">&#34;app&#34;</span><span style="color:#434f54">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;Symbol&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;Y&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;Side&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;Y&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;OrderQty&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;Y&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;CryptoAmount&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;N&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;group</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;NoAllocs&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;N&#34;</span><span style="color:#434f54">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;AllocAccount&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;Y&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">&lt;field</span> <span style="color:#434f54">name=</span><span style="color:#7f8c8d">&#34;AllocQty&#34;</span> <span style="color:#434f54">required=</span><span style="color:#7f8c8d">&#34;Y&#34;</span><span style="color:#434f54">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">&lt;/group&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">&lt;/message&gt;</span>
+</span></span></code></pre></div><h2 id="complete-example">Complete Example</h2>
+<p>Here&rsquo;s a complete example using a custom Coinbase specification:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">#[allow(dead_code)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[rustfmt::skip]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">mod</span> <span style="color:#434f54">coinbase</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">prelude</span>::<span style="color:#728e00">*</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">tagvalue</span>::<span style="color:#434f54">Decoder</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">const</span> <span style="color:#434f54">COINBASE_SPEC</span>: <span style="color:#00979d">&amp;</span><span style="color:#00979d">str</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">r</span><span style="color:#7f8c8d">#&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f8c8d">&lt;fix major=&#34;4&#34; minor=&#34;2&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f8c8d">  &lt;fields&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f8c8d">    &lt;field number=&#34;8&#34; name=&#34;BeginString&#34; type=&#34;STRING&#34;/&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f8c8d">    &lt;field number=&#34;35&#34; name=&#34;MsgType&#34; type=&#34;STRING&#34;/&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f8c8d">    &lt;field number=&#34;1003&#34; name=&#34;TradeID&#34; type=&#34;STRING&#34;/&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f8c8d">    &lt;field number=&#34;1057&#34; name=&#34;AggressorIndicator&#34; type=&#34;BOOLEAN&#34;/&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f8c8d">  &lt;/fields&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f8c8d">&lt;/fix&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f8c8d">&#34;#</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">main</span>() -&gt; <span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>(), <span style="color:#728e00">Box</span><span style="color:#728e00">&lt;</span><span style="color:#728e00">dyn</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">error</span>::<span style="color:#434f54">Error</span><span style="color:#728e00">&gt;&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Load custom specification
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">let</span> <span style="color:#434f54">dictionary</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Dictionary</span>::<span style="color:#434f54">from_quickfix_spec</span>(<span style="color:#434f54">COINBASE_SPEC</span>)<span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Decoder</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">dictionary</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">decoder</span>.<span style="color:#434f54">config_mut</span>().<span style="color:#434f54">separator</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#39;|&#39;</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Sample message with custom fields
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">let</span> <span style="color:#434f54">message</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;8=FIX.4.2|35=8|1003=TRADE123|1057=Y|10=123|&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">decoder</span>.<span style="color:#434f54">decode</span>(<span style="color:#434f54">message</span>)<span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Process standard and custom fields
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;Begin String: </span><span style="color:#7f8c8d">{:?}</span><span style="color:#7f8c8d">&#34;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#8a7b52">8</span>)<span style="color:#728e00">?</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;Message Type: </span><span style="color:#7f8c8d">{:?}</span><span style="color:#7f8c8d">&#34;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#8a7b52">35</span>)<span style="color:#728e00">?</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;Trade ID: </span><span style="color:#7f8c8d">{:?}</span><span style="color:#7f8c8d">&#34;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#8a7b52">1003</span>)<span style="color:#728e00">?</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;Aggressor: </span><span style="color:#7f8c8d">{:?}</span><span style="color:#7f8c8d">&#34;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#8a7b52">1057</span>)<span style="color:#728e00">?</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="production-considerations">Production Considerations</h2>
+<h3 id="version-management">Version Management</h3>
+<p>Keep track of specification versions:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">struct</span> <span style="color:#434f54">CoinbaseSpec</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">version</span>: <span style="color:#00979d">&amp;</span><span style="color:#728e00">&#39;static</span> <span style="color:#00979d">str</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">spec</span>: <span style="color:#00979d">&amp;</span><span style="color:#728e00">&#39;static</span> <span style="color:#00979d">str</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">const</span> <span style="color:#434f54">COINBASE_V1</span>: <span style="color:#434f54">CoinbaseSpec</span> <span style="color:#728e00">=</span> <span style="color:#434f54">CoinbaseSpec</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">version</span>: <span style="color:#7f8c8d">&#34;1.0&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">spec</span>: <span style="color:#434f54">include_str</span><span style="color:#728e00">!</span>(<span style="color:#7f8c8d">&#34;coinbase_v1.xml&#34;</span>),
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">const</span> <span style="color:#434f54">COINBASE_V2</span>: <span style="color:#434f54">CoinbaseSpec</span> <span style="color:#728e00">=</span> <span style="color:#434f54">CoinbaseSpec</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">version</span>: <span style="color:#7f8c8d">&#34;2.0&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">spec</span>: <span style="color:#434f54">include_str</span><span style="color:#728e00">!</span>(<span style="color:#7f8c8d">&#34;coinbase_v2.xml&#34;</span>),
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="error-handling">Error Handling</h3>
+<p>Robust error handling for custom specs:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">load_custom_dictionary</span>(<span style="color:#434f54">spec</span>: <span style="color:#00979d">&amp;</span><span style="color:#00979d">str</span>) -&gt; <span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">Dictionary</span>, <span style="color:#728e00">Box</span><span style="color:#728e00">&lt;</span><span style="color:#728e00">dyn</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">error</span>::<span style="color:#434f54">Error</span><span style="color:#728e00">&gt;&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Dictionary</span>::<span style="color:#434f54">from_quickfix_spec</span>(<span style="color:#434f54">spec</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#434f54">map_err</span>(<span style="color:#728e00">|</span><span style="color:#434f54">e</span><span style="color:#728e00">|</span> <span style="color:#434f54">format!</span>(<span style="color:#7f8c8d">&#34;Failed to load custom FIX spec: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>).<span style="color:#434f54">into</span>())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="testing-custom-fields">Testing Custom Fields</h3>
+<p>Comprehensive testing for custom specifications:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">#[cfg(test)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">mod</span> <span style="color:#434f54">tests</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">use</span> <span style="color:#728e00">super</span>::<span style="color:#728e00">*</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">fn</span> <span style="color:#d35400">test_custom_fields</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">create_coinbase_decoder</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">message</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;8=FIX.4.2|35=8|1003=TEST123|1057=N|10=090|&#34;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">decoder</span>.<span style="color:#434f54">decode</span>(<span style="color:#434f54">message</span>).<span style="color:#434f54">unwrap</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">assert_eq!</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#8a7b52">1003</span>), <span style="color:#728e00">Ok</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;TEST123&#34;</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">assert_eq!</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#8a7b52">1057</span>), <span style="color:#728e00">Ok</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;N&#34;</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Document Extensions</strong>: Clearly document all custom fields and their usage</li>
+<li><strong>Version Control</strong>: Track specification changes and maintain backward compatibility</li>
+<li><strong>Validation</strong>: Implement thorough validation for custom fields</li>
+<li><strong>Testing</strong>: Test custom fields extensively, including edge cases</li>
+<li><strong>Performance</strong>: Consider the performance impact of complex custom validations</li>
+</ol>
+<h2 id="next-steps">Next Steps</h2>
+<p>Custom FIX specifications enable you to:</p>
+<ul>
+<li>Support exchange-specific protocols</li>
+<li>Implement proprietary trading algorithms</li>
+<li>Create specialized financial instruments</li>
+<li>Build custom reporting and compliance systems</li>
+</ul>
+<p>miniFIX&rsquo;s flexibility with custom specifications makes it suitable for any FIX-based financial application, from simple order routing to complex multi-asset trading platforms.</p>
+<hr>
+<p><strong>Next:</strong> <a href="../../../../../blog/2025/09/19/rust-minifix-tutorial-part-05/">Part 05 - JSON Format Conversion</a></p>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

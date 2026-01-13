@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Round 01 on Seamless Global Nature</title>
+    <link>http://localhost:60544/tags/round-01/</link>
+    <description>Recent content in Round 01 on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Wed, 20 Nov 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:60544/tags/round-01/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🦀 Low Latency Message Parser </title>
+      <link>http://localhost:60544/blog/2024/11/20/low-latency-message-parser/</link>
+      <pubDate>Wed, 20 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2024/11/20/low-latency-message-parser/</guid>
+      <description>In today&amp;rsquo;s Everyday I&amp;rsquo;m exploring the bare bones of creating a &lt;em&gt;message parser&lt;/em&gt; and &lt;em&gt;feed handler&lt;/em&gt; for &lt;em&gt;direct financial market data feeds&lt;/em&gt;.</description>
+    </item>
+    <item>
+      <title>🦀 More REST API Client</title>
+      <link>http://localhost:60544/blog/2024/11/18/more-rest-api-client/</link>
+      <pubDate>Mon, 18 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2024/11/18/more-rest-api-client/</guid>
+      <description>We start from scratch and try to build our understanding of the most fundamental idea of Fixed Point Theory- &lt;strong&gt;the Banach Contraction Principle&lt;/strong&gt;.</description>
+    </item>
+  </channel>
+</rss>

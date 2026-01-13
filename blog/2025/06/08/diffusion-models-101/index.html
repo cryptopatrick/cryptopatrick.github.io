@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60544&amp;path=livereload" data-no-instant defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🤖 Diffusion Models 101 - Seamless Global Nature">
+<meta property="og:url" content="http://localhost:60544/blog/2025/06/08/diffusion-models-101/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="http://localhost:60544/img/post-name/name.jpg" />
+
+
+<title>🤖 Diffusion Models 101 | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="http://localhost:60544//css/style.css">
+<link rel="stylesheet" href="http://localhost:60544//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="http://localhost:60544/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="http://localhost:60544/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="http://localhost:60544/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🤖 Diffusion Models 101</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      June 8, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/ai/" style="margin-left:0.25em;">AI</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/mathematics/" style="margin-left:0.25em;">Mathematics</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <br>
+<p>Notes:</p>
+<ul>
+<li>related to Markov Chains</li>
+<li>are probabilitic models</li>
+<li>idea introduced in C. Spearman, The proof and measurement of association between two things, Am. J. Psychol. 100 (3-4)
+(1987) 441-471 (republished).</li>
+<li>related to statictical physics</li>
+<li>2-stage process to generate model</li>
+<li>first - iteratively destroy structure in data (forward or diffusion)</li>
+<li>second- learn to reverse the process and restore structure</li>
+</ul>
+<h2 id="diffusion-process---three-directions">Diffusion Process - Three Directions</h2>
+<p>We diffuse the data by adding Gaussian noise to it in a step-wise manner.
+There are three main ways to implement the diffusion model:</p>
+<ol>
+<li>DDPM: denoising diffusion probabilistic model (the original)</li>
+<li>NCSN: noise conditional score networks</li>
+<li>SDE: stochastic differential equations</li>
+</ol>
+<h3 id="concepts">Concepts</h3>
+<p><em>latent random (vector) variables</em></p>
+<h2 id="pixel-space">Pixel Space</h2>
+<hr>
+<p><img src="https://img.shields.io/badge/Work_In_Progress-orange.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Text_Version-0.1.0-blue.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-No-red.svg" alt="Version:0.1.0"></p>
+<!--![Version:0.1.0](https://img.shields.io/badge/Version-0.5.0-white.svg)  -->
+<!--[![Version:0.1.0](https://img.shields.io/badge/File-issue-orange.svg)](https://github.com/cryptopatrick/learn_wgpu/issues)-->
+<blockquote>
+<p><strong>Preface:</strong> This post is simply <em>study notes</em> taken while learning about diffusion models from different sources on the Internet. It is <em>not</em> meant to be an instructive source to learn from.</p>
+</blockquote>
+<blockquote>
+<p><strong>Code:</strong> The complete source code is available on my <a href="https://github.com/cryptopatrick/diffusionmodels">GitHub</a>.</p>
+</blockquote>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h2 id="what-are-diffusion-models">What are Diffusion Models</h2>
+<p>⠀⠀⠀⠀⠀ Dr. Angela Rae is head of <em>Space Folding Research</em> at <em>The Periphery</em>, a Top
+Secret remote Federation research facility located on the surface of a small
+is racing through everyone&rsquo;s mind - &ldquo;How did they find us?&rdquo;.<br>
+⠀⠀⠀⠀⠀ Up there, orbiting at a chill 26,000 miles, is death. Having covertly decelerated in the radar shadow of a nearby moon, the Rebel ship</p>
+<center>"...by taking the fixed 
+numerical value of the caesium frequency $\delta ν_{Cs}$, the unperturbed 
+ground-state hyperfine transition frequency of the caesium-133 atom, to be 9 192 631 770 
+when expressed in the unit Hz, which is equal to $s^{–1}$."
+</center>
+<p>Emojis: Did you get that? I kinda didn&rsquo;t! 😂 🤷‍♂️</p>
+<hr>
+<h2 id="training">Training</h2>
+<p>Let&rsquo;s start with something familiar, a <strong>Gaussian Distribution</strong>, and let&rsquo;s make things <em>concrete</em> by coding a small Rust program to illustrate our abstractions.<br>
+We know that a Gaussian (standard normal) distribution is characterized by its:</p>
+<ul>
+<li>Bell-shaped curve</li>
+<li>mean ( center of the distribution)</li>
+<li>standard deviation, which controls the &ldquo;width&rdquo; of the bell curve</li>
+</ul>
+<h2 id="goal-generative-battlefield-terrain-simulator">Goal: Generative Battlefield Terrain Simulator</h2>
+<p>We want to train a simulator (program) (a Decoder) so that it is able to generate realistic outputs (like battlefield images), starting from random noise (Gaussian distriction). So given random input, learn how to generate something realistic.<br>
+⠀⠀⠀⠀⠀ To train our simulator we will provide it with <em>real battlefield images</em> as examples.
+Our simulator will assign high probability to these real examples that we provide it.
+We optimize this by using <em>log-likelihood</em> (a simplified product of probabilities).<br>
+⠀⠀⠀⠀⠀ Our ultimate goal is toe <em>minimize the difference</em> between <em>real distributions</em> and
+<em>generated distributions</em>. This difference is called the ```KL divergence``.
+Unfortunately, computing the KL divergence is computationally expensive and hard,
+because we don&rsquo;t know all the hidden factors (called latent variables).</p>
+<h3 id="battlefield-images">Battlefield images</h3>
+<p>In our case, our aim is to genrate realistic battle scenes (for example drone surveillance images) from pure random noise.
+Our training data consists of <em>real</em> images from actual battlefield conditions (terrain, troops, tanks, etc).
+Each image is represented as $x^1, x^2, \dots , x^m$, taken from a real-world distribution $p_{data}(x)$.<br>
+Model - our program is represented by a single function $p_{\theta}(x)$, which is the <em>probability</em> that our model assigns to generating a scene $x$.</p>
+<hr>
+<h2 id="step">Step</h2>
+<p>Our goal is to create a <code>Decoder</code> which can <em>translate</em> our gaussian distribution into <em>high-quality images</em>, for example of cats and dogs.
+We need to find the <em>paramters</em> $\theta$ of the <code>Decoder</code>, $p_\theta(x)$ that can transform
+a simple gaussian distribution into an <em>image distribution</em></p>
+<p>Since we do <em>not</em> know what the <em>true</em> <em>data distribution</em> is, $p_{\text{data}}(x)$ and so we can only <em>approximate it</em> by sample lot of images. If we let images of cats be represented by $x^1$ and so forth, we can&hellip;</p>
+<p>$$\text{Dataset:}\{x^1, x^2, \dots, x^m \} \sim p_{\text{data}}(x) $$</p>
+<hr>
+<p>We are trying to maximize how likely our simulator is to reproduce real battlefield images, on average.</p>
+<h2 id="training-goal--mle">Training Goal / MLE</h2>
+<p>Large Language Models (LLM) have billions of parameters, but our model will have to be tiny in comparison.
+In training our model we want to <em>adjust</em> its parameters, which we denote $\theta$, so that the simulator is able to generate
+battlefield images that look like real-world battlefield images.<br>
+⠀⠀⠀⠀⠀This is called the <strong>Maximum Likelihood Estimation (MLE)</strong> - in which we try to train the model to assign <em>high probability</em> to actual images - think of these images as hills in a landscape.
+is to <em>maximize</em> the <em>sampling probability</em>, which is known as the <em>Maximum Likelihood</em>. Formally we can express this as
+$$\theta^\star = \text{arg max} \prod^m_{i=1} p_{\theta} (x^i)$$</p>
+<hr>
+<blockquote>
+<p>A Bernoulli trial is an experiment which has only two outcomes, Success (1) and Failure (0). If we flip a coin then each coin flip is a Bernoulli trial. The probability of getting heads can be expressed as $p(H)$. In that case the probability of getting tails, $p(T)$ can be expressed as, $1-p(heads)$.</p>
+</blockquote>
+<hr>
+<h2 id="a-look-at-mle">A Look at MLE</h2>
+<p>We need to take a look at MLE and make sure we really understand it. Maximum Likelihood is a statistical method that we can use to <em>estimate</em> the parameters of a model. The <em><em>likelihood function</em>, in our case $p</em>{\thete}(x)$, measures how _likely it is to <code>observer</code> the given data under different parameter settings.</p>
+<h2 id="simplifying">Simplifying</h2>
+<blockquote>
+<p>TODO: why is it unstable?</p>
+</blockquote>
+<p>Working with products of probabilities is numerically unstable.<br>
+To mitigate, we take the log</p>
+<blockquote>
+<p>TODO: why does that work?</p>
+</blockquote>
+<p>By applying a <em>log function</em> to our <em>MLE</em>, we get something that is easier to work with - turning the products $\prod$ into a sum $\sum$.</p>
+<p>The expression still represent the <em>log-likelihood</em> and our goal is still to increase the models&rsquo;s confidence in the real images.
+Finally, if the samples $x^i \sim p_{data}(x)$ then the average log-probability can be rewritten as an expectation.
+$$\begin{align} \theta^\star &amp; = \text{argmax} \; \text{log} \Biggl( \prod^m_{i=1} p_{\theta} (x^i) \Biggr) \\
+&amp; = \text{arg max} \; \sum^m_{i=1} \text{log} \; p_{\theta} (x^i) \\
+&amp; = \text{arg max}  \; \mathbb{E_{x\sim p_{data}}} [\text{log} \; p_{\theta} (x)]\end{align}$$</p>
+<p>The definition is
+$$\theta^\star = \text{arg max}  \; \int p_{data}(x) \text{log} \; p_{\theta} (x) dx$$</p>
+<p>If we subtract a <em>constant</em> that has nothing to do with the parameter $\theta$
+then we find that this is just the <em>tail divergence</em> between the distribution
+from our generated model and the data distribution.
+We subtract a constant that does not depend on $\theta$.
+Why? Because the second term is <em>fixed</em> - it&rsquo;s the entropy of the real data and doesn&rsquo;t involve $\theta$.</p>
+<blockquote>
+<p>Clarify</p>
+</blockquote>
+<p>$$\theta^\star = \text{arg max} \; \int p_{data}(x) \text{log} \; p_{\theta} (x) dx\; - \int p_{data}(x) \text{log} \; p_{\text{data}} (x) dx$$</p>
+<p>We want our model distribution $p_{\theta}$ to get as close as possible to the real battlefield data distribution $p_{\text{data}}$. Meaning, we want to make sure that our battlefield
+image simulator behaves statistically <em>indinstiguishable</em> from real-world imagse.</p>
+<p>$$\begin{align}
+\theta^\star &amp; \approx \text{arg max} \; \int p_{data}(x) \text{log} \; \frac{p_{data}(x)}{p_{\theta} (x)}  dx\; \\
+&amp; = \text{arg min} \; D_{KL}(p_{\text{data}} || p_{\theta})
+\end{align}$$</p>
+<p>So maximizing the likelihood means <em>minimizing</em> the similarity between our two distributions
+$p_{data}(x)$ and $p_{\theta}(x)$.</p>
+<h2 id="computationally-hard">Computationally hard</h2>
+<p>To compute <code>log p(x)</code> exactly, we usually need to integrate over <em>latent variables</em> <code>z</code> (underlying factors like mission objectives,, weather, troop morale, etc).
+But this assumes that we know <code>p(z | x)</code>, which we usually do not. That makes the computation hard (or even impossible).</p>
+<p>It&rsquo;s hard to compute this likelihood value. Either we have to integrate out all latent variables z, $log \;p(x) = log \int p(x,z) dz$,
+or $log \;p(x) = log \frac{p(x,z)}{p(z|x)}$, it assumes that we know the ground truth <em>latent encoder</em> $p(z|x)$</p>
+<hr>
+<h2 id="work-around">Work-around</h2>
+<p>So we&rsquo;re dealing with a computationally expensive problem, let&rsquo;s see what we can do to simplify the computation.</p>
+<p>We start by introducing an <code>Encoder</code> that can capture the <em>latent variable probability</em> given an observation $x$.
+$$q(z | x) \leftarrow \text{Encoder} \leftarrow x$$
+$$z \rightarrow \underset{\theta}{\text{Decoder}} \; \rightarrow p_{\theta}(x | z)$$</p>
+<p>We can express our $Encoder$ as</p>
+<p>$$\text{log } p(x) = \text{log } p(x) \underbrace{\int q(z | x) \;dz}_{\text{this term is one thing we are all latent variable z}}$$</p>
+<p>$$\text{log } p(x) = \int q(z | x) \underbrace{\text{log } p(x)}_{\text{we move the log likelihood inside the integral}} dz$$</p>
+<p>We (1) rewrite the expression as an <em>expectation</em>. Next we (2) apply the <em>Baye&rsquo;s Rules</em>, (3) multiply in a <em>dummy term</em>, (4) swap the posterior probability term, and finally (5) separate them.</p>
+<p>$$\begin{align} \text{log } p(x) &amp; =^{(1)} \mathbb{E_{q(z | x)}\Bigl[\text{log } p(x)} \Bigr] \\
+&amp; =^{(2)} \mathbb{E_{q(z | x)}} \Bigl[ \text{log } \frac{\color{red}{p(x,z)}}{\color{blue}{p(z|x)}} \Bigr] \\
+&amp; =^{(3)} \mathbb{E_{q(z | x)}} \Bigl[ \text{log } \frac{\color{red}{p(x,z)}\;q(z|x)}{\color{blue}{p(z|x)}\;q(z|x)} \Bigr] \\
+&amp; =^{(4)} \mathbb{E_{q(z | x)}} \Bigl[ \text{log } \frac{\color{red}{p(x,z)}\;q(z|x)}{q(z|x)\;\color{blue}{p(z|x)}} \Bigr] \\
+&amp; =^{(5)} \mathbb{E_{q(z | x)}} \Bigl[ \text{log } \frac{\color{red}{p(x,z)}}{q(z|x)} \Bigr] + \mathbb{E_{q(z | x)}} \Bigl[ \text{log } \frac{q(z|x)}{\color{blue}{p(z|x)}} \Bigr] \end{align}$$</p>
+<p>We now recognize that the second term is a the <em>tail divergence</em> between our <code>Encoder</code>, given $q(z| x)$ and our ground truth encoder $\color{blue}{p(z|x)}$.
+$$\text{log } p(x) = \mathbb{E_{q(z | x)}} \Bigl[ \text{log } \frac{\color{red}{p(x,z)}}{q(z|x)} \Bigr] + D_{KL}\bigl(q(z| x) \;||\; \color{blue}{p(z|x)}\bigr) \tag{1}\label{eq1}$$</p>
+<p>Since we don&rsquo;t have access to the <strong>ground truth</strong> encoder,$\color{blue}{p(z|x)}$ , this means that we don&rsquo;t know the value of $D_{KL }\bigl(q(z| x) \;||\; \color{blue}{p(z|x)}\bigr)$. However, we <em>do</em> know that the <strong>tail divergence</strong> is non-negative, $\ge 0$.
+This means that the first term in expression $(1)$ is the <strong>lower bound</strong> of the <strong>log-likelihood value</strong> .</p>
+<p>$$\text{log } p(x) \ge \mathbb{E_{q(z | x)}} \Bigl[ \text{log } \frac{\color{red}{p(x,z)}}{q(z|x)} \Bigr]  \tag{2}\label{eq2}$$</p>
+<blockquote>
+<p>The log-likelihood $(2)$ measures the statistical evidence for our model,  and is known as the <strong>Evidence Lower Bound (ELBO)</strong>.</p>
+</blockquote>
+<blockquote>
+<p>$$\color{black}{\spadesuit}$$</p>
+</blockquote>
+<hr>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="-diffusion-model-algorithm">🔒 Diffusion Model Algorithm</h3>
+<p><strong>List of topics to cover (briefly):</strong> <br>
+[ ] Carmicheal Numbers and the need for primality testing of huge numbers<br>
+[x] Probabilitic Primality Testing with Rabin-Miller</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Step</th>
+          <th style="text-align: left">Process</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><a href="#step-0-preparing-the-payload">0.</a></td>
+          <td style="text-align: left">Gather message data, calculate time-lock duration, estimate attacker&rsquo;s squaring power</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-1-compute-the-composite-modulus">1.</a></td>
+          <td style="text-align: left">Choose two secret primes, $p$ and $q$, and compute the composite modulus: $n=p \cdot q$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-2-the-euler-phi-function">2.</a></td>
+          <td style="text-align: left">Compute the Euler Phi function: $\phi(n)$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-3-compute-the-puzzle-strength">3.</a></td>
+          <td style="text-align: left">Compute the difficulty of the time-lock puzzle: $t=T \cdot S$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-4-generating-the-key-to-the-kingdom">4.</a></td>
+          <td style="text-align: left">Generate the private key for an AES-GCM cryptosystem: $C_K$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-5-encrypting-a-lives-work">5.</a></td>
+          <td style="text-align: left">Pick random $a$ modulo $n$ and encrypt $K$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-6-constructing-the-cipher-key">6.</a></td>
+          <td style="text-align: left">Encrypt the message $M$ using AES-GCM and the private key  $K$:  $C_M = ENC(M,K)$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-7-endgame">7.</a></td>
+          <td style="text-align: left">Output the Time-Lock Puzzle, and delete $p$ and $q$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#appendix-how-to-solve-the-time-lock-puzzle">A.</a></td>
+          <td style="text-align: left">Optional: Provide instructions to Solver on how to solve the Puzzle</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>▲</strong> The seven steps of creating a Time-Lock Puzzle.</p>
+<hr>
+<h1 id="-implementation--version010httpsimgshieldsiobadgeversion20020-ffffffsvg">🦀 Implementation  <img src="https://img.shields.io/badge/Version%200.2.0-FFFFFF.svg" alt="Version:0.1.0"></h1>
+<h4 id="step-0-preparing-the-payload">Step 0: Preparing the Payload</h4>
+<p>First, we need to add some dependencies:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cargo new diffusion
+</span></span><span style="display:flex;"><span>cargo add image, rand, rand_distr
+</span></span></code></pre></div><p>Next we quickly let an Ai suggest some biolerplate code:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">rand</span>::<span style="color:#434f54">thread_rng</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">rand_distr</span>::{<span style="color:#434f54">Normal</span>, <span style="color:#434f54">Distribution</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#95a5a6">// Distribution parameters.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>  <span style="color:#728e00">let</span> <span style="color:#434f54">normal</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Normal</span>::<span style="color:#434f54">new</span>(<span style="color:#8a7b52">0.0</span>, <span style="color:#8a7b52">1.0</span>).<span style="color:#434f54">unwrap</span>(); <span style="color:#95a5a6">// standard normal distribution.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>  <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">rng</span> <span style="color:#728e00">=</span> <span style="color:#434f54">thread_rng</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#95a5a6">// We generate and printout 10 random samples from the distribution.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>  <span style="color:#728e00">for</span> <span style="color:#434f54">_</span> <span style="color:#728e00">in</span> <span style="color:#8a7b52">10</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">sample</span> <span style="color:#728e00">=</span> <span style="color:#434f54">normal</span>.<span style="color:#434f54">sample</span>(<span style="color:#728e00">&amp;</span><span style="color:#728e00">mut</span> <span style="color:#434f54">rng</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;</span><span style="color:#7f8c8d">{:.4}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">sample</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Run it, make sure that it compiles.
+Good. Let&rsquo;s continue.</p>
+<p>$M$: <strong>Message to Protect</strong><br>
+Dr. Angela Rae, and her team of fellow researchers, have quickly collected all</p>
+<hr>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

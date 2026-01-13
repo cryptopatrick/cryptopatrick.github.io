@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 REST API - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2022/04/04/rest-api/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="https://www.cryptopatrick.com/img/post-name/name.jpg" />
+
+
+<title>🦀 REST API | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 REST API</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      April 4, 2022
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/engineering/" style="margin-left:0.25em;">Engineering</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/rust/" style="margin-left:0.25em;">Rust</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <blockquote>
+<p>At the time of writing this post (2023-08-10) Axum sits at version <code>0.6.20</code>.</p>
+</blockquote>
+<h2 id="1-create-a-new-rust-project">1. Create a new Rust project:</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo new rest_api
+</span></span><span style="display:flex;"><span><span style="color:#728e00">cd</span> rest_api
+</span></span></code></pre></div><h2 id="2-import-dependencies">2. Import dependencies:</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#728e00">[</span>package<span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">name</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;rest_api&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">version</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;0.1.0&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">edition</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;2021&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">author</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;CryptoPatrick&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">[</span>dependencies<span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">axum</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;0.6.20&#34;</span> <span style="color:#95a5a6"># Web Framework</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">sqlx</span> <span style="color:#728e00">=</span> <span style="color:#728e00">{</span><span style="color:#434f54">version</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;0.7.1&#34;</span>, <span style="color:#434f54">features</span> <span style="color:#728e00">=</span> <span style="color:#728e00">[</span><span style="color:#7f8c8d">&#34;json&#34;</span>,<span style="color:#7f8c8d">&#34;postgres&#34;</span>,<span style="color:#7f8c8d">&#34;runtime-tokio-native-tls&#34;</span><span style="color:#728e00">]}</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">tokio</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;1.30.0&#34;</span> <span style="color:#95a5a6"># Async Runtime</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">serde</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;1.0.183&#34;</span> <span style="color:#95a5a6"># (De)serialization</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">serde_json</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;1.0.104&#34;</span> <span style="color:#95a5a6"># (De)serialization json</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">[</span>dev-dependencies<span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">anyhow</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;1.0.72&#34;</span> <span style="color:#95a5a6"># Error handling</span>
+</span></span></code></pre></div><blockquote>
+<p>use cargo build to import all the dependencies.</p>
+</blockquote>
+<blockquote>
+<p>Gotcha: In order to use the <code>#[tokio::main]</code> procedural macro we need to
+import either tokio&rsquo;s full feature set, or at least <code>cargo add tokio --features macros,rt-multi-thread</code>.</p>
+</blockquote>
+<h2 id="3-wire-up-axum">3. Wire up Axum:</h2>
+<p>We use Axum&rsquo;s &ldquo;Hello World!&rdquo; example as our jump-off point, and add a simple route:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">std</span><span style="color:#728e00">:</span><span style="color:#00979d">:net::SocketAddr</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">axum</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00979d">routing::</span><span style="color:#728e00">{</span><span style="color:#00979d">get</span><span style="color:#728e00">,</span><span style="color:#00979d">post</span><span style="color:#728e00">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Router</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">tokio::main</span><span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">async</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">main</span><span style="color:#728e00">()</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">anyhow</span><span style="color:#728e00">:</span><span style="color:#00979d">:Result</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// build our application with a single route
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#00979d">let</span> <span style="color:#00979d">app</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Router</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.route</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">/</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">,</span> <span style="color:#00979d">get</span><span style="color:#728e00">(</span><span style="color:#00979d">root</span><span style="color:#728e00">))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">route</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;/ping&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">post</span><span style="color:#728e00">(</span><span style="color:#434f54">ping</span><span style="color:#728e00">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// run it with hyper on localhost:3000
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">addr</span> <span style="color:#728e00">=</span> <span style="color:#434f54">SocketAddr</span><span style="color:#728e00">:</span><span style="color:#00979d">:from</span><span style="color:#728e00">((</span><span style="color:#a61717">[0</span><span style="color:#00979d">.</span><span style="color:#a61717">0</span><span style="color:#00979d">.</span><span style="color:#a61717">0</span><span style="color:#00979d">.</span><span style="color:#a61717">0]</span><span style="color:#728e00">,</span> <span style="color:#a61717">3000</span><span style="color:#728e00">));</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">axum</span><span style="color:#728e00">:</span><span style="color:#00979d">:Server::bind</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;addr</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.serve</span><span style="color:#728e00">(</span><span style="color:#00979d">app.into_make_service</span><span style="color:#728e00">())</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.await</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">unwrap</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// We return Ok(()) since anyhow demands it.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">Ok</span><span style="color:#728e00">(())</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">async</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">root</span><span style="color:#728e00">()</span> <span style="color:#728e00">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">async</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">ping</span><span style="color:#728e00">()</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">impl</span> <span style="color:#434f54">IntoResponse</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f8c8d">&#34;Server was pinged.&#34;</span><span style="color:#728e00">.</span><span style="color:#434f54">to_owned</span><span style="color:#728e00">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><h2 id="4-build-the-crate-to-pull-all-dependencies-then-run-it">4. Build the crate to pull all dependencies, then run it:</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo build
+</span></span><span style="display:flex;"><span>cargo run
+</span></span></code></pre></div><h2 id="5-check-that-the-server-is-running-by-curling-the-status-codes">5. Check that the server is running by curl:ing the status codes:</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#95a5a6"># If this curl returns a status code of 200, then we&#39;re OK:</span>
+</span></span><span style="display:flex;"><span>curl -o /dev/null -s -w <span style="color:#7f8c8d">&#34;%{http_code}\n&#34;</span> http://localhost:3000
+</span></span><span style="display:flex;"><span>curl -o /dev/null -s -w <span style="color:#7f8c8d">&#34;%{http_code}\n&#34;</span> http://localhost:3000/ping
+</span></span></code></pre></div><h2 id="6-refactor-by-improving-our-project-structure">6. Refactor by improving our project structure:</h2>
+<p>Let&rsquo;s add files and folders until we have the following project structure:</p>
+<pre tabindex="0"><code class="language-unix" data-lang="unix"># We use the unix tree command with the -I flag to ignore the target and .git directories.
+➜ tree rest_api --gitignore -a -I target -I &#39;.git
+rest_api
+├── .env
+├── .gitignore
+├── Cargo.lock
+├── Cargo.toml
+├── sql
+├── src
+│   ├── controllers
+│   │   └── issue.rs
+│   ├── errors.rs
+│   ├── main.rs
+│   ├── models
+│   │   └── issue.rs
+│   └── views
+└── tests
+</code></pre><hr>
+<blockquote>
+<p>Our REST API will follow a simple Model View Controller pattern.</p>
+</blockquote>
+<h1 id="7-database-setup">7. Database Setup</h1>
+<p>We want our API to be resilient - in today&rsquo;s terms that translates to being <a href="wikipedia">Cloud Native</a>.
+The two qualities we&rsquo;re going for are <em>high availability</em> and <em>fault tolerance</em>,
+meaning our application running distributed on multiple machines and scaling up and down
+in response to user demand or hardware failures.</p>
+<p>Okay, how?</p>
+<p>For starters, our application needs to be stateless in order to avoid losing data
+in the event of hardware failure - so we need a <em>database</em>.
+Ideally, we want to check our code for errors <em>at compile-time</em> (not runtime).</p>
+<p>We use the Rust crate <code>sqlx</code> because it:</p>
+<ul>
+<li>provides compile-time checks</li>
+<li>is asynchronous, leveraging all available CPUs</li>
+<li>and enable us to write raw SQL, making our code highly portable</li>
+</ul>
+<h2 id="migrations">Migrations</h2>
+<p>Using a database managing system with a graphical user interface, to design and modify our database, can cause some challenges when collaborate with others.
+Using <em>migrations</em> enable us to do everything in <em>code</em>, and above all - share
+that code with others so that they can generate the <em>exact</em> same database setup
+that we have. So, let there be migrations.</p>
+<p>The tool we&rsquo;re using is the nifty CLI <code>sqlx-cli</code>.</p>
+<blockquote>
+<p>Please note that we are using <code>cargo install sqlx-cli</code>.</p>
+</blockquote>
+<h1 id="create-an-env-to-hold-our-environment-variables">Create an .env to hold our environment variables:</h1>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>touch .env
+</span></span><span style="display:flex;"><span><span style="color:#728e00">echo</span> <span style="color:#7f8c8d">&#34;DATABASE_URL=postgresql://user:password@localhost:5432/issues_db&#34;</span> &gt; .env
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#95a5a6"># Make sure we have Docker installed</span>
+</span></span><span style="display:flex;"><span>docker -v
+</span></span><span style="display:flex;"><span>Docker version 24.0.2, build cb74dfc
+</span></span></code></pre></div><h3 id="71-create-the-model">7.1 Create the model</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#95a5a6">//! src/model/issue.rs
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">use</span> <span style="color:#434f54">serde</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span><span style="color:#00979d">Deserialize</span><span style="color:#728e00">,</span> <span style="color:#00979d">Serialize</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">derive</span><span style="color:#728e00">(</span><span style="color:#00979d">sqlx::FromRow</span>, <span style="color:#00979d">Deserialize</span>, <span style="color:#00979d">Serialize</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">struct</span> <span style="color:#434f54">Issue</span> <span style="color:#728e00">{</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">id</span><span style="color:#728e00">:</span>  <span style="color:#00979d">i32</span><span style="color:#728e00">,</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">issue</span><span style="color:#728e00">:</span> <span style="color:#00979d">String</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">derive</span><span style="color:#728e00">(</span><span style="color:#00979d">sqlx::FromRow</span>, <span style="color:#00979d">Deserialize</span>, <span style="color:#00979d">Serialize</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">struct</span> <span style="color:#434f54">NewIssue</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">pub</span> <span style="color:#434f54">issue</span><span style="color:#728e00">:</span> <span style="color:#00979d">String</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><h3 id="72-store-environment-variables-in-env">7.2 Store environment variables in ./.env</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#95a5a6"># In root, create a file .env to store our db url variable:</span>
+</span></span><span style="display:flex;"><span><span style="color:#7f8c8d">```</span>bash
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># In the root of our project.</span>
+</span></span><span style="display:flex;"><span>touch .env
+</span></span></code></pre></div><p>Add the following to .env</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#434f54">DATABASE_USER</span><span style="color:#728e00">=</span><span style="color:#7f8c8d">&#34;admin&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">DATABASE_PASSWORD</span><span style="color:#728e00">=</span><span style="color:#7f8c8d">&#34;admin&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">DATABASE_HOST</span><span style="color:#728e00">=</span><span style="color:#7f8c8d">&#34;127.0.0.1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">DATABASE_PORT</span><span style="color:#728e00">=</span><span style="color:#8a7b52">4000</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">DATABASE_NAME</span><span style="color:#728e00">=</span><span style="color:#7f8c8d">&#34;issues_db&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">DATABASE_URL</span><span style="color:#728e00">=</span><span style="color:#7f8c8d">&#34;postgres://</span><span style="color:#7f8c8d">${</span><span style="color:#434f54">DATABASE_USER</span><span style="color:#7f8c8d">}</span><span style="color:#7f8c8d">:</span><span style="color:#7f8c8d">${</span><span style="color:#434f54">DATABASE_PASSWORD</span><span style="color:#7f8c8d">}</span><span style="color:#7f8c8d">@</span><span style="color:#7f8c8d">${</span><span style="color:#434f54">DATABASE_HOST</span><span style="color:#7f8c8d">}</span><span style="color:#7f8c8d">:</span><span style="color:#7f8c8d">${</span><span style="color:#434f54">DATABASE_PORT</span><span style="color:#7f8c8d">}</span><span style="color:#7f8c8d">/</span><span style="color:#7f8c8d">${</span><span style="color:#434f54">DATABASE_NAME</span><span style="color:#7f8c8d">}</span><span style="color:#7f8c8d">&#34;</span>
+</span></span></code></pre></div><h3 id="73-install-sqlx-clihttpscratesiocratessqlx-cli">7.3 Install <a href="https://crates.io/crates/sqlx-cli">sqlx-cli</a></h3>
+<pre tabindex="0"><code># In the project root.
+# Install sqlx-cli tool for Postgres specifically:
+cargo install sqlx-cli --no-default-features --features native-tls,postgres
+</code></pre><h3 id="74-use-sqlx-cli-to-create-a-database-with-database_url">7.4 Use sqlx-cli to create a database with DATABASE_URL</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#95a5a6"># sqlx will use the DATABASE_URL specified in ./.env, to create our Postgres db.</span>
+</span></span><span style="display:flex;"><span>sqlx database create
+</span></span></code></pre></div><h3 id="75-add-a-migration-schema">7.5 Add a migration schema</h3>
+<p>The following command will create a new file in <code>./migrations/&lt;timestamp&gt;-issue.sql</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#95a5a6"># The -r flag is used to create a reversible migration.</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># This means both *up.sql and *down.sql files will be created.</span>
+</span></span><span style="display:flex;"><span>sqlx migrate add -r issue
+</span></span></code></pre></div><h3 id="76-create-our-sql-in-databaseissuesql">7.6 Create our SQL in ./database/issue.sql:</h3>
+<p>Write our SQL in the migration file, which was created in the previous step.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#728e00">CREATE</span> <span style="color:#728e00">TABLE</span> <span style="color:#434f54">issue</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">id</span> <span style="color:#728e00">SERIAL</span> <span style="color:#728e00">PRIMARY</span> <span style="color:#728e00">KEY</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">issue</span> <span style="color:#728e00">VARCHAR</span>(<span style="color:#8a7b52">255</span>) <span style="color:#728e00">NOT</span> <span style="color:#728e00">NULL</span>,
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><h3 id="77-run-the-migration">7.7 Run the migration</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlx migrate run
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># We should get a confirmation that all went well:</span>
+</span></span><span style="display:flex;"><span>Applied &lt;timestamp&gt;issue.sql
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># To revert a migration we use the command:</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># sqlx migrate revert</span>
+</span></span></code></pre></div><h3 id="78-connect-our-database-to-mainrs">7.8 Connect our database to main.rs</h3>
+<p>We use a database connection pool to cache incoming connections. We use <code>std::fs</code> to read our <code>DATABASE_URL</code> from our <code>.env</code> file, and store it in a variable that we pass to <code>sqlx::PgPoolOptions</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#95a5a6">//! ./src/main.rs
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">use</span> <span style="color:#434f54">sqlx</span><span style="color:#728e00">:</span><span style="color:#00979d">:postgres::PgPoolOptions</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">std</span><span style="color:#728e00">:</span><span style="color:#00979d">:fs</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">anyhow</span><span style="color:#728e00">:</span><span style="color:#00979d">:Context</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">axum</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00979d">Extension</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00979d">routing::</span><span style="color:#728e00">{</span><span style="color:#00979d">get</span><span style="color:#728e00">,</span> <span style="color:#00979d">post</span><span style="color:#728e00">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Router</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">SystemCodes</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">async</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">main</span><span style="color:#728e00">()</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">anyhow</span><span style="color:#728e00">:</span><span style="color:#00979d">:Result&lt;</span><span style="color:#728e00">()</span><span style="color:#00979d">&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00979d">let</span> <span style="color:#00979d">env</span> <span style="color:#728e00">=</span> <span style="color:#00979d">fs::read_to_string</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">.env</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">)</span><span style="color:#00979d">.unwrap</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#728e00">(</span><span style="color:#434f54">key</span><span style="color:#728e00">,</span> <span style="color:#434f54">database_url</span><span style="color:#728e00">)</span> <span style="color:#728e00">=</span> <span style="color:#434f54">env</span><span style="color:#728e00">.</span><span style="color:#434f54">split_once</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#39;=&#39;</span><span style="color:#728e00">).</span><span style="color:#434f54">unwrap</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">assert_eq</span><span style="color:#728e00">!(</span><span style="color:#434f54">key</span><span style="color:#728e00">,</span> <span style="color:#7f8c8d">&#34;DATABASE_URL&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">pool</span> <span style="color:#728e00">=</span> <span style="color:#434f54">PgPoolOptions</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.max_connections</span><span style="color:#728e00">(</span><span style="color:#a61717">50</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.connect</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;database_url</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.await</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">context</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;Unable to connect to db.&#34;</span><span style="color:#728e00">)?;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">app</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Router</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.route</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">/</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">,</span> <span style="color:#00979d">get</span><span style="color:#728e00">(</span><span style="color:#00979d">root</span><span style="color:#728e00">))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">route</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;/ping&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">post</span><span style="color:#728e00">(</span><span style="color:#434f54">ping</span><span style="color:#728e00">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// run it with hyper on localhost:3000
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">addr</span> <span style="color:#728e00">=</span> <span style="color:#434f54">SocketAddr</span><span style="color:#728e00">:</span><span style="color:#00979d">:from</span><span style="color:#728e00">((</span><span style="color:#a61717">[0</span><span style="color:#00979d">.</span><span style="color:#a61717">0</span><span style="color:#00979d">.</span><span style="color:#a61717">0</span><span style="color:#00979d">.</span><span style="color:#a61717">0]</span><span style="color:#728e00">,</span> <span style="color:#a61717">3000</span><span style="color:#728e00">));</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">axum</span><span style="color:#728e00">:</span><span style="color:#00979d">:Server::bind</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;addr</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.serve</span><span style="color:#728e00">(</span><span style="color:#00979d">app.into_make_service</span><span style="color:#728e00">())</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.await</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">unwrap</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// We return Ok(()) since anyhow demands it.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">Ok</span><span style="color:#728e00">(())</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><hr>
+<h1 id="8-controllers">8. Controllers</h1>
+<p>In <code>./controllers/issue.rs</code> we are going to do our entire CRUD.
+From axum we need:</p>
+<ul>
+<li>Extensions</li>
+<li>Json</li>
+<li>StatusCode</li>
+<li>IntoResponse</li>
+</ul>
+<h3 id="get-all">GET all</h3>
+<p>We want to return all issues stored in our database.<br>
+Our function <code>all_issues</code> takes a struct representing our database pool as Axum&rsquo;s <code>Extensions</code> type.</p>
+<p>First, we create an SQL statement to <code>SELECT</code> everything <code>*</code>
+from the <code>issue</code> table.<br>
+Next, we use <code>sqlx</code> to query our database with the created SQL statement.<br>
+Finally, we return a status code together with the Json:ified result as
+an <code>IntoResponse</code> type.</p>
+<blockquote>
+<p>query_as, fetch_all</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">axum</span><span style="color:#728e00">:</span><span style="color:#00979d">:response::IntoResponse</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">axum</span><span style="color:#728e00">:</span><span style="color:#00979d">:http::StatusCode</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">axum</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span><span style="color:#00979d">Extension</span><span style="color:#728e00">,</span> <span style="color:#00979d">Json</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">sqlx</span><span style="color:#728e00">:</span><span style="color:#00979d">:PgPool</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">crate</span><span style="color:#728e00">:</span><span style="color:#00979d">:model::issue</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">async</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">all_issues</span><span style="color:#728e00">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Extension</span><span style="color:#728e00">(</span><span style="color:#434f54">pool</span><span style="color:#728e00">)</span><span style="color:#728e00">:</span> <span style="color:#00979d">Extension&lt;PgPool&gt;</span><span style="color:#728e00">)</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">impl</span> <span style="color:#434f54">IntoResponse</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">sql</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;SELECT * FROM issue &#34;</span><span style="color:#728e00">.</span><span style="color:#434f54">to_string</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">issues</span> <span style="color:#728e00">=</span> <span style="color:#434f54">sqlx</span><span style="color:#728e00">:</span><span style="color:#00979d">:query_as::&lt;</span><span style="color:#728e00">_</span><span style="color:#728e00">,</span> <span style="color:#434f54">issue</span><span style="color:#728e00">:</span><span style="color:#00979d">:Issue&gt;</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;sql</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.fetch_all</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;pool</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.await.unwrap</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">(</span><span style="color:#434f54">StatusCode</span><span style="color:#728e00">:</span><span style="color:#00979d">:OK</span><span style="color:#728e00">,</span> <span style="color:#434f54">Json</span><span style="color:#728e00">(</span><span style="color:#434f54">issues</span><span style="color:#728e00">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><h3 id="get-by-id">GET by id</h3>
+<p>We use <code>sqlx::fetch_one()</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">async</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">issue</span><span style="color:#728e00">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Path</span><span style="color:#728e00">(</span><span style="color:#434f54">id</span><span style="color:#728e00">)</span><span style="color:#728e00">:</span><span style="color:#00979d">Path&lt;i32&gt;</span><span style="color:#728e00">,</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Extension</span><span style="color:#728e00">(</span><span style="color:#434f54">pool</span><span style="color:#728e00">)</span><span style="color:#728e00">:</span> <span style="color:#00979d">Extension&lt;PgPool&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">)</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">impl</span> <span style="color:#434f54">IntoResponse</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">sql</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;SELECT * FROM issue WHERE id=$1&#34;</span><span style="color:#728e00">.</span><span style="color:#434f54">to_string</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">issue</span> <span style="color:#728e00">=</span> <span style="color:#434f54">sqlx</span><span style="color:#728e00">:</span><span style="color:#00979d">:query_as</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;sql</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.bind</span><span style="color:#728e00">(</span><span style="color:#00979d">id</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.fetch_one</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;pool</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.await</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">unwrap</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">(</span><span style="color:#434f54">StatusCode</span><span style="color:#728e00">:</span><span style="color:#00979d">:OK</span><span style="color:#728e00">,</span> <span style="color:#434f54">Json</span><span style="color:#728e00">(</span><span style="color:#434f54">issue</span><span style="color:#728e00">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><h3 id="post">POST</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">async</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">new_issue</span><span style="color:#728e00">(</span><span style="color:#434f54">Json</span><span style="color:#728e00">(</span><span style="color:#434f54">issue</span><span style="color:#728e00">)</span><span style="color:#728e00">:</span> <span style="color:#00979d">Json&lt;task::NewIssue&gt;</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Extension</span><span style="color:#728e00">(</span><span style="color:#434f54">pool</span><span style="color:#728e00">)</span><span style="color:#728e00">:</span> <span style="color:#00979d">Extension&lt;PgPool&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">Result</span><span style="color:#728e00">&lt;(</span><span style="color:#434f54">StatusCode</span><span style="color:#728e00">,</span> <span style="color:#434f54">Json</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">issue</span><span style="color:#728e00">:</span><span style="color:#00979d">:Issue&gt;</span><span style="color:#728e00">),</span> <span style="color:#434f54">CustomError</span><span style="color:#728e00">&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">if</span> <span style="color:#434f54">issue</span><span style="color:#728e00">.</span><span style="color:#434f54">issue</span><span style="color:#728e00">.</span><span style="color:#434f54">is_empty</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">return</span> <span style="color:#434f54">Err</span><span style="color:#728e00">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">let</span> <span style="color:#434f54">sql</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;INSERT INTO issue (issue) VALUES ($1)&#34;</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">let</span> <span style="color:#728e00">_</span> <span style="color:#728e00">=</span> <span style="color:#434f54">sqlx</span><span style="color:#728e00">:</span><span style="color:#00979d">:query</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;sql</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#00979d">.bind</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;issue.issue</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#00979d">.execute</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;pool</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#00979d">.await</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">.</span><span style="color:#434f54">map_err</span><span style="color:#728e00">(|</span><span style="color:#728e00">_</span><span style="color:#728e00">|</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">CustomError</span><span style="color:#728e00">:</span><span style="color:#00979d">:InternalServerError</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">})?;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Ok</span><span style="color:#728e00">((</span><span style="color:#434f54">StatusCode</span><span style="color:#728e00">:</span><span style="color:#00979d">:CREATED</span><span style="color:#728e00">,</span> <span style="color:#434f54">Json</span><span style="color:#728e00">(</span><span style="color:#434f54">issue</span><span style="color:#728e00">)))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span></code></pre></div><h3 id="put-all">PUT all</h3>
+<h3 id="delete">DELETE</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">async</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">delete_task</span><span style="color:#728e00">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Path</span><span style="color:#728e00">(</span><span style="color:#434f54">id</span><span style="color:#728e00">)</span><span style="color:#728e00">:</span> <span style="color:#00979d">Path&lt;i32&gt;</span><span style="color:#728e00">,</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Extension</span><span style="color:#728e00">(</span><span style="color:#434f54">pool</span><span style="color:#728e00">)</span><span style="color:#728e00">:</span> <span style="color:#00979d">Extension&lt;PgPool&gt;</span><span style="color:#728e00">)</span> 
+</span></span><span style="display:flex;"><span><span style="color:#728e00">-&gt;</span> <span style="color:#434f54">Result</span> <span style="color:#728e00">&lt;(</span><span style="color:#434f54">StatusCode</span><span style="color:#728e00">,</span> <span style="color:#434f54">Json</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">Value</span><span style="color:#728e00">&gt;),</span> <span style="color:#434f54">CustomError</span><span style="color:#728e00">&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">_find</span><span style="color:#728e00">:</span> <span style="color:#00979d">task::Task</span> <span style="color:#728e00">=</span> <span style="color:#434f54">sqlx</span><span style="color:#728e00">:</span><span style="color:#00979d">:query_as</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">SELECT</span> <span style="color:#00979d">*</span> <span style="color:#00979d">FROM</span> <span style="color:#00979d">task</span> <span style="color:#00979d">where</span> <span style="color:#00979d">id</span><span style="color:#728e00">=</span><span style="color:#00979d">$1</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">bind</span><span style="color:#728e00">(</span><span style="color:#434f54">id</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">fetch_one</span><span style="color:#728e00">(&amp;</span><span style="color:#434f54">pool</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">await</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">map_err</span><span style="color:#728e00">(|</span><span style="color:#728e00">_</span><span style="color:#728e00">|</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">CustomError</span><span style="color:#728e00">:</span><span style="color:#00979d">:TaskNotFound</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">})?;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">sqlx</span><span style="color:#728e00">:</span><span style="color:#00979d">:query</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">DELETE</span> <span style="color:#00979d">FROM</span> <span style="color:#00979d">task</span> <span style="color:#00979d">WHERE</span> <span style="color:#00979d">id</span><span style="color:#728e00">=</span><span style="color:#00979d">$1</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">bind</span><span style="color:#728e00">(</span><span style="color:#434f54">id</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">execute</span><span style="color:#728e00">(&amp;</span><span style="color:#434f54">pool</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">await</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">map_err</span><span style="color:#728e00">(|</span><span style="color:#728e00">_</span><span style="color:#728e00">|</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">CustomError</span><span style="color:#728e00">:</span><span style="color:#00979d">:TaskNotFound</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">})?;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Ok</span><span style="color:#728e00">((</span><span style="color:#434f54">StatusCode</span><span style="color:#728e00">:</span><span style="color:#00979d">:OK</span><span style="color:#728e00">,</span> <span style="color:#434f54">Json</span><span style="color:#728e00">(</span><span style="color:#434f54">json</span><span style="color:#728e00">!({</span><span style="color:#7f8c8d">&#34;msg&#34;</span><span style="color:#728e00">:</span> <span style="color:#a61717">&#34;</span><span style="color:#00979d">Task</span> <span style="color:#00979d">Deleted</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">}))))</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div>
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

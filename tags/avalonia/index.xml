@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Avalonia on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/tags/avalonia/</link>
+    <description>Recent content in Avalonia on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Thu, 17 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/avalonia/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Avalonia UI on MacOS</title>
+      <link>https://www.cryptopatrick.com/blog/2024/10/17/avalonia-ui-on-macos/</link>
+      <pubDate>Thu, 17 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2024/10/17/avalonia-ui-on-macos/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Description: How to get Avalonia setup on MacOS (Big Sur).&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;For VS Code users there&amp;rsquo;s an extension that can help speed up development process. You can find it on the &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.vscode-avalonia&#34;&gt;VS Code Extension marketplace&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;step-install-net&#34;&gt;Step: Install .NET&lt;/h1&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dotnet new install Avalonia.Templates&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#95a5a6&#34;&gt;# Check installation:&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dotnet --version&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;step-install-avalonia&#34;&gt;Step: Install Avalonia&lt;/h1&gt;&#xA;&lt;p&gt;Using the .NET CLI we install the Avalonia UI templates.&#xA;We can install Avalonia project templates with the following command:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

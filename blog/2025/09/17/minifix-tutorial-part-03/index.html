@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 miniFIX Tutorial | Part 03 - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2025/09/17/minifix-tutorial-part-03/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+
+<title>🦀 miniFIX Tutorial | Part 03 | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 miniFIX Tutorial | Part 03</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      September 17, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/rust/" style="margin-left:0.25em;">Rust</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <h1 id="encoding-fix-messages-with-minifix-creating-new-order-singles">Encoding FIX Messages with miniFIX: Creating New Order Singles</h1>
+<h2 id="introduction">Introduction</h2>
+<p>While decoding FIX messages is essential for processing incoming data, encoding messages is equally important for sending orders, confirmations, and other trading instructions. miniFIX provides a powerful, type-safe encoder that makes creating FIX messages straightforward while maintaining the performance and reliability needed for financial applications.</p>
+<h2 id="what-youll-learn">What You&rsquo;ll Learn</h2>
+<ul>
+<li>How to set up a FIX message encoder</li>
+<li>Creating structured messages with proper headers and trailers</li>
+<li>Working with different data types (strings, integers, decimals, enums)</li>
+<li>Using high-precision decimal types for financial calculations</li>
+<li>Best practices for message construction</li>
+</ul>
+<h2 id="setting-up-the-encoder">Setting Up the Encoder</h2>
+<p>Let&rsquo;s start by creating a basic FIX encoder and constructing a New Order Single message:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">decimal</span>::<span style="color:#434f54">d128</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">prelude</span>::<span style="color:#728e00">*</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">tagvalue</span>::<span style="color:#434f54">Encoder</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">rust_decimal_macros</span>::<span style="color:#434f54">dec</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">encoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Encoder</span>::<span style="color:#434f54">default</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span> <span style="color:#728e00">=</span> <span style="color:#728e00">Vec</span>::<span style="color:#434f54">new</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Start building a FIX 4.4 ExecutionReport message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">encoder</span>.<span style="color:#434f54">start_message</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;FIX.4.4&#34;</span>, <span style="color:#728e00">&amp;</span><span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span>, <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;D&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// The message builder is now ready for field assignment
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>}
+</span></span></code></pre></div><p>The <code>start_message()</code> method creates a message builder that handles:</p>
+<ul>
+<li>Proper FIX header construction</li>
+<li>Automatic body length calculation</li>
+<li>Checksum computation</li>
+<li>Field ordering according to FIX specifications</li>
+</ul>
+<h2 id="building-a-new-order-single">Building a New Order Single</h2>
+<p>Let&rsquo;s construct a complete New Order Single (35=D) message with all the essential fields:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">decimal</span>::<span style="color:#434f54">d128</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">prelude</span>::<span style="color:#728e00">*</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">tagvalue</span>::<span style="color:#434f54">Encoder</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">rust_decimal_macros</span>::<span style="color:#434f54">dec</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">create_new_order_single</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">encoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Encoder</span>::<span style="color:#434f54">default</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span> <span style="color:#728e00">=</span> <span style="color:#728e00">Vec</span>::<span style="color:#434f54">new</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">encoder</span>.<span style="color:#434f54">start_message</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;FIX.4.4&#34;</span>, <span style="color:#728e00">&amp;</span><span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span>, <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;D&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Standard header fields
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">MSG_SEQ_NUM</span>, <span style="color:#8a7b52">215</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SENDER_COMP_ID</span>, <span style="color:#7f8c8d">&#34;CLIENT12&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">TARGET_COMP_ID</span>, <span style="color:#7f8c8d">&#34;BROKER_SYS&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Order identification
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ACCOUNT</span>, <span style="color:#7f8c8d">&#34;Marcel&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">CL_ORD_ID</span>, <span style="color:#7f8c8d">&#34;13346&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Order instructions
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">fix44</span>::<span style="color:#434f54">HANDL_INST</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">fix44</span>::<span style="color:#434f54">HandlInst</span>::<span style="color:#434f54">AutomatedExecutionOrderPrivateNoBrokerIntervention</span>,
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORD_TYPE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">OrdType</span>::<span style="color:#434f54">Limit</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SIDE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">Side</span>::<span style="color:#434f54">Buy</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">TIME_IN_FORCE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">TimeInForce</span>::<span style="color:#434f54">Day</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Financial details with high precision
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">PRICE</span>, <span style="color:#434f54">dec!</span>(<span style="color:#8a7b52">150.08</span>));           <span style="color:#95a5a6">// Using rust_decimal
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">PRICE_DELTA</span>, <span style="color:#434f54">d128!</span>(<span style="color:#8a7b52">32.99</span>));     <span style="color:#95a5a6">// Using decimal128
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Complete the message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">let</span> (<span style="color:#434f54">encoded_message</span>, <span style="color:#434f54">_</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">msg</span>.<span style="color:#434f54">done</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;Encoded FIX message:&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">encoded_message</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="working-with-different-data-types">Working with Different Data Types</h2>
+<p>miniFIX&rsquo;s encoder supports various data types with automatic conversion:</p>
+<h3 id="string-fields">String Fields</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// Static strings
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SENDER_COMP_ID</span>, <span style="color:#7f8c8d">&#34;CLIENT12&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Dynamic strings
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">let</span> <span style="color:#434f54">order_id</span> <span style="color:#728e00">=</span> <span style="color:#434f54">format!</span>(<span style="color:#7f8c8d">&#34;ORDER_</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">chrono</span>::<span style="color:#434f54">Utc</span>::<span style="color:#434f54">now</span>().<span style="color:#434f54">timestamp</span>());
+</span></span><span style="display:flex;"><span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">CL_ORD_ID</span>, <span style="color:#434f54">order_id</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Byte arrays
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SENDER_COMP_ID</span>, <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;CLIENT12&#34;</span>);
+</span></span></code></pre></div><h3 id="numeric-fields">Numeric Fields</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// Integers
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">MSG_SEQ_NUM</span>, <span style="color:#8a7b52">215_</span><span style="color:#728e00">u32</span>);
+</span></span><span style="display:flex;"><span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORDER_QTY</span>, <span style="color:#8a7b52">1000_</span><span style="color:#728e00">i64</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Floating point (not recommended for prices)
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SOME_FIELD</span>, <span style="color:#8a7b52">123.45_</span><span style="color:#728e00">f64</span>);
+</span></span></code></pre></div><h3 id="financial-decimals">Financial Decimals</h3>
+<p>For financial applications, precise decimal arithmetic is crucial:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">rust_decimal_macros</span>::<span style="color:#434f54">dec</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">decimal</span>::<span style="color:#434f54">d128</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Using rust_decimal (recommended for most cases)
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">PRICE</span>, <span style="color:#434f54">dec!</span>(<span style="color:#8a7b52">150.08</span>));
+</span></span><span style="display:flex;"><span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORDER_QTY</span>, <span style="color:#434f54">dec!</span>(<span style="color:#8a7b52">1000</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Using decimal128 for extreme precision
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">PRICE_DELTA</span>, <span style="color:#434f54">d128!</span>(<span style="color:#8a7b52">32.99</span>));
+</span></span></code></pre></div><h3 id="enum-fields">Enum Fields</h3>
+<p>miniFIX provides type-safe enums for standardized field values:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// Order side
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SIDE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">Side</span>::<span style="color:#434f54">Buy</span>);
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// or
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SIDE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">Side</span>::<span style="color:#434f54">Sell</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Order type
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORD_TYPE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">OrdType</span>::<span style="color:#434f54">Limit</span>);
+</span></span><span style="display:flex;"><span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORD_TYPE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">OrdType</span>::<span style="color:#434f54">Market</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Time in force
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">TIME_IN_FORCE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">TimeInForce</span>::<span style="color:#434f54">Day</span>);
+</span></span><span style="display:flex;"><span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">TIME_IN_FORCE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">TimeInForce</span>::<span style="color:#434f54">ImmediateOrCancel</span>);
+</span></span></code></pre></div><h2 id="advanced-message-construction">Advanced Message Construction</h2>
+<h3 id="timestamps">Timestamps</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">chrono</span>::{<span style="color:#434f54">DateTime</span>, <span style="color:#434f54">Utc</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">let</span> <span style="color:#434f54">now</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Utc</span>::<span style="color:#434f54">now</span>();
+</span></span><span style="display:flex;"><span><span style="color:#728e00">let</span> <span style="color:#434f54">timestamp</span> <span style="color:#728e00">=</span> <span style="color:#434f54">now</span>.<span style="color:#434f54">format</span>(<span style="color:#7f8c8d">&#34;%Y%m%d-%H:%M:%S%.3f&#34;</span>).<span style="color:#434f54">to_string</span>();
+</span></span><span style="display:flex;"><span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">TRANSACT_TIME</span>, <span style="color:#434f54">timestamp</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Or using miniFIX timestamp utilities
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">TRANSACT_TIME</span>, <span style="color:#434f54">minifix</span>::<span style="color:#434f54">utils</span>::<span style="color:#434f54">current_timestamp</span>());
+</span></span></code></pre></div><h3 id="conditional-fields">Conditional Fields</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// Add fields conditionally
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">if</span> <span style="color:#434f54">order_type</span> <span style="color:#728e00">==</span> <span style="color:#434f54">OrderType</span>::<span style="color:#434f54">Limit</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">PRICE</span>, <span style="color:#434f54">limit_price</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">if</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Some</span>(<span style="color:#434f54">stop_price</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">stop_price</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">STOP_PX</span>, <span style="color:#434f54">stop_price</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="repeating-groups">Repeating Groups</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// TODO: Example of encoding repeating groups
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6">// This would show how to encode groups like NoPartyIDs, NoAllocs, etc.
+</span></span></span></code></pre></div><h2 id="complete-production-example">Complete Production Example</h2>
+<p>Here&rsquo;s a more comprehensive example that might be used in a production trading system:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">decimal</span>::<span style="color:#434f54">d128</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">prelude</span>::<span style="color:#728e00">*</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">tagvalue</span>::<span style="color:#434f54">Encoder</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">rust_decimal_macros</span>::<span style="color:#434f54">dec</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">chrono</span>::<span style="color:#434f54">Utc</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[derive(Debug)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">pub</span> <span style="color:#728e00">struct</span> <span style="color:#434f54">OrderRequest</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">client_order_id</span>: <span style="color:#728e00">String</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">symbol</span>: <span style="color:#728e00">String</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">side</span>: <span style="color:#434f54">Side</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">order_type</span>: <span style="color:#434f54">OrderType</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">quantity</span>: <span style="color:#434f54">rust_decimal</span>::<span style="color:#434f54">Decimal</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">price</span>: <span style="color:#728e00">Option</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">rust_decimal</span>::<span style="color:#434f54">Decimal</span><span style="color:#728e00">&gt;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">account</span>: <span style="color:#728e00">String</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[derive(Debug)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">pub</span> <span style="color:#728e00">enum</span> <span style="color:#434f54">Side</span> { <span style="color:#434f54">Buy</span>, <span style="color:#434f54">Sell</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[derive(Debug)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">pub</span> <span style="color:#728e00">enum</span> <span style="color:#434f54">OrderType</span> { <span style="color:#434f54">Market</span>, <span style="color:#434f54">Limit</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">pub</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">encode_new_order_single</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">order</span>: <span style="color:#00979d">&amp;</span><span style="color:#434f54">OrderRequest</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">seq_num</span>: <span style="color:#00979d">u32</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">sender_comp_id</span>: <span style="color:#00979d">&amp;</span><span style="color:#00979d">str</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">target_comp_id</span>: <span style="color:#00979d">&amp;</span><span style="color:#00979d">str</span>,
+</span></span><span style="display:flex;"><span>) -&gt; <span style="color:#728e00">Vec</span><span style="color:#728e00">&lt;</span><span style="color:#00979d">u8</span><span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">encoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Encoder</span>::<span style="color:#434f54">default</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span> <span style="color:#728e00">=</span> <span style="color:#728e00">Vec</span>::<span style="color:#434f54">new</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">encoder</span>.<span style="color:#434f54">start_message</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;FIX.4.4&#34;</span>, <span style="color:#728e00">&amp;</span><span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span>, <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;D&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Header fields
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">MSG_SEQ_NUM</span>, <span style="color:#434f54">seq_num</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SENDER_COMP_ID</span>, <span style="color:#434f54">sender_comp_id</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">TARGET_COMP_ID</span>, <span style="color:#434f54">target_comp_id</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Current timestamp
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">let</span> <span style="color:#434f54">timestamp</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Utc</span>::<span style="color:#434f54">now</span>().<span style="color:#434f54">format</span>(<span style="color:#7f8c8d">&#34;%Y%m%d-%H:%M:%S%.3f&#34;</span>).<span style="color:#434f54">to_string</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SENDING_TIME</span>, <span style="color:#434f54">timestamp</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Order details
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">CL_ORD_ID</span>, <span style="color:#728e00">&amp;</span><span style="color:#434f54">order</span>.<span style="color:#434f54">client_order_id</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SYMBOL</span>, <span style="color:#728e00">&amp;</span><span style="color:#434f54">order</span>.<span style="color:#434f54">symbol</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ACCOUNT</span>, <span style="color:#728e00">&amp;</span><span style="color:#434f54">order</span>.<span style="color:#434f54">account</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORDER_QTY</span>, <span style="color:#434f54">order</span>.<span style="color:#434f54">quantity</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Side
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">match</span> <span style="color:#434f54">order</span>.<span style="color:#434f54">side</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Side</span>::<span style="color:#434f54">Buy</span> <span style="color:#728e00">=&gt;</span> <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SIDE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">Side</span>::<span style="color:#434f54">Buy</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Side</span>::<span style="color:#434f54">Sell</span> <span style="color:#728e00">=&gt;</span> <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SIDE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">Side</span>::<span style="color:#434f54">Sell</span>),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Order type and price
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">match</span> <span style="color:#434f54">order</span>.<span style="color:#434f54">order_type</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">OrderType</span>::<span style="color:#434f54">Market</span> <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORD_TYPE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">OrdType</span>::<span style="color:#434f54">Market</span>);
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">OrderType</span>::<span style="color:#434f54">Limit</span> <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORD_TYPE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">OrdType</span>::<span style="color:#434f54">Limit</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">if</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Some</span>(<span style="color:#434f54">price</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">order</span>.<span style="color:#434f54">price</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">PRICE</span>, <span style="color:#434f54">price</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Standard instructions
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">fix44</span>::<span style="color:#434f54">HANDL_INST</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">fix44</span>::<span style="color:#434f54">HandlInst</span>::<span style="color:#434f54">AutomatedExecutionOrderPrivateNoBrokerIntervention</span>,
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">TIME_IN_FORCE</span>, <span style="color:#434f54">fix44</span>::<span style="color:#434f54">TimeInForce</span>::<span style="color:#434f54">Day</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Transaction time
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">let</span> <span style="color:#434f54">transact_time</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Utc</span>::<span style="color:#434f54">now</span>().<span style="color:#434f54">format</span>(<span style="color:#7f8c8d">&#34;%Y%m%d-%H:%M:%S%.3f&#34;</span>).<span style="color:#434f54">to_string</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">TRANSACT_TIME</span>, <span style="color:#434f54">transact_time</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> (<span style="color:#434f54">encoded_message</span>, <span style="color:#434f54">_</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">msg</span>.<span style="color:#434f54">done</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">encoded_message</span>.<span style="color:#434f54">to_vec</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">order</span> <span style="color:#728e00">=</span> <span style="color:#434f54">OrderRequest</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">client_order_id</span>: <span style="color:#7f8c8d">&#34;ORDER_12345&#34;</span>.<span style="color:#434f54">to_string</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">symbol</span>: <span style="color:#7f8c8d">&#34;AAPL&#34;</span>.<span style="color:#434f54">to_string</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">side</span>: <span style="color:#434f54">Side</span>::<span style="color:#434f54">Buy</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">order_type</span>: <span style="color:#434f54">OrderType</span>::<span style="color:#434f54">Limit</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">quantity</span>: <span style="color:#434f54">dec</span><span style="color:#728e00">!</span>(<span style="color:#8a7b52">100</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">price</span>: <span style="color:#728e00">Some</span>(<span style="color:#434f54">dec!</span>(<span style="color:#8a7b52">150.25</span>)),
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">account</span>: <span style="color:#7f8c8d">&#34;ACCOUNT_001&#34;</span>.<span style="color:#434f54">to_string</span>(),
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">fix_message</span> <span style="color:#728e00">=</span> <span style="color:#434f54">encode_new_order_single</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">&amp;</span><span style="color:#434f54">order</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#8a7b52">42</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#7f8c8d">&#34;TRADING_SYSTEM&#34;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#7f8c8d">&#34;PRIME_BROKER&#34;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📤 Encoded FIX Message:&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">fix_message</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// You would typically send this over a network connection
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">// send_to_broker(&amp;fix_message).await?;
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>}
+</span></span></code></pre></div><h2 id="message-structure">Message Structure</h2>
+<p>The encoded message follows standard FIX structure:</p>
+<pre tabindex="0"><code>8=FIX.4.4|9=122|35=D|34=42|49=TRADING_SYSTEM|52=20241201-10:30:15.123|56=PRIME_BROKER|1=ACCOUNT_001|11=ORDER_12345|21=1|40=2|44=150.25|54=1|55=AAPL|38=100|59=0|60=20241201-10:30:15.123|10=072|
+</code></pre><p>Where:</p>
+<ul>
+<li><code>8=FIX.4.4</code>: Begin string</li>
+<li><code>9=122</code>: Body length (calculated automatically)</li>
+<li><code>35=D</code>: Message type (New Order Single)</li>
+<li><code>34=42</code>: Message sequence number</li>
+<li>&hellip; (body fields)</li>
+<li><code>10=072</code>: Checksum (calculated automatically)</li>
+</ul>
+<h2 id="performance-considerations">Performance Considerations</h2>
+<h3 id="buffer-reuse">Buffer Reuse</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">encoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Encoder</span>::<span style="color:#434f54">default</span>();
+</span></span><span style="display:flex;"><span><span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span> <span style="color:#728e00">=</span> <span style="color:#728e00">Vec</span>::<span style="color:#434f54">with_capacity</span>(<span style="color:#8a7b52">1024</span>); <span style="color:#95a5a6">// Pre-allocate
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Reuse buffer for multiple messages
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">buffer</span>.<span style="color:#434f54">clear</span>();
+</span></span><span style="display:flex;"><span><span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">msg1</span> <span style="color:#728e00">=</span> <span style="color:#434f54">encoder</span>.<span style="color:#434f54">start_message</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;FIX.4.4&#34;</span>, <span style="color:#728e00">&amp;</span><span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span>, <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;D&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// ... build message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">buffer</span>.<span style="color:#434f54">clear</span>(); 
+</span></span><span style="display:flex;"><span><span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">msg2</span> <span style="color:#728e00">=</span> <span style="color:#434f54">encoder</span>.<span style="color:#434f54">start_message</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;FIX.4.4&#34;</span>, <span style="color:#728e00">&amp;</span><span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span>, <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;F&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// ... build another message
+</span></span></span></code></pre></div><h3 id="batch-encoding">Batch Encoding</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">encode_orders</span>(<span style="color:#434f54">orders</span>: <span style="color:#00979d">&amp;</span>[<span style="color:#434f54">OrderRequest</span>]) -&gt; <span style="color:#728e00">Vec</span><span style="color:#728e00">&lt;</span><span style="color:#728e00">Vec</span><span style="color:#728e00">&lt;</span><span style="color:#00979d">u8</span><span style="color:#728e00">&gt;&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">encoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Encoder</span>::<span style="color:#434f54">default</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span> <span style="color:#728e00">=</span> <span style="color:#728e00">Vec</span>::<span style="color:#434f54">with_capacity</span>(<span style="color:#8a7b52">512</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">messages</span> <span style="color:#728e00">=</span> <span style="color:#728e00">Vec</span>::<span style="color:#434f54">with_capacity</span>(<span style="color:#434f54">orders</span>.<span style="color:#434f54">len</span>());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">for</span> (<span style="color:#434f54">i</span>, <span style="color:#434f54">order</span>) <span style="color:#728e00">in</span> <span style="color:#434f54">orders</span>.<span style="color:#434f54">iter</span>().<span style="color:#434f54">enumerate</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">buffer</span>.<span style="color:#434f54">clear</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">message</span> <span style="color:#728e00">=</span> <span style="color:#434f54">encode_new_order_single</span>(<span style="color:#434f54">order</span>, <span style="color:#434f54">i</span> <span style="color:#728e00">as</span> <span style="color:#00979d">u32</span> <span style="color:#728e00">+</span> <span style="color:#8a7b52">1</span>, <span style="color:#7f8c8d">&#34;SYS&#34;</span>, <span style="color:#7f8c8d">&#34;BRK&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">messages</span>.<span style="color:#434f54">push</span>(<span style="color:#434f54">message</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">messages</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Validate Input</strong>: Always validate order parameters before encoding</li>
+<li><strong>Use Decimal Types</strong>: Use <code>rust_decimal</code> or <code>decimal</code> for financial amounts</li>
+<li><strong>Handle Timestamps</strong>: Use consistent timestamp formatting</li>
+<li><strong>Reuse Buffers</strong>: Reuse buffers for better performance</li>
+<li><strong>Error Handling</strong>: Implement proper error handling for encoding failures</li>
+<li><strong>Testing</strong>: Thoroughly test encoded messages with your counterparties</li>
+</ol>
+<h2 id="common-patterns">Common Patterns</h2>
+<h3 id="order-amendments">Order Amendments</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// Cancel/Replace (35=G)
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">encoder</span>.<span style="color:#434f54">start_message</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;FIX.4.4&#34;</span>, <span style="color:#728e00">&amp;</span><span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span>, <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;G&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORIG_CL_ORD_ID</span>, <span style="color:#7f8c8d">&#34;ORDER_12345&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">CL_ORD_ID</span>, <span style="color:#7f8c8d">&#34;ORDER_12345_AMEND&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// ... other fields
+</span></span></span></code></pre></div><h3 id="order-cancellation">Order Cancellation</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// Order Cancel Request (35=F)  
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">encoder</span>.<span style="color:#434f54">start_message</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;FIX.4.4&#34;</span>, <span style="color:#728e00">&amp;</span><span style="color:#728e00">mut</span> <span style="color:#434f54">buffer</span>, <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;F&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORIG_CL_ORD_ID</span>, <span style="color:#7f8c8d">&#34;ORDER_12345&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#434f54">msg</span>.<span style="color:#434f54">set</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">CL_ORD_ID</span>, <span style="color:#7f8c8d">&#34;ORDER_12345_CANCEL&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// ... other fields
+</span></span></span></code></pre></div><h2 id="next-steps">Next Steps</h2>
+<p>Message encoding is fundamental to FIX trading systems. With miniFIX&rsquo;s type-safe encoder, you can:</p>
+<ul>
+<li>Build order management systems</li>
+<li>Create trading algorithms</li>
+<li>Implement risk management systems</li>
+<li>Develop market making applications</li>
+</ul>
+<p>The combination of type safety, performance, and precision makes miniFIX ideal for mission-critical financial applications where correctness is paramount.</p>
+<hr>
+<p><strong>Next:</strong> <a href="../../../../../blog/2025/09/18/rust-minifix-tutorial-part-04/">Part 04 - Custom FIX Specifications</a></p>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

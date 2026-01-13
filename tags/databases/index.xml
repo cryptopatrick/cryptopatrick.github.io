@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Databases on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/tags/databases/</link>
+    <description>Recent content in Databases on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Sun, 20 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/databases/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 MVCC 101</title>
+      <link>https://www.cryptopatrick.com/blog/2023/08/20/mvcc-101/</link>
+      <pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2023/08/20/mvcc-101/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Multiversion_concurrency_control&#34;&gt;MVCC&lt;/a&gt; stands for MultiVersion Concurrency Control.&#xA;It&amp;rsquo;s a way to implement &lt;em&gt;transactional isolation&lt;/em&gt; in any application that needs to manage the &lt;em&gt;state&lt;/em&gt; of &lt;em&gt;data&lt;/em&gt; items.&lt;/p&gt;&#xA;&lt;p&gt;The traditional mechanism for state management in a database is concurrent control using read-write locks. However, this solution is based on &lt;em&gt;blocking&lt;/em&gt; and can create &lt;em&gt;contention&lt;/em&gt;.&#xA;MVCC is &lt;em&gt;not&lt;/em&gt; blocking. This means that multiple clients can read and write simultaneously -  reads do not block other reads and writes do not block other writes or reads.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

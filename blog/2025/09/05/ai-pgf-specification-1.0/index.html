@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🤖 Ai:  PGF Specification 1.0 - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2025/09/05/ai-pgf-specification-1.0/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="https://www.cryptopatrick.com/img/post-name/name.jpg" />
+
+
+<title>🤖 Ai:  PGF Specification 1.0 | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🤖 Ai:  PGF Specification 1.0</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      September 5, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/grammar/" style="margin-left:0.25em;">Grammar</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/nlp/" style="margin-left:0.25em;">NLP</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <p><img src="https://img.shields.io/badge/Status-Released-green.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/PGF_Version-1.0.0-green.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg" alt="Version:2.1.0"></p>
+<!-- ////////////////////////////////////////////////////////////////////////
+![Version:0.1.0](https://img.shields.io/badge/Work_In_Progress-orange.svg)
+![Version:0.1.0](https://img.shields.io/badge/Text_Version-0.4.5-blue.svg)
+![Version:0.1.0](https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg)
+-->
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<br>
+<blockquote>
+<p><strong>Preface:</strong> This is the official PGF Specification, Version 1.0, but please make sure to refer to the Grammatical Framework main projects page for the offficial release.</p>
+</blockquote>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h2 id="portable-grammar-format">Portable Grammar Format</h2>
+<p>So far, we talked about the Portable Grammar Format (PGF) as an abstract concept, but in the actual implementation, we store the compiled grammars in a concrete file format.</p>
+<p>This appendix is the reference for the exact format, and it includes details which were intentionally skipped in the previous chapters because they were irrelevant to the main algorithms.</p>
+<p>The format described here is a version 1.0 and is produced by GF 3.2. In case, if the format have to be changed in the future, the implementations should maintain backward compatibility.</p>
+<p>The GF compiler will dump any PGF file into textual representation with a syntax close to what we used in the different chapters, if it is requested to produce the format pgf_pretty:</p>
+<blockquote>
+<p>gf -make -output-format=pgf_pretty MyGrammar. pgf</p>
+</blockquote>
+<h3 id="basic-types">Basic Types</h3>
+<p>The Portable Grammar Format is a binary format where the structures of the grammar are serialized as a sequence of bytes. Every structure is a list of sequentially serialized fields, where every field is either another structure or has a basic type. The allowed basic types are:</p>
+<ul>
+<li>﻿﻿Int8 - 8 bits integer, with sign, represented as a single byte.</li>
+<li>﻿﻿Int16 - 16 bits integer, with sign, represented as a sequence of two bytes where the most significant byte is stored first.</li>
+<li>﻿﻿Int - a 32 bits integer with sign encoded as a sequence of bytes with variable length. The last bit of every byte is an indication for whether there are more bytes left. If the bit is 1, then there is at least one more byte to be read, otherwise this is the last byte in the sequence. The other 7 bits are parts of the stored integer. We store the bits from the least significant to the most significant.</li>
+<li>﻿﻿String - a string in UTF-8 encoding. We first store as Int (a variable length integer) the length of the string in number of Unicode characters and after that we add the UTF-8 encoding of the string itself.</li>
+<li>﻿﻿Float - A double precision floating point number serialized in a big-endian format following the IEEE754 standard.</li>
+<li>﻿﻿List - Many of the object fields are lists of other objects. We say that the field is of type [Object] if it contains a list of objects of type Object. The list is serialized as a variable length integer indicating the length of the list in number of objects, followed by the serialization of the elements of the list.</li>
+</ul>
+<hr>
+<h3 id="pgf">PGF</h3>
+<p>The whole PGF file contains only one structure which corresponds to the abstract structure $G$ from Definition 1 in Section 2.1. The structure has the following fields:</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>type</strong></th>
+          <th><strong>description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int16</td>
+          <td>major PGF version, should be 1.</td>
+      </tr>
+      <tr>
+          <td>Int16</td>
+          <td>minor PGF version, should be 0.</td>
+      </tr>
+      <tr>
+          <td>[Flag]</td>
+          <td>global flags</td>
+      </tr>
+      <tr>
+          <td>Abstract</td>
+          <td>abstract syntax</td>
+      </tr>
+      <tr>
+          <td>Concrete</td>
+          <td>list of concrete syntaxes</td>
+      </tr>
+      <tr>
+          <td>If PGF is changed in the future, the version in the first two fields should be updated.</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>The implementations can use the version number to maintain backward compatibility.</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="flag">Flag</h3>
+<p>The flags are pairs of a name and a literal and store different configuration parameters. They are generated by the compiler and are accessible only internally from the interpreter. By using flags we can add new settings without changing the format.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>flag name</td>
+      </tr>
+      <tr>
+          <td>Literal</td>
+          <td>flag value</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="abstract">Abstract</h3>
+<p>This is the object that represents the abstract syntax A (Definition 2, Section 2.1) of a grammar. The name of the abstract syntax is the name of the top-level abstract module in the grammar. The start category is specified with the flag startcat.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the name of the abstract syntax</td>
+      </tr>
+      <tr>
+          <td>[Flag]</td>
+          <td>a list of flags</td>
+      </tr>
+      <tr>
+          <td>[AbsFun]</td>
+          <td>a list of abstract functions</td>
+      </tr>
+      <tr>
+          <td>[AbsCat]</td>
+          <td>a list of abstract categories</td>
+      </tr>
+      <tr>
+          <td>Note: all lists are sorted by name which makes it easy to do binary search.</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="absfun">AbsFun</h3>
+<p>Every abstract function is represented with one AbsFun object.</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>type</strong></th>
+          <th><strong>description</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the name of the function</td>
+      </tr>
+      <tr>
+          <td>Type</td>
+          <td>function&rsquo;s type signature</td>
+      </tr>
+      <tr>
+          <td>Int</td>
+          <td>function&rsquo;s arity</td>
+      </tr>
+      <tr>
+          <td>Int8</td>
+          <td>a constructor tag: 0 - constructor; 1 - function</td>
+      </tr>
+      <tr>
+          <td>[Equation]</td>
+          <td>definitional equations for this function if it is not a constructor</td>
+      </tr>
+      <tr>
+          <td>Float</td>
+          <td>the probability of the function</td>
+      </tr>
+      <tr>
+          <td>The constructor tag distinguishes between constructors and computable functions, i.e. we can distinguish between this two judgements:</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>﻿﻿constructor: <strong>data</strong> $f: T$</li>
+<li>﻿﻿function: <strong>fun</strong> $f: T$</li>
+</ul>
+<p>If this is a function, then we also include a list of definitional equations. The list can be empty which means that the function is an axiom. In the cases, when we have at least one equation then the arity is the number of arguments that have to be known in order to do pattern matching. For constructors or axioms the arity is zero.</p>
+<hr>
+<h3 id="abscat">AbsCat</h3>
+<p>Every abstract category is represented with one AbsCat object. The object includes the name and the type information for the category plus a list of all functions whose return type is this category. The functions are listed in the order in which they appear in the source code.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the name of the category</td>
+      </tr>
+      <tr>
+          <td>[Hypo]</td>
+          <td>a list of hypotheses</td>
+      </tr>
+      <tr>
+          <td>[CatFun]</td>
+          <td>a list of functions in source-code order</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="catfun">CatFun</h3>
+<p>This object is used internally to keep a list of abstract functions with their probabilities.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the name of the function</td>
+      </tr>
+      <tr>
+          <td>Float</td>
+          <td>the probability of the function</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="type">Type</h3>
+<p>This is the description of an abstract syntax type. Since the types are monomorphic and in normal form, they have the general form:</p>
+<p>$$(X_1 : T_1) → (x_2 : T_2) → &hellip; → (x_n: T_n) → C e_1&hellip; e_n$$</p>
+<p>The list of hypotheses $(x_i: T_i)$ is stored as a list of Hypo objects and the indices $e_1 &hellip; e_n$ are stored as a list of expressions.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>[Hypo]</td>
+          <td>a list of hypotheses</td>
+      </tr>
+      <tr>
+          <td>String</td>
+          <td>the name fo the categoary in the return type</td>
+      </tr>
+      <tr>
+          <td>[Expression]</td>
+          <td>indices in the return type</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="hypo">Hypo</h3>
+<p>Every Hypo object represents an argument in some function type. Since we support implicit and explicit arguments, the first field tells us whether we have explicit argument i.e. $(x: T)$ or implicit i.e. $({x} : T)$. The next two fields are the name of the bound variable and its type. If no variable is bound then the name is $&rsquo;_&rsquo;$.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>BindType</td>
+          <td>the binding type i.e. implicit/explicit argument</td>
+      </tr>
+      <tr>
+          <td>String</td>
+          <td>a variable name or $&rsquo;_&rsquo;$ if no variable is bound</td>
+      </tr>
+      <tr>
+          <td>Type</td>
+          <td>the type of the variable</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="equation">Equation</h3>
+<p>Every computable function is represented with a list of equations where the equation is a pair of list of patterns and an expression. All equations must have the same number of patterns which is equal to the arity of the function.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>[Pattern]</td>
+          <td>a sequence of patterns</td>
+      </tr>
+      <tr>
+          <td>Expression</td>
+          <td>an expression</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="pattern">Pattern</h3>
+<p>This is the representation of a single pattern in a definitional equation for computable function. The first field is a tag which encodes the kind of pattern.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int8</td>
+          <td>a tag</td>
+      </tr>
+  </tbody>
+</table>
+<ol>
+<li>﻿﻿﻿tag=0 - pattern matching on constructor application (i.e. $c; p_1 ;  p_2 &hellip; p_n$)</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the name of the constructor</td>
+      </tr>
+      <tr>
+          <td>[Pattern]</td>
+          <td>a list of nested patterns for the arguments</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="2">
+<li>﻿﻿﻿tag=1 - a variable type</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the variable name</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="3">
+<li>﻿﻿﻿tag=2 - a pattern which binds a variable but also does nested pattern matching (i.e. $x@p$)</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the variable name</td>
+      </tr>
+      <tr>
+          <td>Pattern</td>
+          <td>a nested pattern</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="4">
+<li>
+<p>﻿﻿﻿tag=3 - a wildcard (i.e. $_$).</p>
+</li>
+<li>
+<p>﻿﻿﻿tag=4 - matching a literal i.e. string, integer or float</p>
+</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Literal</td>
+          <td>the value of the literal</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="6">
+<li>﻿﻿﻿tag=5 - pattern matching on an implicit argument (i.e. ${{P}}$)</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>[Pattern]</td>
+          <td>the nested pattern</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="7">
+<li>tag=6 - an inaccessible pattern $(\sim p)$</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Expr</td>
+          <td>the nested pattern</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="expression">Expression</h3>
+<p>This is the encoding of an abstract syntax expression (tree).</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int8</td>
+          <td>a tag</td>
+      </tr>
+  </tbody>
+</table>
+<ol>
+<li>﻿﻿﻿tag=0 - a lambda abstraction (i.e. $\\x → &hellip;$)</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>BindType</td>
+          <td>a tag for implicit/explicit argument</td>
+      </tr>
+      <tr>
+          <td>String</td>
+          <td>the variable name</td>
+      </tr>
+      <tr>
+          <td>Expression</td>
+          <td>the body of the lambda abstraction</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="2">
+<li>﻿﻿﻿tag=1 - application (i.e. $f x$)</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Expression</td>
+          <td>the left-hand expression</td>
+      </tr>
+      <tr>
+          <td>Expression</td>
+          <td>the right-hand expression</td>
+      </tr>
+      <tr>
+          <td>3. ﻿﻿﻿tag=2 - a literal value i.e. string, integer or float type description</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Literal</td>
+          <td>the value of the literal</td>
+      </tr>
+      <tr>
+          <td>4. ﻿﻿﻿tag=3 - a metavariable (i.e. $?0, ?1,&hellip;$)</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int</td>
+          <td>the id of the metavariable</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="5">
+<li>﻿﻿﻿tag=4 - an abstract syntax function</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the function name</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="6">
+<li>tag=5 - a variable</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int</td>
+          <td>the de Bruijn index of the variable</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="7">
+<li>tag=6 - an expression with a type annotation (i.e. $(e: t)$)</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Expression</td>
+          <td>the annotated expression</td>
+      </tr>
+      <tr>
+          <td>Type</td>
+          <td>the type of the expression</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="8">
+<li>tag=7 - an implicit argument (i.e. ${e}$)</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Expression</td>
+          <td>the expression for the argument</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="literal">Literal</h3>
+<p>The Literal object represents the built-in kinds of literal constants. It starts with a tag which encodes the type of the constant:</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int8</td>
+          <td>literal type</td>
+      </tr>
+  </tbody>
+</table>
+<p>Currently we support only three types of literals:</p>
+<ol>
+<li>﻿﻿﻿tag=0 - string type</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the value</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="2">
+<li>﻿﻿﻿tag=1 - integer</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int</td>
+          <td>the value</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="3">
+<li>﻿﻿﻿tag=2 - float type</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Float</td>
+          <td>the value</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="bindtype">BindType</h3>
+<p>The bind type is a tag which encodes whether we have an explicit or an implicit argument.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int8</td>
+          <td>tag</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="concrete">Concrete</h3>
+<p>Every concrete syntax C (Definition 3, Section 2.1), in the grammar, is represented with an object. The name of the concrete syntax is the name of the top-level concrete module in the grammar.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the name of the concrete syntax</td>
+      </tr>
+      <tr>
+          <td>[Flag]</td>
+          <td>a list of flags</td>
+      </tr>
+      <tr>
+          <td>[PrintName]</td>
+          <td>a list of print names</td>
+      </tr>
+      <tr>
+          <td>[Sequence]</td>
+          <td>a table with sequences (Section 2.8.1)</td>
+      </tr>
+      <tr>
+          <td>[CncFun]</td>
+          <td>a list of concrete functions</td>
+      </tr>
+      <tr>
+          <td>[LinDef]</td>
+          <td>a list of functions for default linearization</td>
+      </tr>
+      <tr>
+          <td>[ProductionSet]</td>
+          <td>a list of production sets</td>
+      </tr>
+      <tr>
+          <td>[CncCat]</td>
+          <td>a list of concrete categories</td>
+      </tr>
+      <tr>
+          <td>Int</td>
+          <td>total number of concrete categories allocated for the grammar</td>
+      </tr>
+      <tr>
+          <td><em>Note:</em> The lists Flag, PrintName and CncCat are sorted by name which makes it easy to do binary search.</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><em>Note:</em> The total number of concrete categories is used by the parser to determine whether a given category is part of the grammar, i.e. member of $N^C$, or it was created during the parsing. This is the way to decide when to put metavariables during the tree extraction (Section 2.3.7).</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="printname">PrintName</h3>
+<p>Every function or category can have a print name which is a user friendly name that can be displayed in the user interface instead of the real one. The print names are defined in the concrete syntax which makes it easier to localize the user interface to different languages.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the name of the function or the category</td>
+      </tr>
+      <tr>
+          <td>String</td>
+          <td>the printable name</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="sequence">Sequence</h3>
+<p>This is the representation of a single sequence in PMCFG, produced during the common subexpression optimization (Section 2.8.1).</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>[Symbol]</td>
+          <td>a list of symbols</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="symbol">Symbol</h3>
+<p>The Symbol (Definition 4, Section 2.1) represents either a terminal or a function argument in some sequence. The representation starts with a tag encoding the type of the symbol:</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int8</td>
+          <td>expression tag</td>
+      </tr>
+  </tbody>
+</table>
+<p>The supported symbols are:</p>
+<ol>
+<li>﻿﻿﻿tag=0. This is the representation of an argument, i.e. a pair $\langle k; l \rangle$ ) where $k$ is the argument index and $l$ is the constituent index.</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int</td>
+          <td>argument index</td>
+      </tr>
+      <tr>
+          <td>Int</td>
+          <td>constituent index</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="2">
+<li>﻿﻿﻿tag=1 This is again an argument but we use different tag to indicate that the target can be a literal category (see Section 2.6). If the target category is not a new fresh category, generated by the parser, then it is treated as a literal category. In the pgf_pretty format, we print this kind of symbols as ${d; r}$ instead of $\langle d; r  \rangle$ .</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int</td>
+          <td>argument index</td>
+      </tr>
+      <tr>
+          <td>Int</td>
+          <td>constituent index</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="3">
+<li>﻿﻿﻿tag=2 A high-order argument i.e. $\langle d; $r)$ (Section 2.7).</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int</td>
+          <td>argument index</td>
+      </tr>
+      <tr>
+          <td>Int</td>
+          <td>variable number</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="4">
+<li>﻿﻿﻿tag=3 This is a terminal symbol and represents a list of tokens.</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>[String]</td>
+          <td>sequence of tokens</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="5">
+<li>﻿﻿﻿tag=4 An alternative terminal symbol representing phrase, whose form depends on the prefix of the next token. It corresponds to the <strong>pre</strong> construction in GF and encodes variations like a/an in English.</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>[String]</td>
+          <td>the default form</td>
+      </tr>
+      <tr>
+          <td>[Alternative]</td>
+          <td>a sequence of alternatives</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="alternative">Alternative</h3>
+<p>Every Alternative represents one possible form of a phrase which is dependent on the prefix of the next token. For example when the construction:</p>
+<p>$$pre {\text{&ldquo;beau&rdquo;}; \text{&ldquo;bel&rdquo;/&quot;&lsquo;ami&quot;}}$$</p>
+<p>is compiled then the alternative bel / ami will be represented by the pair ([&ldquo;bel&rdquo;],[&quot; ami&quot;]).</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>[String]</td>
+          <td>The tokens to use if the prefix matches</td>
+      </tr>
+      <tr>
+          <td>[String]</td>
+          <td>The prefix matched with the following tokens</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="cncfun">CncFun</h3>
+<p>This is the definition of a single concrete function (Definition 4, Section 2.1). The first field is the name of the corresponding abstract function which gives us the direct definition of the $\psi_F$ mapping. The second field is the function definition given as a list of indices pointing to the sequences table (see the Concrete object).</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the name of the corresponding abstract function</td>
+      </tr>
+      <tr>
+          <td>[Int]</td>
+          <td>list of indices into the sequences array</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="lindef">LinDef</h3>
+<p>The LinDef object stores the list of all concrete functions that can be used for the default linearization of some concrete category (Section 2.5).</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int</td>
+          <td>the concrete category</td>
+      </tr>
+      <tr>
+          <td>[Int]</td>
+          <td>a list of concrete functions</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="productionset">ProductionSet</h3>
+<p>A group of productions with the same result category. The productions are grouped because this makes it easier for the parser to find the relevant productions in the prediction step:</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int</td>
+          <td>the result category</td>
+      </tr>
+      <tr>
+          <td>[Production]</td>
+          <td>a list of productions</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="production">Production</h3>
+<p>The production can be either an application of some function or a coercion.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int8</td>
+          <td>tag</td>
+      </tr>
+  </tbody>
+</table>
+<ol>
+<li>tag=0 the production is an application (Definition 4, Section 2.1):</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int</td>
+          <td>the concrete function</td>
+      </tr>
+      <tr>
+          <td>[PArg]</td>
+          <td>a list of arguments</td>
+      </tr>
+  </tbody>
+</table>
+<ol start="2">
+<li>tag=1 the production is a coercion (Section 2.8.1):</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Int8</td>
+          <td>a concrete category</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="parg">PArg</h3>
+<p>An argument in a production.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>[Int]</td>
+          <td>the categories of the high-order arguments (Section 2.7)</td>
+      </tr>
+      <tr>
+          <td>Int</td>
+          <td>a concrete category</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="cnccat">CncCat</h3>
+<p>This is the representation of a set of concrete categories which map to the same abstract category. Since all concrete categories generated from the same abstract category are always represented as consequtive integers, here we store only the first and the last cate-gory. The compiler also generates a name for every constituent so here we have the list of names. The length of the list is equal to the dimension of the category.</p>
+<table>
+  <thead>
+      <tr>
+          <th>type</th>
+          <th>description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>String</td>
+          <td>the name of the corresponding (by $\psi_N$) abstract category</td>
+      </tr>
+      <tr>
+          <td>Int</td>
+          <td>the first concrete category</td>
+      </tr>
+      <tr>
+          <td>Int</td>
+          <td>the last concrete category</td>
+      </tr>
+      <tr>
+          <td>[String]</td>
+          <td>a list of constituent names</td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

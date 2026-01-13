@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 miniFIX Tutorial | Part 07 - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2025/09/21/minifix-tutorial-part-07/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+
+<title>🦀 miniFIX Tutorial | Part 07 | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 miniFIX Tutorial | Part 07</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      September 21, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/rust/" style="margin-left:0.25em;">Rust</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <h1 id="building-high-performance-sofh-tcp-servers-with-minifix-and-tokio">Building High-Performance SOFH TCP Servers with miniFIX and Tokio</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Simple Open Framing Header (SOFH) is a lightweight framing protocol often used to wrap FIX messages for reliable transport over TCP connections. When building high-throughput financial systems, combining SOFH framing with async Rust provides excellent performance characteristics. This post demonstrates how to build a SOFH-enabled TCP server using miniFIX and Tokio.</p>
+<h2 id="what-youll-learn">What You&rsquo;ll Learn</h2>
+<ul>
+<li>Understanding SOFH (Simple Open Framing Header) protocol</li>
+<li>Building async TCP servers with Tokio</li>
+<li>Using codec patterns for message framing</li>
+<li>Handling streaming FIX message parsing</li>
+<li>Creating production-ready financial networking code</li>
+</ul>
+<h2 id="understanding-sofh">Understanding SOFH</h2>
+<p>SOFH provides a simple length-prefixed framing mechanism that solves common TCP streaming problems:</p>
+<ul>
+<li><strong>Message Boundaries</strong>: Clearly delineates where each message begins and ends</li>
+<li><strong>Binary Safe</strong>: Handles any payload content including binary data</li>
+<li><strong>Minimal Overhead</strong>: Only 6 bytes per message</li>
+<li><strong>Simple Implementation</strong>: Easy to implement and debug</li>
+</ul>
+<h3 id="sofh-frame-structure">SOFH Frame Structure</h3>
+<pre tabindex="0"><code>+------------------+------------------+------------------+
+|    Start of      |    Encoding     |     Message      |
+|   Message (2)    |    Type (2)     |    Length (2)    |
++------------------+------------------+------------------+
+|                                                       |
+|                Message Payload                        |
+|                 (Variable Length)                     |
++-------------------------------------------------------+
+</code></pre><ul>
+<li><strong>Start of Message</strong>: Always <code>0x0000</code> (2 bytes)</li>
+<li><strong>Encoding Type</strong>: Message format identifier (2 bytes)</li>
+<li><strong>Message Length</strong>: Payload length in bytes (2 bytes)</li>
+<li><strong>Payload</strong>: The actual message content</li>
+</ul>
+<h2 id="setting-up-the-async-tcp-server">Setting Up the Async TCP Server</h2>
+<p>Let&rsquo;s create a basic SOFH TCP server that can handle multiple concurrent connections:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">futures_util</span>::<span style="color:#434f54">stream</span>::<span style="color:#434f54">StreamExt</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">io</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">tokio</span>::<span style="color:#434f54">net</span>::<span style="color:#434f54">TcpListener</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">tokio_util</span>::<span style="color:#434f54">codec</span>::<span style="color:#434f54">Decoder</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[tokio::main]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">main</span>() -&gt; <span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;🚀 Starting SOFH TCP Server on 127.0.0.1:8080&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">listener</span> <span style="color:#728e00">=</span> <span style="color:#434f54">TcpListener</span>::<span style="color:#434f54">bind</span>(<span style="color:#7f8c8d">&#34;127.0.0.1:8080&#34;</span>).<span style="color:#728e00">await</span><span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">loop</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">match</span> <span style="color:#434f54">listener</span>.<span style="color:#434f54">accept</span>().<span style="color:#728e00">await</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">Ok</span>((<span style="color:#434f54">socket</span>, <span style="color:#434f54">addr</span>)) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📡 New connection from: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">addr</span>);
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#95a5a6">// Spawn a task to handle each connection
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>                <span style="color:#434f54">tokio</span>::<span style="color:#434f54">spawn</span>(<span style="color:#728e00">async</span> <span style="color:#728e00">move</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#728e00">if</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">handle_connection</span>(<span style="color:#434f54">socket</span>).<span style="color:#728e00">await</span> {
+</span></span><span style="display:flex;"><span>                        <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;❌ Connection error: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                });
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;⚠️ Failed to accept connection: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">handle_connection</span>(<span style="color:#434f54">socket</span>: <span style="color:#434f54">tokio</span>::<span style="color:#434f54">net</span>::<span style="color:#434f54">TcpStream</span>) -&gt; <span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">minisofh</span>::<span style="color:#434f54">TokioCodec</span>::<span style="color:#434f54">default</span>().<span style="color:#434f54">framed</span>(<span style="color:#434f54">socket</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">while</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Some</span>(<span style="color:#434f54">frame_result</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">decoder</span>.<span style="color:#434f54">next</span>().<span style="color:#728e00">await</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">match</span> <span style="color:#434f54">frame_result</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">Ok</span>(<span style="color:#434f54">frame</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">process_sofh_frame</span>(<span style="color:#434f54">frame</span>).<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;🔧 Frame decode error: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📴 Connection closed&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="processing-sofh-frames">Processing SOFH Frames</h2>
+<p>Once we receive a SOFH frame, we need to extract and process the payload:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">process_sofh_frame</span>(<span style="color:#434f54">frame</span>: <span style="color:#434f54">minisofh</span>::<span style="color:#434f54">Frame</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">payload</span> <span style="color:#728e00">=</span> <span style="color:#434f54">frame</span>.<span style="color:#434f54">payload</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">encoding_type</span> <span style="color:#728e00">=</span> <span style="color:#434f54">frame</span>.<span style="color:#434f54">encoding_type</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📨 Received SOFH frame:&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;   Encoding Type: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">encoding_type</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;   Payload Length: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d"> bytes&#34;</span>, <span style="color:#434f54">payload</span>.<span style="color:#434f54">len</span>());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Convert payload to UTF-8 for display (assuming text content)
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">let</span> <span style="color:#434f54">payload_str</span> <span style="color:#728e00">=</span> <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">payload</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;   Content: &#39;</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#39;&#34;</span>, <span style="color:#434f54">payload_str</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Process based on encoding type
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">match</span> <span style="color:#434f54">encoding_type</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8a7b52">0x4649</span> <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#95a5a6">// &#34;FI&#34; - FIX message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>            <span style="color:#434f54">process_fix_message</span>(<span style="color:#434f54">payload</span>).<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#8a7b52">0x4A53</span> <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#95a5a6">// &#34;JS&#34; - JSON message  
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>            <span style="color:#434f54">process_json_message</span>(<span style="color:#434f54">payload</span>).<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">_</span> <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;⚠️ Unknown encoding type: </span><span style="color:#7f8c8d">{:#06x}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">encoding_type</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">process_fix_message</span>(<span style="color:#434f54">payload</span>: <span style="color:#00979d">&amp;</span>[<span style="color:#00979d">u8</span>]) {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;🔧 Processing FIX message: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">payload</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Here you would typically use miniFIX to parse the FIX message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">// let fix_dictionary = Dictionary::fix44();
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">// let mut decoder = Decoder::new(fix_dictionary);
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">// match decoder.decode(payload) {
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">//     Ok(msg) =&gt; { /* process FIX message */ }
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">//     Err(e) =&gt; eprintln!(&#34;FIX decode error: {}&#34;, e),
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">// }
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">process_json_message</span>(<span style="color:#434f54">payload</span>: <span style="color:#00979d">&amp;</span>[<span style="color:#00979d">u8</span>]) {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📋 Processing JSON message: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">payload</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Process JSON payload
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">// match serde_json::from_slice::&lt;serde_json::Value&gt;(payload) {
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">//     Ok(json) =&gt; { /* process JSON */ }
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">//     Err(e) =&gt; eprintln!(&#34;JSON parse error: {}&#34;, e),
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#95a5a6">// }
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>}
+</span></span></code></pre></div><h2 id="integrating-fix-message-processing">Integrating FIX Message Processing</h2>
+<p>Let&rsquo;s integrate miniFIX for proper FIX message handling within SOFH frames:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">prelude</span>::<span style="color:#728e00">*</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">tagvalue</span>::<span style="color:#434f54">Decoder</span> <span style="color:#728e00">as</span> <span style="color:#434f54">FixDecoder</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">struct</span> <span style="color:#434f54">SofhFixServer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fix_decoder</span>: <span style="color:#434f54">FixDecoder</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">impl</span> <span style="color:#434f54">SofhFixServer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">fn</span> <span style="color:#d35400">new</span>() -&gt; <span style="color:#434f54">Self</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">fix_dictionary</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Dictionary</span>::<span style="color:#434f54">fix44</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">fix_decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">FixDecoder</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">fix_dictionary</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Self</span> { <span style="color:#434f54">fix_decoder</span> }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">handle_fix_frame</span>(<span style="color:#728e00">&amp;</span><span style="color:#728e00">mut</span> <span style="color:#434f54">self</span>, <span style="color:#434f54">payload</span>: <span style="color:#00979d">&amp;</span>[<span style="color:#00979d">u8</span>]) -&gt; <span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">match</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">decode</span>(<span style="color:#434f54">payload</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">Ok</span>(<span style="color:#434f54">msg</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">self</span>.<span style="color:#434f54">process_fix_message</span>(<span style="color:#434f54">msg</span>).<span style="color:#728e00">await</span><span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;❌ FIX decode error: </span><span style="color:#7f8c8d">{:?}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">process_fix_message</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">self</span>, <span style="color:#434f54">msg</span>: <span style="color:#434f54">impl</span> <span style="color:#434f54">GetField</span><span style="color:#728e00">&lt;</span><span style="color:#00979d">u32</span><span style="color:#728e00">&gt;</span>) -&gt; <span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Extract common fields
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#728e00">let</span> <span style="color:#434f54">msg_type</span> <span style="color:#728e00">=</span> <span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">MSG_TYPE</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#434f54">map</span>(<span style="color:#728e00">|</span><span style="color:#434f54">bytes</span><span style="color:#728e00">|</span> <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">bytes</span>))
+</span></span><span style="display:flex;"><span>            .<span style="color:#434f54">unwrap_or_else</span>(<span style="color:#728e00">|</span><span style="color:#434f54">_</span><span style="color:#728e00">|</span> <span style="color:#7f8c8d">&#34;UNKNOWN&#34;</span>.<span style="color:#434f54">into</span>());
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">sender_comp_id</span> <span style="color:#728e00">=</span> <span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SENDER_COMP_ID</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#434f54">map</span>(<span style="color:#728e00">|</span><span style="color:#434f54">bytes</span><span style="color:#728e00">|</span> <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">bytes</span>))
+</span></span><span style="display:flex;"><span>            .<span style="color:#434f54">unwrap_or_else</span>(<span style="color:#728e00">|</span><span style="color:#434f54">_</span><span style="color:#728e00">|</span> <span style="color:#7f8c8d">&#34;UNKNOWN&#34;</span>.<span style="color:#434f54">into</span>());
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📈 FIX Message Details:&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;   Type: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">msg_type</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;   Sender: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">sender_comp_id</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Route based on message type
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#728e00">match</span> <span style="color:#434f54">msg_type</span>.<span style="color:#434f54">as_ref</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#7f8c8d">&#34;D&#34;</span> <span style="color:#728e00">=&gt;</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">handle_new_order_single</span>(<span style="color:#434f54">msg</span>).<span style="color:#728e00">await</span><span style="color:#728e00">?</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#7f8c8d">&#34;F&#34;</span> <span style="color:#728e00">=&gt;</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">handle_order_cancel_request</span>(<span style="color:#434f54">msg</span>).<span style="color:#728e00">await</span><span style="color:#728e00">?</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#7f8c8d">&#34;8&#34;</span> <span style="color:#728e00">=&gt;</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">handle_execution_report</span>(<span style="color:#434f54">msg</span>).<span style="color:#728e00">await</span><span style="color:#728e00">?</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">_</span> <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;⚠️ Unhandled message type: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">msg_type</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">handle_new_order_single</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">self</span>, <span style="color:#434f54">msg</span>: <span style="color:#434f54">impl</span> <span style="color:#434f54">GetField</span><span style="color:#728e00">&lt;</span><span style="color:#00979d">u32</span><span style="color:#728e00">&gt;</span>) -&gt; <span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📝 Processing New Order Single&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">if</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Ok</span>(<span style="color:#434f54">symbol_bytes</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SYMBOL</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">let</span> <span style="color:#434f54">symbol</span> <span style="color:#728e00">=</span> <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">symbol_bytes</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;   Symbol: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">symbol</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">if</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Ok</span>(<span style="color:#434f54">side_bytes</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">SIDE</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">let</span> <span style="color:#434f54">side</span> <span style="color:#728e00">=</span> <span style="color:#728e00">match</span> <span style="color:#434f54">side_bytes</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;1&#34;</span> <span style="color:#728e00">=&gt;</span> <span style="color:#7f8c8d">&#34;BUY&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;2&#34;</span> <span style="color:#728e00">=&gt;</span> <span style="color:#7f8c8d">&#34;SELL&#34;</span>, 
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">_</span> <span style="color:#728e00">=&gt;</span> <span style="color:#7f8c8d">&#34;UNKNOWN&#34;</span>
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;   Side: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">side</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">if</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Ok</span>(<span style="color:#434f54">qty</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>::<span style="color:#728e00">&lt;</span><span style="color:#00979d">i32</span><span style="color:#728e00">&gt;</span>(<span style="color:#434f54">fix44</span>::<span style="color:#434f54">ORDER_QTY</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;   Quantity: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">qty</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// TODO: Implement order processing logic
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;✅ Order processed successfully&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">handle_order_cancel_request</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">self</span>, <span style="color:#434f54">_msg</span>: <span style="color:#434f54">impl</span> <span style="color:#434f54">GetField</span><span style="color:#728e00">&lt;</span><span style="color:#00979d">u32</span><span style="color:#728e00">&gt;</span>) -&gt; <span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;❌ Processing Order Cancel Request&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// TODO: Implement cancel logic
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">handle_execution_report</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">self</span>, <span style="color:#434f54">_msg</span>: <span style="color:#434f54">impl</span> <span style="color:#434f54">GetField</span><span style="color:#728e00">&lt;</span><span style="color:#00979d">u32</span><span style="color:#728e00">&gt;</span>) -&gt; <span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📊 Processing Execution Report&#34;</span>);  
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// TODO: Implement execution report processing
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="enhanced-connection-handler">Enhanced Connection Handler</h2>
+<p>Let&rsquo;s create a more sophisticated connection handler that maintains state per connection:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">sync</span>::<span style="color:#434f54">Arc</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">tokio</span>::<span style="color:#434f54">sync</span>::<span style="color:#434f54">Mutex</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">handle_connection_enhanced</span>(<span style="color:#434f54">socket</span>: <span style="color:#434f54">tokio</span>::<span style="color:#434f54">net</span>::<span style="color:#434f54">TcpStream</span>) -&gt; <span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">peer_addr</span> <span style="color:#728e00">=</span> <span style="color:#434f54">socket</span>.<span style="color:#434f54">peer_addr</span>()<span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;🔗 Handling connection from: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">peer_addr</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">server</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Arc</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">Mutex</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">SofhFixServer</span>::<span style="color:#434f54">new</span>()));
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">minisofh</span>::<span style="color:#434f54">TokioCodec</span>::<span style="color:#434f54">default</span>().<span style="color:#434f54">framed</span>(<span style="color:#434f54">socket</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">message_count</span> <span style="color:#728e00">=</span> <span style="color:#8a7b52">0</span><span style="color:#728e00">u64</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">while</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Some</span>(<span style="color:#434f54">frame_result</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">decoder</span>.<span style="color:#434f54">next</span>().<span style="color:#728e00">await</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">match</span> <span style="color:#434f54">frame_result</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">Ok</span>(<span style="color:#434f54">frame</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">message_count</span> <span style="color:#728e00">+=</span> <span style="color:#8a7b52">1</span>;
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📨 Message #</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d"> from </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">message_count</span>, <span style="color:#434f54">peer_addr</span>);
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">let</span> <span style="color:#434f54">encoding_type</span> <span style="color:#728e00">=</span> <span style="color:#434f54">frame</span>.<span style="color:#434f54">encoding_type</span>();
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">let</span> <span style="color:#434f54">payload</span> <span style="color:#728e00">=</span> <span style="color:#434f54">frame</span>.<span style="color:#434f54">payload</span>();
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">match</span> <span style="color:#434f54">encoding_type</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#8a7b52">0x4649</span> <span style="color:#728e00">=&gt;</span> { <span style="color:#95a5a6">// &#34;FI&#34; - FIX message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>                        <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">server_guard</span> <span style="color:#728e00">=</span> <span style="color:#434f54">server</span>.<span style="color:#434f54">lock</span>().<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>                        <span style="color:#728e00">if</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">server_guard</span>.<span style="color:#434f54">handle_fix_frame</span>(<span style="color:#434f54">payload</span>).<span style="color:#728e00">await</span> {
+</span></span><span style="display:flex;"><span>                            <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;🚨 FIX processing error: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">_</span> <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                        <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;⚠️ Unsupported encoding type: </span><span style="color:#7f8c8d">{:#06x}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">encoding_type</span>);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;💥 Frame decode error from </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">peer_addr</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;👋 Connection from </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d"> closed after </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d"> messages&#34;</span>, <span style="color:#434f54">peer_addr</span>, <span style="color:#434f54">message_count</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="production-ready-server-features">Production-Ready Server Features</h2>
+<h3 id="connection-pool-management">Connection Pool Management</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">collections</span>::<span style="color:#434f54">HashMap</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">sync</span>::<span style="color:#434f54">atomic</span>::{<span style="color:#434f54">AtomicU64</span>, <span style="color:#434f54">Ordering</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">struct</span> <span style="color:#434f54">ConnectionManager</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">connections</span>: <span style="color:#434f54">Arc</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">Mutex</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">HashMap</span><span style="color:#728e00">&lt;</span><span style="color:#728e00">String</span>, <span style="color:#434f54">ConnectionInfo</span><span style="color:#728e00">&gt;&gt;&gt;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">next_connection_id</span>: <span style="color:#434f54">AtomicU64</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">struct</span> <span style="color:#434f54">ConnectionInfo</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">id</span>: <span style="color:#00979d">u64</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">peer_addr</span>: <span style="color:#434f54">std</span>::<span style="color:#434f54">net</span>::<span style="color:#434f54">SocketAddr</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">connected_at</span>: <span style="color:#434f54">std</span>::<span style="color:#434f54">time</span>::<span style="color:#434f54">Instant</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">message_count</span>: <span style="color:#434f54">Arc</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">AtomicU64</span><span style="color:#728e00">&gt;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">impl</span> <span style="color:#434f54">ConnectionManager</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">fn</span> <span style="color:#d35400">new</span>() -&gt; <span style="color:#434f54">Self</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Self</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">connections</span>: <span style="color:#434f54">Arc</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">Mutex</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">HashMap</span>::<span style="color:#434f54">new</span>())),
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">next_connection_id</span>: <span style="color:#434f54">AtomicU64</span>::<span style="color:#434f54">new</span>(<span style="color:#8a7b52">1</span>),
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">add_connection</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">self</span>, <span style="color:#434f54">peer_addr</span>: <span style="color:#434f54">std</span>::<span style="color:#434f54">net</span>::<span style="color:#434f54">SocketAddr</span>) -&gt; <span style="color:#00979d">u64</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">connection_id</span> <span style="color:#728e00">=</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">next_connection_id</span>.<span style="color:#434f54">fetch_add</span>(<span style="color:#8a7b52">1</span>, <span style="color:#434f54">Ordering</span>::<span style="color:#434f54">SeqCst</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">key</span> <span style="color:#728e00">=</span> <span style="color:#434f54">format!</span>(<span style="color:#7f8c8d">&#34;</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">:</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">peer_addr</span>.<span style="color:#434f54">ip</span>(), <span style="color:#434f54">peer_addr</span>.<span style="color:#434f54">port</span>());
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">info</span> <span style="color:#728e00">=</span> <span style="color:#434f54">ConnectionInfo</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">id</span>: <span style="color:#434f54">connection_id</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">peer_addr</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">connected_at</span>: <span style="color:#434f54">std</span>::<span style="color:#434f54">time</span>::<span style="color:#434f54">Instant</span>::<span style="color:#434f54">now</span>(),
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">message_count</span>: <span style="color:#434f54">Arc</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">AtomicU64</span>::<span style="color:#434f54">new</span>(<span style="color:#8a7b52">0</span>)),
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">connections</span> <span style="color:#728e00">=</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">connections</span>.<span style="color:#434f54">lock</span>().<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">connections</span>.<span style="color:#434f54">insert</span>(<span style="color:#434f54">key</span>, <span style="color:#434f54">info</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">connection_id</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">remove_connection</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">self</span>, <span style="color:#434f54">peer_addr</span>: <span style="color:#434f54">std</span>::<span style="color:#434f54">net</span>::<span style="color:#434f54">SocketAddr</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">key</span> <span style="color:#728e00">=</span> <span style="color:#434f54">format!</span>(<span style="color:#7f8c8d">&#34;</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">:</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">peer_addr</span>.<span style="color:#434f54">ip</span>(), <span style="color:#434f54">peer_addr</span>.<span style="color:#434f54">port</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">connections</span> <span style="color:#728e00">=</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">connections</span>.<span style="color:#434f54">lock</span>().<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">connections</span>.<span style="color:#434f54">remove</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">key</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">get_stats</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">self</span>) -&gt; (<span style="color:#00979d">usize</span>, <span style="color:#00979d">u64</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">connections</span> <span style="color:#728e00">=</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">connections</span>.<span style="color:#434f54">lock</span>().<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">connection_count</span> <span style="color:#728e00">=</span> <span style="color:#434f54">connections</span>.<span style="color:#434f54">len</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">total_messages</span>: <span style="color:#00979d">u64</span> <span style="color:#728e00">=</span> <span style="color:#434f54">connections</span>
+</span></span><span style="display:flex;"><span>            .<span style="color:#434f54">values</span>()
+</span></span><span style="display:flex;"><span>            .<span style="color:#434f54">map</span>(<span style="color:#728e00">|</span><span style="color:#434f54">info</span><span style="color:#728e00">|</span> <span style="color:#434f54">info</span>.<span style="color:#434f54">message_count</span>.<span style="color:#434f54">load</span>(<span style="color:#434f54">Ordering</span>::<span style="color:#434f54">SeqCst</span>))
+</span></span><span style="display:flex;"><span>            .<span style="color:#434f54">sum</span>();
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        (<span style="color:#434f54">connection_count</span>, <span style="color:#434f54">total_messages</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="configuration-management">Configuration Management</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">serde</span>::{<span style="color:#434f54">Deserialize</span>, <span style="color:#434f54">Serialize</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[derive(Debug, Deserialize, Serialize)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">pub</span> <span style="color:#728e00">struct</span> <span style="color:#434f54">ServerConfig</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">bind_address</span>: <span style="color:#728e00">String</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">bind_port</span>: <span style="color:#00979d">u16</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">max_connections</span>: <span style="color:#00979d">usize</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">message_buffer_size</span>: <span style="color:#00979d">usize</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#434f54">fix_version</span>: <span style="color:#728e00">String</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">impl</span> <span style="color:#728e00">Default</span> <span style="color:#728e00">for</span> <span style="color:#434f54">ServerConfig</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">fn</span> <span style="color:#d35400">default</span>() -&gt; <span style="color:#434f54">Self</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Self</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">bind_address</span>: <span style="color:#7f8c8d">&#34;127.0.0.1&#34;</span>.<span style="color:#434f54">to_string</span>(),
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">bind_port</span>: <span style="color:#8a7b52">8080</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">max_connections</span>: <span style="color:#8a7b52">1000</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">message_buffer_size</span>: <span style="color:#8a7b52">8192</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">fix_version</span>: <span style="color:#7f8c8d">&#34;FIX.4.4&#34;</span>.<span style="color:#434f54">to_string</span>(),
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">impl</span> <span style="color:#434f54">ServerConfig</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">load_from_file</span>(<span style="color:#434f54">path</span>: <span style="color:#00979d">&amp;</span><span style="color:#00979d">str</span>) -&gt; <span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">Self</span>, <span style="color:#728e00">Box</span><span style="color:#728e00">&lt;</span><span style="color:#728e00">dyn</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">error</span>::<span style="color:#434f54">Error</span><span style="color:#728e00">&gt;&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">contents</span> <span style="color:#728e00">=</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">fs</span>::<span style="color:#434f54">read_to_string</span>(<span style="color:#434f54">path</span>)<span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">config</span>: <span style="color:#434f54">Self</span> <span style="color:#728e00">=</span> <span style="color:#434f54">toml</span>::<span style="color:#434f54">from_str</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">contents</span>)<span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">Ok</span>(<span style="color:#434f54">config</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="complete-production-server">Complete Production Server</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">futures_util</span>::<span style="color:#434f54">stream</span>::<span style="color:#434f54">StreamExt</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">io</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">sync</span>::<span style="color:#434f54">Arc</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">tokio</span>::<span style="color:#434f54">net</span>::<span style="color:#434f54">TcpListener</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">tokio</span>::<span style="color:#434f54">sync</span>::<span style="color:#434f54">Mutex</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">pub</span> <span style="color:#728e00">struct</span> <span style="color:#434f54">SofhFixServer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">config</span>: <span style="color:#434f54">ServerConfig</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">connection_manager</span>: <span style="color:#434f54">ConnectionManager</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fix_decoder</span>: <span style="color:#434f54">Arc</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">Mutex</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">FixDecoder</span><span style="color:#728e00">&gt;&gt;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">impl</span> <span style="color:#434f54">SofhFixServer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">new</span>(<span style="color:#434f54">config</span>: <span style="color:#434f54">ServerConfig</span>) -&gt; <span style="color:#434f54">Self</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">fix_dictionary</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Dictionary</span>::<span style="color:#434f54">fix44</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">fix_decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Arc</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">Mutex</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">FixDecoder</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">fix_dictionary</span>)));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Self</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">config</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">connection_manager</span>: <span style="color:#434f54">ConnectionManager</span>::<span style="color:#434f54">new</span>(),
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">fix_decoder</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">pub</span> <span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">start</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">self</span>) -&gt; <span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">bind_addr</span> <span style="color:#728e00">=</span> <span style="color:#434f54">format!</span>(<span style="color:#7f8c8d">&#34;</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">:</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">self</span>.<span style="color:#434f54">config</span>.<span style="color:#434f54">bind_address</span>, <span style="color:#434f54">self</span>.<span style="color:#434f54">config</span>.<span style="color:#434f54">bind_port</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">listener</span> <span style="color:#728e00">=</span> <span style="color:#434f54">TcpListener</span>::<span style="color:#434f54">bind</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">bind_addr</span>).<span style="color:#728e00">await</span><span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;🚀 SOFH FIX Server listening on </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">bind_addr</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Spawn stats reporting task
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#728e00">let</span> <span style="color:#434f54">connection_manager</span> <span style="color:#728e00">=</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">connection_manager</span>.<span style="color:#434f54">clone</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">tokio</span>::<span style="color:#434f54">spawn</span>(<span style="color:#728e00">async</span> <span style="color:#728e00">move</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">interval</span> <span style="color:#728e00">=</span> <span style="color:#434f54">tokio</span>::<span style="color:#434f54">time</span>::<span style="color:#434f54">interval</span>(<span style="color:#434f54">std</span>::<span style="color:#434f54">time</span>::<span style="color:#434f54">Duration</span>::<span style="color:#434f54">from_secs</span>(<span style="color:#8a7b52">30</span>));
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">loop</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">interval</span>.<span style="color:#434f54">tick</span>().<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">let</span> (<span style="color:#434f54">connections</span>, <span style="color:#434f54">messages</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">connection_manager</span>.<span style="color:#434f54">get_stats</span>().<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📊 Stats: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d"> connections, </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d"> total messages&#34;</span>, <span style="color:#434f54">connections</span>, <span style="color:#434f54">messages</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Accept connections
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#728e00">loop</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">match</span> <span style="color:#434f54">listener</span>.<span style="color:#434f54">accept</span>().<span style="color:#728e00">await</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">Ok</span>((<span style="color:#434f54">socket</span>, <span style="color:#434f54">peer_addr</span>)) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;🔗 New connection from: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">peer_addr</span>);
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#728e00">let</span> <span style="color:#434f54">connection_id</span> <span style="color:#728e00">=</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">connection_manager</span>.<span style="color:#434f54">add_connection</span>(<span style="color:#434f54">peer_addr</span>).<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#728e00">let</span> <span style="color:#434f54">connection_manager</span> <span style="color:#728e00">=</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">connection_manager</span>.<span style="color:#434f54">clone</span>();
+</span></span><span style="display:flex;"><span>                    <span style="color:#728e00">let</span> <span style="color:#434f54">fix_decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">self</span>.<span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">clone</span>();
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">tokio</span>::<span style="color:#434f54">spawn</span>(<span style="color:#728e00">async</span> <span style="color:#728e00">move</span> {
+</span></span><span style="display:flex;"><span>                        <span style="color:#728e00">if</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">Self</span>::<span style="color:#434f54">handle_connection</span>(
+</span></span><span style="display:flex;"><span>                            <span style="color:#434f54">socket</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#434f54">connection_id</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#434f54">connection_manager</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#434f54">fix_decoder</span>,
+</span></span><span style="display:flex;"><span>                        ).<span style="color:#728e00">await</span> {
+</span></span><span style="display:flex;"><span>                            <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;❌ Connection </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d"> error: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">connection_id</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    });
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;⚠️ Accept error: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">handle_connection</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">socket</span>: <span style="color:#434f54">tokio</span>::<span style="color:#434f54">net</span>::<span style="color:#434f54">TcpStream</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">connection_id</span>: <span style="color:#00979d">u64</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">connection_manager</span>: <span style="color:#434f54">Arc</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">ConnectionManager</span><span style="color:#728e00">&gt;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">fix_decoder</span>: <span style="color:#434f54">Arc</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">Mutex</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">FixDecoder</span><span style="color:#728e00">&gt;&gt;</span>,
+</span></span><span style="display:flex;"><span>    ) -&gt; <span style="color:#434f54">io</span>::<span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>()<span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#434f54">peer_addr</span> <span style="color:#728e00">=</span> <span style="color:#434f54">socket</span>.<span style="color:#434f54">peer_addr</span>()<span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">minisofh</span>::<span style="color:#434f54">TokioCodec</span>::<span style="color:#434f54">default</span>().<span style="color:#434f54">framed</span>(<span style="color:#434f54">socket</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">while</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Some</span>(<span style="color:#434f54">frame_result</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">decoder</span>.<span style="color:#434f54">next</span>().<span style="color:#728e00">await</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">match</span> <span style="color:#434f54">frame_result</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">Ok</span>(<span style="color:#434f54">frame</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#728e00">if</span> <span style="color:#434f54">frame</span>.<span style="color:#434f54">encoding_type</span>() <span style="color:#728e00">==</span> <span style="color:#8a7b52">0x4649</span> { <span style="color:#95a5a6">// FIX message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>                        <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">fix_decoder_guard</span> <span style="color:#728e00">=</span> <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">lock</span>().<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>                        <span style="color:#728e00">match</span> <span style="color:#434f54">fix_decoder_guard</span>.<span style="color:#434f54">decode</span>(<span style="color:#434f54">frame</span>.<span style="color:#434f54">payload</span>()) {
+</span></span><span style="display:flex;"><span>                            <span style="color:#728e00">Ok</span>(<span style="color:#434f54">msg</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                                <span style="color:#95a5a6">// Process FIX message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>                                <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;✅ Processed FIX message from connection </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">connection_id</span>);
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                            <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                                <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;❌ FIX decode error: </span><span style="color:#7f8c8d">{:?}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;🔧 Frame error: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#728e00">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">connection_manager</span>.<span style="color:#434f54">remove_connection</span>(<span style="color:#434f54">peer_addr</span>).<span style="color:#728e00">await</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;👋 Connection </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d"> closed&#34;</span>, <span style="color:#434f54">connection_id</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[tokio::main]</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">main</span>() -&gt; <span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>(), <span style="color:#728e00">Box</span><span style="color:#728e00">&lt;</span><span style="color:#728e00">dyn</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">error</span>::<span style="color:#434f54">Error</span><span style="color:#728e00">&gt;&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">config</span> <span style="color:#728e00">=</span> <span style="color:#434f54">ServerConfig</span>::<span style="color:#434f54">load_from_file</span>(<span style="color:#7f8c8d">&#34;server_config.toml&#34;</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#434f54">unwrap_or_else</span>(<span style="color:#728e00">|</span><span style="color:#434f54">_</span><span style="color:#728e00">|</span> <span style="color:#434f54">ServerConfig</span>::<span style="color:#434f54">default</span>());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">server</span> <span style="color:#728e00">=</span> <span style="color:#434f54">SofhFixServer</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">config</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">server</span>.<span style="color:#434f54">start</span>().<span style="color:#728e00">await</span><span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="benefits-of-sofh-with-minifix">Benefits of SOFH with miniFIX</h2>
+<ol>
+<li><strong>Message Boundaries</strong>: SOFH solves TCP streaming issues elegantly</li>
+<li><strong>Performance</strong>: Tokio&rsquo;s async I/O handles thousands of concurrent connections</li>
+<li><strong>Type Safety</strong>: miniFIX provides compile-time FIX message validation</li>
+<li><strong>Framing Flexibility</strong>: Support multiple message formats in one connection</li>
+<li><strong>Production Ready</strong>: Built-in connection management and monitoring</li>
+</ol>
+<h2 id="testing-the-server">Testing the Server</h2>
+<p>Create a simple client to test your server:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">tokio</span>::<span style="color:#434f54">net</span>::<span style="color:#434f54">TcpStream</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">tokio</span>::<span style="color:#434f54">io</span>::<span style="color:#434f54">AsyncWriteExt</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">test_client</span>() -&gt; <span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>(), <span style="color:#728e00">Box</span><span style="color:#728e00">&lt;</span><span style="color:#728e00">dyn</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">error</span>::<span style="color:#434f54">Error</span><span style="color:#728e00">&gt;&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">stream</span> <span style="color:#728e00">=</span> <span style="color:#434f54">TcpStream</span>::<span style="color:#434f54">connect</span>(<span style="color:#7f8c8d">&#34;127.0.0.1:8080&#34;</span>).<span style="color:#728e00">await</span><span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Create a SOFH-wrapped FIX message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">let</span> <span style="color:#434f54">fix_message</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;8=FIX.4.4|9=49|35=D|49=CLIENT|56=SERVER|34=1|52=20241201-10:30:15|11=ORDER1|55=AAPL|54=1|38=100|40=2|44=150.25|10=123|&#34;</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// SOFH header: Start(0x0000) + Encoding(0x4649=&#34;FI&#34;) + Length
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">let</span> <span style="color:#434f54">sofh_header</span> <span style="color:#728e00">=</span> [
+</span></span><span style="display:flex;"><span>        <span style="color:#8a7b52">0x00</span>, <span style="color:#8a7b52">0x00</span>,  <span style="color:#95a5a6">// Start of message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#8a7b52">0x46</span>, <span style="color:#8a7b52">0x49</span>,  <span style="color:#95a5a6">// Encoding type &#34;FI&#34; (FIX)
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        ((<span style="color:#434f54">fix_message</span>.<span style="color:#434f54">len</span>() <span style="color:#728e00">&gt;&gt;</span> <span style="color:#8a7b52">8</span>) <span style="color:#728e00">&amp;</span> <span style="color:#8a7b52">0xFF</span>) <span style="color:#728e00">as</span> <span style="color:#00979d">u8</span>,  <span style="color:#95a5a6">// Length high byte
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        (<span style="color:#434f54">fix_message</span>.<span style="color:#434f54">len</span>() <span style="color:#728e00">&amp;</span> <span style="color:#8a7b52">0xFF</span>) <span style="color:#728e00">as</span> <span style="color:#00979d">u8</span>,         <span style="color:#95a5a6">// Length low byte
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    ];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Send SOFH frame
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">stream</span>.<span style="color:#434f54">write_all</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">sofh_header</span>).<span style="color:#728e00">await</span><span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">stream</span>.<span style="color:#434f54">write_all</span>(<span style="color:#434f54">fix_message</span>).<span style="color:#728e00">await</span><span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📤 Sent SOFH-wrapped FIX message&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This architecture provides a solid foundation for building high-performance FIX gateways, order management systems, and market data servers using modern Rust async patterns.</p>
+<hr>
+<p><strong>Next:</strong> <a href="../../../../../blog/2025/09/22/rust-minifix-tutorial-part-08/">Part 08 - Testing Strategies</a></p>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

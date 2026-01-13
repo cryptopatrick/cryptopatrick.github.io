@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Math on Seamless Global Nature</title>
+    <link>http://localhost:60544/tags/math/</link>
+    <description>Recent content in Math on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Sat, 01 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:60544/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🧮 Reading: AI-Assisted Proofs</title>
+      <link>http://localhost:60544/blog/2025/11/01/reading-ai-assisted-proofs/</link>
+      <pubDate>Sat, 01 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/11/01/reading-ai-assisted-proofs/</guid>
+      <description>Over the summer I&amp;rsquo;m reading a boom called Mathematics for Machine Learning by Deisenroth.</description>
+    </item>
+    <item>
+      <title>🧮 Math: MML CH04 Matrix Decompositions 1/7</title>
+      <link>http://localhost:60544/blog/2025/08/17/math-mml-ch04-matrix-decompositions-1/7/</link>
+      <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/08/17/math-mml-ch04-matrix-decompositions-1/7/</guid>
+      <description>Over the summer I&amp;rsquo;m reading a boom called Mathematics for Machine Learning by Deisenroth.</description>
+    </item>
+    <item>
+      <title>🧮 Math: MML CH04 Matrix Decompositions 1/7</title>
+      <link>http://localhost:60544/blog/2025/08/17/math-mml-ch04-matrix-decompositions-1/7/</link>
+      <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/08/17/math-mml-ch04-matrix-decompositions-1/7/</guid>
+      <description>Over the summer I&amp;rsquo;m reading a boom called Mathematics for Machine Learning by Deisenroth.</description>
+    </item>
+    <item>
+      <title>🧮 Math: Linear Algebra PP 20171221</title>
+      <link>http://localhost:60544/blog/2025/07/25/math-linear-algebra-pp-20171221/</link>
+      <pubDate>Fri, 25 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/07/25/math-linear-algebra-pp-20171221/</guid>
+      <description>Study Notes while going over how to solve a past paper in Linear Algebra.</description>
+    </item>
+    <item>
+      <title>🧮 Math: MML CH04 Matrix Decompositions 1/7</title>
+      <link>http://localhost:60544/blog/2025/07/07/math-mml-ch04-matrix-decompositions-1/7/</link>
+      <pubDate>Mon, 07 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/07/07/math-mml-ch04-matrix-decompositions-1/7/</guid>
+      <description>Over the summer I&amp;rsquo;m reading a book called Mathematics for Machine Learning by Deisenroth.</description>
+    </item>
+  </channel>
+</rss>

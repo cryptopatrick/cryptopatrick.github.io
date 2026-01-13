@@ -33,21 +33,28 @@
         <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
       <nav class="nav-item level is-mobile">
           
-
-          
           
           <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
             
-            <span class="icon" style="margin-right: 0.10em; display: flex; align-items: center;">
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
               <i class="fa fa-male"></i>
             </span>
             
-            About
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
           </a>
           
           <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
             
-            <span class="icon" style="margin-right: 0.10em; display: flex; align-items: center;">
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
               <i class="fa fa-paper-plane"></i>
             </span>
             
@@ -56,7 +63,7 @@
           
           <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
             
-            <span class="icon" style="margin-right: 0.10em; display: flex; align-items: center;">
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
               <i class="fa fa-twitter"></i>
             </span>
             
@@ -65,7 +72,7 @@
           
           <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
             
-            <span class="icon" style="margin-right: 0.10em; display: flex; align-items: center;">
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
               <i class="fa fa-github"></i>
             </span>
             
@@ -74,7 +81,7 @@
           
           <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
             
-            <span class="icon" style="margin-right: 0.10em; display: flex; align-items: center;">
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
               <i class="fa fa-instagram"></i>
             </span>
             
@@ -94,38 +101,746 @@
 
 
 <section class="section">
+  <div class="container">
+    <h1 class="title">Browse by tag</h1>
 
-    <div class="container">
-        <h1 class="title">Topics: </h1>
-        <ul>
-        
-            <li><a href="https://www.cryptopatrick.com/tags/everydays/">Everydays</a>
-                <span style="float:right; padding-right: 5em;">05-07-2025 </span>
-            </li>
-        
-            <li><a href="https://www.cryptopatrick.com/tags/rust/">Rust</a>
-                <span style="float:right; padding-right: 5em;">05-07-2025 </span>
-            </li>
-        
-            <li><a href="https://www.cryptopatrick.com/tags/mathml/">MATHML</a>
-                <span style="float:right; padding-right: 5em;">22-06-2025 </span>
-            </li>
-        
-            <li><a href="https://www.cryptopatrick.com/tags/mathematics/">Mathematics</a>
-                <span style="float:right; padding-right: 5em;">23-12-2024 </span>
-            </li>
-        
-            <li><a href="https://www.cryptopatrick.com/tags/hardware/">Hardware</a>
-                <span style="float:right; padding-right: 5em;">19-12-2024 </span>
-            </li>
-        
-            <li><a href="https://www.cryptopatrick.com/tags/programming/">Programming</a>
-                <span style="float:right; padding-right: 5em;">10-12-2024 </span>
-            </li>
-        
-        </ul>
+    
+    <div class="tag-filter-bar" style="margin-bottom: 2em; padding: 1em; background-color: #f5f7fa; border-radius: 6px;">
+      <div class="tags">
+        <a class="tag is-medium is-link filter-tag active" data-tag="all" href="#" onclick="filterByTag('all'); return false;">All</a>
+        <a class="tag is-medium is-info filter-tag" data-tag="ai" href="#" onclick="filterByTag('ai'); return false;">AI</a>
+        <a class="tag is-medium is-info filter-tag" data-tag="agents" href="#" onclick="filterByTag('agents'); return false;">Agents</a>
+        <a class="tag is-medium is-info filter-tag" data-tag="mathematics" href="#" onclick="filterByTag('mathematics'); return false;">Mathematics</a>
+        <a class="tag is-medium is-info filter-tag" data-tag="linguistics" href="#" onclick="filterByTag('linguistics'); return false;">Linguistics</a>
+        <a class="tag is-medium is-info filter-tag" data-tag="engineering" href="#" onclick="filterByTag('engineering'); return false;">Engineering</a>
+        <a class="tag is-medium is-info filter-tag" data-tag="security" href="#" onclick="filterByTag('security'); return false;">Security</a>
+        <a class="tag is-medium is-info filter-tag" data-tag="ethics" href="#" onclick="filterByTag('ethics'); return false;">Ethics</a>
+        <a class="tag is-medium is-info filter-tag" data-tag="rust" href="#" onclick="filterByTag('rust'); return false;">Rust</a>
+        <a class="tag is-medium is-info filter-tag" data-tag="100days" href="#" onclick="filterByTag('100days'); return false;">100Days</a>
+      </div>
     </div>
+
+    
+    <div id="posts-container">
+      
+      
+      <article data-tags="Rust,Tutorials">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/22/minifix-tutorial-part-08/">🦀 miniFIX Tutorial | Part 08</a></h1>
+        <h2 class="subtitle is-5">
+          September 22, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          In production financial systems, security is paramount. FIX messages often contain sensitive trading information that must be protected during transmission. TLS (Transport Layer Security) provides the cryptographic foundation for secure FIX communication. This post explores building a TLS-enabled FIX acceptor using miniFIX, focusing on security best practices for financial applications.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Rust,Tutorials">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/21/minifix-tutorial-part-07/">🦀 miniFIX Tutorial | Part 07</a></h1>
+        <h2 class="subtitle is-5">
+          September 21, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          Simple Open Framing Header (SOFH) is a lightweight framing protocol often used to wrap FIX messages for reliable transport over TCP connections. When building high-throughput financial systems, combining SOFH framing with async Rust provides excellent performance characteristics. This post demonstrates how to build a SOFH-enabled TCP server using miniFIX and Tokio.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Rust,Tutorials">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/20/minifix-tutorial-part-06/">🦀 miniFIX Tutorial | Part 06</a></h1>
+        <h2 class="subtitle is-5">
+          September 20, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          Modern trading systems require interactive, user-friendly interfaces that can handle real-time market data and order management. This post explores building an interactive trading client using miniFIX with Tokio for async operations, combined with a command-line interface for trader interaction.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Rust,Tutorials">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/19/minifix-tutorial-part-05/">🦀 miniFIX Tutorial | Part 05</a></h1>
+        <h2 class="subtitle is-5">
+          September 19, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          Modern financial systems often need to work with multiple message formats. While FIX is the standard for electronic trading, many systems also use JSON for APIs, configuration, testing, and integration with web-based interfaces. miniFIX provides seamless conversion between JSON and FIX tag=value formats, enabling flexible system architectures.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Rust,Tutorials">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/18/minifix-tutorial-part-04/">🦀 miniFIX Tutorial | Part 04</a></h1>
+        <h2 class="subtitle is-5">
+          September 18, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          While standard FIX specifications (4.0, 4.1, 4.2, 4.4, etc.) cover most trading scenarios, many organizations need custom fields and message types. Exchanges like Coinbase often extend FIX with proprietary fields for their specific business needs. miniFIX supports custom specifications through QuickFIX XML format and provides code generation capabilities to create type-safe Rust definitions.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Rust,Tutorials">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/17/minifix-tutorial-part-03/">🦀 miniFIX Tutorial | Part 03</a></h1>
+        <h2 class="subtitle is-5">
+          September 17, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          While decoding FIX messages is essential for processing incoming data, encoding messages is equally important for sending orders, confirmations, and other trading instructions. miniFIX provides a powerful, type-safe encoder that makes creating FIX messages straightforward while maintaining the performance and reliability needed for financial applications.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Rust,Tutorials">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/16/minifix-tutorial-part-02/">🦀 miniFIX Tutorial | Part 02</a></h1>
+        <h2 class="subtitle is-5">
+          September 16, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          In real-world trading applications, FIX messages often arrive as continuous streams over network connections. Unlike processing individual complete messages, streaming scenarios require handling partial messages, buffering incomplete data, and parsing messages as they arrive. miniFIX provides excellent support for streaming FIX message decoding.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Rust,Tutorials">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/15/minifix-tutorial-part-01/">🦀 miniFIX Tutorial | Part 01</a></h1>
+        <h2 class="subtitle is-5">
+          September 15, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          The Financial Information eXchange (FIX) protocol is the backbone of electronic trading in financial markets. If you&rsquo;re building trading systems in Rust, miniFIX provides a modern, type-safe way to work with FIX messages. In this post, we&rsquo;ll explore how to decode FIX messages using miniFIX&rsquo;s powerful decoding capabilities.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Rust,miniFIX">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/14/minifix-tutorial-series/">🦀 miniFIX Tutorial Series</a></h1>
+        <h2 class="subtitle is-5">
+          September 14, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/minifix/" style="margin-left:0.25em;">miniFIX</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          Intro to a comprehensive blog post tutorial series covering all aspects of the miniFIX Rust crate, from basic usage to advanced production scenarios.
+          
+        </div>
+      </article>
+      
+      <article data-tags="NLP,Grammar">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/05/ai-pgf-specification-1.0/">🤖 Ai:  PGF Specification 1.0</a></h1>
+        <h2 class="subtitle is-5">
+          September 5, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/grammar/" style="margin-left:0.25em;">Grammar</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/nlp/" style="margin-left:0.25em;">NLP</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          Just something I read and found interesting.
+          
+        </div>
+      </article>
+      
+      <article data-tags="NLP,Grammar">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/05/nlp-pgf-specification-2.1/">🔠 NLP: PGF Specification 2.1</a></h1>
+        <h2 class="subtitle is-5">
+          September 5, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/grammar/" style="margin-left:0.25em;">Grammar</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/nlp/" style="margin-left:0.25em;">NLP</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          Having spent considerable time looking for information on this format - which is still under development - I decided to compile my own version of the specification.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Linguistics,Rust">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/09/02/grammatical-framework-3.12/">🔠 Grammatical Framework 3.12</a></h1>
+        <h2 class="subtitle is-5">
+          September 2, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/linguistics/" style="margin-left:0.25em;">Linguistics</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          Just something I read and found interesting.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Agents">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/08/20/agentic-micro-economy/">🤖 Agentic Micro Economy</a></h1>
+        <h2 class="subtitle is-5">
+          August 20, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/agents/" style="margin-left:0.25em;">Agents</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          Just something I read and found interesting.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Rust,Everydays">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/07/05/everydays-rust-setup/">🦀 Everydays: Rust | Setup</a></h1>
+        <h2 class="subtitle is-5">
+          July 5, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/everydays/" style="margin-left:0.25em;">Everydays</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          Having spent considerable time with mathematics, Python, and reading up on Ai, I wanted to spend the next couple of weeks revising my Rust knowledge, from the ground up. I&rsquo;ll be writing short posts everyday where I cover the language, idiomatic patterns, and interesting crates. This series is inspired by one of my favorite artists, Beeple, who creates a piece of art everyday - hence the title of this series (Rust: Everyday).
+          
+        </div>
+      </article>
+      
+      <article data-tags="MATHML">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2025/06/22/ai-summer-reading-mathematics-for-machine-learning/">🤖 Ai: Summer Reading : Mathematics for Machine Learning</a></h1>
+        <h2 class="subtitle is-5">
+          June 22, 2025
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/mathml/" style="margin-left:0.25em;">MATHML</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          This summer I will be reading the book Mathematics for Machine Learning, by marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. As one reviewer stated &lsquo;This book provdides great coverage of allthe basic mathematical concepts for machine learning.&rsquo;. The book has 12 chapters, and my goal is to read one chapter each week.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Rust,Mathematics">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2024/12/23/timed-release-crypto/">🔐 Timed-Release-Crypto</a></h1>
+        <h2 class="subtitle is-5">
+          December 23, 2024
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/mathematics/" style="margin-left:0.25em;">Mathematics</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          I recently coded a tiny Rust library, implementing a cryptographic idea in an old paper which had caught my interest. This post is my way of cementing my understanding of the concepts in the paper which I found difficult to grasp.
+          
+        </div>
+      </article>
+      
+      <article data-tags="mathematics,hardware">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2024/12/19/squarings-modulo-n-per-second/">💻 Squarings Modulo N per Second</a></h1>
+        <h2 class="subtitle is-5">
+          December 19, 2024
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/hardware/" style="margin-left:0.25em;">hardware</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/mathematics/" style="margin-left:0.25em;">mathematics</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          A quick, non-scientific, look at how we might estimate the number of squarings modulo n that a computer can perform per second.
+          
+        </div>
+      </article>
+      
+      <article data-tags="bitcoin,cryptography,rust">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2024/12/12/block-time-lock-messages/">Block Time-Lock Messages</a></h1>
+        <h2 class="subtitle is-5">
+          December 12, 2024
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/bitcoin/" style="margin-left:0.25em;">bitcoin</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/cryptography/" style="margin-left:0.25em;">cryptography</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          Exploring how to use Bitcoin block hashes as time-dependent keys for encrypting messages that can only be decrypted after a specific block is mined.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Programming,Rust">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2024/12/10/the-typestate-pattern/">🦀 The TypeState Pattern</a></h1>
+        <h2 class="subtitle is-5">
+          December 10, 2024
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/programming/" style="margin-left:0.25em;">Programming</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          TypeState is a powerful design pattern that we can use to provide compiletime checks based on the state of things. This post is my way of writing about what I&rsquo;m learning with the hopes that it&rsquo;ll stick better.
+          
+        </div>
+      </article>
+      
+      <article data-tags="rust,programming">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2024/12/06/const-generics/">🦀 Const Generics</a></h1>
+        <h2 class="subtitle is-5">
+          December 6, 2024
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/programming/" style="margin-left:0.25em;">programming</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          A look at const generics in Rust, explained through a Dungeons &amp; Dragons magic system analogy.
+          
+        </div>
+      </article>
+      
+      <article data-tags="csharp,dotnet,avalonia">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2024/10/17/avalonia-ui-on-macos/">Avalonia UI on MacOS</a></h1>
+        <h2 class="subtitle is-5">
+          October 17, 2024
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/avalonia/" style="margin-left:0.25em;">avalonia</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/csharp/" style="margin-left:0.25em;">csharp</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/dotnet/" style="margin-left:0.25em;">dotnet</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+           Description: How to get Avalonia setup on MacOS (Big Sur).
+For VS Code users there&rsquo;s an extension that can help speed up development process. You can find it on the VS Code Extension marketplace
+Step: Install .NET $ dotnet new install Avalonia.Templates # Check installation: $ dotnet --version Step: Install Avalonia Using the .NET CLI we install the Avalonia UI templates. We can install Avalonia project templates with the following command:
+
+          
+          <a class="button" href="https://www.cryptopatrick.com/blog/2024/10/17/avalonia-ui-on-macos/" style="height:28px">
+            Read more
+            <span class="icon is-small">
+              <i class="fa fa-angle-double-right"></i>
+            </span>
+          </a>
+          
+        </div>
+      </article>
+      
+      <article data-tags="Engineering,Rust">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2024/09/25/logging/">🦀 Logging</a></h1>
+        <h2 class="subtitle is-5">
+          September 25, 2024
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/engineering/" style="margin-left:0.25em;">Engineering</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          A quick post looking at two ways to do logging in a Rust code-base.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Engineering,Rust">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2024/09/25/cargo-deploy/">🦀 Cargo Deploy</a></h1>
+        <h2 class="subtitle is-5">
+          September 25, 2024
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/engineering/" style="margin-left:0.25em;">Engineering</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          In this post we&rsquo;ll create our own third-party cargo subcommand, cargo deploy. When we call our command in a Rust project, the command will send a binary to our server at Netlify, and print out the URL in the command line. Let&rsquo;s get started.
+Naming The binary of our command needs to be named cargo-${command}. In our case we&rsquo;ll name it cargo-deploy.
+Placement The binary of our command needs to be stored in ~/.cargo/bin. There&rsquo;s an easy way to do this: we simply create the binary (named cargo-deploy) and then publish it to crates.io. Then, cargo install cargo-deploy will download and place the binary in ~/.cargo/bin.
+
+          
+          <a class="button" href="https://www.cryptopatrick.com/blog/2024/09/25/cargo-deploy/" style="height:28px">
+            Read more
+            <span class="icon is-small">
+              <i class="fa fa-angle-double-right"></i>
+            </span>
+          </a>
+          
+        </div>
+      </article>
+      
+      <article data-tags="Mathematics">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2024/06/10/fixed-point-theory/"> 📐 Fixed Point Theory</a></h1>
+        <h2 class="subtitle is-5">
+          June 10, 2024
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/mathematics/" style="margin-left:0.25em;">Mathematics</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          We start from scratch and try to build our understanding of the most fundamental idea of Fixed Point Theory- the Banach Contraction Principle.
+          
+        </div>
+      </article>
+      
+      <article data-tags="rust,solana">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2024/04/12/solana-101/">🦀 Solana 101</a></h1>
+        <h2 class="subtitle is-5">
+          April 12, 2024
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">rust</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/solana/" style="margin-left:0.25em;">solana</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          I start by reading the Solana documentation and will see how far I get in building something with Solana.
+          
+        </div>
+      </article>
+      
+      <article data-tags="rust,databases,mvcc">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2023/08/20/mvcc-101/">💻 MVCC 101</a></h1>
+        <h2 class="subtitle is-5">
+          August 20, 2023
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/databases/" style="margin-left:0.25em;">databases</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/mvcc/" style="margin-left:0.25em;">mvcc</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          MVCC stands for MultiVersion Concurrency Control. It&rsquo;s a way to implement transactional isolation in any application that needs to manage the state of data items.
+The traditional mechanism for state management in a database is concurrent control using read-write locks. However, this solution is based on blocking and can create contention. MVCC is not blocking. This means that multiple clients can read and write simultaneously - reads do not block other reads and writes do not block other writes or reads.
+
+          
+          <a class="button" href="https://www.cryptopatrick.com/blog/2023/08/20/mvcc-101/" style="height:28px">
+            Read more
+            <span class="icon is-small">
+              <i class="fa fa-angle-double-right"></i>
+            </span>
+          </a>
+          
+        </div>
+      </article>
+      
+      <article data-tags="Engineering,Java,Rust">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2023/07/29/graph-database/">💻 Graph Database</a></h1>
+        <h2 class="subtitle is-5">
+          July 29, 2023
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/engineering/" style="margin-left:0.25em;">Engineering</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/java/" style="margin-left:0.25em;">Java</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          A beginner-oriented post containing a few fundamental concepts, and usually a step-by-step rudimentary example. I&rsquo;m hoping this post will serve as a quick refresher on the covered subject. The content of the post is usually heavily inspired by books and Wiki - my aim is to have a post close at hand if I need to refresh my memory. For proper tutorials and primers - please see other sources on the Internet.
+          
+        </div>
+      </article>
+      
+      <article data-tags="Engineering,Rust">
+        <h1 class="title"><a href="https://www.cryptopatrick.com/blog/2022/04/04/rest-api/">🦀 REST API</a></h1>
+        <h2 class="subtitle is-5">
+          April 4, 2022
+          
+            
+            <span class="tags-inline" style="margin-left:0.5em;">
+              
+                
+                <a class="tag is-link is-light" href="../tags/engineering/" style="margin-left:0.25em;">Engineering</a>
+              
+                
+                <a class="tag is-link is-light" href="../tags/rust/" style="margin-left:0.25em;">Rust</a>
+              
+            </span>
+          
+        </h2>
+        <div class="content">
+          I recently started using Axum, a web framework for Rust, and I&rsquo;m a fan of it so far. I&rsquo;m writing this post to document my learning process and cover how to build a REST API using Axum as a web framework and SQLx for SQL queries. Let&rsquo;s go!
+          
+        </div>
+      </article>
+      
+    </div>
+  </div>
 </section>
+
+<script>
+function filterByTag(selectedTag) {
+  
+  document.querySelectorAll('.filter-tag').forEach(tag => {
+    tag.classList.remove('active', 'is-link');
+    tag.classList.add('is-info');
+  });
+
+  const activeTag = document.querySelector(`[data-tag="${selectedTag}"]`);
+  if (activeTag) {
+    activeTag.classList.add('active', 'is-link');
+    activeTag.classList.remove('is-info');
+  }
+
+  
+  const articles = document.querySelectorAll('#posts-container article');
+
+  articles.forEach(article => {
+    if (selectedTag === 'all') {
+      article.style.display = 'block';
+    } else {
+      const articleTags = article.querySelectorAll('.tags-inline a');
+      let hasTag = false;
+
+      articleTags.forEach(tag => {
+        const tagText = tag.textContent.toLowerCase().trim();
+        if (tagText === selectedTag.toLowerCase()) {
+          hasTag = true;
+        }
+      });
+
+      article.style.display = hasTag ? 'block' : 'none';
+    }
+  });
+}
+</script>
+
 <section class="section">
   <div class="container has-text-centered">
     <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>

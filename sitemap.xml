@@ -3,18 +3,75 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.cryptopatrick.com/post/</loc>
-    <lastmod>2025-09-12T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/</loc>
-    <lastmod>2025-09-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.cryptopatrick.com/tags/everydays/</loc>
-    <lastmod>2025-07-05T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/tags/rust/</loc>
-    <lastmod>2025-07-05T00:00:00+00:00</lastmod>
+    <lastmod>2025-09-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/tags/</loc>
+    <lastmod>2025-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/tutorials/</loc>
+    <lastmod>2025-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/22/minifix-tutorial-part-08/</loc>
+    <lastmod>2025-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/21/minifix-tutorial-part-07/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/20/minifix-tutorial-part-06/</loc>
+    <lastmod>2025-09-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/19/minifix-tutorial-part-05/</loc>
+    <lastmod>2025-09-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/18/minifix-tutorial-part-04/</loc>
+    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/17/minifix-tutorial-part-03/</loc>
+    <lastmod>2025-09-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/16/minifix-tutorial-part-02/</loc>
+    <lastmod>2025-09-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/15/minifix-tutorial-part-01/</loc>
+    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/minifix/</loc>
+    <lastmod>2025-09-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/14/minifix-tutorial-series/</loc>
+    <lastmod>2025-09-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/05/nlp-pgf-specification-2.1/</loc>
+    <lastmod>2025-09-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/grammar/</loc>
+    <lastmod>2025-09-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/nlp/</loc>
+    <lastmod>2025-09-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/05/ai-pgf-specification-1.0/</loc>
+    <lastmod>2025-09-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/09/02/grammatical-framework-3.12/</loc>
+    <lastmod>2025-09-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/linguistics/</loc>
+    <lastmod>2025-09-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/agents/</loc>
+    <lastmod>2025-08-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2025/08/20/agentic-micro-economy/</loc>
+    <lastmod>2025-08-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/everydays/</loc>
     <lastmod>2025-07-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/blog/2025/07/05/everydays-rust-setup/</loc>
@@ -23,20 +80,29 @@
     <loc>https://www.cryptopatrick.com/tags/mathml/</loc>
     <lastmod>2025-06-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://www.cryptopatrick.com/blog/2025/06/22/summer-reading-mathematics-for-machine-learning/</loc>
+    <loc>https://www.cryptopatrick.com/blog/2025/06/22/ai-summer-reading-mathematics-for-machine-learning/</loc>
     <lastmod>2025-06-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.cryptopatrick.com/tags/mathematics/</loc>
-    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/blog/2024/12/23/timed-release-crypto/</loc>
     <lastmod>2024-12-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://www.cryptopatrick.com/tags/hardware/</loc>
-    <lastmod>2024-12-19T00:00:00+00:00</lastmod>
+    <loc>https://www.cryptopatrick.com/tags/mathematics/</loc>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/blog/2024/12/19/squarings-modulo-n-per-second/</loc>
     <lastmod>2024-12-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/hardware/</loc>
+    <lastmod>2024-12-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/bitcoin/</loc>
+    <lastmod>2024-12-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2024/12/12/block-time-lock-messages/</loc>
+    <lastmod>2024-12-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/cryptography/</loc>
+    <lastmod>2024-12-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.cryptopatrick.com/tags/programming/</loc>
     <lastmod>2024-12-10T00:00:00+00:00</lastmod>
@@ -44,6 +110,55 @@
     <loc>https://www.cryptopatrick.com/blog/2024/12/10/the-typestate-pattern/</loc>
     <lastmod>2024-12-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://www.cryptopatrick.com/categories/</loc>
+    <loc>https://www.cryptopatrick.com/blog/2024/12/06/const-generics/</loc>
+    <lastmod>2024-12-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/avalonia/</loc>
+    <lastmod>2024-10-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2024/10/17/avalonia-ui-on-macos/</loc>
+    <lastmod>2024-10-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/csharp/</loc>
+    <lastmod>2024-10-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/dotnet/</loc>
+    <lastmod>2024-10-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/engineering/</loc>
+    <lastmod>2024-09-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2024/09/25/cargo-deploy/</loc>
+    <lastmod>2024-09-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2024/09/25/logging/</loc>
+    <lastmod>2024-09-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2024/06/10/fixed-point-theory/</loc>
+    <lastmod>2024-06-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/solana/</loc>
+    <lastmod>2024-04-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2024/04/12/solana-101/</loc>
+    <lastmod>2024-04-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2023/08/20/mvcc-101/</loc>
+    <lastmod>2023-08-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/databases/</loc>
+    <lastmod>2023-08-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/mvcc/</loc>
+    <lastmod>2023-08-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2023/07/29/graph-database/</loc>
+    <lastmod>2023-07-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/tags/java/</loc>
+    <lastmod>2023-07-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.cryptopatrick.com/blog/2022/04/04/rest-api/</loc>
+    <lastmod>2022-04-04T00:00:00+00:00</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60544&amp;path=livereload" data-no-instant defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 const fn - Seamless Global Nature">
+<meta property="og:url" content="http://localhost:60544/blog/2024/12/07/const-fn/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="http://localhost:60544/img/post-name/name.jpg" />
+
+
+<title>🦀 const fn | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="http://localhost:60544//css/style.css">
+<link rel="stylesheet" href="http://localhost:60544//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="http://localhost:60544/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="http://localhost:60544/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="http://localhost:60544/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 const fn</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      December 7, 2024
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/" style="margin-left:0.25em;"></a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/" style="margin-left:0.25em;"></a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <p>In Rust 1.63 (which dropped in August 2022, we got a nice addition; <code>Mutex::new()</code> and <code>RwLock::new()</code> became <code>const fn</code>. So what does this mean?</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">std</span><span style="color:#728e00">:</span><span style="color:#00979d">:sync::Mutex</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">derive</span><span style="color:#728e00">(</span><span style="color:#00979d">Debug</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">struct</span> <span style="color:#434f54">Log</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">timestamp</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;</span><span style="color:#a61717">&#39;</span><span style="color:#00979d">static</span> <span style="color:#00979d">str</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">message</span><span style="color:#728e00">:</span> <span style="color:#00979d">String</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Vec::new() and String::new() do _not_ allocate so they do not go on the Heap.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6">// This means that we can work with them on the compiled side of the program.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Mutex means that we can change the value inside, making the _static_ mutable.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">static</span> <span style="color:#434f54">BATTLELOG</span><span style="color:#728e00">:</span> <span style="color:#00979d">Mutex&lt;Vec&lt;Log&gt;&gt;</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Mutex</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">(</span><span style="color:#00979d">Vec::new</span><span style="color:#728e00">());</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">fn</span> <span style="color:#434f54">log_message</span><span style="color:#728e00">(</span><span style="color:#434f54">timestamp</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;</span><span style="color:#a61717">&#39;</span><span style="color:#00979d">static</span> <span style="color:#00979d">str</span><span style="color:#728e00">)</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// BATTLELOG is a global 
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">BATTLELOG</span><span style="color:#728e00">.</span><span style="color:#434f54">lock</span><span style="color:#728e00">().</span><span style="color:#434f54">unwrap</span><span style="color:#728e00">().</span><span style="color:#434f54">push</span><span style="color:#728e00">(</span><span style="color:#434f54">Log</span><span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">timestamp</span><span style="color:#728e00">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">message</span><span style="color:#728e00">:</span> <span style="color:#a61717">&#34;</span><span style="color:#00979d">Some</span> <span style="color:#00979d">message</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">.to_string</span><span style="color:#728e00">(),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">});</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">fn</span> <span style="color:#434f54">main</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">log_message</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;2024-12-07::09.00&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">log_message</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;2024-12-07::11.00&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;{BATTLELOG:#?}&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div>
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

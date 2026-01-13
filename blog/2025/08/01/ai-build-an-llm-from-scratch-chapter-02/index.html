@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60544&amp;path=livereload" data-no-instant defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🤖 Ai: Build an LLM from Scratch | Chapter 02 - Seamless Global Nature">
+<meta property="og:url" content="http://localhost:60544/blog/2025/08/01/ai-build-an-llm-from-scratch-chapter-02/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="http://localhost:60544/img/post-name/name.jpg" />
+
+
+<title>🤖 Ai: Build an LLM from Scratch | Chapter 02 | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="http://localhost:60544//css/style.css">
+<link rel="stylesheet" href="http://localhost:60544//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="http://localhost:60544/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="http://localhost:60544/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="http://localhost:60544/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🤖 Ai: Build an LLM from Scratch | Chapter 02</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      August 1, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/concepts/" style="margin-left:0.25em;">Concepts</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/reading/" style="margin-left:0.25em;">Reading</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <!-- ////////////////////////////////////////////////////////////////////////-->
+<p><img src="https://img.shields.io/badge/Work_In_Progress-orange.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Text_Version-0.4.5-blue.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg" alt="Version:0.1.0"></p>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<br>
+<blockquote>
+<p><strong>Preface:</strong></p>
+</blockquote>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h2 id="heading">Heading</h2>
+<p><figure><img src="../../../../../img/time-lock-message/rebellion.jpg">
+</figure>
+<br>
+<strong>▲[^1]</strong> A Rebel ship orbiting above the Federation&rsquo;s top secret military research lab, <em>The Periphery</em>.</p>
+<p>⠀⠀⠀⠀⠀ This is a paragraph.
+⠀⠀⠀⠀⠀ This is another paragraph.</p>
+<h2 id="21-understanding-word-embeddings">2.1 Understanding word embeddings</h2>
+<p>Training Neural Networks involve mathematical operations, and these cannot be perfomed
+on raw text - so we first have to process the text. We do so by turning each discrete word
+into a <em>continuous-valued vectors</em>, representing <em>points</em> in a <em>vector space</em>.
+This process is called <strong>embedding</strong>. So we pass text data to an embedding model and the model outputs a vector-valued representation of that text. There are also embeddings
+for sentence, paragraphs, and whole documents.</p>
+<blockquote>
+<p>Note: a text embedding model would not work for audio, video, or image data.</p>
+</blockquote>
+<h3 id="word2vec">Word2Vec</h3>
+<p>A popular algorithm for generating word embeddings. The idea is that words that
+apear in similar context tend to have similar meaning. As a consequence,
+when projected in vector space, words with similar meaning tend to be close to each other.</p>
+<blockquote>
+<p>TODO: add handdrawn graphor use inkscape.</p>
+</blockquote>
+<blockquote>
+<p>For domain optimizing purposes, rather than using the pretrained Word2Vec embedding model, LLMs tend to create their own.</p>
+</blockquote>
+<blockquote>
+<p><strong>Resource:</strong> Link to paper on <a href="https://arxiv.org/abs/1301.3781">ArXiv</a></p>
+</blockquote>
+<h3 id="dimensionality">Dimensionality</h3>
+<p>Embeddings can have varying dimensions, the higher, the more nuances the model
+is able to capture, but at a compuational cost.
+Humans can see three dimensions, but LLMs often use much higher dimensions. The smallest GPT-2
+models (117M and 125M parameters) use an embedding size of 768 dimensions. The largest GPT-3
+model uses 12,288 dimensions.</p>
+<blockquote>
+<p>TODO: look up Parameters</p>
+</blockquote>
+<hr>
+<h2 id="22-tokenizing-text">2.2 Tokenizing text</h2>
+<p>In this step we split up input text, like <em>&ldquo;If a technological feat is possible, man will do it.&rdquo;</em>.
+into tokens <code>If</code>, <code>a</code>, <code>technological</code>, <code>feat</code>, <code>is</code>, <code>possible</code>, <code>man</code> ,<code>will</code> ,<code>do</code>, <code>it</code>, <code>.</code>.</p>
+<p>The book uses a 20,479-character long text, &ldquo;The Verdict&rdquo;, by Edith Wharton, so I&rsquo;ll use the same.
+The popular LLMs, like ChatGPT, are trained on millions of articles and hundreds of thousands of books. But, for learning purposes it&rsquo;s enough to work with a single text.</p>
+<blockquote>
+<p><a href="https://en.wikisource.org/wiki/The_Verdict">https://en.wikisource.org/wiki/The_Verdict</a></p>
+</blockquote>
+<p>I&rsquo;m following the book and will download the text and store it as <em>the-verdict.txt</em>
+at the root of a source folder.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#728e00">import</span> <span style="color:#434f54">urllib.request</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Location of text to use for input.</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">url</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;https://raw.githubusercontent.com/cryptopatrick/build_llm_scratch/refs/heads/master/ch02/code01/the-verdict.txt&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">file_path</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;the-verdict.txt&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">urllib</span><span style="color:#728e00">.</span><span style="color:#434f54">request</span><span style="color:#728e00">.</span><span style="color:#434f54">urlretrieve</span>(<span style="color:#434f54">url</span>, <span style="color:#434f54">file_path</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">with</span> <span style="color:#728e00">open</span> (<span style="color:#7f8c8d">&#34;the-verdict.txt&#34;</span>, <span style="color:#7f8c8d">&#34;r&#34;</span>, <span style="color:#434f54">encoding</span><span style="color:#728e00">=</span><span style="color:#7f8c8d">&#34;utf-8&#34;</span>) <span style="color:#728e00">as</span> <span style="color:#434f54">f</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">raw_text</span> <span style="color:#728e00">=</span> <span style="color:#434f54">f</span><span style="color:#728e00">.</span><span style="color:#434f54">read</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">print</span>(<span style="color:#7f8c8d">&#34;Total number of chars:&#34;</span>, <span style="color:#728e00">len</span>(<span style="color:#434f54">raw_text</span>))
+</span></span><span style="display:flex;"><span><span style="color:#728e00">print</span>(<span style="color:#7f8c8d">&#34;First 100 characters in the file: &#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#728e00">print</span>(<span style="color:#434f54">raw_text</span>[:<span style="color:#8a7b52">99</span>])
+</span></span></code></pre></div><p>We do not avoid capitalization because it helps LLMs distinguish between proper nouns, like
+Boulder, and common nouns, like boulder.
+Whether to keep or remove whitespace in the embedding model depends on the purpose of the LLM.
+For example, in Python, whitespace carries semantic meaning and thus should probably be included
+during training.</p>
+<hr>
+<h2 id="23-converting-tokens-into-token-ids">2.3 Converting tokens into token IDs</h2>
+<p>Once the input text has been tokenized, we want to convert them into vectors.</p>
+<p>input text -&gt; &ldquo;Hello, world!&rdquo;
+tokenized text -&gt; &ldquo;Hello&rdquo;
+token IDs -&gt; [12456]
+token embeddings [ , . ]</p>
+<p>Using a sorted <em>vocabulary</em> we can map each unique word and special character to a unique integer.
+These unique integers are called <strong>token IDs</strong>.
+So, having tokenized the Edith Wharton&rsquo;s text &ldquo;The Verdict&rdquo;, our next step is to
+create a dictionary/map where each unique token is mapped to a unique integer (token ID).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#95a5a6"># Python&#39;s method _set_ will create a set of unque elements.</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># We then sort all the elements alphabetically, and print the vocabulary size.</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">all_words</span> <span style="color:#728e00">=</span> <span style="color:#728e00">sorted</span>(<span style="color:#728e00">set</span>(<span style="color:#434f54">preprocessed</span>))
+</span></span><span style="display:flex;"><span><span style="color:#434f54">vocab_size</span> <span style="color:#728e00">=</span> <span style="color:#728e00">len</span>(<span style="color:#434f54">all_words</span>)
+</span></span><span style="display:flex;"><span><span style="color:#728e00">print</span>(<span style="color:#434f54">vocab_size</span>)
+</span></span></code></pre></div><h4 id="simple-encoder-and-decoder">Simple Encoder and Decoder</h4>
+<p>Next, using our created vocabulary, we want to tokenize new text, text that our
+model hasn&rsquo;t seen before, into unique token IDs.
+The work we&rsquo;ve been doing so far can be characterised as <strong>encoding</strong>, turning
+text data into token data. But we also want to be able to do the opposite,
+<em>turning token data into text</em>. In the world of LLMs, this is called <strong>decoding</strong>.</p>
+<p>Let&rsquo;s start by first extending our tokenizer code into a propper class.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#728e00">import</span> <span style="color:#434f54">re</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">import</span> <span style="color:#434f54">urllib.request</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Toknizer</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">class</span> <span style="color:#434f54">SimpleTokenizerV1</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">def</span> <span style="color:#434f54">__init__</span>(<span style="color:#434f54">self</span>, <span style="color:#434f54">vocab</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6"># We store the vocabulary as a class attribute, for easy access during</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6"># encode and decode processing.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">self</span><span style="color:#728e00">.</span><span style="color:#434f54">str_to_int</span> <span style="color:#728e00">=</span> <span style="color:#434f54">vocab</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6"># Inverse vocabulary, where token ids are mapped to text tokens.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">self</span><span style="color:#728e00">.</span><span style="color:#434f54">int_to_str</span> <span style="color:#728e00">=</span> {<span style="color:#434f54">i</span>:<span style="color:#434f54">s</span> <span style="color:#728e00">for</span> <span style="color:#434f54">s</span>, <span style="color:#434f54">i</span> <span style="color:#728e00">in</span> <span style="color:#434f54">vocab</span><span style="color:#728e00">.</span><span style="color:#434f54">items</span>()}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">def</span> <span style="color:#d35400">encode</span>(<span style="color:#434f54">self</span>, <span style="color:#434f54">text</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">preprocessed</span> <span style="color:#728e00">=</span> <span style="color:#434f54">re</span><span style="color:#728e00">.</span><span style="color:#434f54">split</span>(<span style="color:#7f8c8d">r</span><span style="color:#7f8c8d">&#39;([,.:;?_!&#34;()</span><span style="color:#7f8c8d">\&#39;</span><span style="color:#7f8c8d">]|--|\s)&#39;</span>, <span style="color:#434f54">text</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">preprocessed</span> <span style="color:#728e00">=</span> [<span style="color:#434f54">item</span><span style="color:#728e00">.</span><span style="color:#434f54">strip</span>() <span style="color:#728e00">for</span> <span style="color:#434f54">item</span> <span style="color:#728e00">in</span> <span style="color:#434f54">preprocessed</span> <span style="color:#728e00">if</span> <span style="color:#434f54">item</span><span style="color:#728e00">.</span><span style="color:#434f54">strip</span>()]
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">ids</span> <span style="color:#728e00">=</span> [<span style="color:#434f54">self</span><span style="color:#728e00">.</span><span style="color:#434f54">str_to_int</span>[<span style="color:#434f54">s</span>] <span style="color:#728e00">for</span> <span style="color:#434f54">s</span> <span style="color:#728e00">in</span> <span style="color:#434f54">preprocessed</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">return</span> <span style="color:#434f54">ids</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">def</span> <span style="color:#d35400">decode</span>(<span style="color:#434f54">self</span>, <span style="color:#434f54">ids</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">text</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34; &#34;</span><span style="color:#728e00">.</span><span style="color:#434f54">join</span>([<span style="color:#434f54">self</span><span style="color:#728e00">.</span><span style="color:#434f54">int_to_str</span>[<span style="color:#434f54">i</span>] <span style="color:#728e00">for</span> <span style="color:#434f54">i</span> <span style="color:#728e00">in</span> <span style="color:#434f54">ids</span>])
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6"># Remove spaces before these punctuations.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">text</span> <span style="color:#728e00">=</span> <span style="color:#434f54">re</span><span style="color:#728e00">.</span><span style="color:#434f54">sub</span>(<span style="color:#7f8c8d">r</span><span style="color:#7f8c8d">&#39;\s+([,.?!&#34;()</span><span style="color:#7f8c8d">\&#39;</span><span style="color:#7f8c8d">])&#39;</span>, <span style="color:#7f8c8d">r</span><span style="color:#7f8c8d">&#39;\1)&#39;</span>, <span style="color:#434f54">text</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">return</span> <span style="color:#434f54">text</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Get file from location.</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">url</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;https://raw.githubusercontent.com/cryptopatrick/build_llm_scratch/refs/heads/master/ch02/code01/the-verdict.txt&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">file_path</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;the-verdict.txt&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">urllib</span><span style="color:#728e00">.</span><span style="color:#434f54">request</span><span style="color:#728e00">.</span><span style="color:#434f54">urlretrieve</span>(<span style="color:#434f54">url</span>, <span style="color:#434f54">file_path</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Read file and tokenize it.</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">with</span> <span style="color:#728e00">open</span> (<span style="color:#7f8c8d">&#34;the-verdict.txt&#34;</span>, <span style="color:#7f8c8d">&#34;r&#34;</span>, <span style="color:#434f54">encoding</span><span style="color:#728e00">=</span><span style="color:#7f8c8d">&#34;utf-8&#34;</span>) <span style="color:#728e00">as</span> <span style="color:#434f54">f</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">raw_text</span> <span style="color:#728e00">=</span> <span style="color:#434f54">f</span><span style="color:#728e00">.</span><span style="color:#434f54">read</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">preprocessed</span> <span style="color:#728e00">=</span> <span style="color:#434f54">re</span><span style="color:#728e00">.</span><span style="color:#434f54">split</span>(<span style="color:#7f8c8d">r</span><span style="color:#7f8c8d">&#39;([,.:;?_!&#34;()</span><span style="color:#7f8c8d">\&#39;</span><span style="color:#7f8c8d">]|--|\s)&#39;</span>, <span style="color:#434f54">raw_text</span>)
+</span></span><span style="display:flex;"><span><span style="color:#434f54">preprocessed</span> <span style="color:#728e00">=</span> [<span style="color:#434f54">item</span><span style="color:#728e00">.</span><span style="color:#434f54">strip</span>() <span style="color:#728e00">for</span> <span style="color:#434f54">item</span> <span style="color:#728e00">in</span> <span style="color:#434f54">preprocessed</span> <span style="color:#728e00">if</span> <span style="color:#434f54">item</span><span style="color:#728e00">.</span><span style="color:#434f54">strip</span>()]
+</span></span><span style="display:flex;"><span><span style="color:#434f54">all_words</span> <span style="color:#728e00">=</span> <span style="color:#728e00">sorted</span>(<span style="color:#728e00">set</span>(<span style="color:#434f54">preprocessed</span>))
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># TODO: Explain this code. List 50 words in the vocabulary.</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">vocab</span> <span style="color:#728e00">=</span> {<span style="color:#434f54">token</span>:<span style="color:#434f54">integer</span> <span style="color:#728e00">for</span> <span style="color:#434f54">integer</span>, <span style="color:#434f54">token</span> <span style="color:#728e00">in</span> <span style="color:#728e00">enumerate</span>(<span style="color:#434f54">all_words</span>)}
+</span></span></code></pre></div><h4 id="encoder">Encoder</h4>
+<p>We now test our Tokenizer on the vocabulary, first by encoding text tokens into
+token IDs.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#434f54">tokenizer</span> <span style="color:#728e00">=</span> <span style="color:#434f54">SimpleTokenizerV1</span>(<span style="color:#434f54">vocab</span>)
+</span></span><span style="display:flex;"><span><span style="color:#434f54">text</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;&#34;&#34;It&#39;s the last he painted, you know,&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f8c8d">    Mrs. Gisburn said with pardonable pride.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">token_ids</span> <span style="color:#728e00">=</span> <span style="color:#434f54">tokenizer</span><span style="color:#728e00">.</span><span style="color:#434f54">encode</span>(<span style="color:#434f54">text</span>)
+</span></span><span style="display:flex;"><span><span style="color:#728e00">print</span>(<span style="color:#434f54">token_ids</span>)
+</span></span></code></pre></div><h4 id="decoder">Decoder</h4>
+<p>Finally, we can also test the Tokenizer&rsquo;s decoding method, turning <code>token_ids</code> into text tokens.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#434f54">text_tokens</span> <span style="color:#728e00">=</span> <span style="color:#434f54">tokenizer</span><span style="color:#728e00">.</span><span style="color:#434f54">decode</span>(<span style="color:#434f54">token_ids</span>)
+</span></span><span style="display:flex;"><span><span style="color:#728e00">print</span>(<span style="color:#434f54">text_tokens</span>)
+</span></span></code></pre></div><hr>
+<h2 id="24-adding-special-context-tokens">2.4 Adding special context tokens</h2>
+<p>We&rsquo;re facing a challenge - our Tokenizer can <em>only</em> encode and decode text tokens which it has seen in its training data (Edith Whartons <em>The Verdict</em>).
+So, in this next step we need to expand the scope of the tokenizer so that it can
+handle unknown tokens. Two tokens that we will add are:</p>
+<ul>
+<li><code>&lt;|unk|&gt;</code> : used whenever we encounter a token that is not in our vocabulary.</li>
+<li><code>&lt;|endoftext|&gt;</code> : used to signal to our LLM that this marks the end of the text.
+For example in a document with one part about sports and another about flowers, we can insert an &lt;|endoftext|&gt; token to mark that the two texts are unrelated.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#434f54">all_words</span> <span style="color:#728e00">=</span> <span style="color:#728e00">sorted</span>(<span style="color:#728e00">set</span>(<span style="color:#434f54">preprocessed</span>))
+</span></span><span style="display:flex;"><span><span style="color:#434f54">all_tokens</span> <span style="color:#728e00">=</span> <span style="color:#728e00">sorted</span>(<span style="color:#728e00">list</span>(<span style="color:#728e00">set</span>(<span style="color:#434f54">preprocessed</span>)))
+</span></span><span style="display:flex;"><span><span style="color:#434f54">all_tokens</span><span style="color:#728e00">.</span><span style="color:#434f54">extend</span>([<span style="color:#7f8c8d">&#34;&lt;|endoftext|&gt;&#34;</span>, <span style="color:#7f8c8d">&#34;&lt;|unk|&gt;&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># TODO: Explain this code. List 50 words in the vocabulary.</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">vocab</span> <span style="color:#728e00">=</span> {<span style="color:#434f54">token</span>:<span style="color:#434f54">integer</span> <span style="color:#728e00">for</span> <span style="color:#434f54">integer</span>, <span style="color:#434f54">token</span> <span style="color:#728e00">in</span> <span style="color:#728e00">enumerate</span>(<span style="color:#434f54">all_tokens</span>)}
+</span></span><span style="display:flex;"><span><span style="color:#728e00">print</span>(<span style="color:#728e00">len</span>(<span style="color:#434f54">vocab</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># If we print the last five words, we&#39;ll see these tokens.</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">for</span> <span style="color:#434f54">i</span>, <span style="color:#434f54">item</span> <span style="color:#728e00">in</span> <span style="color:#728e00">enumerate</span>(<span style="color:#728e00">list</span>(<span style="color:#434f54">vocab</span><span style="color:#728e00">.</span><span style="color:#434f54">items</span>())[<span style="color:#728e00">-</span><span style="color:#8a7b52">5</span>:]):
+</span></span><span style="display:flex;"><span>  <span style="color:#728e00">print</span>(<span style="color:#434f54">item</span>)
+</span></span></code></pre></div><h4 id="other-special-tokens">Other Special Tokens</h4>
+<ul>
+<li>[BOS] : Beginning of Sequence (the start of a text)</li>
+<li>[EOS] : End of Sequence</li>
+<li>[PAD] : During training, when batch processing lots of files, this tag offers
+a way to make sure that all texts are of the same length.
+For short texts we can <em>pad</em> them using [PAD], until they reach the size of the other texts.</li>
+</ul>
+<blockquote>
+<p>GPT only uses <code>&lt;|endoftext|&gt;</code>, it also uses it to <em>pad</em>. GPT does not use <code>&lt;|unk|&gt;</code>.</p>
+</blockquote>
+<hr>
+<h2 id="25-byte-pair-encoding-bpe">2.5 Byte Pair Encoding (BPE)</h2>
+<p>Advanced tokenization scheme used in GPT.</p>
+<h2 id="data-samplin-with-a-sliding-window">Data samplin with a sliding window</h2>
+<h2 id="creating-token-embeddings">Creating token embeddings</h2>
+<h2 id="encoding-word-positions">Encoding word positions</h2>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

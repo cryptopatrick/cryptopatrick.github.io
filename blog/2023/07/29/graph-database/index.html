@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="💻 Graph Database - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2023/07/29/graph-database/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="https://www.cryptopatrick.com/img/post-name/name.jpg" />
+
+
+<title>💻 Graph Database | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">💻 Graph Database</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      July 29, 2023
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/engineering/" style="margin-left:0.25em;">Engineering</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/java/" style="margin-left:0.25em;">Java</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/rust/" style="margin-left:0.25em;">Rust</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <blockquote>
+<p><strong>Please Note</strong>: The Neo4j Server uses Java, AND SPECIFICALLY the Oracle(R) Java(TM) 17, OpenJDK(TM) 17 version - Neo4j does NOT support Java 16.0.1. So, the Oracle version of Java mentioned needs to be installed before Neo4j Server can run. Java can be installed by visiting: <a href="http://www.java.com">http://www.java.com</a>.</p>
+</blockquote>
+<h1 id="installing-oracle-java-jdk-17-on-macos">Installing Oracle Java JDK 17 on MacOS</h1>
+<p>We visit <a href="https://www.oracle.com/java/technologies/downloads/#java17">https://www.oracle.com/java/technologies/downloads/#java17</a>, download
+the <em>x64 DMG Installer</em> file, locate it and run it.</p>
+<p>Once done installing we can check that Java JDK 17 was properly installed:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>java -version
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># If everything installed properly we should get:</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># java version &#34;17.0.8&#34; 2023-07-18 LTS</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Java(TM) SE Runtime Environment (build 17.0.8+9-LTS-211)</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Java HotSpot(TM) 64-Bit Server VM (build 17.0.8+9-LTS-211, mixed mode, sharing)</span>
+</span></span></code></pre></div><p>Excellent, now we&rsquo;re ready to install Neo4j on our Mac.
+<a href="https://neo4j.com/docs/operations-manual/current/installation/osx/">https://neo4j.com/docs/operations-manual/current/installation/osx/</a></p>
+<h1 id="graph-theory-101">Graph Theory 101</h1>
+<p>There are many problems that can be illustrated by using <em>two fundamental elements</em>: <code>nodes</code> and <code>edges</code>. If we think of two air ports , say JFK in New York and Charles de Gaule in Paris, and the aeroplane route between - then the cities are nodes and the route is an edge. We can expand that analogy to envelope <em>all</em> international airports (all internation airports have a unique id) and <em>all</em> the routes between these.
+What we get is a <code>graph</code> model of the international airports and their connections.</p>
+<blockquote>
+<p>Some history: graph theory was invented by Swiss mathematician Leornard Euler. The original example is that of using a graph to model the connections between seven bridges  in Eulers hometown of Keuningsberg (St. Petersburg).</p>
+</blockquote>
+<h2 id="benchmark">Benchmark:</h2>
+<p><a href="https://github.com/dgraph-io/benchmarks">https://github.com/dgraph-io/benchmarks</a>
+<a href="https://github.com/dgraph-io/benchmarks/tree/master/data/neo4j">https://github.com/dgraph-io/benchmarks/tree/master/data/neo4j</a></p>
+<h1 id="step-0-get-neo4j">Step 0: Get Neo4j</h1>
+<p>Things change, but at the time of writing I navigated to <a href="https://neo4j.com/pricing/">https://neo4j.com/pricing/</a>,
+clicked on <em>Self-Managed</em> and then Download for Free.</p>
+<p><a href="https://neo4j.com/pricing/">https://neo4j.com/pricing/</a></p>
+<p>Since I&rsquo;m on a Mac I downloaded the
+Neo4j Community Edition 5.10.0</p>
+<p><figure><img src="../../../../../img/neo4j-post/step-one.png">
+</figure>
+
+1</p>
+<p>Linux / Mac Executable 	Neo4j 5.10.0 (tar) version
+Credentials <em>username=&lsquo;neo4j&rsquo;</em> and <em>password=&lsquo;neo4j&rsquo;</em>.
+having downloaded the file</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#728e00">cd</span> <span style="color:#434f54">$HOME</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># We create a permanent folder that will hold our Neo4j server, and cd into it.</span>
+</span></span><span style="display:flex;"><span>mkdir NEO4J_HOME
+</span></span><span style="display:flex;"><span><span style="color:#728e00">cd</span> NEO4J_HOME
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># We get the neo4j community edition, and then upack it. </span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># (we use flag -L to instruct curl to follow redirects, and flag -k since it https)</span>
+</span></span><span style="display:flex;"><span>curl -L -k https://neo4j.com/artifact.php<span style="color:#7f8c8d">\?</span>name<span style="color:#7f8c8d">\=</span>neo4j-community-5.10.0-unix.tar.gz | tar -xv
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Next (in the same NEO4J_HOME folder) we:</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 1. Accept the evaluation license:</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># ./neo4j-community-5.10.0/bin/neo4j-admin server license --accept-evaluation</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># &gt;  If you are using Community Edition, you can skip this step.</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2. We test that we can launch the Neo4j console application:</span>
+</span></span><span style="display:flex;"><span>./neo4j-community-5.10.0/bin/neo4j console
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># If we get the following output in the terminal, it means we&#39;re almost there:</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Directories in use:</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># ... lots of output removed for brevity ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># Starting Neo4j.</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2023-07-29 19:48:23.987+0000 INFO  Starting...</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2023-07-29 19:48:26.220+0000 INFO  This instance is ServerId{e657df02} (e657df02-c90a-41d8-a524-2b3bd20b3b42)</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2023-07-29 19:48:28.680+0000 INFO  ======== Neo4j 5.10.0 ========</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2023-07-29 19:48:34.510+0000 INFO  Bolt enabled on localhost:7687.</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2023-07-29 19:48:37.880+0000 INFO  Remote interface available at http://localhost:7474/</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2023-07-29 19:48:37.889+0000 INFO  id: 2D22220B748D4CEB34A4C7012CB27B45CC88EFC838B5A162F43C0BCE3B368F7C</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2023-07-29 19:48:37.891+0000 INFO  name: system</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2023-07-29 19:48:37.892+0000 INFO  creationDate: 2023-07-29T19:48:31.227Z</span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6"># 2023-07-29 19:48:37.892+0000 INFO  Started.</span>
+</span></span></code></pre></div><p>Yay! Neo4j Server running.</p>
+<blockquote>
+<p>Neo4j Daemon - optionally, we can also run Neo4j as a background process. To do this:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./bin/neo4j start
+</span></span></code></pre></div><h2 id="step-connect-to-neo4j-using-the-browser">Step: Connect to Neo4j using the browser</h2>
+<p>We can connect to the Neo4j Server and open an admin dashboard by using a brower.
+The first thing that will happen is that Neo4j will ask us to change the default username: &rsquo;neo4j&rsquo; and the default password: &rsquo;neo4j&rsquo;.</p>
+<p>So, let&rsquo;s check that the Neo4j server is working, by browsing to <code>http://localhost:7474</code>, or from a terminal on MacOS:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>open http://localhost:7474
+</span></span></code></pre></div><blockquote>
+<p>For additional commands see the Unix tarball installation documentation.</p>
+</blockquote>
+<p><a href="https://neo4j.com/download-center/?ref=subscription#community">https://neo4j.com/download-center/?ref=subscription#community</a></p>
+<p>Default login is username &rsquo;neo4j&rsquo; and password &rsquo;neo4j&rsquo;</p>
+<h1 id="step-3">Step 3:</h1>
+<p>Once you create a new password for the &rsquo;neo4j&rsquo; user upon visiting the Neo4j Browser the first time, you&rsquo;ll have full access to the Neo4j database.</p>
+<p>The Neo4j Browser is a tool for developers to explore their Neo4j database, execute Cypher queries and see results in tabular or graph form. You can even use the Browser to:</p>
+<ul>
+<li>Import data</li>
+<li>Call user-defined procedures in Java</li>
+<li>Profile queries, looking at the execution plan with EXPLAIN and PROFILE.</li>
+</ul>
+<h1 id="step-4-explore-sample-datasets">Step 4: Explore Sample Datasets</h1>
+<p>Explore two sample datasets built into the Neo4j Browser using the following commands:
+:play movie graph
+:play northwind graph
+Both datasets are easily accessible using the blue &ldquo;Write Code&rdquo; button under the &ldquo;Jump into Code&rdquo; section of the guides.</p>
+<p>Neo4j is used by developers building applications for a wide range of use cases and industries. Graph databases are a great fit for any use case where a relationship-first approach is helpful, including content recommendations, network/IT analysis, fraud detection, Internet of Things(IoT) and more.</p>
+<h1 id="step-5-interact-with-neo4j-using-rust">Step 5: interact with Neo4j using Rust</h1>
+<p>The Neo4j Browser is our developer interface to the Neo4j graph database.
+However, to write applications we want to interact with Neo4j using our favorite
+programming language (well, Rust).
+<a href="https://neo4j.com/docs/driver-manual/1.7/#driver-get-the-driver">https://neo4j.com/docs/driver-manual/1.7/#driver-get-the-driver</a></p>
+<blockquote>
+<p>From what I can tell, at the time of writing this (see post date), Neo4j offers language binding for the following languages: Java, .NET, JS, Python, and Go. Not Rust.</p>
+</blockquote>
+<p>To do that we:</p>
+<h1 id="step-6-create-data-models">Step 6: Create Data Models</h1>
+<p>We&rsquo;ll start by creating a very small Data model
+in order to get going.
+The core elements that we&rsquo;ll work with are</p>
+<p>Start with a small data model and then build out from there - Neo4j is naturally adaptive, so you can add new <code>node labels</code>,
+<code>relationships</code> and <code>properties</code>
+on the fly.
+Example Data Models</p>
+<blockquote>
+<p>The developer community has provided example data models and queries for a variety of use cases. There are available here: <a href="https://neo4j.com/graphgists">https://neo4j.com/graphgists</a></p>
+</blockquote>
+<h3 id="data-import">Data Import</h3>
+<p>If we have existing data, for example in CSV format, then we want to experiment with then we can load it into Neo4j
+using it&rsquo;s language  some existing data you&rsquo;d like to import? You can import your data from CSV files using the Cypher&rsquo;s LOAD CSV command.
+<a href="https://neo4j.com/developer/guide-import-csv/">https://neo4j.com/developer/guide-import-csv/</a>
+<a href="https://neo4j.com/docs/developer-manual/3.0/cypher/#query-load-csv">https://neo4j.com/docs/developer-manual/3.0/cypher/#query-load-csv</a>
+<a href="https://neo4j.com/developer/guide-import-csv/">https://neo4j.com/developer/guide-import-csv/</a>
+Learn more about import in the Neo4j Developer Manual: Load CSV and Importing CSV Data into Neo4j.</p>
+<blockquote>
+<p>Data intgration - can we mix Postgres and Neo4j?: <a href="https://neo4j.com/developer/integration/">https://neo4j.com/developer/integration/</a></p>
+</blockquote>
+<p>Of course, Neo4j believes in polyglot persistence as well - so we&rsquo;re happy if Neo4j is just one part of your overall architecture and storing your connected data, while your columnar, tabular and document data is stored elsewhere. Learn more about the various types of data integrations possible with Neo4j.</p>
+<p>&ldquo;<a href="https://neo4j.com/download-thanks/?edition=community&amp;release=5.10.0&amp;flavour=unix&amp;_gl=1">https://neo4j.com/download-thanks/?edition=community&amp;release=5.10.0&amp;flavour=unix&amp;_gl=1</a><em>1cy7123</em>_ga<em>NTExMDI2NDUxLjE2OTA2NTIwMzI.</em>_ga_DL38Q8KGQC*MTY5MDY1MjAzMC4xLjEuMTY5MDY1MjEzMi42MC4wLjA.#install&rdquo;</p>
+<h1 id="neo4j">Neo4j</h1>
+<h2 id="step-1-spin-up-a-free-instance-of-aurodb">Step 1: spin up a free instance of AuroDB</h2>
+<p>I&rsquo;m using the AuraDB Free tier.</p>
+<blockquote>
+<p>The next option is the AuraDB Professional plan, which costs $65/month
+at the time of writing.</p>
+</blockquote>
+<p>According to Neo4j, the database is hosted somewhere in the region of Belgium.
+Neo4j version 5</p>
+<p>Constraints
+Nodes: 200,000
+Relationships: 400,000
+RAM: 1 Gb
+Host: GCP</p>
+<h2 id="neo4rs">neo4rs</h2>
+<p>I&rsquo;m using Neo4j&rsquo;s own Rust library <code>neo4rs</code> to interact with the Auro instance.
+Neo4j driver for rust  - This driver is compatible with Neo4j version 5.x and 4.4.</p>
+<blockquote>
+<p><a href="https://github.com/neo4j-labs/neo4rs">https://github.com/neo4j-labs/neo4rs</a></p>
+</blockquote>
+<p>To try and quickly get started I&rsquo;ll simply follow the example given on the github page
+and see how it goes. <a href="https://github.com/neo4j-labs/neo4rs#example">https://github.com/neo4j-labs/neo4rs#example</a></p>
+<p>Having spun up the AuroDB instance we&rsquo;ve presented with a very nice looking window
+presenting our <code>credentials</code> that I
+need in order to connect to the database.</p>
+<figure><img src="../../../../../img/post-name/name.jpg">
+</figure>
+
+<h1 id="step--look-at-the-sample-database-bundled-with-neo4j">Step : Look at the sample database bundled with Neo4j</h1>
+<p>From what I can tell, the <code>Neo4j Community Edition 5.10.0</code> comes bundled with a
+small <a href="https://neo4j.com/docs/getting-started/languages-guides/neo4j-go/#_the_example_project">graph movie database example project</a> that we can use to start experimenting right away.</p>
+<blockquote>
+<p>&ldquo;The front-end page is the same for all drivers: movie search, movie details, and a graph visualization of actors and movies.&rdquo;</p>
+</blockquote>
+<p>There more information about the example datasets here <a href="https://neo4j.com/docs/getting-started/appendix/example-data/">https://neo4j.com/docs/getting-started/appendix/example-data/</a></p>
+<p>Nice! Next, how do we connect to our database?</p>
+<h1 id="step--connect-to-neo4j-server-running-on-localhost">Step : Connect to Neo4j Server running on localhost</h1>
+<p>I&rsquo;m using <a href="https://neo4j.com/docs/getting-started/languages-guides/neo4j-go/">https://neo4j.com/docs/getting-started/languages-guides/neo4j-go/</a>
+a guide on how to connect to Neo4j from Go - but I&rsquo;ll try to connect from Rust instead.
+Let&rsquo;s g&hellip;Rust.</p>
+<p>According to Crates.io neo4rs supports</p>
+<blockquote>
+<p>Neo4rs is a Neo4j rust driver implemented using bolt specification This driver is compatible with Neo4j version 5.x and 4.4. Only the latest 5.x version is supported, following the Neo4j Version support policy.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#728e00">#</span> <span style="color:#434f54">We</span> <span style="color:#434f54">start</span> <span style="color:#434f54">by</span> <span style="color:#434f54">creating</span> <span style="color:#434f54">a</span> <span style="color:#728e00">new</span> <span style="color:#434f54">Rust</span> <span style="color:#434f54">project</span><span style="color:#728e00">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">cargo</span> <span style="color:#728e00">new</span> <span style="color:#434f54">lrn_neo4j</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">cd</span> <span style="color:#434f54">lrn_neo4j</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#</span> <span style="color:#434f54">Add</span> <span style="color:#434f54">the</span> <span style="color:#434f54">neo4rs</span> <span style="color:#434f54">dependency</span><span style="color:#728e00">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">cargo</span> <span style="color:#434f54">add</span> <span style="color:#434f54">neo4rs</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#</span> <span style="color:#434f54">Build</span> <span style="color:#434f54">the</span> <span style="color:#434f54">project</span> <span style="color:#434f54">to</span> <span style="color:#434f54">pull</span> <span style="color:#434f54">in</span> <span style="color:#434f54">all</span> <span style="color:#434f54">deps</span> <span style="color:#434f54">and</span> <span style="color:#434f54">make</span> <span style="color:#434f54">sure</span> <span style="color:#434f54">it</span> <span style="color:#434f54">builds</span> <span style="color:#434f54">without</span> <span style="color:#434f54">errors</span><span style="color:#728e00">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">cargo</span> <span style="color:#434f54">build</span>
+</span></span></code></pre></div><blockquote>
+<p>At the time of writing, <code>neo4rs</code> is at version 0.6.2.</p>
+</blockquote>
+<p>In a computer system we need an adaptor program in order to make a connection
+our database, just like we do when we want to connect our computer to a printer -
+the computer needs to know details about the specific computer in order to interface with it. For each diffrent model/make of printer, we need a particular driver.</p>
+<p>It&rsquo;s the same thing with databases.
+The database driver functions like an adaptor which connects a generic interface to a specific database vendor implementation.
+Neo4j provides drivers which allow us to connect to the Neojs database and develop applications which create, read, update, and delete information from the graph db.</p>
+<p>Neo4j provides an officially supported driver written in Go (there are also drivers
+written in Java, Javascript, .NET, and Python).
+The Go driver uses a protocol called <code>Bolt</code> to connect to the Neo4j database.
+We are going to use the database driver <code>neo4rs</code>, which is developed by Neo4j but still under active development.</p>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

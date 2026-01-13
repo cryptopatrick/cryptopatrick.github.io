@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60544&amp;path=livereload" data-no-instant defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🤖 Ai: Auto-Regressive LLMs are Doomed - Seamless Global Nature">
+<meta property="og:url" content="http://localhost:60544/blog/2025/06/18/ai-auto-regressive-llms-are-doomed/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="http://localhost:60544/img/post-name/name.jpg" />
+
+
+<title>🤖 Ai: Auto-Regressive LLMs are Doomed | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="http://localhost:60544//css/style.css">
+<link rel="stylesheet" href="http://localhost:60544//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="http://localhost:60544/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="http://localhost:60544/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="http://localhost:60544/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🤖 Ai: Auto-Regressive LLMs are Doomed</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      June 18, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/" style="margin-left:0.25em;"></a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/" style="margin-left:0.25em;"></a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <p>In a <a href="https://x.com/ylecun/status/1640122342570336267">tweet</a> from 2023, Meta Ai researcher and CNN inventor, Yann LeCun conjectures that
+&ldquo;Auto-Regressive LLMs are doomed&rdquo;. These are notes taken while trying to understand
+his argument.</p>
+<h2 id="auto-regressive-llms-ar-llms">Auto-Regressive LLMs (AR-LLMs)</h2>
+<p>Claim: Auto-Regressive LLMs are <em>exponentially diverging diffusion processes</em>.
+Okay, let&rsquo;s approach this by starting with some definitions:</p>
+<ul>
+<li>diffusion process</li>
+<li>exponentially diverging</li>
+<li>auto-regressive</li>
+<li>LLM</li>
+</ul>
+<h2 id="yann-lecuns-argument">Yann LeCun&rsquo;s argument</h2>
+<p>We start by letting $e$ be the <em>probability</em> that any <em>generated token</em> <strong>exits</strong>
+the tree of &ldquo;correct&rdquo; answers.</p>
+<ul>
+<li>$e$: probability that any produced token takes us outside the set of correct answers.</li>
+<li>$\mathcal{P}(\text{correct})$: probability that answers of length $n$ is is correct.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// Let&#39;s create a model that can generate a probability distrubution.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6">// and then use it to generate longer and longer n-grams.
+</span></span></span></code></pre></div><p>Then the probability that an <em>answer</em> of length $n$ is <em>correct</em> is $(1-e)^n$
+$$\mathcal{P}(\text{correct}) = (1-e)^n$$</p>
+<p>LeCun claims that AR-LLMs are <em>doomed</em> and that they cannot made factual, non-toxic,
+controllable, and the problem is not fixable without a major redesign.</p>
+<hr>
+<p>Errors accumulate.
+The proba of correctness decreases exponentially.
+One can mitigate the problem by making e smaller (through training) but one simply cannot eliminate the problem entirely.
+A solution would require to make LLMs non auto-regressive while preserving their fluency.</p>
+<p>The full slide deck is here.
+This was my introductory position statement to the philosophical debate
+“Do large language models need sensory grounding for meaning and understanding?”
+Which took place at NYU Friday evening.</p>
+<p>I should add that things like RLHF may reduce e but do not change the fact that token production is auto-regressive and subject to exponential divergence.</p>
+<p>Most human answers are not produced auto-regressively but are planned ahead.
+No exponential divergence there.
+Mathematical proofs are discarded if they don&rsquo;t produce the desired result.
+So they are not subject to exponential divergence.</p>
+<p>counter argument:
+this assumes that the errors are unrecoverable (subsequent tokens cannot change the meaning to correct for a rogue generation). I&rsquo;d argue that you never truly exit the tree because you can always emit tokens that revise past statements.</p>
+<p>Yann is wrong that the issue is in autoregressive generation. In fact, you can make an autoregressive model generate a full sequence and refine through inverse CDF-like tricks. The result is exactly the same. 1/3</p>
+<p>This could plausibly be argued as a result of <em>training</em>, by virtue of the causal attention mask. However, this isn&rsquo;t much an issue in today&rsquo;s LLMs. 2/3</p>
+<p>Why? The simple reason is dynamic output length. With chain-of-thought for example, a LLM is secretly a latent variable model. A sequence of length N can depend on an intermediate sequence of length N/2. This is also powerful for enabling adaptive computation 3</p>
+<p>ample a sequence u ~ Unif(0,1). Now simply find the sequence x such that F(x) = u. With continuous this is exactly inverse CDF and you can use SGD as the refinement mechanism. With discrete you can use an iterative solver; see eg <a href="https://arxiv.org/abs/2002.03629">https://arxiv.org/abs/2002.03629</a> by @YSongStanford</p>
+<p>It&rsquo;s not an assumption.
+It&rsquo;s a fact.
+An answer must terminate with an &ldquo;end&rdquo; marker.
+There are no subsequent tokens after &ldquo;end&rdquo;.</p>
+<p>That would be a kind of planning.
+Planning the sequence is clearly a good way to avoid exponential divergence.</p>
+<p>The answer generated by LLM has hierarchical content structure by itself. For example, you won&rsquo;t answer people like &ldquo;Yes, I agree&rdquo; but then throw some &ldquo;disagree arguments&rdquo; to me. You decided your answer at the beginning. The later part is explaining &ldquo;why&rdquo;.</p>
+<p>You are arguing that answers should be planned ahead.
+I totally agree.</p>
+<p>It&rsquo;s not specific to LLMs.
+It&rsquo;s specific to <em>any</em> auto-regressive generative process.</p>
+<p>-I don&rsquo;t think it&rsquo;s specific to auto-regressive processes, either. Holds for any probability distribution over sequences, including convolutional, energy-based, what have you</p>
+<p>No.
+Exponential divergence only occurs if you factorize P(y1,y2,y3) as P(y3|y1,y2)P(y2|y1)P(y1).
+But you absolutely don&rsquo;t have to.</p>
+<p>-I don’t think that’s right.
+Given any joint p(y1,y2,y3), you can use the chain rule factorize as p(y3|y1,y2) p(y2 | y1) P(y1), and make the same argument.
+This argument doesn’t say anything about AR models. It says that it is harder to predict longer sequences.</p>
+<p>I think it depends on what we mean by P().
+P(y1,y2,y3) is the &ldquo;real&rdquo; joint t distribution.
+You can choose to parameterize it as
+Q(y3|y1,y2,w)Q(y2|y1,w)Q(y1|w)
+where Q is some trainable function with parameter w.
+But you certainly don&rsquo;t have to use this factorization.</p>
+<p>-While I don&rsquo;t disagree with you about LLMs, aren&rsquo;t you assuming that each &ldquo;e&rdquo; is independent? That&rsquo;s clearly not the case here.
+Yes, I&rsquo;m implicitly making an independence assumption.
+Not clear to what extent it&rsquo;s valid or invalid.</p>
+<p>-Have thought about tree structure: produce outline then fill in. Reduces length of iteration to log(n)</p>
+<p>Yup.
+That would constitute a form of hierarchical planning.
+The question is precisely how to do it.</p>
+<ul>
+<li>Come on, are we saying now that the tokens generated are independent? That&rsquo;s clearly not true, or everyone missed something very important here.
+No. We are assuming the <em>errors</em> are independent, so their probabilities can be multiplied.
+-Is this mathematically proven or an intuitive conjecture/assumption?
+If AI produces a proof of the Riemann hypothesis the probability of it writting CQFD wrong at the end given that the rest of the proof is correct is practically 0 imo.
+Again might be missing something here
+-This has been pointed out to @ylecun
+multiple times and he continues to ignore this to build his exponentially divergent narrative. The errors are not independent and there is no proof provided. As you go a correct subtree, the probability of error also reduces.</li>
+</ul>
+<p>-so if e is 10e-12, at the end of 32k tokens we got… 0,999999968 chance we got a correct answer
+e just need to be sufficiently small; how can we be convinced that it’s not possible?
+also, this conjucture is abstract its crazy</p>
+<p>Good luck making e less than 10e-12 !</p>
+<p>AR-LLM do not &ldquo;search&rdquo;.
+That&rsquo;s part of the problem.</p>
+<p>-They can use beam search or similar.
+Possibly, but that would be super-expensive.
+And that would make them non auto-regressive.
+-Vaswani etal use beam search in several places, Radford etal don&rsquo;t seem to mention it or any alternative (nucleus, top-k). GPT3 had temp param but that doesn&rsquo;t rule out beam search. Lots of blogs assert yes or no without evidence.
+But Radford etal (GPT2) do mention top-k sampling on summarisation tasks.</p>
+<p>-The argument assumes that 1 error is enough to diverge. But LMs seem more robust than this.
+Also, LMs implicitly plan ahead, as in &ldquo;I climbed an apple tree and picked&rdquo;.</p>
+<p>No. It&rsquo;s a tree. One mistake, and you&rsquo;re out.</p>
+<p>MCTS, beam search, etc would constitute forms of planning and may fix the issue.
+The resulting systems would no-longer be auto-regressive.
+But they would be <em>insanely</em> expensive at inference time.</p>
+<p>-Why is e independent of n? Wouldn’t the probability of error decrease with growing n, as the next token is conditioned on a longer “correct” prefix?</p>
+<p>-The chain of words forming a meaningful sentence may be related to the concept of Perplexity. For this, the probability of dependent events is used in the formula. With such methods, divergence may be prevented.</p>
+<p>Probability e that any produced token keeps us inside of the set of correct answers.
+P(Incorrect) = (1-e)^n
+Let e = 0.9
+P(Incorrect) = (1-0.9)^9 = 0.000000009
+P(Correct) = 1 - 0.000000009</p>
+<p>Hey @ylecun
+I have discussed this error accumulation problem in a paper where I proposed a novel encoder/decoder architecture <a href="https://link.springer.com/chapter/10.1007/978-3-030-30490-4_33">https://link.springer.com/chapter/10.1007/978-3-030-30490-4_33</a> while beam search might help, it is impossible in real valued sequences. One solution is one shot prediction (planed pred)</p>
+<p>Ask yourself why Microsoft suddenly limited the length of interactions with Bing chat / Sydney.</p>
+<p>I thought it was because the system prompt became lost or irrelevant compared with the huge input.</p>
+<p>But now I wonder if they could be including something new in the generation so that they are not purely autoregressive and more Alpha - Zero</p>
+<h2 id="the-1-en-formula-assumes-only-the-bot-is-doing-the-talking--the-user-responses-if-focused-may-serve-as-a-stabilizing-influence">The (1-e)^n formula assumes only the bot is doing the talking.  The user responses, if focused, may serve as a stabilizing influence.</h2>
+<p><img src="https://img.shields.io/badge/Work_In_Progress-orange.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Text_Version-0.4.5-blue.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg" alt="Version:0.1.0"></p>
+<!--![Version:0.1.0](https://img.shields.io/badge/Version-0.5.0-white.svg)  -->
+<!--[![Version:0.1.0](https://img.shields.io/badge/File-issue-orange.svg)](https://github.com/cryptopatrick/learn_wgpu/issues)-->
+<br>
+<blockquote>
+<p><strong>Preface:</strong> I recently coded a tiny Rust library,</p>
+</blockquote>
+<blockquote>
+<p><strong>Code:</strong> The complete source code is available on my <a href="https://github.com/cryptopatrick/timed_release_crypto">GitHub</a>.</p>
+</blockquote>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h2 id="to-send-a-message-into-the-future">To send a message into the future</h2>
+<p><figure><img src="../../../../../img/time-lock-message/rebellion.jpg">
+</figure>
+<br>
+<strong>▲<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></strong> A Rebel ship orbiting above the Federation&rsquo;s top secret military research lab, <em>The Periphery</em>.</p>
+<table></table>
+<p>⠀⠀⠀⠀⠀ Dr. Angela Rae is head of <em>Space Folding Research</em> at <em>The Periphery</em>, a Top
+Secret remote Federation research facility located on the surface of a small
+is racing through everyone&rsquo;s mind - &ldquo;How did they find us?&rdquo;.<br>
+⠀⠀⠀⠀⠀ Up there, orbiting at a chill 26,000 miles, is death. Having covertly decelerated in the radar shadow of a nearby moon, the Rebel ship</p>
+<center>"...by taking the fixed 
+numerical value of the caesium frequency $\delta ν_{Cs}$, the unperturbed 
+ground-state hyperfine transition frequency of the caesium-133 atom, to be 9 192 631 770 
+when expressed in the unit Hz, which is equal to $s^{–1}$."
+</center>
+<p>Emojis: Did you get that? I kinda didn&rsquo;t! 😂 🤷‍♂️</p>
+<p><strong>The Future</strong></p>
+<p>If we&rsquo;re trying to send a message into the future, then we need to spend some</p>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="-pmbonlocks-version010httpsimgshieldsiobadgeversion20020-ffffffsvg">🔒 $\pmb{On\;locks}$ <img src="https://img.shields.io/badge/Version%200.2.0-FFFFFF.svg" alt="Version:0.1.0"></h3>
+<p><strong>List of topics to cover (briefly):</strong> <br>
+[ ] Carmicheal Numbers and the need for primality testing of huge numbers<br>
+[x] Probabilitic Primality Testing with Rabin-Miller</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Step</th>
+          <th style="text-align: left">Process</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><a href="#step-0-preparing-the-payload">0.</a></td>
+          <td style="text-align: left">Gather message data, calculate time-lock duration, estimate attacker&rsquo;s squaring power</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-1-compute-the-composite-modulus">1.</a></td>
+          <td style="text-align: left">Choose two secret primes, $p$ and $q$, and compute the composite modulus: $n=p \cdot q$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-2-the-euler-phi-function">2.</a></td>
+          <td style="text-align: left">Compute the Euler Phi function: $\phi(n)$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-3-compute-the-puzzle-strength">3.</a></td>
+          <td style="text-align: left">Compute the difficulty of the time-lock puzzle: $t=T \cdot S$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-4-generating-the-key-to-the-kingdom">4.</a></td>
+          <td style="text-align: left">Generate the private key for an AES-GCM cryptosystem: $C_K$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-5-encrypting-a-lives-work">5.</a></td>
+          <td style="text-align: left">Pick random $a$ modulo $n$ and encrypt $K$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-6-constructing-the-cipher-key">6.</a></td>
+          <td style="text-align: left">Encrypt the message $M$ using AES-GCM and the private key  $K$:  $C_M = ENC(M,K)$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-7-endgame">7.</a></td>
+          <td style="text-align: left">Output the Time-Lock Puzzle, and delete $p$ and $q$</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#appendix-how-to-solve-the-time-lock-puzzle">A.</a></td>
+          <td style="text-align: left">Optional: Provide instructions to Solver on how to solve the Puzzle</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>▲</strong> The seven steps of creating a Time-Lock Puzzle.</p>
+<hr>
+<h1 id="-implementation">🦀 Implementation</h1>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h4 id="step-0-preparing-the-payload">Step 0: Preparing the Payload</h4>
+<p>$M$: <strong>Message to Protect</strong><br>
+Dr. Angela Rae, and her team of fellow researchers, have quickly collected all</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Ai-generated image of Rebel spaceship.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

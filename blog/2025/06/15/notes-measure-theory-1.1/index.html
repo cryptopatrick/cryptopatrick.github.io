@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60544&amp;path=livereload" data-no-instant defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="Notes: Measure Theory 1.1 - Seamless Global Nature">
+<meta property="og:url" content="http://localhost:60544/blog/2025/06/15/notes-measure-theory-1.1/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="http://localhost:60544/img/post-name/name.jpg" />
+
+
+<title>Notes: Measure Theory 1.1 | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="http://localhost:60544//css/style.css">
+<link rel="stylesheet" href="http://localhost:60544//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="http://localhost:60544/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="http://localhost:60544/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="http://localhost:60544/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Notes: Measure Theory 1.1</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      June 15, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/" style="margin-left:0.25em;"></a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/" style="margin-left:0.25em;"></a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <p><img src="https://img.shields.io/badge/Work_In_Progress-orange.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Text_Version-0.4.5-blue.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg" alt="Version:0.1.0"></p>
+<!--![Version:0.1.0](https://img.shields.io/badge/Version-0.5.0-white.svg)  -->
+<!--[![Version:0.1.0](https://img.shields.io/badge/File-issue-orange.svg)](https://github.com/cryptopatrick/learn_wgpu/issues)-->
+<br>
+<blockquote>
+<p><strong>Preface:</strong> I recently coded a tiny Rust library,</p>
+</blockquote>
+<blockquote>
+<p><strong>Code:</strong> The complete source code is available on my <a href="https://github.com/cryptopatrick/timed_release_crypto">GitHub</a>.</p>
+</blockquote>
+<p><strong>Definition 1.1.</strong> A collection of $A$ of subsets of a set $X$ is an $\mathbf{\text{algebra of sets}}$<br>
+if it satisfies the following axioms:</p>
+<ul>
+<li>(a)  The <em>whole</em> set $X$ and the empty set $\emptyset$ belong to $A$.</li>
+<li>(b)  The <em>complement</em> $X\setminus E$ of a set $E$  in $A$ belongs to $A$. (closed under complements)</li>
+<li>(c)  The <em>union</em> of a finite collection of sets in $A$ belongs to $A$.</li>
+</ul>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h2 id="intuition-groups-in-a-military-base">Intuition: Groups in a Military Base</h2>
+<p>Abstraction is scary, so let&rsquo;s try and build some intuition of what definition 1.1. means, by creating a non-abstract example.</p>
+<blockquote>
+<p>Todo: Change image</p>
+</blockquote>
+<p><figure><img src="../../../../../img/time-lock-message/rebellion.jpg">
+</figure>
+<br>
+<strong>▲<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></strong> A Rebel ship orbiting above the Federation&rsquo;s top secret military research lab, <em>The Periphery</em>.</p>
+<table></table>
+<blockquote>
+<p>Todo: Finish text</p>
+</blockquote>
+<p>⠀⠀⠀⠀⠀ Dr. Angela Rae is head of <em>Space Folding Research</em> at <em>The Periphery</em>, a Top
+Secret remote Federation research facility located on the surface of a small
+is racing through everyone&rsquo;s mind - &ldquo;How did they find us?&rdquo;.<br>
+⠀⠀⠀⠀⠀ Up there, orbiting at a chill 26,000 miles, is death. Having covertly decelerated in the radar shadow of a nearby moon, the Rebel ship</p>
+<p><strong>Set $X$</strong><br>
+Let&rsquo;s have $X$ represent all the soldiers and officers stationed at a military base. Each<br>
+$$X = \{S1, S2, S3, S4, S5 \}$$</p>
+<p>Next, we divide all the soldiers up in teams and officers (subsets):</p>
+<ul>
+<li>Alpha team: $A = \{S1, S2 \}$</li>
+<li>Bravo team: $B = \{S3, S4 \}$</li>
+<li>Officers: $C = \{S5 \}$</li>
+</ul>
+<p><strong>Subsets of $X$</strong><br>
+We can <em>combine</em> our subsets in different ways, including no subsets. This set of combinations is denoted the <em>algebra of A</em>, of the set $X$:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// Below is A, our collection of subsets E1, E2, ..., of the set X.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#a61717">∅</span>, <span style="color:#95a5a6">// No one on base
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>{<span style="color:#434f54">S1</span>, <span style="color:#434f54">S2</span>}, <span style="color:#95a5a6">// Alpha team
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>{<span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>}, <span style="color:#95a5a6">// Bravo team
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>{<span style="color:#434f54">S5</span>}, <span style="color:#95a5a6">// Officers
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>{<span style="color:#434f54">S1</span>, <span style="color:#434f54">S2</span>, <span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>},  <span style="color:#95a5a6">// Soldiers only
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>{<span style="color:#434f54">S1</span>, <span style="color:#434f54">S2</span>, <span style="color:#434f54">S5</span>}, <span style="color:#95a5a6">// Alpha team plus Officers
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>{<span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>, <span style="color:#434f54">S5</span>}, <span style="color:#95a5a6">// Bravo team plus Officers
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">X</span> <span style="color:#728e00">=</span> {<span style="color:#434f54">S1</span>, <span style="color:#434f54">S2</span>, <span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>, <span style="color:#434f54">S5</span>} <span style="color:#95a5a6">// Everyone on base
+</span></span></span></code></pre></div><blockquote>
+<p>So, the intuition in our example is that our algebra $A$ denotes all the <em>permissable groupings</em> (unions) of <em>subsets</em> in the set $X$, expressing the concepts: <em>no one</em>, <em>everyone</em>, <em>opposites</em>, and <em>combinations</em>.</p>
+</blockquote>
+<h2 id="check-is-a-an-algebra">Check: is $A$ an algebra?</h2>
+<p>Now, in order for our collection $A$ to be <em>algebra</em>, it needs to meet the axioms, declared in <strong>Definition 1.1.</strong>. Do they? Let&rsquo;s see.</p>
+<ul>
+<li>Axiom (a): The whole set $X$ and the empty set $\emptyset$ belong to $A$</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#434f54">X</span> <span style="color:#728e00">=</span> {<span style="color:#434f54">S1</span>, <span style="color:#434f54">S2</span>, <span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>, <span style="color:#434f54">S5</span>} <span style="color:#95a5a6">// Everyone on base
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#a61717">∅</span>, <span style="color:#95a5a6">// No one on base
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#a61717">✅</span> <span style="color:#434f54">Axiom</span> (<span style="color:#434f54">a</span>) <span style="color:#434f54">is</span> <span style="color:#434f54">satisfied</span>
+</span></span></code></pre></div><ul>
+<li>Axiom (b): The complement $X \setminus E$ in $A$ belongs to $A$
+We need to check if the complement of each subset is in $A$ is also an element in $A$. Checking this entails taking the complement of each subset and checking that that set is an element in $A$:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// The complement of Alpha team...
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>{<span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>, <span style="color:#434f54">S5</span>} 
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// ...is the same as...
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>{<span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>, <span style="color:#434f54">S5</span>}, <span style="color:#95a5a6">// Bravo team plus Officers
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// We need to do this check for every subset in $A$.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6">// which will show that the axiom is met.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#a61717">✅</span> <span style="color:#434f54">Axiom</span> (<span style="color:#434f54">b</span>) <span style="color:#434f54">is</span> <span style="color:#434f54">satisfied</span>
+</span></span></code></pre></div><ul>
+<li>Axiom (c): The union of a finite collection of sets in $A$ belongs to $A$
+If we combine subsets then we should find the result of that combination as a subset in $A$:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// All soldiers
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">Alpha</span> <span style="color:#434f54">U</span> <span style="color:#434f54">Bravo</span> <span style="color:#728e00">=</span> {<span style="color:#434f54">S1</span>, <span style="color:#434f54">S2</span>} <span style="color:#434f54">U</span> {<span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>} <span style="color:#728e00">=</span> {<span style="color:#434f54">S1</span>, <span style="color:#434f54">S2</span>, <span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>} 
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Alpha team plus officers
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">Alpha</span> <span style="color:#434f54">U</span> <span style="color:#434f54">Officers</span> <span style="color:#728e00">=</span> {<span style="color:#434f54">S1</span>, <span style="color:#434f54">S2</span>} <span style="color:#434f54">U</span> {<span style="color:#434f54">S5</span>} <span style="color:#728e00">=</span> {<span style="color:#434f54">S1</span>, <span style="color:#434f54">S2</span>, <span style="color:#434f54">S5</span>} 
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Bravo team plus officers
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">Bravo</span> <span style="color:#434f54">U</span> <span style="color:#434f54">Officers</span> <span style="color:#728e00">=</span> {<span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>} <span style="color:#434f54">U</span> {<span style="color:#434f54">S5</span>} <span style="color:#728e00">=</span> {<span style="color:#434f54">S3</span>, <span style="color:#434f54">S4</span>, <span style="color:#434f54">S5</span>} 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a61717">✅</span> <span style="color:#434f54">Axiom</span> (<span style="color:#434f54">c</span>) <span style="color:#434f54">is</span> <span style="color:#434f54">satisfied</span>
+</span></span></code></pre></div><p>As we can see, all the axioms of definition 1.1. are met, and
+we are therefore allowed to denote our collection $A$ an <strong>algebra of sets</strong>.</p>
+<h2 id="extending-a-into-a-sigma-algebra-or-borel-field">Extending $A$ into a Sigma-Algebra or Borel Field</h2>
+<p>Having covered the baseline, we are now in position to extend these concepts into a more powerful structure:
+the <strong>sigma-algebra</strong>, adding one additiona superpower:
+we are now allowed to take <em>countably infinite unions</em> of sets in the collection.</p>
+<p>So basically, instead of a set $X$ of <em>fixed</em> size, we can now handle sets that can change in size dynamically:
+$$X = \{S1, S2, S3, S4, S5, \dots \}$$</p>
+<p>Next, we add some kind of <strong>measure</strong>, for example, let&rsquo;s say we want to <strong>tag</strong> (measure) which soliders that are part of our military base, that are currently either:</p>
+<ul>
+<li>Fighting in the Northern sector, $A_N$</li>
+<li>Fighting in the Western sector, $A_W$</li>
+<li>Stationed on base, $A_B$</li>
+</ul>
+<p>So the sigma-algebra $A$ represents all the soldiers/officers of our military base, that are &ldquo;measurable&rdquo; - meaning, wholse behaviour we can track/logg/reason about.</p>
+<p>What new is that now we can keep tagging (updating) as things change. A unit might go from fighting in the Northern sector, to returning to the military base, $A_N \rightarrow A_B$.
+Our sigma-algebra ensures that even after thousands of hours of logging, no soldier will be logged in two states simultaneously,
+like S1 is both fighting in the Northern sector, $A_N$, while also  chillin&rsquo; back at the military base, $A_B$.
+$$A_N \cup A_W \cup A_B \cdots$$</p>
+<blockquote>
+<p>So the point is that our <strong>algebra of sets</strong> can only handle finite unions of sets, while our sigma-algebra can handle growing and even infinite sets. Which is useful for ongoing events, like $S1$ moving from fighting in the northern sector and returning back to base. We can also use them to hanble continous time, rather than discreet time.</p>
+</blockquote>
+<blockquote>
+<p>What fraction of time was spent in each state?</p>
+</blockquote>
+<p>We can create some tagged subsets:</p>
+<ul>
+<li>$A_1$: Soldiers
+⠀⠀⠀⠀⠀ A $\sigma \mathit{-algebra}$ (also called a <em>Borel field</em>) is an
+algebra $\mathcal{X}$ of subsets of a set $X$, for which axiom (c) is <em>extended</em> as follows:</li>
+<li>(c$^{\prime}$)  The union of a countable collection of sets in $\mathcal{X}$ belongs to $X$.</li>
+</ul>
+<blockquote>
+<p>Todo: Add intuition</p>
+</blockquote>
+<hr>
+<h2 id="entering-_measuable-space_">Entering <em>Measuable Space</em></h2>
+<p>By a measurable space we mean a pair $(X,\mathcal{X})$ consisting of an arbitrary set $X$
+and a $\sigma \mathit{-algebra} \;\mathcal{X}$  of subsets of $X$. Sets in $\mathcal{X}$ are called <strong>measurable sets</strong> (with respect to the $\sigma \mathit{-algebra} \; \mathcal{X}$)
+or $\mathcal{X} \mathit{\text{-measurable sets}}$.</p>
+<blockquote>
+<p>Todo: Add intuition</p>
+</blockquote>
+<hr>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h3 id="-pmbonlocks-version010httpsimgshieldsiobadgeversion20020-ffffffsvg">🔒 $\pmb{On\;locks}$ <img src="https://img.shields.io/badge/Version%200.2.0-FFFFFF.svg" alt="Version:0.1.0"></h3>
+<p><strong>List of topics to cover (briefly):</strong> <br>
+[ ] Carmicheal Numbers and the need for primality testing of huge numbers<br>
+[x] Probabilitic Primality Testing with Rabin-Miller</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Concept</th>
+          <th style="text-align: left">Intuition</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Algebra of sets</td>
+          <td style="text-align: left">Handles <strong>static</strong>, well-structured groupings (fixed patrols, fixed teams)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">σ-Algebra</td>
+          <td style="text-align: left">Handles <strong>dynamic</strong>, infinite/ongoing events (ever-growing logs, real-time monitoring)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><a href="#step-2-the-euler-phi-function">2.</a></td>
+          <td style="text-align: left">Compute the Euler Phi function: $\phi(n)$</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>▲</strong> The seven steps of creating a Time-Lock Puzzle.</p>
+<hr>
+<h1 id="-implementation">🦀 Implementation</h1>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h4 id="step-0-preparing-the-payload">Step 0: Preparing the Payload</h4>
+<p>$M$: <strong>Message to Protect</strong><br>
+Dr. Angela Rae, and her team of fellow researchers, have quickly collected all</p>
+<figure><img src="../../../../../img/post-name/name.jpg">
+</figure>
+
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Ai-generated image of Rebel spaceship.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

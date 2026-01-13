@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MiniFIX on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/tags/minifix/</link>
+    <description>Recent content in MiniFIX on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Sun, 14 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/minifix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🦀 miniFIX Tutorial Series</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/14/minifix-tutorial-series/</link>
+      <pubDate>Sun, 14 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/14/minifix-tutorial-series/</guid>
+      <description>Intro to a comprehensive blog post tutorial series covering all aspects of the miniFIX Rust crate, from basic usage to advanced production scenarios.</description>
+    </item>
+  </channel>
+</rss>

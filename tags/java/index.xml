@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/tags/java/</link>
+    <description>Recent content in Java on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Sat, 29 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>💻 Graph Database</title>
+      <link>https://www.cryptopatrick.com/blog/2023/07/29/graph-database/</link>
+      <pubDate>Sat, 29 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2023/07/29/graph-database/</guid>
+      <description>A beginner-oriented post containing a few fundamental concepts, and usually a step-by-step rudimentary example. I&amp;rsquo;m hoping this post will serve as a quick refresher on the covered subject. The content of the post is usually heavily inspired by books and Wiki - my aim is to have a post close at hand if I need to refresh my memory. For proper tutorials and primers - please see other sources on the Internet.</description>
+    </item>
+  </channel>
+</rss>

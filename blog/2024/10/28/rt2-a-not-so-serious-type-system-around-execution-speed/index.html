@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60544&amp;path=livereload" data-no-instant defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 RT2 - A not so serious type system around execution speed - Seamless Global Nature">
+<meta property="og:url" content="http://localhost:60544/blog/2024/10/28/rt2-a-not-so-serious-type-system-around-execution-speed/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="http://localhost:60544/img/post-name/name.jpg" />
+
+
+<title>🦀 RT2 - A not so serious type system around execution speed | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="http://localhost:60544//css/style.css">
+<link rel="stylesheet" href="http://localhost:60544//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="http://localhost:60544/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="http://localhost:60544/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="http://localhost:60544/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 RT2 - A not so serious type system around execution speed</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      October 28, 2024
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/" style="margin-left:0.25em;"></a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/" style="margin-left:0.25em;"></a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <blockquote>
+<p>&ldquo;Most books should be blog posts, most blog posts should be tweets.&rdquo;</p>
+</blockquote>
+<p><strong>RT2</strong> is a type system that enable us to express <em>types</em> around <em>enforced execution time guarantees</em> using a type system, preventing misuse of operations that exceed specified execution times.
+In this post I&rsquo;ll go through the idea, the code, and also sketch a few examples
+of how the code could be used in the military domain, where timing is critical.
+Creating a type system in Rust that classifies operations based on their execution time—namely Fast, Medium, and Slow—requires us to leverage Rust&rsquo;s type system and some creative use of traits. Below is an implementation that meets your requirements, complete with documentation, tests, and three examples from the military domain.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#95a5a6">// Define a trait for execution time
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">pub</span> <span style="color:#728e00">trait</span> <span style="color:#434f54">ExecutionTime</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fn</span> <span style="color:#434f54">duration</span><span style="color:#728e00">(&amp;</span><span style="color:#434f54">self</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">u128</span><span style="color:#728e00">;</span> <span style="color:#95a5a6">// Duration in milliseconds
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Marker types for Fast, Medium, and Slow
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">pub</span> <span style="color:#434f54">struct</span> <span style="color:#434f54">Fast</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">&gt;(</span><span style="color:#434f54">T</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">struct</span> <span style="color:#434f54">Medium</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">&gt;(</span><span style="color:#434f54">T</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">struct</span> <span style="color:#434f54">Slow</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">&gt;(</span><span style="color:#434f54">T</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Implementation for Fast type
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">impl</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">:</span> <span style="color:#00979d">ExecutionTime&gt;</span> <span style="color:#00979d">ExecutionTime</span> <span style="color:#00979d">for</span> <span style="color:#00979d">Fast&lt;T&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00979d">fn</span> <span style="color:#00979d">duration</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;self</span><span style="color:#728e00">)</span> <span style="color:#00979d">-&gt;</span> <span style="color:#00979d">u128</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">self.</span><span style="color:#a61717">0</span><span style="color:#00979d">.duration</span><span style="color:#728e00">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Implementation for Medium type
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">impl</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">:</span> <span style="color:#00979d">ExecutionTime&gt;</span> <span style="color:#00979d">ExecutionTime</span> <span style="color:#00979d">for</span> <span style="color:#00979d">Medium&lt;T&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00979d">fn</span> <span style="color:#00979d">duration</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;self</span><span style="color:#728e00">)</span> <span style="color:#00979d">-&gt;</span> <span style="color:#00979d">u128</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">self.</span><span style="color:#a61717">0</span><span style="color:#00979d">.duration</span><span style="color:#728e00">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Implementation for Slow type
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">impl</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">:</span> <span style="color:#00979d">ExecutionTime&gt;</span> <span style="color:#00979d">ExecutionTime</span> <span style="color:#00979d">for</span> <span style="color:#00979d">Slow&lt;T&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00979d">fn</span> <span style="color:#00979d">duration</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;self</span><span style="color:#728e00">)</span> <span style="color:#00979d">-&gt;</span> <span style="color:#00979d">u128</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">self.</span><span style="color:#a61717">0</span><span style="color:#00979d">.duration</span><span style="color:#728e00">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Operations that are guaranteed to finish in less than 1 millisecond
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">impl</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">&gt;</span> <span style="color:#434f54">Fast</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">pub</span> <span style="color:#434f54">fn</span> <span style="color:#728e00">new</span><span style="color:#728e00">(</span><span style="color:#434f54">value</span><span style="color:#728e00">:</span> <span style="color:#00979d">T</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">Self</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Fast</span><span style="color:#728e00">(</span><span style="color:#434f54">value</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Operations that are guaranteed to finish in less than 100 milliseconds
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">impl</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">&gt;</span> <span style="color:#434f54">Medium</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">pub</span> <span style="color:#434f54">fn</span> <span style="color:#728e00">new</span><span style="color:#728e00">(</span><span style="color:#434f54">value</span><span style="color:#728e00">:</span> <span style="color:#00979d">T</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">Self</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Medium</span><span style="color:#728e00">(</span><span style="color:#434f54">value</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Operations that cannot guarantee to finish in less than 100 milliseconds
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">impl</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">&gt;</span> <span style="color:#434f54">Slow</span><span style="color:#728e00">&lt;</span><span style="color:#434f54">T</span><span style="color:#728e00">&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">pub</span> <span style="color:#434f54">fn</span> <span style="color:#728e00">new</span><span style="color:#728e00">(</span><span style="color:#434f54">value</span><span style="color:#728e00">:</span> <span style="color:#00979d">T</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">Self</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">Slow</span><span style="color:#728e00">(</span><span style="color:#434f54">value</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Example implementations of ExecutionTime
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">#[</span><span style="color:#00979d">derive</span><span style="color:#728e00">(</span><span style="color:#00979d">Debug</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">struct</span> <span style="color:#434f54">QuickTask</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">impl</span> <span style="color:#434f54">ExecutionTime</span> <span style="color:#728e00">for</span> <span style="color:#434f54">QuickTask</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fn</span> <span style="color:#434f54">duration</span><span style="color:#728e00">(&amp;</span><span style="color:#434f54">self</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">u128</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Simulate a task that finishes in less than 1 ms
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#8a7b52">0</span> <span style="color:#95a5a6">// Placeholder for actual logic
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">derive</span><span style="color:#728e00">(</span><span style="color:#00979d">Debug</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">struct</span> <span style="color:#434f54">ModerateTask</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">impl</span> <span style="color:#434f54">ExecutionTime</span> <span style="color:#728e00">for</span> <span style="color:#434f54">ModerateTask</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fn</span> <span style="color:#434f54">duration</span><span style="color:#728e00">(&amp;</span><span style="color:#434f54">self</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">u128</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Simulate a task that finishes in less than 100 ms
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#8a7b52">50</span> <span style="color:#95a5a6">// Placeholder for actual logic
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">derive</span><span style="color:#728e00">(</span><span style="color:#00979d">Debug</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">struct</span> <span style="color:#434f54">LongTask</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">impl</span> <span style="color:#434f54">ExecutionTime</span> <span style="color:#728e00">for</span> <span style="color:#434f54">LongTask</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fn</span> <span style="color:#434f54">duration</span><span style="color:#728e00">(&amp;</span><span style="color:#434f54">self</span><span style="color:#728e00">)</span> <span style="color:#728e00">-&gt;</span> <span style="color:#434f54">u128</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Simulate a task that takes longer than 100 ms
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#8a7b52">200</span> <span style="color:#95a5a6">// Placeholder for actual logic
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Example tests
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">#[</span><span style="color:#00979d">cfg</span><span style="color:#728e00">(</span><span style="color:#00979d">test</span><span style="color:#728e00">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">mod</span> <span style="color:#434f54">tests</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">use</span> <span style="color:#728e00">super:</span><span style="color:#00979d">:*</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">#[</span><span style="color:#00979d">test</span><span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fn</span> <span style="color:#434f54">test_fast_task</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">let</span> <span style="color:#434f54">fast_task</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Fast</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">(</span><span style="color:#00979d">QuickTask</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">assert</span><span style="color:#728e00">!(</span><span style="color:#434f54">fast_task</span><span style="color:#728e00">.</span><span style="color:#434f54">duration</span><span style="color:#728e00">()</span> <span style="color:#728e00">&lt;</span> <span style="color:#8a7b52">1</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">#[</span><span style="color:#00979d">test</span><span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fn</span> <span style="color:#434f54">test_medium_task</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">let</span> <span style="color:#434f54">medium_task</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Medium</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">(</span><span style="color:#00979d">ModerateTask</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">assert</span><span style="color:#728e00">!(</span><span style="color:#434f54">medium_task</span><span style="color:#728e00">.</span><span style="color:#434f54">duration</span><span style="color:#728e00">()</span> <span style="color:#728e00">&gt;=</span> <span style="color:#8a7b52">1</span> <span style="color:#728e00">&amp;&amp;</span> <span style="color:#434f54">medium_task</span><span style="color:#728e00">.</span><span style="color:#434f54">duration</span><span style="color:#728e00">()</span> <span style="color:#728e00">&lt;</span> <span style="color:#8a7b52">100</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">#[</span><span style="color:#00979d">test</span><span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fn</span> <span style="color:#434f54">test_slow_task</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">let</span> <span style="color:#434f54">slow_task</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Slow</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">(</span><span style="color:#00979d">LongTask</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">assert</span><span style="color:#728e00">!(</span><span style="color:#434f54">slow_task</span><span style="color:#728e00">.</span><span style="color:#434f54">duration</span><span style="color:#728e00">()</span> <span style="color:#728e00">&gt;=</span> <span style="color:#8a7b52">100</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Examples from the military domain
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">pub</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">military_examples</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Example 1: A fast operation like targeting a moving object
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">targeting</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Fast</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">(</span><span style="color:#00979d">QuickTask</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;Targeting duration: {} ms&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">targeting</span><span style="color:#728e00">.</span><span style="color:#434f54">duration</span><span style="color:#728e00">());</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Example 2: Medium operation like processing drone flight data
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">data_processing</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Medium</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">(</span><span style="color:#00979d">ModerateTask</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;Data processing duration: {} ms&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">data_processing</span><span style="color:#728e00">.</span><span style="color:#434f54">duration</span><span style="color:#728e00">());</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Example 3: Slow operation like analyzing large surveillance data
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">data_analysis</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Slow</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">(</span><span style="color:#00979d">LongTask</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;Data analysis duration: {} ms&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">data_analysis</span><span style="color:#728e00">.</span><span style="color:#434f54">duration</span><span style="color:#728e00">());</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">fn</span> <span style="color:#434f54">main</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">military_examples</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div>
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

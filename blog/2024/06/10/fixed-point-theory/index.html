@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content=" 📐 Fixed Point Theory - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2024/06/10/fixed-point-theory/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+
+<title> 📐 Fixed Point Theory | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title"> 📐 Fixed Point Theory</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      June 10, 2024
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/mathematics/" style="margin-left:0.25em;">Mathematics</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <p>In a topological space, the distance between two points is determined based on <em>quality</em>. However, for numerical sets, like N, the concept of distance is determined based on a direct comparison of the proximity degree of numbers.
+For example, we have no problem understanding that the number 3 is closer to 7 than to 9.</p>
+<hr>
+<blockquote>
+<p><strong>Intended Readership:</strong> This post is geared towards fellow mathematics undergrad freshmen and software developers. For a rigorous and less chatty exposition please look elsewhere.</p>
+</blockquote>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#why-study-fixed-point-theory">Why study Fixed Point Theory?</a></li>
+<li><a href="#learning-abstract-concepts">Learning Abstract Concepts</a></li>
+<li><a href="#strategic-placement-of-combat-troop">Example: Strategic Placement of Combat Troops</a></li>
+<li><a href="#complete-metric-space">Complete Metric Space</a></li>
+<li><a href="#lipschitzian-maps">Lipschitzian Maps</a></li>
+<li><a href="#the-banach-fixed-point-theorem">The Banach Fixed Point Theorem</a></li>
+<li><a href="#exercises">Exercises</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ol>
+<h2 id="introduction">Introduction</h2>
+<p>I&rsquo;m currently enrolled as a freshman in the mathematics undergraduate program at my local university. The courses I&rsquo;m taking are the usual suspects (Calculus, Linear Algebra, and Discrete Mathematics). So where does <em>Fixed Point Theory</em> fit in all this? Well, whilst reading a book by mathematician J. Franklin [4] I stumbled upon a passage which sparked my interest:</p>
+<blockquote>
+<p>&ldquo;<em>Schauder&rsquo;s Fixed Point Theorem is one of the very great achievements of science. It is a principal tool of modern nonlinear analysis. So great a result, so useful a tool, should be available to all mathematics students with an absolute minimum of preparation.</em>&quot;<br>— J. Franklin</p>
+</blockquote>
+<h2 id="why-study-fixed-point-theory">Why study Fixed Point Theory?</h2>
+<p>The origins of Fixed Point Theory rest in the method of <em>successive approximations</em>
+for proving the existence and uniqueness of solutions to problems in differential equations.
+The precursors to the theory can be traced in the works of the celebrated mathematician Picard.<br>
+⠀⠀⠀⠀⠀Polish mathematician <em>Stefan Banach</em> is credited with having
+laid the groundwork of Fixed Point Theory. In 1922 the 30-year old Banach had an epiphany and
+recognized the fundamental role of a quality called <em>metric completeness</em>. He published his discovery in his thesis [3], presenting an abstract framework suitable for a broad range of applications. However, for many years activity was low in Banach&rsquo;s newly discovered field. It was the pioneering work of mathematician Felix Browder in the mid-nineteen sixties that sparked new interest in Fixed Point Theory.<br>
+⠀⠀⠀⠀⠀*So why study this, somewhat esoteric, field of mathematics?<br>
+Well, imagine if we&rsquo;re tasked with the ardous task of searching for the proverbial &ldquo;<em>needle in a haystack</em>&rdquo; then it will be <em>quite</em> valuable if we know two things:</p>
+<ol>
+<li>Does a needle actually <em>exist</em> in the haystack, or will we be wasting our time searching for something that doesn&rsquo;t exist in the first place?</li>
+<li>Assuming we know there&rsquo;s a needle in the haystack - is it <em>unique?</em><br>
+If we find a needle, and if we <em>know for a fact</em> that there&rsquo;s only <em>one</em> needle in the haystack, then searching for additional needles in the same haystack will be a waste of time.</li>
+</ol>
+<p>In this post we will try to work our way up a hill of mathematical concepts.
+At the top awaits a sparkling price in the form of Banach&rsquo;s famous mathematical theorem, the <em>Compact Mapping Principle</em>. In the hope of making the exposition appealing to a wide audience, I will try to make the
+writing plain, direct, and readable.</p>
+<p>Timeout!<br>
+Let&rsquo;s brew a cup of coffee and ponder the following:</p>
+<ol>
+<li><em>Consider this, you&rsquo;re standing outside in a country.
+In your hand you are holding an unfolded paper map representing that entire country.
+Now, place the map on the ground in front of you. Convince yourself that there
+will be one point on the map which exactly represents that actual place in the real world.</em></li>
+<li><em>Next, convince yourself that regardless of where you place that map in that country,
+as long as the map is inside the borders of the country, there will always be
+one point on the map which exactly represents that point in the real world.</em></li>
+</ol>
+<blockquote>
+<p>&ldquo;Dude, enough! I don&rsquo;t want the whole story - just tell me what I need to know.&rdquo;</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Acceptable Quality Area Above</p>
+</blockquote>
+<h2 id="complete-metric-space">Complete Metric Space</h2>
+<blockquote>
+<p>The proof provides us with a constructive procedure for getting increasingly
+more accurate estimations of the fixed point. This method is called <em>Picard Iteration</em>.
+We start by choosing an arbitrary $x_n \in A$, then recursively calculate $x_1$,
+$x_2$, $x_3$, &hellip; by letting<br>
+$$x_{n+1} = \lambda(x_n), n=0,1,2,..$$</p>
+</blockquote>
+<p>Geometrically, this means that images $\lambda(x)$ and $\lambda(y)$ are close to each other
+than the points $x$ and $y$.</p>
+<p>CMP imposes strong <em>continuity</em> condition on $f$ but only weak conditions on $A$.</p>
+<p>Fixed point method, which is a beautiful mixture of analysis, topology, and geometry has been revealed as a very powerful and important tool in the study of nonlinear phenomena.
+In particular, fixed points techniques have been applied in such diverse fields as biology, chemistry, economics, engineering, game theory and physics.</p>
+<p>Picture this, it&rsquo;s a sunny Sunday afternoon and we&rsquo;re sitting on a bench in the park.
+We&rsquo;ve met to have a detailed conversation about <strong><a href="Yt">The Gladiator Fight in Dune 2</a></strong>. More specifically, what we really want is to have a rigorous conversation about <em>distances</em> between points in a Metric space.<br>
+Sorry, what&rsquo;s that? Metric? Don&rsquo;t worry. Take a sip of that coffee and let&rsquo;s dive in.<br>
+⠀⠀⠀⠀⠀Metric Spaces are essential because they formalize the notion of <em>distance</em>
+and give us tools to explore complicated questions related to it. A <em>metric space</em> is a Set of points, $X$, together with a <em>distance function</em>, $d$, often expressed in the form $(X,d)$. The distance function $d(x,y)$ will give us the distance between two points in the set.<br>
+⠀⠀⠀⠀⠀Let&rsquo;s remind ourselves of the Gladiator Scene, the arena is populated by three gladiators and Feyd-Rautha Harkonnen.
+So in our example, the Arena is our set of points, let&rsquo;s denote it $A$. In $A$, each point represents a combatant, let&rsquo;s label the three gladiators; $g_1$, $g_2$, and $g_3$, and let&rsquo;s label <em>Feyd-Rautha Harkonnen</em> as $frh$.<br>
+⠀⠀⠀⠀⠀Our distance function will assign a real (decimal) number to any pair of combatants $(x,y)$ present in the arena $A$, representing the distance between them. At the start of the fight there are six <em>combatant distance</em> pairs:
+$$d(g_1, g_2), d(g_1, g_3), d(g_1, frh), d(g_2, g_3), d(g_2, frh),d(g_3, frh)$$
+Let&rsquo;s illustrate this using some spiffy graphics skills:</p>
+<figure><img src="../../../../../img/relationship_01b.jpg"><figcaption>
+      <h4>Figure: The three gladiators and Feyd-Rautha Harkonnen getting ready to fight.</h4>
+    </figcaption>
+</figure>
+
+<p>⠀⠀⠀⠀⠀Next we need to tighten the conditions by requireing the Metric Space to be <em>complete</em>.<br>
+A <em>complete metric space</em> is a special kind of metric space, where every
+Cauchy sequence converges to a point within the space.</p>
+<p><strong>Definition: Metric</strong><br>
+Let $A$ be a nonempty set. A real-valued function $d:A x A \rightarrow \mathbf{R}$ is said to be
+a <em>metric</em> on $A$ if it satisfies the following conditions for all $x,y,z \in A$:<br>
+$\qquad (M1) \qquad d(x,y) \geq 0$<br>
+$\qquad (M2: Axiom of Separation) \qquad d(x,y) = 0 \text{, if and only if } x = y$<br>
+$\qquad (M3: Symmetry) \qquad d(x,y) = d(y,x)$<br>
+$\qquad (M4: The Triangle Equality) \qquad d(x,z) \leq d(x,y) + d(y,z)$</p>
+<p><strong>Definition: Metric Space</strong><br>
+The set $A$ endowed with a metric $d$ on $A$ is called a <em>metric space</em> and is denoted by $(A,d)$.</p>
+<p><strong>Definition: Complete Metric Space</strong><br>
+Let $(A,d)$ be a metric space. A sequence $\{x_n\}$ of points of $A$ is said to be <em>convergent</em> if there is a point $u \in A$, called the <em>limit point</em>, such that for each $\epsilon \gt 0$, there exists an integer $N \gt 0$ such that</p>
+<p>$$d(x_n, u) \lt \epsilon, \quad \text{for all } n \gt N.$$</p>
+<blockquote>
+<p>Insert: image of Cauchy sequence in 2d with upper bound vs onion or eye of tornado.
+A metric space $(X,d)$ is <em>complete</em> if every Cauchy sequence has a limit that is also in $X$, that is, the limit converges to a point in the space. Let&rsquo;s take a moment and define this notion.</p>
+</blockquote>
+<p><strong>Definition: Cauchy sequence in a Metric space</strong><br>
+A sequence $\{x_n\}$ is said to be a <em>Cauchy sequence</em> if for every $\epsilon \gt 0$
+there exists an integer $N$, such that for all $m,n \geq N: d(x_m, x_n) &lt; \epsilon$.<br>
+$$\color{black}{\spadesuit}$$</p>
+<p><strong>Properties of a Metric Space</strong><br>
+A Metric space has properties that we can lean on once we start trying to prove claims about how things behave in it. There are four properties that we need to be aware of:</p>
+<ol>
+<li><em>Non-negativity:</em> The distance between a pair of gladiators is never less than zero (this requirement is necessary otherwise two gladiators could occupy the exact same physical space in the arena, which makes no sense.). We formalize this requirement as: $d(x,y) \geq 0$.</li>
+<li><em>Identity:</em> The distance between a gladiator and itself is always 0, which we formalize as $d(x,y)=0 \text{ if and only if } d=y$ (which translates into: <em>if the distance between gladiator $x$ and gladiator $y$ is zero, then they are in fact the same gladiator</em>).</li>
+<li><em>Symmetry:</em> The distance between gladiator A, Feyd-Rautha, and gladiator B, , is the same as the distance between B and A: $d(x,y) = d(y,x)$.</li>
+<li><em>Triangle inequality:</em> In an arena with only 2 gladiators and 1 lion, the distance
+between the gladiators x and y, cannot exceed the combined distance between gladiator A and B, and gladiator B and the lion, $d(x,z) \leq d(x,y) + d(y,z)$.</li>
+</ol>
+<h2 id="lipschitzian-maps">Lipschitzian Maps</h2>
+<p>This post is about <em>contraction</em>, so let&rsquo;s take a moment and make sure we understand
+the meaning of that word in the mathematical context at hand.
+A function between two metric spaces, $f:(X,d_X) \rightarrow (Y,d_Y)$ is said to be Lipschitz continuous if there exists a non-negative <em>constant</em> $K \geq 0$, such that for each pair of points $x_1, x_2 \in X$ we can multiply the distance between the pair $(x_1,x_2)$ in the arena $X$ with the constant $K$ and we will get a contraction of the arena with is equal in size or smaller.
+Formally we can write this as:
+$$K \cdot d_X(x_1,x_2) \geq d_Y(f(x_1),f(x_2))$$</p>
+<p>The smallest such constant $K$, is called the <em>Lipschitz</em> constant of $f$.
+Bounded variation: Lipschitz continous functions do not oscillate wildly. Their rate of change is bounded.</p>
+<p>We want to highlight a particular type of function that we&rsquo;ll use.
+A function that we can apply to every point in our set, and every result
+from using the function will itself be a point in the arena.
+In other words, the function maps a set onto itself:
+$F: X \rightarrow X$. Now, this function is said to be <em>Lipschitzian</em> if
+there exists a <em>constant</em> $\alpha \geq 0$ such that:</p>
+<p>$$d(F(x), F(y)) \leq \alpha \cdot d(x,y) \text{ for all } x,y \in X \tag{1}\label{eq1}$$</p>
+<p>Equation $\eqref{eq1}$ is called the <em>Global Stiffness Equestion</em> and is the
+focus of this post.</p>
+<p><strong>Contraction Constant</strong>
+The constant places stronger conditions on <em>how</em> the distance between the combatants change.
+It&rsquo;s not only getting smaller, it&rsquo;s getting smaller by a fixed scaling constant, $k$.
+The smallest $\alpha$ for which $\eqref{eq1}$ holds is called <em>the Lipschitz constant</em> for $F$, and is given its own denotation, $L$.</p>
+<p><strong>Definition:</strong> A Lipschitzian mapping $T: M \rightarrow M$ with Lipschitz constant
+$k \le 1$ is said to be a <em>contraction mapping</em>.</p>
+<p>If $L &lt; 1$ then we say that $F$ is a <strong>contraction</strong>, basically what this means
+is that if we apply function $F$ to every pair $(x,y)$ in the Harkonnen Arena (the set $X$)
+then the entire arena will <em>contract</em> in size (think, we scale it down).</p>
+<p>If, on the other hand, $L=1$ then we call $F$ a <strong>nonexpansive</strong>, meaning, we
+can apply the function to every pair of points$(x,y)$ in the arena, without
+worrying that the size of the arena will <em>increase</em>.</p>
+<p><strong>Handy Notation</strong><br>
+Now we want to introduce notation that will simplify our discussion. Going forward we will use this nifty notation of an <em>inductive</em> application of a map - representing repeated application of our contraction map to a particular point $x$.</p>
+<p>$$\begin{align} F^0(x) = x \\ F^{n+1}(x) = F(F^n(x))\end{align}$$</p>
+<p>Let&rsquo;s break this down.<br>
+$F^0(x)=x$ simply means that if we apply the function $0$ times to $x$, then we get $x$ back.<br>
+What&rsquo;s next is it bit more involved, here we&rsquo;re defining a <em>recurrent function</em>, where the result of applying the function the first time is then what we&rsquo;ll use when we apply the function a second time, and so on and so on.</p>
+<p>Let&rsquo;s look at an example.<br>
+Let&rsquo;s say that we have a Metric Space $(Y,d)$ where the distance between two points $x_1, x_2$ is $d(x_1,x_2)=80$.
+We also have a contractive function $F$ that takes $x$, the distance between two points in the square, and cuts it in half, $F(x) = {1 \over 2}x$. If we run this function repeatedly, where each iteration gets the output of the former iteration, we get.</p>
+<p>$F^0(80)= \text{ by power law definition} = 80$<br>
+$F^1(80)=F(F^0(80))=F(80)={1 \over 2} \cdot 80=40$<br>
+$F^2(80)=F(F^1(80))=F(40)={1 \over 2} \cdot 40=20$<br>
+$F^3(80)=F(F^2(80))=F(20)={1 \over 2} \cdot 20=10$<br>
+$F^4(80)=F(F^3(80))=F(10)={1 \over 2} \cdot 10=5$</p>
+<p>So, we can se that by applying our <em>halving function</em> four consecutive times to the pair of points in our metric space, the initial distance between them, 80, is reduced to 5. A contraction.</p>
+<h2 id="the-banach-fixed-point-theorem">The Banach Fixed Point Theorem</h2>
+<p>We have finally reached the finish line of this article, a mathematical result, sparkling like a jewel - <em>The Banach Fixed Point Theorem</em>. Also known as the <em>Contraction Mapping Principle</em>, or <em>CMP</em> for short. The theorem is remarkable in its simplicity, yet it is probably the most widely used fixed point theorem in mathematical analysis.<br>
+⠀⠀⠀⠀⠀The strength of the <em>CMP</em> lies in that the <em>contractive condition on the mapping</em> is easy to test, and the theorem only requires the structure of a <em>complete metric space</em> to be applicable.<br>
+We will use the same key ingredients of the <em>CMP</em> as it appeared in Banach&rsquo;s original 1922 thesis [1].</p>
+<p><strong>Theorem 1.1 (Contraction Mapping Principle)</strong><br>
+Let $(A,d)$ be a complete metric space and let $\lambda : A \rightarrow A$ be a contraction
+with a Lipschitzian constant $0 \leq k \lt 1$. Then $\lambda$ has a <em>unique fixed point</em> $u \in A$.
+Furthermore, for any $c \in A$ we have that
+$$\lim_{n \to \infty}\lambda^n(c) = u$$</p>
+<p>and for each $c \in A$,</p>
+<p>$$d(\lambda^n(c),u) \leq  {k^n \over 1-k} \cdot d(c,\lambda(c)) \tag{2}\label{eq2}$$</p>
+<p><strong>Proof:</strong> To prove the <em>CMP</em> we need to convince ourselves of two things;</p>
+<ol>
+<li>There exists a fixed point in the arena (Existence), and 2. it is the only one (Uniqueness).</li>
+</ol>
+<p>⠀⠀⠀⠀⠀_Proof of Uniqueness_ ():<br>
+We start by proving that given the stated conditions of the theorem then
+there can only exist one (unique) fixed point $u$ in the metric space (in our case Feyd-Rautha).<br>
+⠀⠀⠀⠀⠀Let&rsquo;s say that we have two arbitrary gladiators $x$ and $y$ in the Harkonnen arena $H$.
+If there&rsquo;s more than one fixed point, then there has to be at lest two.
+Let&rsquo;s say that it&rsquo;s these two gladiators $x$ and $y$.
+Remember, being a fixed point means that regardless how many times we change the
+size of the metric space by applying the function $F$, your position will remain the same - or, $x=F(x)$.<br>
+⠀⠀⠀⠀⠀We also need to remember that the theorem places the condition
+on $F$ of being a contraction function with a Lipschitzian constant $L$. That changes everything, for starters, if $F$ is a contraction function then we know that it&rsquo;s value has to be $[0,1)$, and every value that it is applied to, for
+example $F(x)$ will be smaller than before.<br>
+⠀⠀⠀⠀⠀But if both $x$, and $y$ are fixed point
+then the distance between them can&rsquo;t change when we apply the contraction function $F$, or formally: $d(x,y) = d(F(x),F(y))$. But we also know that $L &lt; 1$ (since
+it&rsquo;s a contraction), and no value multipled by another value between 0 and less than one, $[0,1)$, can do anything <em>but</em> decrease in size. So, $L \cdot d(x,y)$ <strong>has</strong>
+to be lower than $d(x,y)$, which can <em>only</em> be true if $d(x,y)=0$, because it would be a contradiction if $x$ and $y$ are both fixed points in the metric space $X$ and
+$L \cdot d(x,y) \geq d(x,y)$.</p>
+<p>$$d(x,y) = d(F(x), F(y)) \leq L \cdot d(x,y) \tag{3}\label{eq3}$$</p>
+<p>This is a contradiction because we&rsquo;re supposed to be able to arbitrarily pick <em>any</em> two points in the metric space, and the distance between them should
+decrease after each application of $F^n$.
+So, by proof of contradiction, there can only be <em>one</em> unique fixed point, in a
+complete contraction Lipschitzian metric space.<br>
+⠀⠀⠀⠀⠀If we contract the arena, for example repetedly halving it four times, and we still end up with the same distance between our two gladiators $x$ and $y$, then $x=F(x)$ and $y=F(y)$
+which can only be true if the distance between them is 0, $d(x,y)=0$.<br>
+⠀⠀⠀⠀⠀Next we need to show <em>existence</em> of a fixed point.
+We start by selecting an arbitrary Gladiator in the arena, $x \in X$.
+We remind ourselves of the earlier discussion on cauchy sequences and convince ourselves that repeatedly applying our contraction function $F$ will create
+a sequence of numbers. For example, in our earlier example where we had $F(x)={1 \over 2}x$
+and an arena of size 80, repeatedly applying $F$ for $n \in \{0,1,2,3,4\}$ resulted in the sequence $\{80,40,20,10,5\}. \quad \square$</p>
+<p>⠀⠀⠀⠀⠀_Proof of Existence_ (there <em>is</em> a fixed point combatant in the Arena):
+We start by reminding ourself of two important <em>conditions</em> that the <em>CMP</em> places
+on the <em>Metric space</em>. First, it has to be <em>closed</em>. Let&rsquo;s take a moment and
+make sure we understand what that means.
+Have a look at these two</p>
+<p>M is <em>closed</em> means that M <em>contains</em> all of it&rsquo;s limit points.</p>
+<p>And just like that, the proof of <em>The Banach Fixed Point Theorem</em> is done.
+$$\blacksquare$$</p>
+<blockquote>
+<p>Acceptable Quality Area Below</p>
+</blockquote>
+<hr>
+<h2 id="exercises">Exercises</h2>
+<p>Theoretical knowledge is great. It&rsquo;s also nice to convince ourselves that we
+know how to use our new knowledge. Here are three exercises<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> on which we can practice our Fixed Point Theory Kung-Fu:</p>
+<ol>
+<li>
+<p>Let $F$ be a contraction created from an <em>incomplete</em> Metric Space into itself.<br>
+Show that it need not have a fixed point.</p>
+</li>
+<li>
+<p>Let $\bar B_r$ be a <em>closed ball</em> of radius $r \gt 0$, centred at zero, in a Banach space $E$, where $F : \bar B_r \rightarrow E$ is a contraction and $F(-x) = -F(x)$
+for $x \in \partial \bar B_r$.<br>
+Show that $F$ has a fixed point in $\bar B_r$.</p>
+</li>
+<li>
+<p>Let $U$ be an <em>open subset</em> of a Banach space $E$ and let $F: U \rightarrow E$
+be a contraction.<br>
+Show that $(I - F)(U)$ is open.</p>
+</li>
+</ol>
+<blockquote>
+<p>Hang on! Where are the answers to the exercises? Proving something is about convincing ourselves that our line of argument is correct. If we&rsquo;re able to do that, then there&rsquo;s no need for answers.
+So, work through the exercises until you are 100% convinced that your proofs are correct.</p>
+</blockquote>
+<h2 id="example-reprogramming-satellite-orbits">Example: Reprogramming Satellite Orbits</h2>
+<p>It&rsquo;s the year 2150, Man has become a space traveling organism.
+Let&rsquo;s say we&rsquo;ve been tasked with reprogramming the orbits of a 1000 satellites orbiting a small planet in the Quadrant Solar System.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#728e00">package</span> <span style="color:#728e00">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#7f8c8d">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#7f8c8d">&#34;gonum.org/v1/gonum/mat&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Function to print a matrix
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">func</span> <span style="color:#d35400">printMatrix</span>(<span style="color:#728e00">matrix</span> <span style="color:#728e00">mat</span>.<span style="color:#728e00">Matrix</span>, <span style="color:#728e00">name</span> <span style="color:#00979d">string</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#728e00">r</span>, <span style="color:#728e00">c</span> <span style="color:#728e00">:=</span> <span style="color:#728e00">matrix</span>.<span style="color:#d35400">Dims</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#728e00">fmt</span>.<span style="color:#d35400">Printf</span>(<span style="color:#7f8c8d">&#34;%s = \n&#34;</span>, <span style="color:#728e00">name</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#728e00">for</span> <span style="color:#728e00">i</span> <span style="color:#728e00">:=</span> <span style="color:#8a7b52">0</span>; <span style="color:#728e00">i</span> &lt; <span style="color:#728e00">r</span>; <span style="color:#728e00">i</span><span style="color:#728e00">++</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#728e00">for</span> <span style="color:#728e00">j</span> <span style="color:#728e00">:=</span> <span style="color:#8a7b52">0</span>; <span style="color:#728e00">j</span> &lt; <span style="color:#728e00">c</span>; <span style="color:#728e00">j</span><span style="color:#728e00">++</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#728e00">fmt</span>.<span style="color:#d35400">Printf</span>(<span style="color:#7f8c8d">&#34;%6.2f &#34;</span>, <span style="color:#728e00">matrix</span>.<span style="color:#d35400">At</span>(<span style="color:#728e00">i</span>, <span style="color:#728e00">j</span>))
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#728e00">fmt</span>.<span style="color:#d35400">Println</span>()
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">func</span> <span style="color:#d35400">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#95a5a6">// Step 1: Define the system Ax = b
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#95a5a6">// A represents the linear relationship between aircraft paths
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#95a5a6">// A is a 3x3 matrix for three aircraft
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#728e00">A</span> <span style="color:#728e00">:=</span> <span style="color:#728e00">mat</span>.<span style="color:#d35400">NewDense</span>(<span style="color:#8a7b52">3</span>, <span style="color:#8a7b52">3</span>, []<span style="color:#00979d">float64</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#8a7b52">2</span>, <span style="color:#8a7b52">1</span>, <span style="color:#8a7b52">0</span>,  <span style="color:#95a5a6">// Relation between aircraft 1 and 2
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>		<span style="color:#8a7b52">1</span>, <span style="color:#8a7b52">2</span>, <span style="color:#8a7b52">1</span>,  <span style="color:#95a5a6">// Relation between aircraft 2 and 3
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>		<span style="color:#8a7b52">0</span>, <span style="color:#8a7b52">1</span>, <span style="color:#8a7b52">2</span>,  <span style="color:#95a5a6">// Relation between aircraft 3 and 1
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#95a5a6">// x is the vector of adjustments we want to solve for (3x1)
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#95a5a6">// This represents adjustments in speed and altitude for each aircraft
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#728e00">x</span> <span style="color:#728e00">:=</span> <span style="color:#728e00">mat</span>.<span style="color:#d35400">NewVecDense</span>(<span style="color:#8a7b52">3</span>, <span style="color:#00979d">nil</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#95a5a6">// b represents the target adjustments we want (constraints)
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#95a5a6">// For example, final positions or speed/altitude changes
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#728e00">b</span> <span style="color:#728e00">:=</span> <span style="color:#728e00">mat</span>.<span style="color:#d35400">NewVecDense</span>(<span style="color:#8a7b52">3</span>, []<span style="color:#00979d">float64</span>{<span style="color:#8a7b52">10</span>, <span style="color:#8a7b52">5</span>, <span style="color:#8a7b52">8</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#95a5a6">// Step 2: Solve the system Ax = b
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#95a5a6">// Create a LU decomposition of A
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#728e00">var</span> <span style="color:#728e00">lu</span> <span style="color:#728e00">mat</span>.<span style="color:#728e00">LU</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#728e00">lu</span>.<span style="color:#d35400">Factorize</span>(<span style="color:#728e00">A</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#95a5a6">// Solve for x using the LU decomposition and the target vector b
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#728e00">err</span> <span style="color:#728e00">:=</span> <span style="color:#728e00">lu</span>.<span style="color:#d35400">SolveVecTo</span>(<span style="color:#728e00">x</span>, <span style="color:#00979d">false</span>, <span style="color:#728e00">b</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#728e00">if</span> <span style="color:#728e00">err</span> <span style="color:#728e00">!=</span> <span style="color:#00979d">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#728e00">fmt</span>.<span style="color:#d35400">Println</span>(<span style="color:#7f8c8d">&#34;Error solving system:&#34;</span>, <span style="color:#728e00">err</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#728e00">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#95a5a6">// Step 3: Print results
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#d35400">printMatrix</span>(<span style="color:#728e00">A</span>, <span style="color:#7f8c8d">&#34;Matrix A&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#728e00">fmt</span>.<span style="color:#d35400">Printf</span>(<span style="color:#7f8c8d">&#34;Vector b = \n%v\n&#34;</span>, <span style="color:#728e00">mat</span>.<span style="color:#d35400">Formatted</span>(<span style="color:#728e00">b</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#728e00">fmt</span>.<span style="color:#d35400">Printf</span>(<span style="color:#7f8c8d">&#34;Solution x (adjustments) = \n%v\n&#34;</span>, <span style="color:#728e00">mat</span>.<span style="color:#d35400">Formatted</span>(<span style="color:#728e00">x</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#95a5a6">// Interpret the solution x
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>	<span style="color:#728e00">fmt</span>.<span style="color:#d35400">Println</span>(<span style="color:#7f8c8d">&#34;Interpretation: Each value in x represents the necessary adjustments&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#728e00">fmt</span>.<span style="color:#d35400">Println</span>(<span style="color:#7f8c8d">&#34;to the speed/altitude of the aircraft to optimize the flight paths and avoid collisions.&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We end up with a Matrix, $A$
+A: The ballistic system’s dynamics matrix, accounting for gravity, air resistance, and projectile properties.
+Vector
+x
+x: The projectile’s velocity and position.
+Vector
+b
+b: The external forces such as gravity or air resistance.</p>
+<p>Many problems can be reformulated to precisely ask for a fixed point of a function. A very simple example is the following:</p>
+<p>Suppose that $A$ is an $𝑛×𝑛$ matrix, thought of as a function $𝐴:ℝ^𝑛→ℝ^𝑛$.<br>
+Solving $𝐴𝑥=𝑏$ is an extremely important problem (I hope this does not require elaboration).</p>
+<p>Now, $𝐴𝑥=𝑏$ holds if, and only if, $𝐵𝑥=𝑥$ where $𝐵𝑥=𝑥−𝐴𝑥+𝑏$.
+So, here the problem of solving $𝐴𝑥=𝑏$ is <em>transformed</em>, via defining a new function $𝐵:ℝ^𝑛→ℝ^𝑛$, to a fixed point problem.</p>
+<p>If you can now equip $ℝ^𝑛$ with a metric structure (for instance, one of the many norms you can place on $ℝ^𝑛$) such that $𝐵$ is a contraction, then you obtain an iterative process guaranteed to converge to the solution of the system, no matter which initial point you use to start the process.</p>
+<blockquote>
+<p>Show the example below in code and time it: fixed point vs solve linear eq.
+Of course, there are precise methods to solve linear equations, but they tend to be computationally hard. The Banach Fixed Point theorem in this case is thus very useful.</p>
+</blockquote>
+<h2 id="bibliography">Bibliography</h2>
+<p>[1]: Banach S. Sur les opérations dans les ensembles abstraits et leur application aux équations intégrales. Fundamenta Mathematicae. 1922;3:133-181</p>
+<p>[2] Tarski A. A lattice-theoretical fixpoint theorem and its applications. Pacific Journal of Mathematics. 1955;5(2):285-309</p>
+<p>[3] Ansari QH, Sahu DR. Fixed Point Theory and Variational Principles in Metric Spaces. Cambridge University Press; 2023.</p>
+<p>[4] Franklin, J. N. Methods of Mathematical Economics Theory, Siam, 2002.</p>
+<p>$$\color{red}{\diamondsuit}$$</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>These exercises were taken from page 9 in the book <em>Fixed Point Theory and Applications</em> by R.P. Agarwal, M. Meechan, and D. O´Regan, Cambridge University Press, 2001.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

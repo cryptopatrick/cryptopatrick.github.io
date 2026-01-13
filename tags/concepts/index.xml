@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Concepts on Seamless Global Nature</title>
+    <link>http://localhost:60544/tags/concepts/</link>
+    <description>Recent content in Concepts on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Sat, 06 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:60544/tags/concepts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>:book: Read: Automated Theorem Prover</title>
+      <link>http://localhost:60544/blog/2025/12/06/book-read-automated-theorem-prover/</link>
+      <pubDate>Sat, 06 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/12/06/book-read-automated-theorem-prover/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>:book: cicili</title>
+      <link>http://localhost:60544/blog/2025/10/07/book-cicili/</link>
+      <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/10/07/book-cicili/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>🦀 Internals</title>
+      <link>http://localhost:60544/blog/2025/09/12/internals/</link>
+      <pubDate>Fri, 12 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/09/12/internals/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>🤖 Ai: Engineering: Prototype of an Uber Grade Ai Agent</title>
+      <link>http://localhost:60544/blog/2025/09/01/ai-engineering-prototype-of-an-uber-grade-ai-agent/</link>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/09/01/ai-engineering-prototype-of-an-uber-grade-ai-agent/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>:book: Read: Git Gladiators</title>
+      <link>http://localhost:60544/blog/2025/08/15/book-read-git-gladiators/</link>
+      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/08/15/book-read-git-gladiators/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>:book: Read: Topic</title>
+      <link>http://localhost:60544/blog/2025/08/15/book-read-topic/</link>
+      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/08/15/book-read-topic/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>:book: Read: Voigt-Kampf Test</title>
+      <link>http://localhost:60544/blog/2025/08/15/book-read-voigt-kampf-test/</link>
+      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/08/15/book-read-voigt-kampf-test/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>🤖 Ai:  VPS Vibe Coder</title>
+      <link>http://localhost:60544/blog/2025/08/12/ai-vps-vibe-coder/</link>
+      <pubDate>Tue, 12 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/08/12/ai-vps-vibe-coder/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>🤖 Ai: Build an LLM from Scratch | Chapter 02</title>
+      <link>http://localhost:60544/blog/2025/08/01/ai-build-an-llm-from-scratch-chapter-02/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/08/01/ai-build-an-llm-from-scratch-chapter-02/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+    <item>
+      <title>🤖 Ai: LLM Vocabulary</title>
+      <link>http://localhost:60544/blog/2025/08/01/ai-llm-vocabulary/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60544/blog/2025/08/01/ai-llm-vocabulary/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+  </channel>
+</rss>

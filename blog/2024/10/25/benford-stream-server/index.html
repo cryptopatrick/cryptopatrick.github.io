@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60544&amp;path=livereload" data-no-instant defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 Benford Stream Server - Seamless Global Nature">
+<meta property="og:url" content="http://localhost:60544/blog/2024/10/25/benford-stream-server/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="http://localhost:60544/img/post-name/name.jpg" />
+
+
+<title>🦀 Benford Stream Server | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="http://localhost:60544//css/style.css">
+<link rel="stylesheet" href="http://localhost:60544//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="http://localhost:60544/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="http://localhost:60544/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="http://localhost:60544/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 Benford Stream Server</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      October 25, 2024
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/everydays/" style="margin-left:0.25em;">Everydays</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/mathematics/" style="margin-left:0.25em;">Mathematics</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/rust/" style="margin-left:0.25em;">Rust</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <p>In this Everyday we will simulate the following scenario:
+&ldquo;It&rsquo;s Election Night and you&rsquo;re in charge of Election Integrity.
+Over the next couple of hours, hundreds of thousands of voting <strong>ballots</strong> will
+be entered in voting machines. Each ballot has a unique random number REF.</p>
+<p>Let&rsquo;s sit down and write a small program with the following requirements:</p>
+<ol>
+<li>Our program should be able to handle a stream of up to 100,000 random numbers
+arriving via TCP/IP over a period of one (1) second.</li>
+<li>One program will be in charge of generating random numbers and streaming them.</li>
+<li>We will store all numbers in a database, in our case ScyllaDB.</li>
+</ol>
+<h1 id="rust">Rust</h1>
+<p>We will need to install Rust and also a database drive for the database technology
+that we intend to use, ScylllaDB. For this we use the <a href="https://crates.io/crates/scylla">scylla-crate</a> REF.</p>
+<h1 id="database-scylladb">Database: ScyllaDB</h1>
+<p>We can choose to run our database either locally or remotely.
+In our case we will choose to run it remotely in case our local site becomes a target
+of election interference ops.
+We&rsquo;ll use the ScyllaDB installation guide for your our operatingsystem (MacOS).</p>
+<h1 id="server">Server</h1>
+<p>This server will stream random numbers, in real time, to any client subscribing to it.
+Once logged in, the client can set a few parameters that will affect the stream,
+such as size of the numbers and the average frequency per second (including an upper and lower bound)
+of the stream.</p>
+<h1 id="client">Client</h1>
+<p>The client will process the stream of numbers. Once the size of the process numbers
+has surpassed a threshold (set by the user) the client will indicate (with a guage)
+if the stream is staying inside bounds that are expected by Benford&rsquo;s Law.
+If the stream of numbers starts moving outside of Benford bounds, the client will
+issue an alert (the user can set how far outside of the bounds, or how long bounds have to be crossed, for the alarm to be issued).</p>
+<h1 id="throughput">Throughput</h1>
+<p>We will explore ways to push throughput to the max, identifying bottlenecks.</p>
+<hr>
+<blockquote>
+<p><a href="https://www.politifact.com/article/2022/feb/01/claim-about-serial-numbers-ballots-misguided/">https://www.politifact.com/article/2022/feb/01/claim-about-serial-numbers-ballots-misguided/</a></p>
+</blockquote>
+<p>In Michigan, all ballots regardless of how they’re submitted have a numbered stub. When the completed ballot is received by an election worker, the stub is removed, and the ballot is processed without any information that could link it to a specific voter.</p>
+<p>Here is an example from a sample ballot sent to us by Tracy Wimmer, a spokesperson for the Michigan Secretary of State:
+Email interview, Tracy Wimmer, spokesperson for Michigan Secretary of State Jocelyn Benson, Jan. 28, 2022
+<a href="https://static.politifact.com/politifact/photos/Michigan_sample_ballot_in_2014_top_half_only.png">https://static.politifact.com/politifact/photos/Michigan_sample_ballot_in_2014_top_half_only.png</a></p>
+<h1 id="example-michigan-ballots">Example: Michigan Ballots</h1>
+<p>In the state of Michigan, US, each voting ballot is assigned a unique random number.
+This is done to ensure the integrity of the election process.</p>
+<h2 id="system-design">System Design</h2>
+<ol>
+<li><strong>Random Number Generation</strong><br>
+Source of Randomness: The random numbers for ballots are typically generated using a secure random number generator (RNG).
+It is important that the algorithm employed by the RNG (be it software-based or hardware-based) adheres to the US national standards for randomness and cryptographic security.</li>
+<li><strong>Interval and Range of Numbers</strong><br>
+Interval: The random numbers assigned to ballots are usually within a specific range that allows for a sufficient number of unique identifiers. The range can vary based on the total number of ballots printed for a particular election or precinct.
+Uniform Distribution: The goal is to have a uniform distribution of these numbers across the possible range to minimize predictability and ensure fairness.</li>
+<li>Length of the Random Number
+In Michigan, the random number assigned to each ballot typically consist of 6 digits.
+This allows for a range of numbers from 000000 to 999999, resulting in a total of 1,000,000 possible combinations.</li>
+<li>Process of Assignment
+Ballot Preparation: During the ballot preparation phase, the election officials will generate the random numbers for the ballots and assign them before printing.
+Tracking: Each ballot is marked with its unique random number, allowing election officials to track the ballots throughout the election process. This is crucial for verifying the integrity of the election.</li>
+<li>Transparency and Security
+Audit Trails: The use of random numbers allows for a verifiable audit trail, which can help detect any irregularities in the election process.
+Security Measures: The entire process of generating and assigning random numbers is typically governed by strict security protocols to prevent tampering and ensure the integrity of the electoral process.
+Conclusion</li>
+</ol>
+<hr>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">cargo</span> <span style="color:#728e00">new</span> <span style="color:#434f54">scylla_random_numbers</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">cd</span> <span style="color:#434f54">scylla_random_numbers</span>
+</span></span></code></pre></div><h2 id="step-4-server-_-generate-random-number-and-send-it">Step 4: Server _ Generate Random Number and Send it</h2>
+<p>In generating random numbers we want to make sure that werwer are adhering to the
+the US national standard fro generating random cryptographcly secure random numbers.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">rand</span><span style="color:#728e00">:</span><span style="color:#00979d">:Rng</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">scylla</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span><span style="color:#00979d">Session</span><span style="color:#728e00">,</span> <span style="color:#00979d">SessionBuilder</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">std</span><span style="color:#728e00">:</span><span style="color:#00979d">:sync::</span><span style="color:#728e00">{</span><span style="color:#00979d">Arc</span><span style="color:#728e00">,</span> <span style="color:#00979d">Mutex</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">tokio</span><span style="color:#728e00">:</span><span style="color:#00979d">:time::</span><span style="color:#728e00">{</span><span style="color:#00979d">sleep</span><span style="color:#728e00">,</span> <span style="color:#00979d">Duration</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">uuid</span><span style="color:#728e00">:</span><span style="color:#00979d">:Uuid</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">tokio::main</span><span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">async</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">main</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#95a5a6">// Create a ScyllaDB session
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">contact_points</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">&#34;127.0.0.1:9042&#34;</span><span style="color:#728e00">;</span> <span style="color:#95a5a6">// Adjust if needed
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">session</span><span style="color:#728e00">:</span> <span style="color:#00979d">Session</span> <span style="color:#728e00">=</span> <span style="color:#434f54">SessionBuilder</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.known_node</span><span style="color:#728e00">(</span><span style="color:#00979d">contact_points</span><span style="color:#728e00">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.build</span><span style="color:#728e00">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00979d">.await</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">.</span><span style="color:#434f54">expect</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;Failed to connect to ScyllaDB&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Arc and Mutex to share the session across threads
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">session</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Arc</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">(</span><span style="color:#00979d">Mutex::new</span><span style="color:#728e00">(</span><span style="color:#00979d">session</span><span style="color:#728e00">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Generate and insert random numbers
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#434f54">let</span> <span style="color:#434f54">number_of_values</span> <span style="color:#728e00">=</span> <span style="color:#8a7b52">100</span><span style="color:#434f54">_000</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">let</span> <span style="color:#434f54">mut</span> <span style="color:#434f54">handles</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Vec</span><span style="color:#728e00">:</span><span style="color:#00979d">:new</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">for</span> <span style="color:#728e00">_</span> <span style="color:#434f54">in</span> <span style="color:#8a7b52">0.</span><span style="color:#728e00">.</span><span style="color:#434f54">number_of_values</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">let</span> <span style="color:#434f54">session_clone</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Arc</span><span style="color:#728e00">:</span><span style="color:#00979d">:clone</span><span style="color:#728e00">(</span><span style="color:#00979d">&amp;session</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">handles</span><span style="color:#728e00">.</span><span style="color:#434f54">push</span><span style="color:#728e00">(</span><span style="color:#434f54">tokio</span><span style="color:#728e00">:</span><span style="color:#00979d">:spawn</span><span style="color:#728e00">(</span><span style="color:#00979d">async</span> <span style="color:#00979d">move</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#00979d">let</span> <span style="color:#00979d">value:</span> <span style="color:#00979d">i32</span> <span style="color:#728e00">=</span> <span style="color:#00979d">rand::thread_rng</span><span style="color:#728e00">()</span><span style="color:#00979d">.gen_range</span><span style="color:#728e00">(</span><span style="color:#a61717">0</span><span style="color:#00979d">..</span><span style="color:#a61717">100</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#00979d">let</span> <span style="color:#00979d">id</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Uuid</span><span style="color:#728e00">:</span><span style="color:#00979d">:new_v4</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">let</span> <span style="color:#434f54">session</span> <span style="color:#728e00">=</span> <span style="color:#434f54">session_clone</span><span style="color:#728e00">.</span><span style="color:#434f54">lock</span><span style="color:#728e00">().</span><span style="color:#434f54">unwrap</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">session</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">.</span><span style="color:#434f54">query</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;INSERT INTO random_numbers_keyspace.numbers (id, value) VALUES (?, ?)&#34;</span><span style="color:#728e00">,</span> <span style="color:#728e00">(</span><span style="color:#434f54">id</span><span style="color:#728e00">,</span> <span style="color:#434f54">value</span><span style="color:#728e00">))</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">.</span><span style="color:#434f54">await</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">.</span><span style="color:#434f54">expect</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;Failed to insert value into ScyllaDB&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">}));</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Wait for all insertions to complete
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">for</span> <span style="color:#434f54">handle</span> <span style="color:#434f54">in</span> <span style="color:#434f54">handles</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#434f54">handle</span><span style="color:#728e00">.</span><span style="color:#434f54">await</span><span style="color:#728e00">.</span><span style="color:#434f54">expect</span><span style="color:#728e00">(</span><span style="color:#7f8c8d">&#34;Task failed&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println</span><span style="color:#728e00">!(</span><span style="color:#7f8c8d">&#34;Inserted {} random numbers into ScyllaDB.&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">number_of_values</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><h2 id="step-5-benford-client-_-subscribe-to-numbers-and-persist">Step 5: Benford Client _ Subscribe to numbers and persist</h2>
+<p>Our client will loggin to the server that&rsquo;s streaming &hellip; and persist each ballot
+number with the unique id of the ballot, as well as a timestamp of <em>when</em> (time and date)
+the ballot was received by the client from the server.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">scylla</span><span style="color:#728e00">:</span><span style="color:#00979d">:</span><span style="color:#728e00">{</span><span style="color:#00979d">Session</span><span style="color:#728e00">,</span> <span style="color:#00979d">SessionBuilder</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">std</span><span style="color:#728e00">:</span><span style="color:#00979d">:sync::</span><span style="color:#728e00">{</span><span style="color:#00979d">Arc</span><span style="color:#728e00">,</span> <span style="color:#00979d">Mutex</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">tokio</span><span style="color:#728e00">:</span><span style="color:#00979d">:time::</span><span style="color:#728e00">{</span><span style="color:#00979d">sleep</span><span style="color:#728e00">,</span> <span style="color:#00979d">Duration</span><span style="color:#728e00">};</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">uuid</span><span style="color:#728e00">:</span><span style="color:#00979d">:Uuid</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">#[</span><span style="color:#00979d">tokio::main</span><span style="color:#728e00">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">async</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">main</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div>
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

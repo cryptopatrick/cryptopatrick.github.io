@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60544&amp;path=livereload" data-no-instant defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content=":book: cicili - Seamless Global Nature">
+<meta property="og:url" content="http://localhost:60544/blog/2025/10/07/book-cicili/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="http://localhost:60544/img/post-name/name.jpg" />
+
+
+<title>:book: cicili | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="http://localhost:60544//css/style.css">
+<link rel="stylesheet" href="http://localhost:60544//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="http://localhost:60544/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="http://localhost:60544/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="http://localhost:60544/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">:book: cicili</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      October 7, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/concepts/" style="margin-left:0.25em;">Concepts</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/reading/" style="margin-left:0.25em;">Reading</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <!-- ////////////////////////////////////////////////////////////////////////-->
+<p><img src="https://img.shields.io/badge/Work_In_Progress-orange.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Text_Version-0.4.5-blue.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg" alt="Version:0.1.0"></p>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<br>
+<h1 id="cicili-design-overview">CICILI Design Overview</h1>
+<p>This document captures the architecture and critical workflows that enforce whitelist-driven header verification in <strong>CICILI</strong>. It complements the PRD by explaining how data flows through the compiler, where trust boundaries live, and how failure modes are surfaced to developers.</p>
+<h2 id="goals">Goals</h2>
+<ul>
+<li>Guarantee that every header consumed during compilation is registered in the cicilian whitelist.</li>
+<li>Provide deterministic, reproducible verification via SHA-256 hashing and optional RSA/Ed25519 signatures.</li>
+<li>Allow operators to pin the whitelist and public key at runtime without rebuilding the compiler.</li>
+</ul>
+<h2 id="system-context">System Context</h2>
+<p>The compiler runs locally, but may consult external sources (blockchain-synchronized whitelist updates, CI pipelines) when refreshing the whitelist file. At build time everything operates offline using the local whitelist artifacts.</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    dev[Developer Source Files] --&gt;|compiles with| cicili[CICILI Compiler]
+    cicili --&gt; whitelist[Local Whitelist Config]
+    whitelist --&gt; ledger[(Blockchain Ledger)]
+    dev --&gt;|updates metadata| tooling[Whitelist Tooling]
+    tooling --&gt; ledger
+    tooling --&gt; whitelist
+</code></pre><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams</span> <span style="color:#728e00">import</span> <span style="color:#434f54">Diagram</span>, <span style="color:#434f54">Cluster</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams.generic.compute</span> <span style="color:#728e00">import</span> <span style="color:#434f54">Rack</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams.onprem.client</span> <span style="color:#728e00">import</span> <span style="color:#434f54">User</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams.onprem.iac</span> <span style="color:#728e00">import</span> <span style="color:#434f54">Ansible</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams.onprem.database</span> <span style="color:#728e00">import</span> <span style="color:#434f54">PostgreSQL</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams.generic.storage</span> <span style="color:#728e00">import</span> <span style="color:#434f54">Storage</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">with</span> <span style="color:#434f54">Diagram</span>(<span style="color:#7f8c8d">&#34;CICILI Flow&#34;</span>, <span style="color:#434f54">show</span><span style="color:#728e00">=</span><span style="color:#00979d">False</span>, <span style="color:#434f54">direction</span><span style="color:#728e00">=</span><span style="color:#7f8c8d">&#34;LR&#34;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">dev</span> <span style="color:#728e00">=</span> <span style="color:#434f54">User</span>(<span style="color:#7f8c8d">&#34;Developer Source Files&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">cicili</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Ansible</span>(<span style="color:#7f8c8d">&#34;CICILI Compiler&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">whitelist</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Rack</span>(<span style="color:#7f8c8d">&#34;Local Whitelist Config&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">ledger</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Storage</span>(<span style="color:#7f8c8d">&#34;Blockchain Ledger&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">tooling</span> <span style="color:#728e00">=</span> <span style="color:#434f54">PostgreSQL</span>(<span style="color:#7f8c8d">&#34;Whitelist Tooling&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">dev</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">cicili</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">cicili</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">whitelist</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">whitelist</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">ledger</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">dev</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">tooling</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">tooling</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">ledger</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">tooling</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">whitelist</span>
+</span></span></code></pre></div><ul>
+<li><strong>Whitelist Tooling</strong> collects SHA-256 hashes, signs headers, and publishes new entries to the blockchain.</li>
+<li><strong>CICILI Compiler</strong> consumes a snapshot (text file) of the whitelist plus an embedded or operator-specified public key.</li>
+</ul>
+<h2 id="compiler-architecture">Compiler Architecture</h2>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart TD
+    subgraph Frontend
+        pp[Preprocessor &amp; Lexer]
+        parser[Parser]
+    end
+    subgraph Whitelist Stack
+        wlinit[Whitelist Init]
+        wlcheck[Whitelist Verify]
+    end
+    subgraph Backend
+        sema[Type Checker]
+        codegen[Code Generator]
+        emit[Assembler &amp; Linker]
+    end
+
+    start([Compiler Driver]) --&gt; wlinit
+    wlinit --&gt; pp
+    pp --&gt; wlcheck
+    wlcheck --&gt;|OK| parser
+    wlcheck --&gt;|DENY| diag[Diagnostic Engine]
+    parser --&gt; sema --&gt; codegen --&gt; emit --&gt; done([Executable / Object])
+</code></pre><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams</span> <span style="color:#728e00">import</span> <span style="color:#434f54">Diagram</span>, <span style="color:#434f54">Cluster</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams.generic.compute</span> <span style="color:#728e00">import</span> <span style="color:#434f54">Rack</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams.generic.blank</span> <span style="color:#728e00">import</span> <span style="color:#434f54">Blank</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams.onprem.client</span> <span style="color:#728e00">import</span> <span style="color:#434f54">User</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">from</span> <span style="color:#434f54">diagrams.generic.storage</span> <span style="color:#728e00">import</span> <span style="color:#434f54">Storage</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">with</span> <span style="color:#434f54">Diagram</span>(<span style="color:#7f8c8d">&#34;CICILI Compiler Pipeline&#34;</span>, <span style="color:#434f54">show</span><span style="color:#728e00">=</span><span style="color:#00979d">False</span>, <span style="color:#434f54">direction</span><span style="color:#728e00">=</span><span style="color:#7f8c8d">&#34;TB&#34;</span>):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">start</span> <span style="color:#728e00">=</span> <span style="color:#434f54">User</span>(<span style="color:#7f8c8d">&#34;Compiler Driver&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">with</span> <span style="color:#434f54">Cluster</span>(<span style="color:#7f8c8d">&#34;Frontend&#34;</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">pp</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Rack</span>(<span style="color:#7f8c8d">&#34;Preprocessor &amp; Lexer&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">parser</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Rack</span>(<span style="color:#7f8c8d">&#34;Parser&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">with</span> <span style="color:#434f54">Cluster</span>(<span style="color:#7f8c8d">&#34;Whitelist Stack&#34;</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">wlinit</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Rack</span>(<span style="color:#7f8c8d">&#34;Whitelist Init&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">wlcheck</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Rack</span>(<span style="color:#7f8c8d">&#34;Whitelist Verify&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">with</span> <span style="color:#434f54">Cluster</span>(<span style="color:#7f8c8d">&#34;Backend&#34;</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">sema</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Rack</span>(<span style="color:#7f8c8d">&#34;Type Checker&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">codegen</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Rack</span>(<span style="color:#7f8c8d">&#34;Code Generator&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">emit</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Rack</span>(<span style="color:#7f8c8d">&#34;Assembler &amp; Linker&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">diag</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Storage</span>(<span style="color:#7f8c8d">&#34;Diagnostic Engine&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">done</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Storage</span>(<span style="color:#7f8c8d">&#34;Executable / Object&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">start</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">wlinit</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">pp</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">wlcheck</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">wlcheck</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">parser</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">wlcheck</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">diag</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">parser</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">sema</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">codegen</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">emit</span> <span style="color:#728e00">&gt;&gt;</span> <span style="color:#434f54">done</span>
+</span></span></code></pre></div><h3 id="whitelist-initialization">Whitelist Initialization</h3>
+<ol>
+<li>Parse CLI options: <code>--whitelist</code>, <code>--whitelist-key</code>, verbose flag.</li>
+<li>Determine candidate whitelist paths:
+<ul>
+<li>CLI override</li>
+<li><code>CICILI_WHITELIST</code> environment variable</li>
+<li><code>whitelist.conf</code></li>
+<li><code>src/std_headers_whitelist.conf</code></li>
+</ul>
+</li>
+<li>Load entries into memory, marking those with placeholder signatures.</li>
+<li>Load the public key (if any entries require real signature validation) from override path, <code>CICILI_PUBLIC_KEY</code>, <code>/etc/cicili/public_key.pem</code>, or the working directory.</li>
+</ol>
+<p>Initialization failure is fatal and aborts compilation before any translation unit is processed.</p>
+<h3 id="include-resolution--verification">Include Resolution &amp; Verification</h3>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+    participant Driver
+    participant Preproc as Preprocessor
+    participant WL as Whitelist Manager
+    participant FS as Filesystem
+
+    Driver-&gt;&gt;Preproc: process source
+    Preproc-&gt;&gt;FS: resolve include path
+    FS--&gt;&gt;Preproc: absolute path or error
+    Preproc-&gt;&gt;WL: request include check(name, path)
+    WL-&gt;&gt;WL: lookup entry
+    alt Entry found
+        WL-&gt;&gt;FS: compute SHA-256
+        WL-&gt;&gt;WL: compare hash
+        alt Signature present
+            WL-&gt;&gt;WL: verify signature (EVP)
+            WL--&gt;&gt;Preproc: ALLOWED
+        else Placeholder or no signature
+            WL--&gt;&gt;Preproc: ALLOWED_WEAK (warn once)
+        end
+    else Entry missing
+        WL--&gt;&gt;Preproc: NOT_FOUND / DENIED / HASH_MISMATCH / INVALID_SIGNATURE / PUBLIC_KEY_MISSING
+    end
+    Preproc--&gt;&gt;Driver: continue or emit diagnostic
+</code></pre><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#434f54">sequenceDiagram</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">participant</span> <span style="color:#434f54">Driver</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">participant</span> <span style="color:#434f54">Preproc</span> <span style="color:#728e00">as</span> <span style="color:#434f54">Preprocessor</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">participant</span> <span style="color:#434f54">WL</span> <span style="color:#728e00">as</span> <span style="color:#434f54">Whitelist</span> <span style="color:#434f54">Manager</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">participant</span> <span style="color:#434f54">FS</span> <span style="color:#728e00">as</span> <span style="color:#434f54">Filesystem</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Driver</span><span style="color:#728e00">-&gt;&gt;</span><span style="color:#434f54">Preproc</span>: <span style="color:#434f54">process</span> <span style="color:#434f54">source</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Preproc</span><span style="color:#728e00">-&gt;&gt;</span><span style="color:#434f54">FS</span>: <span style="color:#434f54">resolve</span> <span style="color:#434f54">include</span> <span style="color:#434f54">path</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">FS</span><span style="color:#728e00">--&gt;&gt;</span><span style="color:#434f54">Preproc</span>: <span style="color:#434f54">absolute</span> <span style="color:#434f54">path</span> <span style="color:#728e00">or</span> <span style="color:#434f54">error</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Preproc</span><span style="color:#728e00">-&gt;&gt;</span><span style="color:#434f54">WL</span>: <span style="color:#434f54">request</span> <span style="color:#434f54">include</span> <span style="color:#434f54">check</span>(<span style="color:#434f54">name</span>, <span style="color:#434f54">path</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">WL</span><span style="color:#728e00">-&gt;&gt;</span><span style="color:#434f54">WL</span>: <span style="color:#434f54">lookup</span> <span style="color:#434f54">entry</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">alt</span> <span style="color:#434f54">Entry</span> <span style="color:#434f54">found</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">WL</span><span style="color:#728e00">-&gt;&gt;</span><span style="color:#434f54">FS</span>: <span style="color:#434f54">compute</span> <span style="color:#434f54">SHA</span><span style="color:#728e00">-</span><span style="color:#8a7b52">256</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">WL</span><span style="color:#728e00">-&gt;&gt;</span><span style="color:#434f54">WL</span>: <span style="color:#434f54">compare</span> <span style="color:#728e00">hash</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">alt</span> <span style="color:#434f54">Signature</span> <span style="color:#434f54">present</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">WL</span><span style="color:#728e00">-&gt;&gt;</span><span style="color:#434f54">WL</span>: <span style="color:#434f54">verify</span> <span style="color:#434f54">signature</span> (<span style="color:#434f54">EVP</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">WL</span><span style="color:#728e00">--&gt;&gt;</span><span style="color:#434f54">Preproc</span>: <span style="color:#434f54">ALLOWED</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">else</span> <span style="color:#434f54">Placeholder</span> <span style="color:#728e00">or</span> <span style="color:#434f54">no</span> <span style="color:#434f54">signature</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">WL</span><span style="color:#728e00">--&gt;&gt;</span><span style="color:#434f54">Preproc</span>: <span style="color:#434f54">ALLOWED_WEAK</span> (<span style="color:#434f54">warn</span> <span style="color:#434f54">once</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">else</span> <span style="color:#434f54">Entry</span> <span style="color:#434f54">missing</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">WL</span><span style="color:#728e00">--&gt;&gt;</span><span style="color:#434f54">Preproc</span>: <span style="color:#434f54">NOT_FOUND</span> <span style="color:#728e00">/</span> <span style="color:#434f54">DENIED</span> <span style="color:#728e00">/</span> <span style="color:#434f54">HASH_MISMATCH</span> <span style="color:#728e00">/</span> <span style="color:#434f54">INVALID_SIGNATURE</span> <span style="color:#728e00">/</span> <span style="color:#434f54">PUBLIC_KEY_MISSING</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">Preproc</span><span style="color:#728e00">--&gt;&gt;</span><span style="color:#434f54">Driver</span>: <span style="color:#728e00">continue</span> <span style="color:#728e00">or</span> <span style="color:#434f54">emit</span> <span style="color:#434f54">diagnostic</span>
+</span></span></code></pre></div><ul>
+<li><strong>ALLOWED</strong>: header proceeds silently.</li>
+<li><strong>ALLOWED_WEAK</strong>: header builds, but compiler emits a warning (<code>placeholder signature; hash verified only</code>).</li>
+<li><strong>NOT_FOUND / DENIED / HASH_MISMATCH / INVALID_SIGNATURE / PUBLIC_KEY_MISSING</strong>: compilation aborts with a descriptive error.</li>
+</ul>
+<h3 id="data-structures">Data Structures</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Structure</th>
+          <th>Purpose</th>
+          <th>Notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>struct whitelist_entry</code></td>
+          <td>In-memory representation of a whitelist row</td>
+          <td>Stores name, path, SHA-256 hash, optional signature, flags, runtime state</td>
+      </tr>
+      <tr>
+          <td>Placeholder flag</td>
+          <td>Marks entries without valid signatures</td>
+          <td>Enables one-time warnings</td>
+      </tr>
+      <tr>
+          <td>Runtime state flag</td>
+          <td>Records whether a warning has already been issued</td>
+          <td>Prevents noisy duplicate diagnostics</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="failure-modes--diagnostics">Failure Modes &amp; Diagnostics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Condition</th>
+          <th>Detection Point</th>
+          <th>Diagnostic</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Missing whitelist file</td>
+          <td>Driver startup</td>
+          <td><code>cicili: unable to load whitelist configuration.</code></td>
+      </tr>
+      <tr>
+          <td>Missing public key when required</td>
+          <td><code>ensure_public_key_loaded</code></td>
+          <td><code>failed to load public key for signature verification</code></td>
+      </tr>
+      <tr>
+          <td>Unknown header</td>
+          <td>Preprocessor include check</td>
+          <td><code>'&lt;header&gt;' is not in the approved whitelist</code></td>
+      </tr>
+      <tr>
+          <td>Hash mismatch</td>
+          <td>Post-hash comparison</td>
+          <td><code>'&lt;header&gt;' failed integrity check (hash mismatch)</code></td>
+      </tr>
+      <tr>
+          <td>Invalid signature</td>
+          <td>EVP verify</td>
+          <td><code>'&lt;header&gt;' failed cryptographic verification</code></td>
+      </tr>
+      <tr>
+          <td>Placeholder signature</td>
+          <td>Flagged entry</td>
+          <td>Warning (compilation continues)</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="tooling--developer-inputs">Tooling &amp; Developer Inputs</h2>
+<ul>
+<li><code>tools/generate_header_manifest.py</code>: inventories headers, produces metadata for audits and blockchain submissions.</li>
+<li><code>src/gen_whitelist.sh</code>: regenerates a whitelist file with fresh hashes (signatures left as placeholders until a signing pipeline injects real values).</li>
+<li><code>src/test_cicili.sh</code>: scripted smoke test that builds the compiler, runs whitelist unit tests, and demonstrates whitelist enforcement.</li>
+<li><code>make whitelist-test</code>: compiles and runs <code>tests/test_whitelist.c</code>, validating whitelist initialization and placeholder handling.</li>
+</ul>
+<h2 id="extensibility">Extensibility</h2>
+<p>Future enhancements:</p>
+<ol>
+<li><strong>Header acquisition pipeline</strong>: containerized capture of approved libc headers, coupled with automated signing.</li>
+<li><strong>Blockchain integration</strong>: replace the static whitelist file with a signed manifest synchronized from the cicilian ledger.</li>
+<li><strong><code>import</code> syntax</strong>: adapt preprocessing to recognize <code>import &lt;header&gt;</code> while reusing the existing whitelist enforcement path.</li>
+<li><strong>Negative-path tests</strong>: add dedicated unit tests for hash mismatch, denied entries, and missing public keys once fixture management is in place.</li>
+</ol>
+<h2 id="summary">Summary</h2>
+<p>CICILI guarantees whitelist compliance by inserting verification at the earliest feasible point—the include resolver. All failure modes are detected before parsing, preventing untrusted code from entering later compilation stages. CLI overrides and placeholder handling empower gradual rollout while retaining operator visibility into incomplete trust relationships.</p>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 Logging - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2024/09/25/logging/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="https://www.cryptopatrick.com/img/post-name/name.jpg" />
+
+
+<title>🦀 Logging | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 Logging</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      September 25, 2024
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/engineering/" style="margin-left:0.25em;">Engineering</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/rust/" style="margin-left:0.25em;">Rust</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <h1 id="introduction">Introduction</h1>
+<p>Logging in software engineering is very important to get a sense of what&rsquo;s going
+on when the code is executing. There are many ways to log - from the simple
+print to stdout, to more sophisticated ways using crates.
+Let&rsquo;s have a look at two crates which help us do logging in Rust.</p>
+<h1 id="crate-01-log">Crate 01: log</h1>
+<p><code>log</code> is a logging <em>facade</em> that simply provides the API. The actual logging implementation has to be added using another crate - of which we can find a list on the website of log:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">log</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#434f54">pub</span> <span style="color:#434f54">fn</span> <span style="color:#434f54">shave_the_yak</span><span style="color:#728e00">(</span><span style="color:#434f54">yak</span><span style="color:#728e00">:</span> <span style="color:#00979d">&amp;mut</span> <span style="color:#00979d">Yak</span><span style="color:#728e00">)</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">log</span><span style="color:#728e00">:</span><span style="color:#00979d">:trace!</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">Commencing</span> <span style="color:#00979d">yak</span> <span style="color:#00979d">shaving</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">loop</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">match</span> <span style="color:#434f54">find_a_razor</span><span style="color:#728e00">()</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">Ok</span><span style="color:#728e00">(</span><span style="color:#434f54">razor</span><span style="color:#728e00">)</span> <span style="color:#728e00">=&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">log</span><span style="color:#728e00">:</span><span style="color:#00979d">:info!</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">Razor</span> <span style="color:#00979d">located:</span> <span style="color:#728e00">{}</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">,</span> <span style="color:#00979d">razor</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">yak</span><span style="color:#728e00">.</span><span style="color:#434f54">shave</span><span style="color:#728e00">(</span><span style="color:#434f54">razor</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">break</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">Err</span><span style="color:#728e00">(</span><span style="color:#434f54">err</span><span style="color:#728e00">)</span> <span style="color:#728e00">=&gt;</span> <span style="color:#728e00">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#434f54">log</span><span style="color:#728e00">:</span><span style="color:#00979d">:warn!</span><span style="color:#728e00">(</span><span style="color:#a61717">&#34;</span><span style="color:#00979d">Unable</span> <span style="color:#00979d">to</span> <span style="color:#00979d">locate</span> <span style="color:#00979d">a</span> <span style="color:#00979d">razor:</span> <span style="color:#728e00">{},</span> <span style="color:#00979d">retrying</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">,</span> <span style="color:#434f54">err</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">}</span>
+</span></span></code></pre></div><h1 id="crate-02-tracing">Crate 02: tracing</h1>
+<p><code>tracing</code> is a crate that calls itself &ldquo;a framework for instrumenting Rust programs to collect structured, event-based diagnostic information&rdquo;. It requires its logger counterpart <code>tracing-subscriber</code> to be used, or a custom type that implements the <code>tracing::Subscriber</code> function. Developed by the Tokio team, it&rsquo;s fully built from the ground up for async, which makes it perfect for web applications with Rust.</p>
+<p><code>tracing</code> uses the concept of &ldquo;spans&rdquo; which are used to record the flow of execution through a program. Events can happen inside or outside of a span and can also be used similarly to unstructured logging (i.e., just recording the event any which way) but can also represent a point in time within a span. See below:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#434f54">use</span> <span style="color:#434f54">tracing</span><span style="color:#728e00">:</span><span style="color:#00979d">:Level</span><span style="color:#728e00">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// records an event outside of any span context:
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">tracing</span><span style="color:#728e00">:</span><span style="color:#00979d">:event!</span><span style="color:#728e00">(</span><span style="color:#00979d">Level::DEBUG</span><span style="color:#728e00">,</span> <span style="color:#a61717">&#34;</span><span style="color:#00979d">something</span> <span style="color:#00979d">happened</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// create the span while entering it
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">let</span> <span style="color:#434f54">span</span> <span style="color:#728e00">=</span> <span style="color:#434f54">tracing</span><span style="color:#728e00">:</span><span style="color:#00979d">:span!</span><span style="color:#728e00">(</span><span style="color:#00979d">Level::INFO</span><span style="color:#728e00">,</span> <span style="color:#a61717">&#34;</span><span style="color:#00979d">my_span</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">).</span><span style="color:#434f54">entered</span><span style="color:#728e00">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// records an event within &#34;my_span&#34;.
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">tracing</span><span style="color:#728e00">:</span><span style="color:#00979d">:event!</span><span style="color:#728e00">(</span><span style="color:#00979d">Level::DEBUG</span><span style="color:#728e00">,</span> <span style="color:#a61717">&#34;</span><span style="color:#00979d">something</span> <span style="color:#00979d">happened</span> <span style="color:#00979d">inside</span> <span style="color:#00979d">my_span</span><span style="color:#a61717">&#34;</span><span style="color:#728e00">);</span>
+</span></span></code></pre></div><p>Spans can form a tree structure, and the entire subtree is represented by its children - therefore, a parent span will always last as long as its longest-lived child span, if not longer.</p>
+<p>Because all of this can be a bit excessive, <code>tracing</code> has also included the regular macros that would be in other log facade libraries for logging - namely, <code>info!</code>, <code>error!</code>, <code>debug!</code>, <code>warn!</code> and <code>trace!</code>. There&rsquo;s also a span version of each of these macros - but if you&rsquo;re coming from <code>log</code> and want to try <code>tracing</code> out without getting lost in the complexity of trying to make sure everything is in a span, tracing&rsquo;s got your back.</p>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

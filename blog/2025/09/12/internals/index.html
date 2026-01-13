@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60544&amp;path=livereload" data-no-instant defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 Internals - Seamless Global Nature">
+<meta property="og:url" content="http://localhost:60544/blog/2025/09/12/internals/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="http://localhost:60544/img/post-name/name.jpg" />
+
+
+<title>🦀 Internals | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="http://localhost:60544//css/style.css">
+<link rel="stylesheet" href="http://localhost:60544//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="http://localhost:60544/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="http://localhost:60544/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="http://localhost:60544/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 Internals</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      September 12, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/concepts/" style="margin-left:0.25em;">Concepts</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/reading/" style="margin-left:0.25em;">Reading</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <!-- ////////////////////////////////////////////////////////////////////////-->
+<p><img src="https://img.shields.io/badge/Work_In_Progress-orange.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Text_Version-0.4.5-blue.svg" alt="Version:0.1.0">
+<img src="https://img.shields.io/badge/Source_Code_Builds-Yes-green.svg" alt="Version:0.1.0"></p>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<br>
+<blockquote>
+<p><strong>Preface:</strong> Compiler Explorer <a href="https://godbold.org/z/xahcT9oqc">https://godbold.org/z/xahcT9oqc</a> to understand the generated assembly.</p>
+</blockquote>
+<!-- ////////////////////////////////////////////////////////////////////////-->
+<h2 id="heading">Heading</h2>
+<p>rax, rdi, rsi, xmm0, ymm0
+opcodes, x86-64, optional operands</p>
+<blockquote>
+<p>GeHotz list of languages: Assember, PyTorch, C, VHDL,</p>
+</blockquote>
+<p>When we code in Rust, it&rsquo;s nice to think that we&rsquo;re close to the metal (CPU).
+In reality, there&rsquo;s a whole abstraction layer lodged between our Rust code and
+the CPU - that layer is <strong>Assembler</strong>.
+Assembly code are the <em>actual</em> machine instructions to the CPU.
+We can&rsquo;t get any lower, or close to the metal (CPU), than Assembler code.
+As such, it makes sense to have a good understanding what our Rust code is
+actually instructing, via generated Assembler code, the CPU to do.</p>
+<h3 id="increment-integer-by-1">Increment integer by 1</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">pub</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">increment_i64</span>(<span style="color:#434f54">num</span>: <span style="color:#00979d">i64</span>) -&gt; <span style="color:#00979d">i64</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#434f54">num</span> <span style="color:#728e00">+</span> <span style="color:#8a7b52">1</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code class="language-assembler" data-lang="assembler">// lea : load effective address adds 1 to the value in ``rdi``.
+lea rax, [rdi + 1]
+// return the value stored in rax as a confimation.
+ret
+</code></pre><p><figure><img src="../../../../../img/time-lock-message/rebellion.jpg">
+</figure>
+<br>
+<strong>▲[^1]</strong> A Rebel ship orbiting above the Federation&rsquo;s top secret military research lab, <em>The Periphery</em>.</p>
+<p>⠀⠀⠀⠀⠀ This is a paragraph.
+⠀⠀⠀⠀⠀ This is another paragraph.</p>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>

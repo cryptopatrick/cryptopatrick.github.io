@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Solana on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/tags/solana/</link>
+    <description>Recent content in Solana on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Fri, 12 Apr 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/solana/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🦀 Solana 101</title>
+      <link>https://www.cryptopatrick.com/blog/2024/04/12/solana-101/</link>
+      <pubDate>Fri, 12 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2024/04/12/solana-101/</guid>
+      <description>I start by reading the Solana documentation and will see how far I get in building something with Solana.</description>
+    </item>
+  </channel>
+</rss>

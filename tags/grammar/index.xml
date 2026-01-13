@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Grammar on Seamless Global Nature</title>
+    <link>https://www.cryptopatrick.com/tags/grammar/</link>
+    <description>Recent content in Grammar on Seamless Global Nature</description>
+    <generator>Hugo</generator>
+    <language>en-EN</language>
+    <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
+    <lastBuildDate>Fri, 05 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.cryptopatrick.com/tags/grammar/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🔠 NLP: PGF Specification 2.1</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/05/nlp-pgf-specification-2.1/</link>
+      <pubDate>Fri, 05 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/05/nlp-pgf-specification-2.1/</guid>
+      <description>Having spent considerable time looking for information on this format - which is still under development - I decided to compile my own version of the specification.</description>
+    </item>
+    <item>
+      <title>🤖 Ai:  PGF Specification 1.0</title>
+      <link>https://www.cryptopatrick.com/blog/2025/09/05/ai-pgf-specification-1.0/</link>
+      <pubDate>Fri, 05 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/blog/2025/09/05/ai-pgf-specification-1.0/</guid>
+      <description>Just something I read and found interesting.</description>
+    </item>
+  </channel>
+</rss>

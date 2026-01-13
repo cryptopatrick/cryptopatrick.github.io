@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="keyword 1, keyword 2, keyword 3" name="keywords">
+<meta content="CryptoPatrick" name="author">
+<meta property="og:title" content="🦀 miniFIX Tutorial | Part 02 - Seamless Global Nature">
+<meta property="og:url" content="https://www.cryptopatrick.com/blog/2025/09/16/minifix-tutorial-part-02/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+
+
+
+<title>🦀 miniFIX Tutorial | Part 02 | Seamless Global Nature</title>
+
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/style.css">
+<link rel="stylesheet" href="https://www.cryptopatrick.com//css/customcode.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+
+ <img src="../../../../../profile.jpg" alt="Avatar" style="margin-right: 1em" height="100px">
+      <div class="nav-left" style="flex-basis: auto;">
+        <a class="nav-item" href="https://www.cryptopatrick.com/"><h1 class="title is-4">Seamless Global Nature</h1></a>
+      <nav class="nav-item level is-mobile">
+          
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/about/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-male"></i>
+            </span>
+            
+            About Me
+          </a>
+          
+          <a class="level-item" href="https://www.cryptopatrick.com/tags/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-tags"></i>
+            </span>
+            
+            Tags
+          </a>
+          
+          <a class="level-item" href="https://100-days-of-vibe.vercel.app" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            
+            100DaysOfVibe
+          </a>
+          
+          <a class="level-item" href="https://x.com/cryptopatrick" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-twitter"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://github.com/cryptopatrick?tab=repositories" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-github"></i>
+            </span>
+            
+             
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/cryptopatrickk/" style="display: flex; align-items: center;">
+            
+            <span class="icon" style="margin-right: 0.175em; display: flex; align-items: center;">
+              <i class="fa fa-instagram"></i>
+            </span>
+            
+             
+          </a>
+          
+        </nav>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">🦀 miniFIX Tutorial | Part 02</h1>
+    
+    
+    <h2 class="subtitle is-5">
+      September 16, 2025
+       by CryptoPatrick
+      
+        
+        <span class="tags-inline" style="margin-left:0.1em;">
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/rust/" style="margin-left:0.25em;">Rust</a>
+          
+            
+            <a class="tag is-link is-light" href="../../../../../tags/tutorials/" style="margin-left:0.25em;">Tutorials</a>
+          
+        </span>
+      
+      
+    </h2>
+    <div class="content">
+      <h1 id="streaming-fix-message-decoding-with-minifix">Streaming FIX Message Decoding with miniFIX</h1>
+<h2 id="introduction">Introduction</h2>
+<p>In real-world trading applications, FIX messages often arrive as continuous streams over network connections. Unlike processing individual complete messages, streaming scenarios require handling partial messages, buffering incomplete data, and parsing messages as they arrive. miniFIX provides excellent support for streaming FIX message decoding.</p>
+<h2 id="what-youll-learn">What You&rsquo;ll Learn</h2>
+<ul>
+<li>How to set up a streaming FIX decoder</li>
+<li>Managing message buffers and partial reads</li>
+<li>Parsing messages from continuous streams</li>
+<li>Best practices for production streaming scenarios</li>
+</ul>
+<h2 id="the-challenge-of-streaming">The Challenge of Streaming</h2>
+<p>When FIX messages arrive over a network connection, they may come in chunks smaller than a complete message. You might receive:</p>
+<ol>
+<li>Part of a message</li>
+<li>Multiple messages in one chunk</li>
+<li>A complete message plus part of the next one</li>
+</ol>
+<p>miniFIX&rsquo;s streaming decoder handles these scenarios gracefully.</p>
+<h2 id="setting-up-a-streaming-decoder">Setting Up a Streaming Decoder</h2>
+<p>Let&rsquo;s create a streaming decoder that can handle multiple messages from a continuous stream:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">prelude</span>::<span style="color:#728e00">*</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">tagvalue</span>::<span style="color:#434f54">Decoder</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">io</span>::{<span style="color:#434f54">Cursor</span>, <span style="color:#434f54">Read</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">create_streaming_decoder</span>(<span style="color:#434f54">fix_dictionary</span>: <span style="color:#434f54">Dictionary</span>) -&gt; <span style="color:#434f54">Decoder</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Decoder</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">fix_dictionary</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">decoder</span>.<span style="color:#434f54">config_mut</span>().<span style="color:#434f54">separator</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#39;|&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">decoder</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="sample-stream-data">Sample Stream Data</h2>
+<p>For this example, we&rsquo;ll simulate a stream containing multiple FIX messages:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">const</span> <span style="color:#434f54">FIX_MESSAGES</span>: <span style="color:#00979d">&amp;</span>[<span style="color:#728e00">&amp;</span>[<span style="color:#00979d">u8</span>]] <span style="color:#728e00">=</span> <span style="color:#728e00">&amp;</span>[
+</span></span><span style="display:flex;"><span>    <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;8=FIX.4.2|9=97|35=6|49=BKR|56=IM|34=14|52=20100204-09:18:42|23=115685|28=N|55=SPMI.MI|54=2|44=2200.75|27=S|25=H|10=248|&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;8=FIX.4.2|9=40|35=D|49=AFUNDMGR|56=ABROKER|15=USD|59=0|10=091|&#34;</span>,
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">create_fix_stream</span>() -&gt; <span style="color:#728e00">Vec</span><span style="color:#728e00">&lt;</span><span style="color:#00979d">u8</span><span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">FIX_MESSAGES</span>.<span style="color:#434f54">iter</span>().<span style="color:#434f54">copied</span>().<span style="color:#434f54">flatten</span>().<span style="color:#434f54">copied</span>().<span style="color:#434f54">collect</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="the-streaming-parse-loop">The Streaming Parse Loop</h2>
+<p>The core of streaming FIX message parsing involves a careful loop that reads data and attempts to parse complete messages:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">fix_dictionary</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Dictionary</span>::<span style="color:#434f54">fix42</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">fix_decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">create_streaming_decoder</span>(<span style="color:#434f54">fix_dictionary</span>).<span style="color:#434f54">streaming</span>(<span style="color:#434f54">vec!</span>[]);
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">stream</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Cursor</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">create_fix_stream</span>());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">for</span> <span style="color:#434f54">message_num</span> <span style="color:#728e00">in</span> <span style="color:#8a7b52">0</span><span style="color:#728e00">..</span><span style="color:#434f54">FIX_MESSAGES</span>.<span style="color:#434f54">len</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">loop</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#95a5a6">// Fill the decoder&#39;s buffer with available data
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>            <span style="color:#434f54">stream</span>.<span style="color:#434f54">read_exact</span>(<span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">fillable</span>()).<span style="color:#434f54">unwrap</span>();
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#95a5a6">// Try to parse a complete message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>            <span style="color:#728e00">match</span> <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">try_parse</span>().<span style="color:#434f54">unwrap</span>() {
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">Some</span>(<span style="color:#434f54">_</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#95a5a6">// Successfully parsed a complete message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>                    <span style="color:#728e00">let</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">message</span>();
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">process_message</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">msg</span>, <span style="color:#434f54">message_num</span>);
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#95a5a6">// Clear decoder to prepare for next message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>                    <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">clear</span>();
+</span></span><span style="display:flex;"><span>                    <span style="color:#728e00">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">None</span> <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#95a5a6">// Still parsing - need more data
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>                    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;Partial message received, waiting for more data...&#34;</span>);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">process_message</span>(<span style="color:#434f54">msg</span>: <span style="color:#00979d">&amp;</span><span style="color:#434f54">impl</span> <span style="color:#434f54">GetField</span><span style="color:#728e00">&lt;</span><span style="color:#00979d">u32</span><span style="color:#728e00">&gt;</span>, <span style="color:#434f54">message_num</span>: <span style="color:#00979d">usize</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;Message </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">message_num</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">fix42</span>::<span style="color:#434f54">BEGIN_STRING</span>).<span style="color:#434f54">unwrap</span>()));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#95a5a6">// Process the message based on its type
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    <span style="color:#728e00">match</span> <span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">fix42</span>::<span style="color:#434f54">MSG_TYPE</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">Ok</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;6&#34;</span>) <span style="color:#728e00">=&gt;</span> <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;  Indication of Interest&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">Ok</span>(<span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;D&#34;</span>) <span style="color:#728e00">=&gt;</span> <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;  New Order Single&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">_</span> <span style="color:#728e00">=&gt;</span> <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;  Other message type&#34;</span>),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="key-concepts">Key Concepts</h2>
+<h3 id="1-buffer-management">1. Buffer Management</h3>
+<p>The streaming decoder maintains an internal buffer that you can fill with incoming data:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#95a5a6">// Get the fillable portion of the buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#728e00">let</span> <span style="color:#434f54">fillable_buffer</span> <span style="color:#728e00">=</span> <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">fillable</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#95a5a6">// Read data into the buffer (must use read_exact)
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span><span style="color:#434f54">stream</span>.<span style="color:#434f54">read_exact</span>(<span style="color:#434f54">fillable_buffer</span>).<span style="color:#434f54">unwrap</span>();
+</span></span></code></pre></div><h3 id="2-partial-parsing">2. Partial Parsing</h3>
+<p>The <code>try_parse()</code> method attempts to parse a complete message from the current buffer:</p>
+<ul>
+<li><code>Some(_)</code>: A complete message was successfully parsed</li>
+<li><code>None</code>: More data is needed to complete the current message</li>
+</ul>
+<h3 id="3-message-clearing">3. Message Clearing</h3>
+<p>After processing a message, call <code>clear()</code> to prepare the decoder for the next message:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">clear</span>();
+</span></span></code></pre></div><h2 id="production-considerations">Production Considerations</h2>
+<h3 id="error-handling">Error Handling</h3>
+<p>In production, you&rsquo;ll want robust error handling:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">match</span> <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">try_parse</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">Ok</span>(<span style="color:#728e00">Some</span>(<span style="color:#434f54">_</span>)) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Process message
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#728e00">let</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">message</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">process_message</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">msg</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">clear</span>();
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">Ok</span>(<span style="color:#728e00">None</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Need more data
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#728e00">continue</span>;
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Handle parsing error
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;FIX parsing error: </span><span style="color:#7f8c8d">{:?}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Decide whether to reset decoder or handle gracefully
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="network-integration">Network Integration</h3>
+<p>With real network streams, you might use this pattern:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">tokio</span>::<span style="color:#434f54">net</span>::<span style="color:#434f54">TcpStream</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">tokio</span>::<span style="color:#434f54">io</span>::<span style="color:#434f54">AsyncReadExt</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">async</span> <span style="color:#728e00">fn</span> <span style="color:#d35400">process_fix_stream</span>(<span style="color:#728e00">mut</span> <span style="color:#434f54">stream</span>: <span style="color:#434f54">TcpStream</span>) -&gt; <span style="color:#728e00">Result</span><span style="color:#728e00">&lt;</span>(), <span style="color:#728e00">Box</span><span style="color:#728e00">&lt;</span><span style="color:#728e00">dyn</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">error</span>::<span style="color:#434f54">Error</span><span style="color:#728e00">&gt;&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">fix_dictionary</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Dictionary</span>::<span style="color:#434f54">fix42</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">fix_decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Decoder</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">fix_dictionary</span>).<span style="color:#434f54">streaming</span>(<span style="color:#434f54">vec!</span>[]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">loop</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Read data from network
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#728e00">let</span> <span style="color:#434f54">bytes_read</span> <span style="color:#728e00">=</span> <span style="color:#434f54">stream</span>.<span style="color:#434f54">read</span>(<span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">fillable</span>()).<span style="color:#728e00">await</span><span style="color:#728e00">?</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">if</span> <span style="color:#434f54">bytes_read</span> <span style="color:#728e00">==</span> <span style="color:#8a7b52">0</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">break</span>; <span style="color:#95a5a6">// Connection closed
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#95a5a6">// Try to parse messages
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>        <span style="color:#728e00">while</span> <span style="color:#728e00">let</span> <span style="color:#728e00">Some</span>(<span style="color:#434f54">_</span>) <span style="color:#728e00">=</span> <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">try_parse</span>()<span style="color:#728e00">?</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">let</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">message</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">process_message</span>(<span style="color:#728e00">&amp;</span><span style="color:#434f54">msg</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">clear</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="complete-streaming-example">Complete Streaming Example</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">prelude</span>::<span style="color:#728e00">*</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">minifix</span>::<span style="color:#434f54">tagvalue</span>::<span style="color:#434f54">Decoder</span>;
+</span></span><span style="display:flex;"><span><span style="color:#728e00">use</span> <span style="color:#434f54">std</span>::<span style="color:#434f54">io</span>::{<span style="color:#434f54">Cursor</span>, <span style="color:#434f54">Read</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">const</span> <span style="color:#434f54">FIX_MESSAGES</span>: <span style="color:#00979d">&amp;</span>[<span style="color:#728e00">&amp;</span>[<span style="color:#00979d">u8</span>]] <span style="color:#728e00">=</span> <span style="color:#728e00">&amp;</span>[
+</span></span><span style="display:flex;"><span>    <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;8=FIX.4.2|9=97|35=6|49=BKR|56=IM|34=14|52=20100204-09:18:42|23=115685|28=N|55=SPMI.MI|54=2|44=2200.75|27=S|25=H|10=248|&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#34;8=FIX.4.2|9=40|35=D|49=AFUNDMGR|56=ABROKER|15=USD|59=0|10=091|&#34;</span>,
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">create_fix_stream</span>() -&gt; <span style="color:#728e00">Vec</span><span style="color:#728e00">&lt;</span><span style="color:#00979d">u8</span><span style="color:#728e00">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">FIX_MESSAGES</span>.<span style="color:#434f54">iter</span>().<span style="color:#434f54">copied</span>().<span style="color:#434f54">flatten</span>().<span style="color:#434f54">copied</span>().<span style="color:#434f54">collect</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#728e00">fn</span> <span style="color:#d35400">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#434f54">fix_dictionary</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Dictionary</span>::<span style="color:#434f54">fix42</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">fix_decoder</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Decoder</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">fix_dictionary</span>).<span style="color:#434f54">streaming</span>(<span style="color:#434f54">vec!</span>[]);
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">config_mut</span>().<span style="color:#434f54">separator</span> <span style="color:#728e00">=</span> <span style="color:#7f8c8d">b</span><span style="color:#7f8c8d">&#39;|&#39;</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">stream</span> <span style="color:#728e00">=</span> <span style="color:#434f54">Cursor</span>::<span style="color:#434f54">new</span>(<span style="color:#434f54">create_fix_stream</span>());
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">let</span> <span style="color:#728e00">mut</span> <span style="color:#434f54">message_count</span> <span style="color:#728e00">=</span> <span style="color:#8a7b52">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#728e00">for</span> <span style="color:#434f54">_expected_message</span> <span style="color:#728e00">in</span> <span style="color:#8a7b52">0</span><span style="color:#728e00">..</span><span style="color:#434f54">FIX_MESSAGES</span>.<span style="color:#434f54">len</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#728e00">loop</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#95a5a6">// Read data into decoder buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#95a5a6"></span>            <span style="color:#728e00">if</span> <span style="color:#434f54">stream</span>.<span style="color:#434f54">read_exact</span>(<span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">fillable</span>()).<span style="color:#434f54">is_err</span>() {
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#728e00">match</span> <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">try_parse</span>() {
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">Ok</span>(<span style="color:#728e00">Some</span>(<span style="color:#434f54">_</span>)) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">message_count</span> <span style="color:#728e00">+=</span> <span style="color:#8a7b52">1</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#728e00">let</span> <span style="color:#434f54">msg</span> <span style="color:#728e00">=</span> <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">message</span>();
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;📨 Message #</span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, 
+</span></span><span style="display:flex;"><span>                        <span style="color:#434f54">message_count</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">fix42</span>::<span style="color:#434f54">BEGIN_STRING</span>).<span style="color:#434f54">unwrap</span>())
+</span></span><span style="display:flex;"><span>                    );
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;   Sender: </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d">&#34;</span>, 
+</span></span><span style="display:flex;"><span>                        <span style="color:#728e00">String</span>::<span style="color:#434f54">from_utf8_lossy</span>(<span style="color:#434f54">msg</span>.<span style="color:#434f54">get</span>(<span style="color:#434f54">fix42</span>::<span style="color:#434f54">SENDER_COMP_ID</span>).<span style="color:#434f54">unwrap</span>())
+</span></span><span style="display:flex;"><span>                    );
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">fix_decoder</span>.<span style="color:#434f54">clear</span>();
+</span></span><span style="display:flex;"><span>                    <span style="color:#728e00">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">Ok</span>(<span style="color:#728e00">None</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;⏳ Waiting for more data...&#34;</span>);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#728e00">Err</span>(<span style="color:#434f54">e</span>) <span style="color:#728e00">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#434f54">eprintln!</span>(<span style="color:#7f8c8d">&#34;❌ Parse error: </span><span style="color:#7f8c8d">{:?}</span><span style="color:#7f8c8d">&#34;</span>, <span style="color:#434f54">e</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#728e00">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#434f54">println!</span>(<span style="color:#7f8c8d">&#34;✅ Processed </span><span style="color:#7f8c8d">{}</span><span style="color:#7f8c8d"> messages&#34;</span>, <span style="color:#434f54">message_count</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="benefits-of-streaming-decoding">Benefits of Streaming Decoding</h2>
+<ol>
+<li><strong>Memory Efficiency</strong>: Only allocates buffers as needed</li>
+<li><strong>Real-time Processing</strong>: Messages processed as soon as they&rsquo;re complete</li>
+<li><strong>Robust Handling</strong>: Gracefully handles partial messages and network chunking</li>
+<li><strong>Performance</strong>: Minimal copying and efficient buffer management</li>
+</ol>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Always use <code>read_exact()</code></strong>: This ensures the buffer is properly filled</li>
+<li><strong>Handle partial reads</strong>: Network connections may not deliver complete messages at once</li>
+<li><strong>Clear after processing</strong>: Always call <code>clear()</code> after processing each message</li>
+<li><strong>Error recovery</strong>: Implement strategies for handling malformed messages</li>
+<li><strong>Buffer sizing</strong>: Consider the typical message sizes in your application</li>
+</ol>
+<h2 id="next-steps">Next Steps</h2>
+<p>Streaming FIX decoding opens up possibilities for:</p>
+<ul>
+<li>Real-time market data processing</li>
+<li>Order management systems</li>
+<li>FIX gateway implementations</li>
+<li>High-frequency trading applications</li>
+</ul>
+<p>Combined with Rust&rsquo;s async capabilities and miniFIX&rsquo;s performance, you can build robust, high-performance FIX processing systems.</p>
+<hr>
+<p><strong>Next:</strong> <a href="../../../../../blog/2025/09/17/rust-minifix-tutorial-part-03/">Part 03 - Encoding FIX Messages</a></p>
+
+
+
+
+    </div>
+    
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>'I write to understand as much as to be understood.' —Elie Wiesel<br> (c) 2024 CryptoPatrick</p>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+</body>
