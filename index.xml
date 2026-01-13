@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en-EN</language>
     <copyright>&#39;I write to understand as much as to be understood.&#39; —Elie Wiesel&lt;br&gt; (c) 2024 CryptoPatrick</copyright>
-    <lastBuildDate>Mon, 22 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.cryptopatrick.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Me</title>
+      <link>https://www.cryptopatrick.com/about/</link>
+      <pubDate>Tue, 13 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://www.cryptopatrick.com/about/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Who am I?:&lt;/strong&gt; Hi! My name is Patrick. I was born and raised in Gothenburg, on the Swedish West Coast.&#xA;I&amp;rsquo;m a trained &lt;em&gt;Computational Linguist&lt;/em&gt;, specializing in &lt;em&gt;Large Language Models (LLM)&lt;/em&gt; and &lt;em&gt;Agentic Artificial Intelligence&lt;/em&gt;. I&amp;rsquo;m passionate about building systems that are simple, have few parts, are easy to maintain, and very fast. I&amp;rsquo;m looking for my first professional developer role. I have several years of experience in developing Open Source Software.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>🦀 miniFIX Tutorial | Part 08</title>
       <link>https://www.cryptopatrick.com/blog/2025/09/22/minifix-tutorial-part-08/</link>
